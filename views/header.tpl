@@ -40,5 +40,21 @@
     </nav>
 </header>
 <aside class="main-sidebar">
-   
+   <section class="sidebar" style="height: auto;">
+     <ul class="sidebar-menu">
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-book"></i> <span>知识积累</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu" style="display: none;">
+            <li class=""><a href="index.html"><i class="fa fa-circle-o"></i>精彩文章</a></li>
+            <li><a href="index2.html"><i class="fa fa-circle-o"></i>我的文章</a></li>
+            <li><a href="index2.html"><i class="fa fa-circle-o"></i>已删除的文章</a></li>
+          </ul>
+        </li>
+      </ul>
+    </section>
 </aside>
