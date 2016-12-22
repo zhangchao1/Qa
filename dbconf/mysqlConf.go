@@ -8,7 +8,7 @@ func GetMysqlConfig() (data map[string]map[string]map[string]interface{}) {
 				"password": "root",
 				"host":     "127.0.0.2",
 				"port":     3306,
-				"dbname":   "Qa",
+				"dbname":   "qa",
 			},
 		},
 		"test": {
