@@ -4,10 +4,22 @@ import (
 	"Qa/controllers"
 )
 
-type ArticleController struct {
+type Article struct {
 	controllers.ControllerBase
 }
 
-func (this *ArticleController) index() {
+func (this *Article) Index() {
+
+}
+
+func (this *Article) Edit() {
+
+}
+
+func (this *Article) Detail() {
+
+}
+
+func (this *Article) Add() {
 
 }

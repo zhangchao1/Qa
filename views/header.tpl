@@ -210,8 +210,8 @@
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
-          <ul class="treeview-menu" style="display: none;">
-            <li class=""><a href="index.html"><i class="fa fa-star-o"></i>精彩文章</a></li>
+          <ul class="treeview-menu" style="display: block">
+            <li class="active"><a href="/article"><i class="fa fa-star-o"></i>精彩文章</a></li>
             <li><a href="index2.html"><i class=" fa fa-user-secret"></i>我的文章</a></li>
             <li><a href="index2.html"><i class="fa fa-trash-o"></i>已删除的文章</a></li>
           </ul>
