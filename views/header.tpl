@@ -15,31 +15,13 @@
         <span class="logo-lg"><b>Qa</b>后台</span>
     </a>
     <nav class="navbar navbar-static-top">
-        <!-- Sidebar toggle button-->
-        <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-            <span class="sr-only">Toggle navigation</span>
-        </a>
-        <div class="navbar-custom-menu" style="float:left">
-            <ul class="nav navbar-nav">
-                <li class="dropdown user user-menu">
-                    <a href="">
-                    </a>
-                </li>
-
-            </ul>
-        </div>
-        <div class="navbar-custom-menu">
-            <ul class="nav navbar-nav">
-                <li class="dropdown user user-menu">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                        <span class="hidden-xs"></span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <div class="navbar-custom-menu">
+      <!-- Sidebar toggle button-->
+      <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+        <span class="sr-only">Toggle navigation</span>
+      </a>
+      <!-- Navbar Right Menu -->
+      <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
-
           <!-- Notifications: style can be found in dropdown.less -->
           <li class="dropdown notifications-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -204,6 +186,7 @@
           </li>
         </ul>
       </div>
+
     </nav>
 </header>
 <aside class="main-sidebar">

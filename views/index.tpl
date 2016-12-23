@@ -1,5 +1,5 @@
 {{template "header.tpl" .}}
-<div class="content-wrapper" style="min-height: 920px;">
+<div class="content-wrapper" style="min-height: 900px;">
 	<section class="content-header">
 	  <h1>QAMS</h1>
 	  <ol class="breadcrumb">
