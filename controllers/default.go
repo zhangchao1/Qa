@@ -5,5 +5,6 @@ type MainController struct {
 }
 
 func (this *MainController) Get() {
+	this.Data["controllerName"] = "home"
 	this.TplName = "index.tpl"
 }
