@@ -2,7 +2,7 @@
     <div class="pull-right hidden-xs">
       <b>Version</b> 2.3.7
     </div>
-    <strong>Copyright © 2014-2016 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights
+    <strong>Copyright © 2014-2016 <a href="/">QAMS</a>.</strong> All rights
     reserved.
  </footer>
 <script src="https://cdn.bootcss.com/jquery/2.2.3/jquery.min.js"></script>
