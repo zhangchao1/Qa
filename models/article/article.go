@@ -6,18 +6,19 @@ import (
 )
 
 type Article struct {
-	Id         int64  `orm:"column(aid);"`
-	Uid        int64  `orm:"column(uid);"`
-	Title      string `orm:"column(title);"`
-	Content    string `orm:"column(content);"`
-	Tag        string `orm:"column(tag);"`
-	Types      string `orm:"column(types);"`
-	Status     int    `orm:"column(status);"`
-	AdmireNum  int    `orm:"column(admireNum);"`
-	CommentNum int    `orm:"column(commentNum);"`
-	ViewNum    int    `orm:"column(viewNum);"`
-	Updated    string `orm:"column(updated);"`
-	Created    string `orm:"column(created);"`
+	Id          int64  `orm:"column(aid);"`
+	Uid         int64  `orm:"column(uid);"`
+	Title       string `orm:"column(title);"`
+	Content     string `orm:"column(content);"`
+	Description string `orm:"column(description);"`
+	Tag         string `orm:"column(tag);"`
+	Types       string `orm:"column(types);"`
+	Status      int    `orm:"column(status);"`
+	AdmireNum   int    `orm:"column(admireNum);"`
+	CommentNum  int    `orm:"column(commentNum);"`
+	ViewNum     int    `orm:"column(viewNum);"`
+	Updated     string `orm:"column(updated);"`
+	Created     string `orm:"column(created);"`
 }
 
 func (m *Article) TableName() string {
@@ -42,6 +43,7 @@ func AddArticle(addItem Article) (int64, error) {
 	article.Content = addItem.Content
 	article.Tag = addItem.Tag
 	article.Types = addItem.Types
+	article.Description = addItem.Description
 	article.Status = 0
 	article.AdmireNum = 0
 	article.CommentNum = 0
