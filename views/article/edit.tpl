@@ -51,6 +51,9 @@
 		                  <textarea class="form-control" rows="4" placeholder="文章简介" name="content"></textarea>
 		                </div>
 	              	</form>
+	              	<div>
+	              	{[ items ]}
+	              	</div>
 	            </div>
 	            <div class="box-footer">
 	                <button type="submit" class="btn btn-info">保存</button>
@@ -64,14 +67,17 @@
 <script>
 	var vue = new Vue({
         el: '#active_edit',
-        data: {},
+        data: {
+        	items:""
+        },
         delimiters: ['{[', ']}'],
         methods:{
         },
         mounted:function(){
+        	var vuethis = this;
         	var editor = CKEDITOR.replace("content");
 	        	editor.on( 'change', function( event ) {
-	        	console.log(this.getData())
+	        	vuethis.items = this.getData()
         	})
         }
     });
