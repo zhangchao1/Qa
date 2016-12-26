@@ -197,7 +197,7 @@
     </nav>
 </header>
 <aside class="main-sidebar">
-   <section class="sidebar" style="height: auto;">
+   <section class="sidebar" style="height: 900px;">
      <ul class="sidebar-menu">
         <li class="treeview">
           <a href="#">

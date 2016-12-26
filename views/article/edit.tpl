@@ -51,8 +51,8 @@
 		                  <textarea class="form-control" rows="4" placeholder="文章简介" name="content"></textarea>
 		                </div>
 	              	</form>
-	              	<div>
-	              	{[ items ]}
+	              	<div id="contents">
+
 	              	</div>
 	            </div>
 	            <div class="box-footer">
@@ -78,6 +78,7 @@
         	var editor = CKEDITOR.replace("content");
 	        	editor.on( 'change', function( event ) {
 	        	vuethis.items = this.getData()
+	        	$("#contents").html(vuethis.items)
         	})
         }
     });

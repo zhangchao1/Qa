@@ -25,7 +25,9 @@
 	            </div>
 	            <div class="box-body">
 	            <h1 class="text-center"><small>最亮的星</small></h1>
+	             <div id="article_contents">
 
+	             </div>
 	             <button type="button" class="btn btn-default btn-md"><i class="fa fa-heart-o"></i>赞</button>
 	             <button type="button" class="btn btn-default btn-md"><i class="fa fa-eye"></i> 已浏览</button>
 	             <button type="button" class="btn btn-default btn-md"><i class="fa fa-commenting"></i> 评论</button>
