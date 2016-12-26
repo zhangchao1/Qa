@@ -11,7 +11,7 @@
         <li class="active">文章添加</li>
       </ol>
     </section>
-   <section class="content" id="active_add">
+   <section class="content" id="article_add">
    	<div class="row">
         <div class="col-md-12">
             <div class="box">
@@ -48,7 +48,7 @@
 		                </div>
 		                <div class="form-group">
 		                  <label>内容</label>
-		                  <textarea class="form-control" rows="4" placeholder="文章简介" name="content"></textarea>
+		                  <textarea class="form-control" rows="4" placeholder="文章简介" id="add_cotent" name="content"></textarea>
 		                </div>
 	              	</form>
 	            </div>
@@ -59,8 +59,20 @@
     	</div>
    </section>
 </div>
-<script src="http://cdn.bootcss.com/ckeditor/4.5.10/ckeditor.js"></script>
+  <script src="http://cdn.bootcss.com/ckeditor/4.5.10/ckeditor.js"></script>
 <script>
-	CKEDITOR.replace('content')
+	var vue = new Vue({
+        el: '#article_add',
+        data: {},
+        delimiters: ['{[', ']}'],
+        methods:{
+        },
+        mounted:function(){
+        	var editor = CKEDITOR.replace("content");
+	        	editor.on( 'change', function( event ) {
+	        	console.log(this.getData())
+        	})
+        }
+    });
 </script>
 {{template "footer.tpl" .}}

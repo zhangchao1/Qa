@@ -62,6 +62,18 @@
 </div>
 <script src="http://cdn.bootcss.com/ckeditor/4.5.10/ckeditor.js"></script>
 <script>
-	CKEDITOR.replace('content')
+	var vue = new Vue({
+        el: '#active_edit',
+        data: {},
+        delimiters: ['{[', ']}'],
+        methods:{
+        },
+        mounted:function(){
+        	var editor = CKEDITOR.replace("content");
+	        	editor.on( 'change', function( event ) {
+	        	console.log(this.getData())
+        	})
+        }
+    });
 </script>
 {{template "footer.tpl" .}}

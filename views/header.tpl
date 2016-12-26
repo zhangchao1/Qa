@@ -8,6 +8,13 @@
   <link href="https://cdn.bootcss.com/admin-lte/2.3.7/css/AdminLTE.min.css" rel="stylesheet">
   <link href="https://cdn.bootcss.com/admin-lte/2.3.7/css/skins/_all-skins.min.css" rel="stylesheet">
   <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <script src="https://cdn.bootcss.com/jquery/2.2.3/jquery.min.js"></script>
+  <script src="https://cdn.bootcss.com/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <script src="https://cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="https://cdn.bootcss.com/admin-lte/2.3.8/js/app.min.js"></script>
+  <script src="https://cdn.bootcss.com/admin-lte/2.3.7/js/demo.js"></script>
+  <script src="//cdn.bootcss.com/vue/2.1.4/vue.min.js"></script>
+  <script src="//cdn.bootcss.com/vue-resource/1.0.3/vue-resource.min.js"></script>
   <body class="hold-transition skin-blue sidebar-mini">
   	<header class="main-header">
     <a href="/" class="logo">
