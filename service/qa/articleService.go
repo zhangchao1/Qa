@@ -2,32 +2,33 @@ package qa
 
 import (
 	"Qa/models/article"
+	"github.com/astaxie/beego/validation"
 )
 
 type ArticleService struct {
 }
 
-type AddResult struct {
-	is_success bool
-	errmsg     string
+type SaveResult struct {
+	IsSuccess bool
+	ErrMsg    string
 }
 
-func (this *ArticleService) Add(add article.Article) AddResult {
+func (this *ArticleService) Add(addArticle article.Article) SaveResult {
 	var newArticle article.Article
-	var result AddResult
-	newArticle.Uid = add.Uid
-	newArticle.Title = add.Title
-	newArticle.Content = add.Content
-	newArticle.Tag = add.Tag
-	newArticle.Types = add.Types
-	newArticle.Description = add.Description
+	var result SaveResult
+	newArticle.Uid = addArticle.Uid
+	newArticle.Title = addArticle.Title
+	newArticle.Content = addArticle.Content
+	newArticle.Tag = addArticle.Tag
+	newArticle.Types = addArticle.Types
+	newArticle.Description = addArticle.Description
 	_, err := article.AddArticle(newArticle)
 	if err != nil {
-		result.errmsg = "系统错误"
-		result.is_success = false
+		result.ErrMsg = "系统错误"
+		result.IsSuccess = false
 	} else {
-		result.errmsg = "保存成功"
-		result.is_success = true
+		result.ErrMsg = "保存成功"
+		result.IsSuccess = true
 	}
 	return result
 }
