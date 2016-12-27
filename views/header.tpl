@@ -218,7 +218,7 @@
             </span>
           </a>
           <ul class="treeview-menu" {{if eq "article" .controllerName}}style="display: block"{{else}}style="display: None"{{end}}>
-            <li class="active"><a href="/article"><i class="fa fa-star-o"></i>精彩文章</a></li>
+            <li class="active"><a href="/article/index"><i class="fa fa-star-o"></i>精彩文章</a></li>
             <li><a href="/article/my"><i class=" fa fa-user-secret"></i>我的文章</a></li>
             <li><a href="/article/my/recycle"><i class="fa fa-trash-o"></i>已删除的文章</a></li>
           </ul>
