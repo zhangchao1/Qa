@@ -2,6 +2,7 @@ package article
 
 import (
 	"Qa/controllers"
+	"strconv"
 )
 
 type Article struct {
@@ -13,11 +14,27 @@ func (this *Article) Index() {
 }
 
 func (this *Article) Edit() {
-	this.Data["controllerName"] = "article"
+	var id int64
+	Params := make(map[string]string)
+	Params = this.Ctx.Input.Params()
+	id, _ = strconv.ParseInt(Params["0"], 10, 64)
+	if id == 0 {
+		return
+	} else {
+		this.Data["controllerName"] = "article"
+	}
 }
 
 func (this *Article) Detail() {
-	this.Data["controllerName"] = "article"
+	var id int64
+	Params := make(map[string]string)
+	Params = this.Ctx.Input.Params()
+	id, _ = strconv.ParseInt(Params["0"], 10, 64)
+	if id == 0 {
+		return
+	} else {
+		this.Data["controllerName"] = "article"
+	}
 }
 
 func (this *Article) Add() {
