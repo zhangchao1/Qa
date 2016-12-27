@@ -68,6 +68,7 @@ func EditArticle(id int64, editItem Article) error {
 		article.Title = editItem.Title
 		article.Content = editItem.Content
 		article.Status = editItem.Status
+
 		article.Updated = time.Now().Format("2006-01-02 15:04:05")
 		_, err := o.Update(&article, "title", "content", "status")
 		return err
