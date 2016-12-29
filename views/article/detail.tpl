@@ -6,12 +6,12 @@
         <small>厚积而薄发</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="/"><i class="fa fa-dashboard"></i>Home</a></li>
         <li><a href="/article/add">知识积累</a></li>
         <li class="active">文章详情</li>
       </ol>
     </section>
-   <section class="content" id="active_detail">
+   <section class="content" id="article_detail">
    	<div class="row">
 	    <div class="col-md-12">
 	          <div class="box box-widget">
@@ -24,13 +24,14 @@
 				    </div>
 	            </div>
 	            <div class="box-body">
-	            <h1 class="text-center"><small>最亮的星</small></h1>
-	             <div id="article_contents">
 
+	            <h1 class="text-center"><small>{[ items.Title ]}</small></h1>
+	            <p class="text-green" style="text-align: center;">简介:{[ items.Description ]}</p>
+	             <div id="article_contents" style="text-align:left;">
 	             </div>
-	             <button type="button" class="btn btn-default btn-md"><i class="fa fa-heart-o"></i>赞</button>
-	             <button type="button" class="btn btn-default btn-md"><i class="fa fa-eye"></i> 已浏览</button>
-	             <button type="button" class="btn btn-default btn-md"><i class="fa fa-commenting"></i> 评论</button>
+	             <button type="button" class="btn btn-default btn-md"><i class="fa fa-heart-o"></i>赞({[ items.AdmireNum ]})</button>
+	             <button type="button" class="btn btn-default btn-md"><i class="fa fa-eye"></i> 已浏览({[ items.ViewNum ]})</button>
+	             <button type="button" class="btn btn-default btn-md"><i class="fa fa-commenting"></i>评论({[ items.CommentNum ]})</button>
 	          </div>
 	          <div class="box-footer box-comments">
 	          	  <h1><small>精彩评论</small></h1>
@@ -60,6 +61,31 @@
             </div>	
     </div>
    </section>
-   
 </div>
+<script>
+	var aid = {{.aid}}
+	Vue.config.delimiters = ['{[', ']}']
+	var vue = new Vue({
+        el: '#article_detail',
+        data:function(){
+        	return {
+        		items:{}
+        	}
+        },
+        methods:{
+        },
+        ready:function(){
+        	this.$http.get('/api/article/getArticle?id='+ aid, [], []).then(function(response){
+                if(response.data.IsSuccess == true){
+                    this.items = response.data.data
+                    $("#article_contents").html(response.data.data.Content)
+                }else{
+                    alert(response.data.ErrMsg);
+                }
+            	}, function(response){
+                alert('提交失败')
+            });
+        }
+    });
+</script>
 {{template "footer.tpl" .}}

@@ -5,5 +5,6 @@
     <strong>Copyright © 2014-2016 <a href="/">QAMS</a>.</strong> All rights
     reserved.
  </footer>
+ </div>
 </body>
 </html>

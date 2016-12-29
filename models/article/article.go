@@ -67,10 +67,11 @@ func EditArticle(id int64, editItem Article) error {
 	if o.Read(&article) == nil {
 		article.Title = editItem.Title
 		article.Content = editItem.Content
-		article.Status = editItem.Status
-
+		article.Tag = editItem.Tag
+		article.Types = editItem.Types
+		article.Description = editItem.Description
 		article.Updated = time.Now().Format("2006-01-02 15:04:05")
-		_, err := o.Update(&article, "title", "content", "status")
+		_, err := o.Update(&article, "title", "content", "tag", "types", "description")
 		return err
 	}
 	return nil

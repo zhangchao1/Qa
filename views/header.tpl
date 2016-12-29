@@ -13,9 +13,16 @@
   <script src="https://cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <script src="https://cdn.bootcss.com/admin-lte/2.3.8/js/app.min.js"></script>
   <script src="https://cdn.bootcss.com/admin-lte/2.3.7/js/demo.js"></script>
-  <script src="//cdn.bootcss.com/vue/2.1.4/vue.min.js"></script>
+  {{if eq 1 .vueVersion}}
+  <script src="https://cdn.bootcss.com/vue/1.0.25/vue.js"></script>
   <script src="//cdn.bootcss.com/vue-resource/1.0.3/vue-resource.min.js"></script>
+  <script src="https://cdn.bootcss.com/vue-validator/2.1.3/vue-validator.js"></script>
+  {{else if eq 2 .vueVersion}}
+  <script src="https://cdn.bootcss.com/vue/2.1.7/vue.min.js"></script>
+  <script src="https://cdn.bootcss.com/vue-resource/1.0.3/vue-resource.min.js"></script>
+  {{end}}
   <body class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper">
   	<header class="main-header">
     <a href="/" class="logo">
         <span class="logo-mini"><b>Qa</b></span>
@@ -193,11 +200,10 @@
           </li>
         </ul>
       </div>
-
     </nav>
 </header>
 <aside class="main-sidebar">
-   <section class="sidebar" style="height: 900px;">
+   <section class="sidebar">
      <ul class="sidebar-menu">
         <li class="treeview">
           <a href="#">

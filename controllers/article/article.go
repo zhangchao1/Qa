@@ -10,6 +10,7 @@ type Article struct {
 }
 
 func (this *Article) Index() {
+	this.Data["vueVersion"] = 2
 	this.Data["controllerName"] = "article"
 }
 
@@ -21,6 +22,8 @@ func (this *Article) Edit() {
 	if id == 0 {
 		return
 	} else {
+		this.Data["aid"] = id
+		this.Data["vueVersion"] = 1
 		this.Data["controllerName"] = "article"
 	}
 }
@@ -33,18 +36,23 @@ func (this *Article) Detail() {
 	if id == 0 {
 		return
 	} else {
+		this.Data["aid"] = id
+		this.Data["vueVersion"] = 1
 		this.Data["controllerName"] = "article"
 	}
 }
 
 func (this *Article) Add() {
+	this.Data["vueVersion"] = 1
 	this.Data["controllerName"] = "article"
 }
 
 func (this *Article) My() {
+	this.Data["vueVersion"] = 2
 	this.Data["controllerName"] = "article"
 }
 
 func (this *Article) Recycle() {
+	this.Data["vueVersion"] = 2
 	this.Data["controllerName"] = "article"
 }

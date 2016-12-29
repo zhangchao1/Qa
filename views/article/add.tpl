@@ -21,18 +21,19 @@
 	                </div>
 	        	</div>
 	            <div class="box-body">
+	            	<validator name="validation1">
 		            <form role="form">
 		                <div class="form-group">
 		                  <label>标题</label>
-		                  <input type="text" class="form-control" placeholder="输入文章标题">
+		                  <input type="text" class="form-control" placeholder="输入文章标题" v-model="title" v-validate:title="['required']">
 		                </div>
 		                <div class="form-group">
 		                  <label>标签</label>
-		                  <input type="text" class="form-control" placeholder="输入文章标签">
+		                  <input type="text" class="form-control" placeholder="输入文章标签" v-model="tag" v-validate:tag="['required']">
 		                </div>
 		                <div class="form-group">
 		                  <label>类别</label>
-		                  <select class="form-control">
+		                  <select class="form-control" v-model="types" v-validate:types="['required']">
 		                    <option>技术分享</option>
 		                    <option>企业文化</option>
 		                    <option>管理知识</option>
@@ -44,33 +45,62 @@
                 		</div>
                 		<div class="form-group">
 		                  <label>简介</label>
-		                  <textarea class="form-control" rows="4" placeholder="文章简介"></textarea>
+		                  <textarea class="form-control" rows="4" placeholder="文章简介" v-model="description" v-validate:description="['required']"></textarea>
 		                </div>
 		                <div class="form-group">
 		                  <label>内容</label>
-		                  <textarea class="form-control" rows="4" placeholder="文章简介" id="add_cotent" name="content"></textarea>
+		                  <textarea class="form-control" rows="4" placeholder="文章内容" id="add_cotent" name="content" v-model="content" v-validate:content="['required']" ></textarea>
 		                </div>
 	              	</form>
+	             	</validator>
 	            </div>
 	            <div class="box-footer">
-	                <button type="submit" class="btn btn-info">保存</button>
+	                <button type="submit" class="btn btn-info" v-on:click="save" :disabled="!$validation1.valid">保存</button>
               </div>
     		</div>
     	</div>
    </section>
 </div>
-  <script src="http://cdn.bootcss.com/ckeditor/4.5.10/ckeditor.js"></script>
+<script src="http://cdn.bootcss.com/ckeditor/4.5.10/ckeditor.js"></script>
 <script>
 	var vue = new Vue({
         el: '#article_add',
-        data: {},
+        data: {
+        	uid : 2,
+        	title: "",
+        	content:"",
+        	tag:"",
+        	types:"",
+        	description:"",
+        },
         delimiters: ['{[', ']}'],
         methods:{
+        	save:function(){
+        		var params = {
+	                Title: this.title,
+	                Content: this.content,
+	                Tag: this.tag,
+	                Types: this.types,
+	                Uid:this.uid,
+	                Description:this.description
+            	}
+            	this.$http.post('/api/article/add', params, []).then(function(response){
+            		console.log(response)
+                if(response.data.IsSuccess == true){
+                    alert("保存成功")
+                }else{
+                    alert(response.data.ErrMsg);
+                }
+            	}, function(response){
+                alert('提交失败')
+            	});
+            }
         },
-        mounted:function(){
+        ready:function(){
+        	var vthis = this;
         	var editor = CKEDITOR.replace("content");
 	        	editor.on( 'change', function( event ) {
-	        	console.log(this.getData())
+	        	vthis.content = this.getData()
         	})
         }
     });
