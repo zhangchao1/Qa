@@ -44,6 +44,8 @@
 	      
 	    </div>
   </div>
+  <section class="content" id="home">
+  </section>
 </div>
 {{template "footer.tpl" .}}
 
