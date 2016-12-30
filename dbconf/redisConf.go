@@ -3,7 +3,7 @@ package dbconf
 func GetRedisConf() (data map[string]map[string]map[string]interface{}) {
 	redisConf := map[string]map[string]map[string]interface{}{
 		"dev": {
-			"cache": {
+			"admire": {
 				"host":     "127.0.0.1",
 				"port":     "6379",
 				"password": "",

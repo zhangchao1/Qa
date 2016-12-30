@@ -72,6 +72,7 @@
 | id | 自增id | int |
 | uid | 点赞uid | int |
 | name | 点赞用户 | int |
+| status | 点赞状态 | int |
 | guid | 被点赞模型的id | int |
 | created | 点赞时间 | datetime |
 
