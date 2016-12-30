@@ -68,8 +68,9 @@ func (this *ArticleService) Edit(EditArticle article.Article) SaveResult {
 		Tag:         EditArticle.Tag,
 		Types:       EditArticle.Types,
 	}
-	fmt.Println(val)
+	fmt.Println(EditArticle)
 	is, err := valid.Valid(&val)
+	fmt.Println(is, err)
 	if err != nil {
 		fmt.Println(err)
 		result.ErrMsg = "传入正确的参数"
@@ -81,6 +82,7 @@ func (this *ArticleService) Edit(EditArticle article.Article) SaveResult {
 		}
 		result.IsSuccess = false
 	} else {
+		fmt.Println(EditArticle)
 		err := article.EditArticle(EditArticle.Id, EditArticle)
 		if err != nil {
 			result.ErrMsg = "系统错误"

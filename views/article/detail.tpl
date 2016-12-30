@@ -27,6 +27,7 @@
 
 	            <h1 class="text-center"><small>{[ items.Title ]}</small></h1>
 	            <p class="text-green" style="text-align: center;">简介:{[ items.Description ]}</p>
+              <p><span class="label label-success">标签</span>:{[ items.Tag ]}</p>
 	             <div id="article_contents" style="text-align:left;">
 	             </div>
 	             <button type="button" class="btn btn-default btn-md"><i class="fa fa-heart-o"></i>赞({[ items.AdmireNum ]})</button>

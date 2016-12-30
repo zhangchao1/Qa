@@ -66,7 +66,7 @@
 	var vue = new Vue({
         el: '#article_add',
         data: {
-        	uid : 2,
+        	uid : 1,
         	title: "",
         	content:"",
         	tag:"",
