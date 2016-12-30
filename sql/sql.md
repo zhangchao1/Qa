@@ -1,0 +1,1 @@
+sql备份指令：mysqldump -uroot -proot -d qa > e:\qa.sql
