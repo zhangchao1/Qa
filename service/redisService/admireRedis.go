@@ -15,23 +15,43 @@ var AdmireRedis *redis.Client
 type AdmireRedisService struct {
 }
 
-func (this *AdmireRedisService) init() {
+func init() {
 	AdmireRedis, _ = nosql.ConnetRedis("admire")
+	fmt.Print(AdmireRedis)
 }
 
-func (this *AdmireRedisService) AddAdmiresArticle(guid int, count int) *redis.BoolCmd {
+func (this *AdmireRedisService) AddAdmiresArticle(guid int, count int) bool {
 	AdmrieKey := fmt.Sprintf(ADMIRE_KEY_ARTICLE, guid)
 	Guid := strconv.Itoa(guid)
 	Count := strconv.Itoa(count)
-	Success := AdmireRedis.HSet(AdmrieKey, Guid, Count)
-	return Success
+	err := AdmireRedis.HSet(AdmrieKey, Guid, Count).Err()
+	if err != nil {
+		return false
+	} else {
+		return true
+	}
 }
 
-func (this *AdmireRedisService) AdmireStatusArticle(guid int, uid int) *redis.BoolCmd {
+func (this *AdmireRedisService) AdmireStatusArticle(guid int, uid int) bool {
 	UadmireKey := fmt.Sprintf(U_ADMIRE_ARTICLE_KEY, guid)
 	fmt.Println(UadmireKey)
 	Uid := strconv.Itoa(uid)
-	Status := AdmireRedis.SIsMember(UadmireKey, Uid)
-	fmt.Println(Status)
-	return Status
+	err := AdmireRedis.SIsMember(UadmireKey, Uid).Err()
+	if err != nil {
+		return false
+	} else {
+		return true
+	}
+}
+
+func (this *AdmireRedisService) AddArtileAdmires(guid int, uid int) bool {
+	UadmireKey := fmt.Sprintf(U_ADMIRE_ARTICLE_KEY, guid)
+	fmt.Println(UadmireKey)
+	Uid := strconv.Itoa(uid)
+	err := AdmireRedis.SAdd(UadmireKey, Uid).Err()
+	if err != nil {
+		return false
+	} else {
+		return true
+	}
 }

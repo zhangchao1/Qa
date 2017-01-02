@@ -83,11 +83,11 @@
 | --- | --- | --- | 
 | id | 自增id | int |
 | uid | 用户uid | int |
-| aid | 文章id | int |
+| cid | 文章id | int |
+| targetUid | 目标用户id | int |
 | types | 评论的类型 | int |
 | content| 评论内容 | int |
 | status | 删除评论 | int |
-| updated | 评论更新时间 | datetime |
 | created | 评论时间 | datetime |
 
 ##浏览模块

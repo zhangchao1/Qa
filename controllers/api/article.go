@@ -30,15 +30,14 @@ func (this *Article) Add() {
 func (this *Article) GetArticle() {
 	var articleService qa.ArticleService
 	id, _ := this.GetInt64("id")
-	fmt.Println(id)
 	if id == 0 {
 		this.Data["json"] = map[string]interface{}{"IsSuccess": false, "ErrMsg": "请传递正确的参数"}
 		this.ServeJSON()
 	} else {
-		data, err := articleService.GetArticleById(id)
-		fmt.Println(data, err)
+		data, err := articleService.GetArticleByAid(id, 1)
+		fmt.Println(err)
 		if err != nil {
-			this.Data["json"] = map[string]interface{}{"IsSuccess": false, "ErrMsg": "系统错误"}
+			this.Data["json"] = map[string]interface{}{"IsSuccess": false, "ErrMsg": "无效的id"}
 			this.ServeJSON()
 		} else {
 			this.Data["json"] = map[string]interface{}{"IsSuccess": true, "ErrMsg": "", "data": data}
@@ -56,4 +55,32 @@ func (this *Article) Edit() {
 	fmt.Println(result)
 	this.Data["json"] = result
 	this.ServeJSON()
+}
+
+// @router /recyle [get]
+func (this *Article) Recyle() {
+	var articleService qa.ArticleService
+	id, _ := this.GetInt64("id")
+	if id == 0 {
+		this.Data["json"] = map[string]interface{}{"IsSuccess": false, "ErrMsg": "请传递正确的参数"}
+		this.ServeJSON()
+	} else {
+		reult := articleService.Recyle(id)
+		this.Data["json"] = reult
+		this.ServeJSON()
+	}
+}
+
+// @router /recover [get]
+func (this *Article) Recover() {
+	var articleService qa.ArticleService
+	id, _ := this.GetInt64("id")
+	if id == 0 {
+		this.Data["json"] = map[string]interface{}{"IsSuccess": false, "ErrMsg": "请传递正确的参数"}
+		this.ServeJSON()
+	} else {
+		reult := articleService.Recover(id)
+		this.Data["json"] = reult
+		this.ServeJSON()
+	}
 }

@@ -17,6 +17,7 @@ type SaveResult struct {
 
 func (this *ArticleService) Add(addArticle article.Article) SaveResult {
 	var result SaveResult
+	var article article.Article
 	valid := validation.Validation{}
 	val := validator.ArticleSaveValidation{
 		Uid:         addArticle.Uid,
@@ -26,15 +27,12 @@ func (this *ArticleService) Add(addArticle article.Article) SaveResult {
 		Tag:         addArticle.Tag,
 		Types:       addArticle.Types,
 	}
-	fmt.Println(val)
 	is, err := valid.Valid(&val)
 	if err != nil {
-		fmt.Println(err)
 		result.ErrMsg = "传入正确的参数"
 		result.IsSuccess = false
 	} else if !is {
 		for _, err := range valid.Errors {
-			fmt.Println(err.Key, err.Message)
 			result.ErrMsg = fmt.Sprintf("%s:%s", err.Key, err.Message)
 		}
 		result.IsSuccess = false
@@ -51,39 +49,36 @@ func (this *ArticleService) Add(addArticle article.Article) SaveResult {
 	return result
 }
 
-func (this *ArticleService) GetArticleById(Id int64) (article.Article, error) {
+func (this *ArticleService) GetArticleByAid(id int64, status int) (article.Article, error) {
 	var data article.Article
-	data, err := article.GetArticleById(Id)
+	var article article.Article
+	data, err := article.GetArticleById(id, status)
 	return data, err
 }
 
-func (this *ArticleService) Edit(EditArticle article.Article) SaveResult {
+func (this *ArticleService) Edit(editArticle article.Article) SaveResult {
 	var result SaveResult
+	var article article.Article
 	valid := validation.Validation{}
 	val := validator.ArticleEditValidation{
-		Id:          EditArticle.Id,
-		Title:       EditArticle.Title,
-		Content:     EditArticle.Content,
-		Description: EditArticle.Description,
-		Tag:         EditArticle.Tag,
-		Types:       EditArticle.Types,
+		Id:          editArticle.Id,
+		Title:       editArticle.Title,
+		Content:     editArticle.Content,
+		Description: editArticle.Description,
+		Tag:         editArticle.Tag,
+		Types:       editArticle.Types,
 	}
-	fmt.Println(EditArticle)
 	is, err := valid.Valid(&val)
-	fmt.Println(is, err)
 	if err != nil {
-		fmt.Println(err)
 		result.ErrMsg = "传入正确的参数"
 		result.IsSuccess = false
 	} else if !is {
 		for _, err := range valid.Errors {
-			fmt.Println(err.Key, err.Message)
 			result.ErrMsg = fmt.Sprintf("%s:%s", err.Key, err.Message)
 		}
 		result.IsSuccess = false
 	} else {
-		fmt.Println(EditArticle)
-		err := article.EditArticle(EditArticle.Id, EditArticle)
+		err := article.EditArticle(editArticle.Id, editArticle)
 		if err != nil {
 			result.ErrMsg = "系统错误"
 			result.IsSuccess = false
@@ -91,6 +86,34 @@ func (this *ArticleService) Edit(EditArticle article.Article) SaveResult {
 			result.ErrMsg = "保存成功"
 			result.IsSuccess = true
 		}
+	}
+	return result
+}
+
+func (this *ArticleService) Recyle(id int64) SaveResult {
+	var result SaveResult
+	var article article.Article
+	err := article.ChangeArticleStatus(id, 0)
+	if err == nil {
+		result.ErrMsg = "删除成功"
+		result.IsSuccess = true
+	} else {
+		result.ErrMsg = "系统错误"
+		result.IsSuccess = false
+	}
+	return result
+}
+
+func (this *ArticleService) Recover(id int64) SaveResult {
+	var result SaveResult
+	var article article.Article
+	err := article.ChangeArticleStatus(id, 1)
+	if err == nil {
+		result.ErrMsg = "还原成功"
+		result.IsSuccess = true
+	} else {
+		result.ErrMsg = "系统错误"
+		result.IsSuccess = false
 	}
 	return result
 }

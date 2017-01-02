@@ -59,7 +59,7 @@
 	            </div>
 	            <div class="box-footer">
 	                <button type="submit" class="btn btn-info" :disabled="!$validation1.valid" v-on:click="save" >保存</button>
-	                <button type="submit" class="btn btn-danger pull-right">删除</button>
+	                <button type="submit" class="btn btn-danger pull-right" v-on:click="recyle">删除</button>
               </div>
     		</div>
     	</div>
@@ -100,7 +100,19 @@
                 alert('提交失败')
             	});
 
-        	}
+        	},
+            recyle:function(){
+                this.$http.get('/api/article/recyle?id='+ aid, [], []).then(function(response){
+                    console.log(response)
+                if(response.data.IsSuccess == true){
+                    window.href="/article/my"
+                }else{
+                    alert(response.data.ErrMsg);
+                }
+                }, function(response){
+                alert('提交失败')
+            });
+            }
         },
         ready:function(){
         	var vuethis = this;
