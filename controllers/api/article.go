@@ -130,3 +130,17 @@ func (this *Article) DeleteArticle() {
 		this.ServeJSON()
 	}
 }
+
+// @router /admire [get]
+func (this *Article) AdmireArticle() {
+	var articleService qa.ArticleService
+	id, _ := this.GetInt64("id")
+	if id == 0 {
+		this.Data["json"] = map[string]interface{}{"IsSuccess": false, "ErrMsg": "请传递正确的参数"}
+		this.ServeJSON()
+	} else {
+		result := articleService.AddAdmrie(id)
+		this.Data["json"] = result
+		this.ServeJSON()
+	}
+}

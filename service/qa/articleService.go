@@ -15,11 +15,15 @@ type SaveResult struct {
 	IsSuccess bool
 	ErrMsg    string
 }
+type AdmireResult struct {
+	IsSuccess bool
+	ErrMsg    string
+	Count     int64
+}
 
 func (this *ArticleService) Add(addArticle article.Article) SaveResult {
 	var result SaveResult
 	var article article.Article
-	var articleRedis redisService.ArticleRedis
 	valid := validation.Validation{}
 	val := validator.ArticleSaveValidation{
 		Uid:         addArticle.Uid,
@@ -39,20 +43,13 @@ func (this *ArticleService) Add(addArticle article.Article) SaveResult {
 		}
 		result.IsSuccess = false
 	} else {
-		id, err := article.AddArticle(addArticle)
+		_, err := article.AddArticle(addArticle)
 		if err != nil {
 			result.ErrMsg = "系统错误"
 			result.IsSuccess = false
 		} else {
-			articleInfo, errStatus := article.GetArticleById(id, 1)
-			if errStatus != nil {
-				result.ErrMsg = "系统错误"
-				result.IsSuccess = false
-			} else {
-				articleRedis.AddArticleInfo(id, articleInfo)
-				result.ErrMsg = "保存成功"
-				result.IsSuccess = true
-			}
+			result.ErrMsg = "保存成功"
+			result.IsSuccess = true
 		}
 	}
 	return result
@@ -141,7 +138,28 @@ func (this *ArticleService) Delete(id int64) SaveResult {
 	return result
 }
 
-// func (this *ArticleService) AddAdmrie(id int64) SaveResult {
-// 	// var article article.Article
-
-// }
+func (this *ArticleService) AddAdmrie(id int64) AdmireResult {
+	var article article.Article
+	var admireService AdmireService
+	var admireRedis redisService.AdmireRedisService
+	var result AdmireResult
+	errUserAdmire := admireRedis.AdmireStatusArticle(int(id), 1)
+	if errUserAdmire == true {
+		result.IsSuccess = false
+		result.ErrMsg = "你已经点过赞了!"
+	} else {
+		addAdmireNumStatus := article.UpdateAdmireNum(id)
+		errAddAdmireStatus := admireService.AddAdmire(id, 1, 1, "chaochao", 1)
+		admireRedis.AddUserAdmires(int(id), 1)
+		count := admireRedis.AddAdmiresArticle(int(id))
+		if addAdmireNumStatus == nil && errAddAdmireStatus == true {
+			result.IsSuccess = true
+			result.ErrMsg = ""
+			result.Count = count
+		} else {
+			result.IsSuccess = false
+			result.ErrMsg = "系统错误"
+		}
+	}
+	return result
+}
