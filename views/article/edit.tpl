@@ -93,6 +93,7 @@
             		console.log(response)
                 if(response.data.IsSuccess == true){
                     alert("保存成功")
+                    window.location.href="/article/my"
                 }else{
                     alert(response.data.ErrMsg);
                 }
@@ -105,7 +106,8 @@
                 this.$http.get('/api/article/recyle?id='+ aid, [], []).then(function(response){
                     console.log(response)
                 if(response.data.IsSuccess == true){
-                    window.href="/article/my"
+                    alert("删除成功")
+                    window.location.href="/article/recycle"
                 }else{
                     alert(response.data.ErrMsg);
                 }

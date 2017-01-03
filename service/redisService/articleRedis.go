@@ -6,7 +6,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"gopkg.in/redis.v4"
-	"strconv"
 )
 
 const ARTICLE_INFO = "qa:article:info:%d"
@@ -20,21 +19,16 @@ func init() {
 	articleRedis, _ = nosql.ConnetRedis("article")
 }
 
-func (this *ArticleRedis) AddArticleInfo(aid int64, articleInfo article.Article) bool {
-	Aid := strconv.Itoa(aid)
-	cancheKey := fmt.Sprintf(ARTICLE_INFO, Aid)
-	info := json.Marshal(articleInfo)
-	err := articleRedis.Set(cancheKey, info).Err()
-	if err != nil {
-		return false
-	} else {
-		return true
-	}
+func (this *ArticleRedis) AddArticleInfo(aid int64, articleInfo article.Article) error {
+	cancheKey := fmt.Sprintf(ARTICLE_INFO, aid)
+	info, _ := json.Marshal(articleInfo)
+	_, status := articleRedis.Set(cancheKey, info, 0).Result()
+	return status
 }
 
 func (this *ArticleRedis) GetArticleInfo(aid int64) article.Article {
-	Aid := strconv.Itoa(aid)
-	cancheKey := fmt.Sprintf(ARTICLE_INFO, Aid)
+	cancheKey := fmt.Sprintf(ARTICLE_INFO, aid)
+	fmt.Println(cancheKey)
 	info, err := articleRedis.Get(cancheKey).Result()
 	if err != nil {
 		return article.Article{}

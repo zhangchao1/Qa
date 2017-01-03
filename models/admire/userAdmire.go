@@ -39,7 +39,7 @@ func (this *UserAdmire) CancelAdmire(guid int64, uid int64, types int64) error {
 	o := orm.NewOrm()
 	o.Using("Qa")
 	var cancelAdmire UserAdmire
-	cancelAdmire = Admire{Guid: guid, Types: types, Uid: uid}
+	cancelAdmire = UserAdmire{Guid: guid, Types: types, Uid: uid}
 	_, err := o.Delete(cancelAdmire)
 	return err
 }

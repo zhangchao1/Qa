@@ -88,6 +88,7 @@
             		console.log(response)
                 if(response.data.IsSuccess == true){
                     alert("保存成功")
+                    window.location.href="/article/my"
                 }else{
                     alert(response.data.ErrMsg);
                 }

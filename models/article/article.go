@@ -2,6 +2,7 @@ package article
 
 import (
 	"github.com/astaxie/beego/orm"
+	"math"
 	"time"
 )
 
@@ -22,6 +23,11 @@ type Article struct {
 	ViewNum     int    `orm:"column(ViewNum);"`
 	Updated     string `orm:"column(Updated);"`
 	Created     string `orm:"column(Created);"`
+}
+
+type Items struct {
+	Datas []orm.Params
+	Total int64
 }
 
 func (this *Article) TableName() string {
@@ -155,4 +161,48 @@ func (this *Article) DeleteArticle(id int64) error {
 	article = Article{Id: id}
 	_, err := o.Delete(&article)
 	return err
+}
+
+func (this *Article) RecyleList(start int64, max int64, orderBy string) Items {
+	o := orm.NewOrm()
+	o.Using("Qa")
+	var maps []orm.Params
+	var items Items
+	var totalPage int64
+	cnt, err := o.QueryTable("article").Filter("Status", 0).Count()
+	if err != nil {
+		cnt = 0
+	}
+	count := float64(cnt)
+	maxCount := float64(max)
+	pages := float64(count / maxCount)
+	totalPage = int64(math.Ceil(pages))
+	offset := (start - 1) * max
+	limit := max
+	o.QueryTable("article").Filter("Status", 0).Limit(limit, offset).OrderBy(orderBy).Values(&maps)
+	items.Datas = maps
+	items.Total = totalPage
+	return items
+}
+
+func (this *Article) MyArticleList(start int64, max int64, orderBy string) Items {
+	o := orm.NewOrm()
+	o.Using("Qa")
+	var maps []orm.Params
+	var items Items
+	var totalPage int64
+	cnt, err := o.QueryTable("article").Filter("Status", 1).Count()
+	if err != nil {
+		cnt = 0
+	}
+	count := float64(cnt)
+	maxCount := float64(max)
+	pages := float64(count / maxCount)
+	totalPage = int64(math.Ceil(pages))
+	offset := (start - 1) * max
+	limit := max
+	o.QueryTable("article").Filter("Status", 1).Limit(limit, offset).OrderBy(orderBy).Values(&maps)
+	items.Datas = maps
+	items.Total = totalPage
+	return items
 }

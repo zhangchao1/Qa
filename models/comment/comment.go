@@ -52,4 +52,5 @@ func (this *Comment) CancelComment(id int64) {
 		_, err := o.Update(&cancelComment, "Status", "Updated")
 		return err
 	}
+	return err
 }

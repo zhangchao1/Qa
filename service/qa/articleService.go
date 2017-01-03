@@ -2,6 +2,7 @@ package qa
 
 import (
 	"Qa/models/article"
+	"Qa/service/redisService"
 	"Qa/validator"
 	"fmt"
 	"github.com/astaxie/beego/validation"
@@ -18,6 +19,7 @@ type SaveResult struct {
 func (this *ArticleService) Add(addArticle article.Article) SaveResult {
 	var result SaveResult
 	var article article.Article
+	var articleRedis redisService.ArticleRedis
 	valid := validation.Validation{}
 	val := validator.ArticleSaveValidation{
 		Uid:         addArticle.Uid,
@@ -37,13 +39,20 @@ func (this *ArticleService) Add(addArticle article.Article) SaveResult {
 		}
 		result.IsSuccess = false
 	} else {
-		_, err := article.AddArticle(addArticle)
+		id, err := article.AddArticle(addArticle)
 		if err != nil {
 			result.ErrMsg = "系统错误"
 			result.IsSuccess = false
 		} else {
-			result.ErrMsg = "保存成功"
-			result.IsSuccess = true
+			articleInfo, errStatus := article.GetArticleById(id, 1)
+			if errStatus != nil {
+				result.ErrMsg = "系统错误"
+				result.IsSuccess = false
+			} else {
+				articleRedis.AddArticleInfo(id, articleInfo)
+				result.ErrMsg = "保存成功"
+				result.IsSuccess = true
+			}
 		}
 	}
 	return result
@@ -117,3 +126,22 @@ func (this *ArticleService) Recover(id int64) SaveResult {
 	}
 	return result
 }
+
+func (this *ArticleService) Delete(id int64) SaveResult {
+	var result SaveResult
+	var article article.Article
+	err := article.DeleteArticle(id)
+	if err == nil {
+		result.ErrMsg = "删除成功"
+		result.IsSuccess = true
+	} else {
+		result.ErrMsg = "系统错误"
+		result.IsSuccess = false
+	}
+	return result
+}
+
+// func (this *ArticleService) AddAdmrie(id int64) SaveResult {
+// 	// var article article.Article
+
+// }

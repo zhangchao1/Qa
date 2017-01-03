@@ -12,7 +12,8 @@
         后台的文章分享模块用于进行技术积累，不要用于技术之外的文章,管理员会进行删除的！
       </div>
     </div>
-    <div class="box box-info">
+  <section class="content" id="home">
+      <div class="box box-info">
         <div class="box-header with-border">
           <h3 class="box-title">技术文章排行榜</h3>
         </div>
@@ -37,14 +38,13 @@
         </div>
    </div>
    <div class="box box-danger">
-	    <div class="box-header with-border">
-	      <h3 class="box-title">滨彩生活</h3>
-	    </div>
-	    <div class="box-body no-padding">
-	      
-	    </div>
+      <div class="box-header with-border">
+        <h3 class="box-title">滨彩生活</h3>
+      </div>
+      <div class="box-body no-padding">
+        
+      </div>
   </div>
-  <section class="content" id="home">
   </section>
 </div>
 {{template "footer.tpl" .}}

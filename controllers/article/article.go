@@ -48,11 +48,11 @@ func (this *Article) Add() {
 }
 
 func (this *Article) My() {
-	this.Data["vueVersion"] = 2
+	this.Data["vueVersion"] = 1
 	this.Data["controllerName"] = "article"
 }
 
 func (this *Article) Recycle() {
-	this.Data["vueVersion"] = 2
+	this.Data["vueVersion"] = 1
 	this.Data["controllerName"] = "article"
 }

@@ -65,8 +65,8 @@ func (this *Article) Recyle() {
 		this.Data["json"] = map[string]interface{}{"IsSuccess": false, "ErrMsg": "请传递正确的参数"}
 		this.ServeJSON()
 	} else {
-		reult := articleService.Recyle(id)
-		this.Data["json"] = reult
+		result := articleService.Recyle(id)
+		this.Data["json"] = result
 		this.ServeJSON()
 	}
 }
@@ -79,8 +79,54 @@ func (this *Article) Recover() {
 		this.Data["json"] = map[string]interface{}{"IsSuccess": false, "ErrMsg": "请传递正确的参数"}
 		this.ServeJSON()
 	} else {
-		reult := articleService.Recover(id)
-		this.Data["json"] = reult
+		result := articleService.Recover(id)
+		this.Data["json"] = result
+		this.ServeJSON()
+	}
+}
+
+// @router /recycleList [get]
+func (this *Article) RecycleList() {
+	var articles article.Article
+	var result article.Items
+	startIndex, _ := this.GetInt64("start")
+	maxCounts, _ := this.GetInt64("max")
+	if startIndex == 0 || maxCounts == 0 {
+		this.Data["json"] = map[string]interface{}{"IsSuccess": false, "ErrMsg": "请传递正确的参数"}
+		this.ServeJSON()
+	} else {
+		result = articles.RecyleList(startIndex, maxCounts, "-Updated")
+		this.Data["json"] = map[string]interface{}{"IsSuccess": true, "ErrMsg": "", "data": result}
+		this.ServeJSON()
+	}
+}
+
+// @router /myarticle [get]
+func (this *Article) MyArticleList() {
+	var articles article.Article
+	var result article.Items
+	startIndex, _ := this.GetInt64("start")
+	maxCounts, _ := this.GetInt64("max")
+	if startIndex == 0 || maxCounts == 0 {
+		this.Data["json"] = map[string]interface{}{"IsSuccess": false, "ErrMsg": "请传递正确的参数"}
+		this.ServeJSON()
+	} else {
+		result = articles.MyArticleList(startIndex, maxCounts, "-Updated")
+		this.Data["json"] = map[string]interface{}{"IsSuccess": true, "ErrMsg": "", "data": result}
+		this.ServeJSON()
+	}
+}
+
+// @router /delete [get]
+func (this *Article) DeleteArticle() {
+	var articleService qa.ArticleService
+	id, _ := this.GetInt64("id")
+	if id == 0 {
+		this.Data["json"] = map[string]interface{}{"IsSuccess": false, "ErrMsg": "请传递正确的参数"}
+		this.ServeJSON()
+	} else {
+		result := articleService.Delete(id)
+		this.Data["json"] = result
 		this.ServeJSON()
 	}
 }
