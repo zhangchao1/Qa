@@ -2,6 +2,7 @@ package qa
 
 import (
 	"Qa/models/admire"
+	"fmt"
 )
 
 type Result struct {
@@ -26,6 +27,7 @@ func (this *AdmireService) AddAdmire(guid int64, types int64, count int64, name 
 		errAdmireStatus = addAdmire.UpdateAdmire(guid, types)
 	}
 	_, errUserAdmireStatus := addUserAdmire.AddUserAdmire(addUserItem)
+	fmt.Println(errUserAdmireStatus, errAdmireStatus)
 	if errUserAdmireStatus == nil && errAdmireStatus == nil {
 		return true
 	} else {

@@ -30,7 +30,7 @@
               <p><span class="label label-success">标签</span>:{[ items.Tag ]}</p>
 	             <div id="article_contents" style="text-align:left;">
 	             </div>
-	             <button type="button" class="btn btn-default btn-md"><i class="fa fa-heart-o"></i>赞({[ items.AdmireNum ]})</button>
+	             <button type="button" v-on:click="userAdmire" class="btn btn-default btn-md"><i id="article_admire"></i>赞({[ items.AdmireNum ]})</button>
 	             <button type="button" class="btn btn-default btn-md"><i class="fa fa-eye"></i> 已浏览({[ items.ViewNum ]})</button>
 	             <button type="button" class="btn btn-default btn-md"><i class="fa fa-commenting"></i>评论({[ items.CommentNum ]})</button>
 	          </div>
@@ -74,6 +74,19 @@
         	}
         },
         methods:{
+          userAdmire :function(){
+            this.$http.get('/api/article/admire?id='+ aid, [], []).then(function(response){
+                if(response.data.IsSuccess == true){
+                    this.items.AdmireNum = response.data.Count
+                     $("#article_admire").removeClass()
+                     $("#article_admire").addClass("fa fa-heart")
+                }else{
+                    alert(response.data.ErrMsg);
+                }
+              }, function(response){
+                alert('提交失败')
+            });
+          }
         },
         ready:function(){
         	this.$http.get('/api/article/getArticle?id='+ aid, [], []).then(function(response){
@@ -84,6 +97,19 @@
                     alert(response.data.ErrMsg);
                 }
             	}, function(response){
+                alert('提交失败')
+            });
+          this.$http.get('/api/article/admirestatus?id='+ aid, [], []).then(function(response){
+                if(response.data.IsSuccess == true){
+                    if(response.data.Status == true){
+                      $("#article_admire").addClass("fa fa-heart")
+                    }else{
+                      $("#article_admire").addClass("fa fa-heart-o")
+                    }
+                }else{
+                    alert(response.data.ErrMsg);
+                }
+              }, function(response){
                 alert('提交失败')
             });
         }
