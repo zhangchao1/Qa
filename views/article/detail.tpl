@@ -99,10 +99,9 @@
               this.$http.post('/api/article/addcomment', params, []).then(function(response){
                 console.log(response)
                 if(response.data.IsSuccess == true){
-                    alert(response.data.ErrMsg);
                     this.items.CommentNum= response.data.Count
                     this.commentList(1);
-                    $("#comment_content").empty()
+                    $("#comment_content").val("")
                 }else{
                     alert(response.data.ErrMsg);
                 }

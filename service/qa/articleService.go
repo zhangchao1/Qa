@@ -169,6 +169,8 @@ func (this *ArticleService) AddAdmrie(id int64) AdmireResult {
 		errAddAdmireStatus := admireService.AddAdmire(id, 1, 1, "chaochao", 1)
 		admireRedis.AddUserAdmires(int(id), 1)
 		count := admireRedis.AddAdmiresArticle(int(id))
+		fmt.Println(addAdmireNumStatus)
+		fmt.Println(errAddAdmireStatus)
 		if addAdmireNumStatus == nil && errAddAdmireStatus == true {
 			result.IsSuccess = true
 			result.ErrMsg = ""
