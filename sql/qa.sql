@@ -1,27 +1,24 @@
--- MySQL dump 10.13  Distrib 5.5.40, for Win32 (x86)
---
--- Host: localhost    Database: qa
--- ------------------------------------------------------
--- Server version	5.5.40
+/*
+Navicat MySQL Data Transfer
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+Source Server         : localhost
+Source Server Version : 50540
+Source Host           : localhost:3306
+Source Database       : qa
 
---
--- Table structure for table `admire`
---
+Target Server Type    : MYSQL
+Target Server Version : 50540
+File Encoding         : 65001
 
+Date: 2017-01-04 18:10:19
+*/
+
+SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for `admire`
+-- ----------------------------
 DROP TABLE IF EXISTS `admire`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `admire` (
   `Id` int(14) unsigned NOT NULL AUTO_INCREMENT,
   `Guid` int(14) unsigned NOT NULL,
@@ -30,59 +27,54 @@ CREATE TABLE `admire` (
   `Updated` datetime NOT NULL,
   `Created` datetime NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `article`
---
-
-DROP TABLE IF EXISTS `article`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `article` (
-  `aid` int(14) unsigned NOT NULL AUTO_INCREMENT,
-  `uid` int(14) unsigned NOT NULL,
-  `title` varchar(50) NOT NULL,
-  `content` text NOT NULL,
-  `tag` varchar(20) NOT NULL,
-  `description` varchar(100) NOT NULL,
-  `types` varchar(20) NOT NULL,
-  `status` tinyint(3) unsigned NOT NULL,
-  `admireNum` int(14) unsigned NOT NULL,
-  `commentNum` int(14) unsigned NOT NULL,
-  `viewNum` int(14) unsigned NOT NULL,
-  `updated` datetime NOT NULL,
-  `created` datetime NOT NULL,
-  PRIMARY KEY (`aid`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `useradmire`
---
+-- ----------------------------
+-- Table structure for `article`
+-- ----------------------------
+DROP TABLE IF EXISTS `article`;
+CREATE TABLE `article` (
+  `Aid` int(14) unsigned NOT NULL AUTO_INCREMENT,
+  `Uid` int(14) unsigned NOT NULL,
+  `Title` varchar(50) NOT NULL,
+  `Content` text NOT NULL,
+  `Tag` varchar(20) NOT NULL,
+  `Description` varchar(100) NOT NULL,
+  `Types` varchar(20) NOT NULL,
+  `Status` tinyint(3) unsigned NOT NULL,
+  `AdmireNum` int(14) unsigned NOT NULL,
+  `CommentNum` int(14) unsigned NOT NULL,
+  `ViewNum` int(14) unsigned NOT NULL,
+  `Updated` datetime NOT NULL,
+  `Created` datetime NOT NULL,
+  PRIMARY KEY (`Aid`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
+-- ----------------------------
+-- Table structure for `comment`
+-- ----------------------------
+DROP TABLE IF EXISTS `comment`;
+CREATE TABLE `comment` (
+  `Id` int(14) unsigned NOT NULL AUTO_INCREMENT,
+  `Cid` int(14) unsigned NOT NULL,
+  `Uid` int(14) unsigned NOT NULL,
+  `TargetUid` int(14) unsigned NOT NULL,
+  `Content` varchar(255) NOT NULL,
+  `Types` tinyint(8) unsigned NOT NULL,
+  `Created` datetime NOT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+-- ----------------------------
+-- Table structure for `useradmire`
+-- ----------------------------
 DROP TABLE IF EXISTS `useradmire`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `useradmire` (
   `Id` int(14) unsigned NOT NULL AUTO_INCREMENT,
   `Uid` int(14) unsigned NOT NULL,
   `Name` varchar(255) NOT NULL,
   `Guid` int(14) unsigned NOT NULL,
+  `Types` tinyint(8) unsigned NOT NULL,
   `Status` tinyint(3) unsigned NOT NULL,
   `Created` datetime NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2016-12-30 18:56:44
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
