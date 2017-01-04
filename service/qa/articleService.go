@@ -2,6 +2,7 @@ package qa
 
 import (
 	"Qa/models/article"
+	"Qa/models/comment"
 	"Qa/service/redisService"
 	"Qa/validator"
 	"fmt"
@@ -16,6 +17,12 @@ type SaveResult struct {
 	ErrMsg    string
 }
 type AdmireResult struct {
+	IsSuccess bool
+	ErrMsg    string
+	Count     int64
+}
+
+type CommentResult struct {
 	IsSuccess bool
 	ErrMsg    string
 	Count     int64
@@ -192,6 +199,43 @@ func (this *ArticleService) UserAdmireStatus(id int64, uid int64) UserAdmireStat
 			result.ErrMsg = ""
 			result.IsSuccess = true
 			result.Status = false
+		}
+	}
+	return result
+}
+
+func (this *ArticleService) AddArticleComment(add comment.Comment) CommentResult {
+	var result CommentResult
+	var commentService commentService
+	var article article.Article
+	var commentRedis redisService.CommentRedisService
+	valid := validation.Validation{}
+	val := validator.CommentValidation{
+		Content:   add.Content,
+		Uid:       add.Uid,
+		Cid:       add.Cid,
+		TargetUid: add.TargetUid,
+	}
+	is, err := valid.Valid(&val)
+	if err != nil {
+		result.ErrMsg = "传入正确的参数"
+		result.IsSuccess = false
+	} else if !is {
+		for _, err := range valid.Errors {
+			result.ErrMsg = fmt.Sprintf("%s:%s", err.Key, err.Message)
+		}
+		result.IsSuccess = false
+	} else {
+		errUpdateCommentNum := article.UpdateCommentNum(add.Cid)
+		CommentNum := commentRedis.AddCommentArticle(int(add.Cid))
+		_, errAddComment := commentService.AddComment(add)
+		if errUpdateCommentNum == nil && errAddComment == nil {
+			result.ErrMsg = "添加成功"
+			result.IsSuccess = true
+			result.Count = CommentNum
+		} else {
+			result.ErrMsg = "系统错误"
+			result.IsSuccess = false
 		}
 	}
 	return result

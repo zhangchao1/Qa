@@ -2,6 +2,7 @@ package api
 
 import (
 	"Qa/models/article"
+	"Qa/models/comment"
 	"Qa/service/qa"
 	"encoding/json"
 	"fmt"
@@ -155,6 +156,37 @@ func (this *Article) UserAdmireStatus() {
 	} else {
 		result := articleService.UserAdmireStatus(id, 1)
 		this.Data["json"] = result
+		this.ServeJSON()
+	}
+}
+
+// @router /addcomment [post]
+func (this *Article) AddComment() {
+	var articleService qa.ArticleService
+	var addComment comment.Comment
+	json.Unmarshal(this.Ctx.Input.RequestBody, &addComment)
+	addComment.Types = 1
+	addComment.Uid = 1
+	addComment.TargetUid = 2
+	result := articleService.AddArticleComment(addComment)
+	fmt.Println(result)
+	this.Data["json"] = result
+	this.ServeJSON()
+}
+
+// @router /commentlist [get]
+func (this *Article) ArticleCommentList() {
+	var Comment comment.Comment
+	var result comment.Items
+	id, _ := this.GetInt64("id")
+	startIndex, _ := this.GetInt64("start")
+	maxCounts, _ := this.GetInt64("max")
+	if startIndex == 0 || maxCounts == 0 || id == 0 {
+		this.Data["json"] = map[string]interface{}{"IsSuccess": false, "ErrMsg": "请传递正确的参数"}
+		this.ServeJSON()
+	} else {
+		result = Comment.CommentList(startIndex, maxCounts, "-Created", id, 1)
+		this.Data["json"] = map[string]interface{}{"IsSuccess": true, "ErrMsg": "", "data": result}
 		this.ServeJSON()
 	}
 }
