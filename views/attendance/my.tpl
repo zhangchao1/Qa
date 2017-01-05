@@ -55,10 +55,13 @@
               </div>
     </div>
     </div>
-
+    <div id="calendar">
+    </div>
    </section>
 </div>
+<link href="/static/css/bootstrap-year-calendar.min.css" rel="stylesheet">
 <script src="https://cdn.bootcss.com/moment.js/2.17.1/moment.min.js"></script>
+<script src="/static/js/bootstrap-year-calendar.min.js"></script>
 <script>
     Vue.config.delimiters = ['{[', ']}']
     var vue = new Vue({
@@ -76,6 +79,7 @@
             $('#nowtime').text(now);
             $('#addtime').text(addtime);
             }, 1000);
+            $("#calendar").calendar()
         },
     });
 </script>
