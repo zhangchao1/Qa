@@ -207,7 +207,7 @@
      <ul class="sidebar-menu">
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-user"></i> <span>个人中心</span>
+            <i class="fa fa-home"></i> <span>个人中心</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -236,7 +236,7 @@
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
-          <ul class="treeview-menu" style="display: none;">
+          <ul class="treeview-menu" >
             
           </ul>
         </li>
@@ -247,8 +247,9 @@
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
-          <ul class="treeview-menu" style="display: none;">
-            
+          <ul class="treeview-menu" {{if eq "attendance" .controllerName}}style="display: block"{{else}}style="display: None"{{end}}>
+            <li class="active"><a href="/attendance/my"><i class="fa fa-user"></i>我要考勤</a></li>
+            <li><a href="/attendance/record"><i class=" fa fa-user-secret"></i>考勤记录</a></li>
           </ul>
         </li>
         <li class="treeview">
