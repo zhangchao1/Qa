@@ -1,5 +1,5 @@
 {{template "header.tpl" .}}
-<div class="content-wrapper" style="min-height: 900px;">
+<div class="content-wrapper">
 	<section class="content-header">
       <h1>
         考勤
@@ -55,7 +55,7 @@
               </div>
     </div>
     </div>
-    <div id="calendar">
+    <div id="calendar" style="height: 500px">
     </div>
    </section>
 </div>

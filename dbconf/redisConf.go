@@ -21,6 +21,12 @@ func GetRedisConf() (data map[string]map[string]map[string]interface{}) {
 				"password": "",
 				"db":       3,
 			},
+			"user": {
+				"host":     "127.0.0.1",
+				"port":     "6379",
+				"password": "",
+				"db":       4,
+			},
 		},
 		"test": {
 			"cache": {

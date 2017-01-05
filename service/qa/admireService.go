@@ -5,12 +5,6 @@ import (
 	"fmt"
 )
 
-type Result struct {
-	IsSuccess bool
-	ErrMsg    string
-	Count     int
-}
-
 type AdmireService struct {
 }
 

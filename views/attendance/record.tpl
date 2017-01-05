@@ -1,5 +1,5 @@
 {{template "header.tpl" .}}
-<div class="content-wrapper" style="min-height: 900px;">
+<div class="content-wrapper">
 	<section class="content-header">
       <h1>
         考勤记录
