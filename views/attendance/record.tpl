@@ -17,7 +17,7 @@
             <div class="input-group input-group-sm" style="width:400px;">
               <input type="text" name="table_search" class="form-control" placeholder="查询考勤" id="daterange">
               <div class="input-group-btn">
-                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                <button type="submit" class="btn btn-default" v-on:click="searchAttendance"><i class="fa fa-search"></i></button>
               </div>
             </div>
             </div>
@@ -26,38 +26,17 @@
               <table class="table table-hover">
                 <tbody><tr>
                   <th>ID</th>
-                  <th>User</th>
-                  <th>Date</th>
-                  <th>Status</th>
-                  <th>Reason</th>
+                  <th>Uid</th>
+                  <th>考勤时间</th>
+                  <th>考勤IP</th>
+                  <th>考勤状态</th>
                 </tr>
-                <tr>
-                  <td>183</td>
-                  <td>John Doe</td>
-                  <td>11-7-2014</td>
-                  <td><span class="label label-success">Approved</span></td>
-                  <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                </tr>
-                <tr>
-                  <td>219</td>
-                  <td>Alexander Pierce</td>
-                  <td>11-7-2014</td>
-                  <td><span class="label label-warning">Pending</span></td>
-                  <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                </tr>
-                <tr>
-                  <td>657</td>
-                  <td>Bob Doe</td>
-                  <td>11-7-2014</td>
-                  <td><span class="label label-primary">Approved</span></td>
-                  <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                </tr>
-                <tr>
-                  <td>175</td>
-                  <td>Mike Doe</td>
-                  <td>11-7-2014</td>
-                  <td><span class="label label-danger">Denied</span></td>
-                  <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                <tr v-for="item in items">
+                  <td>{[ item.Id ]}</td>
+                  <td>{[ item.Uid ]}</td>
+                  <td>{[ item.Dy ]}</td>
+                  <td>{[ item.Ip ]}</td>
+                  <td><span class="label {[ item.Status ]}">{[ item.Types]}</span></td>
                 </tr>
               </tbody></table>
             </div>
@@ -73,26 +52,45 @@
 	var vue = new Vue({
         el: '#attendance_record',
         data: {
-        	
+        	   items:""
         },
         methods:{
-        	
+        	 searchAttendance:function(){
+             this.loadData(1)
+           },
+           loadData:function(pages){
+             var searchtime = $("#daterange").val()
+             if (searchtime == ""){
+                alert("请输入查询时间")
+                return
+             }
+             var search_time = searchtime.split(" ");
+             this.$http.get('/api/attendance/search?startTime='+ search_time[0] +"&endTime=" +search_time[2] + "&startIndex=" + pages , [], []).then(function(response){
+                if(response.data.IsSuccess == true){
+                    this.items = response.data.Data
+                }else{
+                    alert(response.data.ErrMsg);
+                }
+              }, function(response){
+                alert('提交失败')
+            });
+           }
         },
         ready:function(){
          	$("#daterange").daterangepicker({
-				opens: 'right',
-				format: 'YYYY-MM-DD',
-				ranges: {
-					'本月': [moment().startOf('month'), moment().endOf('month')],
-					'上月': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-				},
-				locale: {
-					applyLabel: '确定',
-					cancelLabel: '取消',
-					fromLabel: '从',
-					toLabel: '至',
-				}
-			});
+      				opens: 'right',
+      				format: 'YYYY-MM-DD',
+      				ranges: {
+      					'本月': [moment().startOf('month'), moment().endOf('month')],
+      					'上月': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+      				},
+      				locale: {
+      					applyLabel: '确定',
+      					cancelLabel: '取消',
+      					fromLabel: '从',
+      					toLabel: '至',
+      				}
+      			});
         },
     });
 </script>

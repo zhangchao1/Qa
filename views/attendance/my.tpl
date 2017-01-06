@@ -28,7 +28,7 @@
                 color:#fff;
                 font-size: 26px;
                 -webkit-border-radius: 50%;
-                border-radius: 50%;">打卡<br><span id="addtime"></span>
+                border-radius: 50%;" v-on:click="addAttendance">打卡<br><span id="addtime"></span>
         </button>
         </div>
     </div>
@@ -70,7 +70,21 @@
             
         },
         methods:{
-   
+            addAttendance :function(){
+              var addtime = $("#nowtime").text()
+              if(addtime == ""){
+                alert("请提交考勤时间")
+              }
+              this.$http.get('/api/attendance/add?addTime='+ addtime, [], []).then(function(response){
+                if(response.data.IsSuccess == true){
+                    alert(response.data.ErrMsg);
+                }else{
+                    alert(response.data.ErrMsg);
+                }
+              }, function(response){
+                alert('提交失败')
+            });
+            }
         },
         ready:function(){
             setInterval(function() {

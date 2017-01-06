@@ -4,6 +4,8 @@ import (
 	"Qa/models/attendance"
 	"Qa/service/redisService"
 	"fmt"
+	"github.com/astaxie/beego/orm"
+	"strings"
 	"time"
 )
 
@@ -12,6 +14,11 @@ const WORK_ON_TIME = " 9:30:00"
 const WORK_OFF_TIME = " 18:30:00"
 const WORK_OVER_TIME = " 19:30:00"
 
+type Datas struct {
+	Data      []orm.Params
+	IsSuccess bool
+	ErrMsg    string
+}
 type AttendanceService struct {
 }
 
@@ -21,16 +28,12 @@ func (this *AttendanceService) AddAttendance(addTime string, uid int64, ip strin
 	var addItem attendance.Attendance
 	var attendanceRedis redisService.AttendanceRedisService
 	dayTime := time.Now().Format("2006-01-02")
-	fmt.Println(dayTime)
 	startTime := dayTime + " 00:00:00"
 	endTime := dayTime + " 23:59:59"
-	fmt.Println(dayTime, startTime, endTime)
 	attendanceTime, _ := time.Parse("2006-01-02 15:04:05", addTime)
 	dayStart, _ := time.Parse("2006-01-02 15:04:05", startTime)
 	dayEnd, _ := time.Parse("2006-01-02 15:04:05", endTime)
-	fmt.Println(attendanceTime, dayStart, dayEnd)
-	fmt.Println(attendanceTime.After(dayEnd), attendanceTime.Before(dayStart))
-	if attendanceTime.After(dayEnd) || attendanceTime.Before(dayStart) {
+	if attendanceTime.Before(dayStart) || attendanceTime.After(dayEnd) {
 		result.IsSuccess = false
 		result.ErrMsg = "考勤日期有误"
 	} else {
@@ -56,6 +59,7 @@ func (this *AttendanceService) AddAttendance(addTime string, uid int64, ip strin
 			} else {
 				attendaceInfo := addAttendance.GetUserDayAttendanceInfo(uid, startTime,
 					endTime)
+				fmt.Println(attendaceInfo)
 				status := GetAttendanceStatus(attendanceTime)
 				updateId, ok := attendaceInfo[1]["Id"].(int64)
 				attendanceRedis.AddAttendance(uid)
@@ -89,20 +93,56 @@ func GetAttendanceStatus(attendanceTime time.Time) int {
 	overTime, _ := time.Parse("2006-01-02 15:04:05", workOverTime)
 	middleTime, _ := time.Parse("2006-01-02 15:04:05", workMiddleTime)
 	var status int
-	if onTime.Before(attendanceTime) {
+	if onTime.After(attendanceTime) {
 		status = 1
 	}
-	if onTime.After(attendanceTime) && middleTime.Before(attendanceTime) {
+	if onTime.Before(attendanceTime) && middleTime.After(attendanceTime) {
 		status = 2
 	}
-	if middleTime.After(attendanceTime) && offTime.Before(attendanceTime) {
+	if middleTime.Before(attendanceTime) && offTime.After(attendanceTime) {
 		status = 3
 	}
-	if offTime.After(attendanceTime) && overTime.Before(attendanceTime) {
+	if offTime.Before(attendanceTime) && overTime.After(attendanceTime) {
 		status = 4
 	}
-	if overTime.After(attendanceTime) {
+	if overTime.Before(attendanceTime) {
 		status = 5
 	}
 	return status
+}
+
+func (this *AttendanceService) SearchAttendance(uid int64, startTime string, endTime string, limit int64, offset int64) Datas {
+	var serachAttendance attendance.Attendance
+	var Items Datas
+	searchInfo := serachAttendance.GetRangeAttendanceRecord(uid, startTime, endTime, limit, offset)
+	for i := 0; i < len(searchInfo); i++ {
+		oldtypes, ok := searchInfo[i]["Types"].(string)
+		if !ok {
+			fmt.Println("sytem error")
+		}
+		searchInfo[i]["Status"], searchInfo[i]["Types"] = CheckTypes(oldtypes)
+	}
+	Items.Data = searchInfo
+	Items.ErrMsg = ""
+	Items.IsSuccess = true
+	return Items
+}
+
+func CheckTypes(types string) (string, string) {
+	if !strings.Contains(types, ",") {
+		return "label-danger", "考勤异常"
+	} else {
+		typesInfo := strings.Split(types, ",")
+		if typesInfo[0] == "1" && typesInfo[1] == "4" {
+			return "label-success", "正常"
+		} else if typesInfo[0] == "1" && typesInfo[1] == "5" {
+			return "label-success", "加班"
+		} else if typesInfo[0] == "2" && (typesInfo[1] == "4" || typesInfo[1] == "5") {
+			return "label-danger", "迟到"
+		} else if typesInfo[0] == "1" && typesInfo[1] == "3" {
+			return "label-danger", "早退"
+		} else {
+			return "label-danger", "迟到又早退"
+		}
+	}
 }

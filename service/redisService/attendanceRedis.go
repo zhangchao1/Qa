@@ -21,8 +21,7 @@ func init() {
 }
 
 func (this *AttendanceRedisService) AddAttendance(uid int64) int64 {
-	year, month, day := time.Now().Date()
-	dayTime := fmt.Sprintf("%d%d%d", year, month, day)
+	dayTime := time.Now().Format("20060102")
 	attendanceKey := fmt.Sprintf(USER_EACH_DAY_ATTENDANCE, dayTime, uid)
 	fmt.Println(attendanceKey)
 	Uid := strconv.FormatInt(uid, 10)
@@ -31,8 +30,7 @@ func (this *AttendanceRedisService) AddAttendance(uid int64) int64 {
 }
 
 func (this *AttendanceRedisService) GetAttendance(uid int64) int64 {
-	year, month, day := time.Now().Date()
-	dayTime := fmt.Sprintf("%d%d%d", year, month, day)
+	dayTime := time.Now().Format("20060102")
 	attendanceKey := fmt.Sprintf(USER_EACH_DAY_ATTENDANCE, dayTime, uid)
 	fmt.Println(attendanceKey)
 	Uid := strconv.FormatInt(uid, 10)
