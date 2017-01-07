@@ -5,6 +5,15 @@ import (
 	"Qa/controllers/api"
 	"Qa/controllers/article"
 	"Qa/controllers/attendance"
+	"Qa/controllers/colorlife"
+	"Qa/controllers/goods"
+	"Qa/controllers/leave"
+	"Qa/controllers/overtime"
+	"Qa/controllers/project"
+	"Qa/controllers/reimbursement"
+	"Qa/controllers/resume"
+	"Qa/controllers/travel"
+	"Qa/controllers/user"
 	"github.com/astaxie/beego"
 )
 
@@ -13,6 +22,15 @@ func init() {
 	//文章
 	beego.AutoRouter(&article.Article{})
 	beego.AutoRouter(&attendance.Attendance{})
+	beego.AutoRouter(&overtime.Overtime{})
+	beego.AutoRouter(&project.Project{})
+	beego.AutoRouter(&reimbursement.Reimbursement{})
+	beego.AutoRouter(&resume.Resume{})
+	beego.AutoRouter(&travel.Travel{})
+	beego.AutoRouter(&user.User{})
+	beego.AutoRouter(&leave.Leave{})
+	beego.AutoRouter(&colorlife.Colorlife{})
+	beego.AutoRouter(&goods.Goods{})
 	//api接口路由
 	ns := beego.NewNamespace("/api",
 		beego.NSNamespace("/article",
