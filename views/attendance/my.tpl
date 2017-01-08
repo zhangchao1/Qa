@@ -19,14 +19,15 @@
             <div class="info-box-content">
               <span class="info-box-text">当前时间</span>
               <span class="info-box-number" id="nowtime"></span>
+              <span>(每天只能打20次)</span>
             </div>
         </div>
-        <div id="attendance_click" style="margin-left:auto;margin-right:auto;width:200px">
-        <button type="button" class="btn btn-default" style="width: 200px;height: 200px;
+        <div id="attendance_click" style="margin-left:auto;margin-right:auto;margin-left:20%;width:200px">
+        <button type="button" class="btn btn-default" style="width: 300px;height: 300px;
                 -moz-border-radius: 50%;
                 background:MediumTurquoise; 
                 color:#fff;
-                font-size: 26px;
+                font-size: 30px;
                 -webkit-border-radius: 50%;
                 border-radius: 50%;" v-on:click="addAttendance">打卡<br><span id="addtime"></span>
         </button>
@@ -45,11 +46,14 @@
                 </div>
                 <div class="box-footer no-padding">
                   <ul class="nav nav-stacked">
-                    <li><a href="#">出勤天数 <span class="pull-right badge bg-blue">3天</span></a></li>
-                    <li><a href="#">正常 <span class="pull-right badge bg-green">1天</span></a></li>
-                    <li><a href="#">迟到<span class="pull-right badge bg-red">1天</span></a></li>
-                    <li><a href="#">早退<span class="pull-right badge bg-red">1天</span></a></li>
-                    <li><a href="#">总计上班时长<span class="pull-right badge bg-blue">22个小时</span></a></li>
+                    <li><a href="#">出勤天数 <span class="pull-right badge bg-blue">{[ items.monthSum ]}天</span></a></li>
+                    <li><a href="#">正常 <span class="pull-right badge bg-green">{[ items.normalAttendance ]}天</span></a></li>
+                    <li><a href="#">迟到<span class="pull-right badge bg-red">{[ items.lateAttendance ]}天</span></a></li>
+                    <li><a href="#">早退<span class="pull-right badge bg-red">{[ items.leftEarly ]}天</span></a></li>
+                    <li><a href="#">加班<span class="pull-right badge bg-green">{[ items.overTime ]}天</span></a></li>
+                    <li><a href="#">考勤异常<span class="pull-right badge bg-red">{[ items.unNormalAttendance ]}天</span></a></li>
+                    <li><a href="#">迟到早退<span class="pull-right badge bg-red">{[ items.lateAndLeftEarly ]}天</span></a></li>
+                    <li><a href="#">总计上班时长<span class="pull-right badge bg-blue">{[ items.monthSumWork ]}个小时</span></a></li>
                   </ul>
                 </div>
               </div>
@@ -67,7 +71,7 @@
     var vue = new Vue({
         el: '#attendance_add',
         data: {
-            
+            items:{}
         },
         methods:{
             addAttendance :function(){
@@ -94,6 +98,15 @@
             $('#addtime').text(addtime);
             }, 1000);
             $("#calendar").calendar()
+            this.$http.get('/api/attendance/monthsum', [], []).then(function(response){
+                if(response.data.IsSuccess == true){
+                    this.items = response.data.MonthSumAttendance
+                }else{
+                    alert(response.data.ErrMsg);
+                }
+              }, function(response){
+                alert('提交失败')
+            });
         },
     });
 </script>

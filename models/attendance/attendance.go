@@ -14,7 +14,7 @@ type Attendance struct {
 	Created string `orm:"column(Created);"`
 }
 
-const QUERY_ATTENDANCE_SERACH = "select DATE_FORMAT(Updated,'%Y-%m-%d') as Dy,GROUP_CONCAT(`Status`) as Types,Uid,Ip,Id from attendance where DATE_FORMAT(Updated,'%Y-%m-%d') >= ? and DATE_FORMAT(Updated,'%Y-%m-%d')<= ? AND Uid = ? GROUP BY DATE_FORMAT(Updated,'%Y-%m-%d') ORDER BY Updated desc Limit ?,?"
+const QUERY_ATTENDANCE_SERACH = "select DATE_FORMAT(Updated,'%Y-%m-%d') as Dy,GROUP_CONCAT(`Status`) as Types,GROUP_CONCAT(`Updated`) as attenanceLen,Uid,Ip,Id from attendance where DATE_FORMAT(Updated,'%Y-%m-%d') >= ? and DATE_FORMAT(Updated,'%Y-%m-%d')<= ? AND Uid = ? GROUP BY DATE_FORMAT(Updated,'%Y-%m-%d') ORDER BY Updated desc Limit ?,?"
 
 func (this *Attendance) TableName() string {
 	return "attendance"
@@ -67,6 +67,5 @@ func (this *Attendance) GetRangeAttendanceRecord(uid int64, searchStart string, 
 	o.Using("Qa")
 	var maps []orm.Params
 	o.Raw(QUERY_ATTENDANCE_SERACH, searchStart, searchEnd, uid, offset, limit).Values(&maps)
-	fmt.Println(maps)
 	return maps
 }

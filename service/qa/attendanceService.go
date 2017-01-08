@@ -9,7 +9,7 @@ import (
 	"time"
 )
 
-const SUM_ATTENDANCE = 10
+const SUM_ATTENDANCE = 20
 const WORK_ON_TIME = " 9:30:00"
 const WORK_OFF_TIME = " 18:30:00"
 const WORK_OVER_TIME = " 19:30:00"
@@ -19,6 +19,7 @@ type Datas struct {
 	IsSuccess bool
 	ErrMsg    string
 }
+
 type AttendanceService struct {
 }
 
@@ -120,7 +121,12 @@ func (this *AttendanceService) SearchAttendance(uid int64, startTime string, end
 		if !ok {
 			fmt.Println("sytem error")
 		}
+		addtendaceHour, ok := searchInfo[i]["attenanceLen"].(string)
+		if !ok {
+			fmt.Println("sytem error")
+		}
 		searchInfo[i]["Status"], searchInfo[i]["Types"] = CheckTypes(oldtypes)
+		searchInfo[i]["GetHour"] = getHour(addtendaceHour)
 	}
 	Items.Data = searchInfo
 	Items.ErrMsg = ""
@@ -144,5 +150,16 @@ func CheckTypes(types string) (string, string) {
 		} else {
 			return "label-danger", "迟到又早退"
 		}
+	}
+}
+
+func getHour(attendanceTime string) float64 {
+	if !strings.Contains(attendanceTime, ",") {
+		return 0.0
+	} else {
+		attendanceTimeLen := strings.Split(attendanceTime, ",")
+		startTime, _ := time.Parse("2006-01-02 15:04:05", attendanceTimeLen[0])
+		endTime, _ := time.Parse("2006-01-02 15:04:05", attendanceTimeLen[1])
+		return endTime.Sub(startTime).Hours()
 	}
 }
