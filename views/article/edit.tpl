@@ -65,7 +65,7 @@
     	</div>
    </section>
 </div>
-<script src="http://cdn.bootcss.com/ckeditor/4.5.10/ckeditor.js"></script>
+<script src="/static/js/ckeditor/ckeditor.js"></script>
 <script>
 	var aid = {{.aid}}
 	var vue = new Vue({

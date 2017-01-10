@@ -45,7 +45,7 @@
    </section>
 </div>
 <link href="/static/css/daterangepicker-bs3.css" rel="stylesheet">
-<script src="https://cdn.bootcss.com/bootstrap-daterangepicker/2.1.24/moment.min.js"></script>
+<script src="/static/js/moment.min.js"></script>
 <script src="/static/js/daterangepicker.js"></script>
 <script>
 	Vue.config.delimiters = ['{[', ']}']

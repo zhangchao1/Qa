@@ -3,24 +3,23 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>QAMS 实用,简单的后台</title>
-  <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-  <link href="//cdn.bootcss.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">
-  <link href="https://cdn.bootcss.com/admin-lte/2.3.7/css/AdminLTE.min.css" rel="stylesheet">
-  <link href="https://cdn.bootcss.com/admin-lte/2.3.7/css/skins/_all-skins.min.css" rel="stylesheet">
-  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
-  <script src="https://cdn.bootcss.com/jquery/2.2.3/jquery.min.js"></script>
-  <script src="https://cdn.bootcss.com/jqueryui/1.12.1/jquery-ui.min.js"></script>
-  <script src="https://cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-  <script src="https://cdn.bootcss.com/admin-lte/2.3.8/js/app.min.js"></script>
-  <script src="https://cdn.bootcss.com/admin-lte/2.3.7/js/demo.js"></script>
+  <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/static/css/ionicons.min.css" rel="stylesheet">
+  <link href="/static/css/AdminLTE.min.css" rel="stylesheet">
+  <link href="/static/css/_all-skins.min.css" rel="stylesheet">
+  <link href="/static/css/font-awesome.min.css" rel="stylesheet">
+  <script src="/static/js/jquery.min.js"></script>
+  <script src="/static/js/jquery-ui.min.js"></script>
+  <script src="/static/js/bootstrap.min.js"></script>
+  <script src="/static/js/app.min.js"></script>
+  <script src="/static/js/demo.js"></script>
   {{if eq 1 .vueVersion}}
-  <script src="https://cdn.bootcss.com/vue/1.0.25/vue.js"></script>
-  <script src="//cdn.bootcss.com/vue-resource/1.0.3/vue-resource.min.js"></script>
-  <script src="https://cdn.bootcss.com/vue-validator/2.1.3/vue-validator.js"></script>
+  <script src="/static/js/vue.js"></script>
+  <script src="/static/js/vue-validator.js"></script>
   {{else if eq 2 .vueVersion}}
-  <script src="https://cdn.bootcss.com/vue/2.1.7/vue.min.js"></script>
-  <script src="https://cdn.bootcss.com/vue-resource/1.0.3/vue-resource.min.js"></script>
+  <script src="/static/js/vue2.min.js"></script>
   {{end}}
+  <script src="/static/js/vue-resource.min.js"></script>
   <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
   	<header class="main-header">
