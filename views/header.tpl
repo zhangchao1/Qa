@@ -261,7 +261,7 @@
           </a>
           <ul class="treeview-menu" {{if eq "leave" .controllerName}}style="display: block"{{else}}style="display: None"{{end}}>
             <li class="active"><a href="/leave/my"><i class="fa fa-user"></i>个人请假</a></li>
-            <li><a href="/leave/record"><i class=" fa fa-user-secret"></i>请假记录</a></li>
+            <li><a href="/leave/record"><i class=" fa fa-search"></i>请假记录</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -273,7 +273,7 @@
           </a>
           <ul class="treeview-menu" {{if eq "overtime" .controllerName}}style="display: block"{{else}}style="display: None"{{end}}>
             <li class="active"><a href="/overtime/add"><i class="fa fa-user"></i>申请加班</a></li>
-            <li><a href="/overtime/record"><i class=" fa fa-user-secret"></i>加班查询</a></li>
+            <li><a href="/overtime/record"><i class=" fa fa-search"></i>加班查询</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -285,7 +285,7 @@
           </a>
           <ul class="treeview-menu" {{if eq "reimbursement" .controllerName}}style="display: block"{{else}}style="display: None"{{end}}>
             <li class="active"><a href="/reimbursement/add"><i class="fa fa-user"></i>申请报销</a></li>
-            <li><a href="/reimbursement/record"><i class=" fa fa-user-secret"></i>报销查询</a></li>
+            <li><a href="/reimbursement/record"><i class=" fa fa-search"></i>报销查询</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -297,7 +297,7 @@
           </a>
           <ul class="treeview-menu" {{if eq "goods" .controllerName}}style="display: block"{{else}}style="display: None"{{end}}>
             <li class="active"><a href="/goods/add"><i class="fa fa-user"></i>申请物品</a></li>
-            <li><a href="/goods/record"><i class=" fa fa-user-secret"></i>物品申请查询</a></li>
+            <li><a href="/goods/record"><i class=" fa fa-search"></i>物品申请查询</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -309,7 +309,7 @@
           </a>
           <ul class="treeview-menu" {{if eq "travel" .controllerName}}style="display: block"{{else}}style="display: None"{{end}}>
            <li class="active"><a href="/travel/add"><i class="fa fa-user"></i>申请出差</a></li>
-            <li><a href="/travel/record"><i class=" fa fa-user-secret"></i>出差申请查询</a></li>
+            <li><a href="/travel/record"><i class=" fa fa-search"></i>出差申请查询</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -319,8 +319,9 @@
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
-          <ul class="treeview-menu" style="display: none;">
-            
+          <ul class="treeview-menu" {{if eq "resume" .controllerName}}style="display: block"{{else}}style="display: None"{{end}}>
+            <li class="active"><a href="/resume/add"><i class="fa fa-user"></i>创建简历</a></li>
+            <li><a href="/resume/search"><i class=" fa fa-search"></i>简历查询</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -330,8 +331,10 @@
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
-          <ul class="treeview-menu" style="display: none;">
-            
+          <ul class="treeview-menu" {{if eq "colorlife" .controllerName}}style="display: block"{{else}}style="display: None"{{end}}>
+            <li class="active"><a href="/colorlife/index"><i class="fa fa-user"></i>员工相册</a></li>
+            <li><a href="/colorlife/my"><i class=" fa fa-user-secret"></i>我的相册</a></li>
+            <li><a href="/colorlife/search"><i class=" fa fa-search"></i>相册搜索</a></li>
           </ul>
         </li>
       </ul>
