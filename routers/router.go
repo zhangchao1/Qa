@@ -43,6 +43,11 @@ func init() {
 				&api.Attendance{},
 			),
 		),
+		beego.NSNamespace("/colorlife",
+			beego.NSInclude(
+				&api.ColorLife{},
+			),
+		),
 	)
 	beego.AddNamespace(ns)
 }
