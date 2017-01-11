@@ -41,16 +41,16 @@
       </div>
    </section>
 </div>
-<link href="https://cdn.bootcss.com/bootstrap-fileinput/4.3.5/css/fileinput.min.css" rel="stylesheet">
-<script src="https://cdn.bootcss.com/bootstrap-fileinput/4.3.5/js/fileinput.min.js"></script>
-<script src="https://cdn.bootcss.com/bootstrap-fileinput/4.3.5/js/locales/zh.min.js"></script>
+<link href="/static/bootstrap-fileinput/css/fileinput.min.css" rel="stylesheet">
+<script src="/static/bootstrap-fileinput/js/fileinput.min.js"></script>
+<script src="/static/bootstrap-fileinput/js/locales/zh.js"></script>
 <script>
   $("#file-0a").fileinput({
             uploadUrl : "/upload_img",//上传图片的url
             allowedFileExtensions : [ 'jpg', 'png', 'gif' ],
             overwriteInitial : false,
             maxFileSize : 1000,//上传文件最大的尺寸
-            maxFilesNum : 1,//上传最大的文件数量
+            maxFilesNum : 10,//上传最大的文件数量
             initialCaption: "请上传相册图片",//文本框初始话value
             //allowedFileTypes: ['image', 'video', 'flash'],
             slugCallback : function(filename) {
