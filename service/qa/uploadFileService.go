@@ -1,10 +1,6 @@
 package qa
 
-// import (
-// 	"crypto/md5"
-// 	"encoding/hex"
-// 	"time"
-// )
+import ()
 
 type UploadFileService struct {
 }
