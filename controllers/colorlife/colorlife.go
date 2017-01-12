@@ -2,6 +2,7 @@ package colorlife
 
 import (
 	"Qa/controllers"
+	"strconv"
 )
 
 type Colorlife struct {
@@ -17,13 +18,31 @@ func (this *Colorlife) Index() {
 	this.Data["controllerName"] = "colorlife"
 }
 func (this *Colorlife) Detail() {
-	this.Data["vueVersion"] = 1
-	this.Data["controllerName"] = "colorlife"
+	var id int64
+	Params := make(map[string]string)
+	Params = this.Ctx.Input.Params()
+	id, _ = strconv.ParseInt(Params["0"], 10, 64)
+	if id == 0 {
+		return
+	} else {
+		this.Data["cid"] = id
+		this.Data["vueVersion"] = 1
+		this.Data["controllerName"] = "colorlife"
+	}
 }
 
 func (this *Colorlife) Edit() {
-	this.Data["vueVersion"] = 1
-	this.Data["controllerName"] = "colorlife"
+	var id int64
+	Params := make(map[string]string)
+	Params = this.Ctx.Input.Params()
+	id, _ = strconv.ParseInt(Params["0"], 10, 64)
+	if id == 0 {
+		return
+	} else {
+		this.Data["cid"] = id
+		this.Data["vueVersion"] = 1
+		this.Data["controllerName"] = "colorlife"
+	}
 }
 
 func (this *Colorlife) My() {

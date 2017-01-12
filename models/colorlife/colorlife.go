@@ -31,11 +31,6 @@ func init() {
 	orm.RegisterModel(new(Colorlife))
 }
 
-/**
- * 增加文章
- * [AddArticle description]
- * @param {[type]} updAlb Article) (int64, error [description]
- */
 func (this *Colorlife) AddColorlife(addItem Colorlife) (int64, error) {
 	o := orm.NewOrm()
 	o.Using("Qa")
@@ -54,4 +49,29 @@ func (this *Colorlife) AddColorlife(addItem Colorlife) (int64, error) {
 	colorlife.Created = time.Now().Format("2006-01-02 15:04:05")
 	id, err := o.Insert(colorlife)
 	return id, err
+}
+
+func (this *Colorlife) EditColorlife(id int64, editItem Colorlife) error {
+	o := orm.NewOrm()
+	o.Using("Qa")
+	colorlife := Colorlife{Id: id}
+	err := o.Read(&colorlife)
+	if err == nil {
+		colorlife.Title = editItem.Title
+		colorlife.Tag = editItem.Tag
+		colorlife.Description = editItem.Description
+		colorlife.IsPublic = editItem.IsPublic
+		colorlife.Ablums = editItem.Ablums
+		colorlife.Updated = time.Now().Format("2006-01-02 15:04:05")
+		_, err := o.Update(&colorlife, "Title", "Ablums", "Tag", "IsPublic", "Description", "Updated")
+		return err
+	}
+	return err
+}
+
+func (this *Colorlife) GetColorlifeById(id int64, status int) (item Colorlife, err error) {
+	o := orm.NewOrm()
+	colorlife := Colorlife{Id: id, Status: status}
+	err = o.Read(&colorlife, "Id", "Status")
+	return colorlife, err
 }

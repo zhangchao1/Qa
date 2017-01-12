@@ -73,3 +73,34 @@ func (this *ColorLife) Add() {
 	this.Data["json"] = result
 	this.ServeJSON()
 }
+
+// @router /edit [post]
+func (this *ColorLife) Edit() {
+	var editcolorlife colorlife.Colorlife
+	json.Unmarshal(this.Ctx.Input.RequestBody, &editcolorlife)
+	var colorlifeService qa.ColorlifeService
+	result := colorlifeService.Edit(editcolorlife)
+	fmt.Println(result)
+	this.Data["json"] = result
+	this.ServeJSON()
+}
+
+// @router /getcolorlife [get]
+func (this *ColorLife) GetColorlife() {
+	var colorlifeService qa.ColorlifeService
+	id, _ := this.GetInt64("id")
+	if id == 0 {
+		this.Data["json"] = map[string]interface{}{"IsSuccess": false, "ErrMsg": "请传递正确的参数"}
+		this.ServeJSON()
+	} else {
+		data, err := colorlifeService.GetColorlifeByCid(id, 1)
+		fmt.Println(err)
+		if err != nil {
+			this.Data["json"] = map[string]interface{}{"IsSuccess": false, "ErrMsg": "无效的id"}
+			this.ServeJSON()
+		} else {
+			this.Data["json"] = map[string]interface{}{"IsSuccess": true, "ErrMsg": "", "data": data}
+			this.ServeJSON()
+		}
+	}
+}
