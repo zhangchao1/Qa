@@ -2,6 +2,7 @@ package api
 
 import (
 	"Qa/models/colorlife"
+	"Qa/models/comment"
 	"Qa/service/qa"
 	"crypto/md5"
 	"encoding/hex"
@@ -102,5 +103,64 @@ func (this *ColorLife) GetColorlife() {
 			this.Data["json"] = map[string]interface{}{"IsSuccess": true, "ErrMsg": "", "data": data}
 			this.ServeJSON()
 		}
+	}
+}
+
+// @router /admire [get]
+func (this *ColorLife) AdmireColorLife() {
+	var colorlifeService qa.ColorlifeService
+	id, _ := this.GetInt64("id")
+	if id == 0 {
+		this.Data["json"] = map[string]interface{}{"IsSuccess": false, "ErrMsg": "请传递正确的参数"}
+		this.ServeJSON()
+	} else {
+		result := colorlifeService.AddAdmrie(id)
+		this.Data["json"] = result
+		this.ServeJSON()
+	}
+}
+
+// @router /admirestatus [get]
+func (this *ColorLife) UserAdmireStatus() {
+	var colorlifeService qa.ColorlifeService
+	id, _ := this.GetInt64("id")
+	if id == 0 {
+		this.Data["json"] = map[string]interface{}{"IsSuccess": false, "ErrMsg": "请传递正确的参数"}
+		this.ServeJSON()
+	} else {
+		result := colorlifeService.UserAdmireStatus(id, 1)
+		this.Data["json"] = result
+		this.ServeJSON()
+	}
+}
+
+// @router /addcomment [post]
+func (this *ColorLife) AddComment() {
+	var colorlifeService qa.ColorlifeService
+	var addComment comment.Comment
+	json.Unmarshal(this.Ctx.Input.RequestBody, &addComment)
+	addComment.Types = 2
+	addComment.Uid = 1
+	addComment.TargetUid = 2
+	result := colorlifeService.AddColorlifeComment(addComment)
+	fmt.Println(result)
+	this.Data["json"] = result
+	this.ServeJSON()
+}
+
+// @router /commentlist [get]
+func (this *ColorLife) ColorLifeCommentList() {
+	var Comment comment.Comment
+	var result comment.Items
+	id, _ := this.GetInt64("id")
+	startIndex, _ := this.GetInt64("start")
+	maxCounts, _ := this.GetInt64("max")
+	if startIndex == 0 || maxCounts == 0 || id == 0 {
+		this.Data["json"] = map[string]interface{}{"IsSuccess": false, "ErrMsg": "请传递正确的参数"}
+		this.ServeJSON()
+	} else {
+		result = Comment.CommentList(startIndex, maxCounts, "-Created", id, 2)
+		this.Data["json"] = map[string]interface{}{"IsSuccess": true, "ErrMsg": "", "data": result}
+		this.ServeJSON()
 	}
 }

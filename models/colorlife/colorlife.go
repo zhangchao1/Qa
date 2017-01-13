@@ -75,3 +75,45 @@ func (this *Colorlife) GetColorlifeById(id int64, status int) (item Colorlife, e
 	err = o.Read(&colorlife, "Id", "Status")
 	return colorlife, err
 }
+
+func (this *Colorlife) UpdateAdmireNum(id int64) error {
+	o := orm.NewOrm()
+	o.Using("Qa")
+	colorlife := Colorlife{Id: id}
+	err := o.Read(&colorlife)
+	if err == nil {
+		colorlife.AdmireNum = colorlife.AdmireNum + 1
+		colorlife.Updated = time.Now().Format("2006-01-02 15:04:05")
+		_, err := o.Update(&colorlife, "AdmireNum", "Updated")
+		return err
+	}
+	return err
+}
+
+func (this *Colorlife) UpdateCommentNum(id int64) error {
+	o := orm.NewOrm()
+	o.Using("Qa")
+	colorlife := Colorlife{Id: id}
+	err := o.Read(&colorlife)
+	if err == nil {
+		colorlife.CommentNum = colorlife.CommentNum + 1
+		colorlife.Updated = time.Now().Format("2006-01-02 15:04:05")
+		_, err := o.Update(&colorlife, "CommentNum", "Updated")
+		return err
+	}
+	return err
+}
+
+func (this *Colorlife) UpdateViewNum(id int64) error {
+	o := orm.NewOrm()
+	o.Using("Qa")
+	colorlife := Colorlife{Id: id}
+	err := o.Read(&colorlife)
+	if err == nil {
+		colorlife.ViewNum = colorlife.ViewNum + 1
+		colorlife.Updated = time.Now().Format("2006-01-02 15:04:05")
+		_, err := o.Update(&colorlife, "ViewNum", "Updated")
+		return err
+	}
+	return err
+}

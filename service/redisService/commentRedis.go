@@ -8,6 +8,7 @@ import (
 )
 
 const COMMENT_KEY_ARTICLE = "qa:comment:article:%d"
+const COMMENT_KEY_COLORLIFE = "qa:comment:colorlife:%d"
 
 var CommentRedis *redis.Client
 
@@ -21,6 +22,13 @@ func init() {
 
 func (this *CommentRedisService) AddCommentArticle(cid int) int64 {
 	CommentKey := fmt.Sprintf(COMMENT_KEY_ARTICLE, cid)
+	Cid := strconv.Itoa(cid)
+	count, _ := AdmireRedis.HIncrBy(CommentKey, Cid, 1).Result()
+	return count
+}
+
+func (this *CommentRedisService) AddCommentColorlife(cid int) int64 {
+	CommentKey := fmt.Sprintf(COMMENT_KEY_COLORLIFE, cid)
 	Cid := strconv.Itoa(cid)
 	count, _ := AdmireRedis.HIncrBy(CommentKey, Cid, 1).Result()
 	return count

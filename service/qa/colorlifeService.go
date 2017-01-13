@@ -2,6 +2,8 @@ package qa
 
 import (
 	"Qa/models/colorlife"
+	"Qa/models/comment"
+	"Qa/service/redisService"
 	"Qa/validator"
 	"fmt"
 	"github.com/astaxie/beego/validation"
@@ -85,4 +87,96 @@ func (this *ColorlifeService) GetColorlifeByCid(id int64, status int) (colorlife
 	var colorlife colorlife.Colorlife
 	data, err := colorlife.GetColorlifeById(id, status)
 	return data, err
+}
+
+func (this *ColorlifeService) AddAdmrie(id int64) AdmireResult {
+	var colorlife colorlife.Colorlife
+	var admireService AdmireService
+	var admireRedis redisService.AdmireRedisService
+	var result AdmireResult
+	errUserAdmire := admireRedis.AdmireStatusColorlife(int(id), 1)
+	_, errIdStatus := colorlife.GetColorlifeById(id, 1)
+	if errUserAdmire == true {
+		result.IsSuccess = false
+		result.ErrMsg = "你已经点过赞了!"
+	} else if errIdStatus != nil {
+		result.IsSuccess = false
+		result.ErrMsg = "无法点赞"
+	} else {
+		addAdmireNumStatus := colorlife.UpdateAdmireNum(id)
+		errAddAdmireStatus := admireService.AddAdmire(id, 2, 1, "chaochao", 1)
+		admireRedis.AddUserColorlifeAdmires(int(id), 1)
+		count := admireRedis.AddAdmiresColorlife(int(id))
+		fmt.Println(addAdmireNumStatus)
+		fmt.Println(errAddAdmireStatus)
+		if addAdmireNumStatus == nil && errAddAdmireStatus == true {
+			result.IsSuccess = true
+			result.ErrMsg = ""
+			result.Count = count
+		} else {
+			result.IsSuccess = false
+			result.ErrMsg = "系统错误"
+		}
+	}
+	return result
+}
+
+func (this *ColorlifeService) UserAdmireStatus(id int64, uid int64) UserAdmireStatus {
+	var admireRedis redisService.AdmireRedisService
+	var colorlife colorlife.Colorlife
+	var result UserAdmireStatus
+	_, errIdStatus := colorlife.GetColorlifeById(id, int(uid))
+	if errIdStatus != nil {
+		result.ErrMsg = "请传递正确的id"
+		result.IsSuccess = false
+	} else {
+		errUserAdmire := admireRedis.AdmireStatusColorlife(int(id), int(uid))
+		if errUserAdmire == true {
+			result.ErrMsg = ""
+			result.IsSuccess = true
+			result.Status = true
+		} else {
+			result.ErrMsg = ""
+			result.IsSuccess = true
+			result.Status = false
+		}
+	}
+	return result
+}
+
+func (this *ColorlifeService) AddColorlifeComment(add comment.Comment) CommentResult {
+	var result CommentResult
+	var commentService commentService
+	var colorlife colorlife.Colorlife
+	var commentRedis redisService.CommentRedisService
+	valid := validation.Validation{}
+	val := validator.CommentValidation{
+		Content:   add.Content,
+		Uid:       add.Uid,
+		Cid:       add.Cid,
+		TargetUid: add.TargetUid,
+	}
+	is, err := valid.Valid(&val)
+	if err != nil {
+		result.ErrMsg = "传入正确的参数"
+		result.IsSuccess = false
+	} else if !is {
+		for _, err := range valid.Errors {
+			result.ErrMsg = fmt.Sprintf("%s:%s", err.Key, err.Message)
+		}
+		result.IsSuccess = false
+	} else {
+		errUpdateCommentNum := colorlife.UpdateCommentNum(add.Cid)
+		CommentNum := commentRedis.AddCommentColorlife(int(add.Cid))
+		_, errAddComment := commentService.AddComment(add)
+		if errUpdateCommentNum == nil && errAddComment == nil {
+			result.ErrMsg = "添加成功"
+			result.IsSuccess = true
+			result.Count = CommentNum
+		} else {
+			result.ErrMsg = "系统错误"
+			result.IsSuccess = false
+		}
+	}
+	return result
 }
