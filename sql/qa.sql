@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50540
 File Encoding         : 65001
 
-Date: 2017-01-05 18:50:18
+Date: 2017-01-13 15:02:30
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -28,6 +28,7 @@ CREATE TABLE `admire` (
   `Created` datetime NOT NULL,
   PRIMARY KEY (`Id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
 -- ----------------------------
 -- Table structure for `article`
 -- ----------------------------
@@ -49,6 +50,7 @@ CREATE TABLE `article` (
   PRIMARY KEY (`Aid`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
+
 -- ----------------------------
 -- Table structure for `attendance`
 -- ----------------------------
@@ -58,6 +60,27 @@ CREATE TABLE `attendance` (
   `Uid` int(14) unsigned NOT NULL,
   `Status` tinyint(8) unsigned NOT NULL,
   `Ip` varchar(50) NOT NULL,
+  `Updated` datetime NOT NULL,
+  `Created` datetime NOT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for `colorlife`
+-- ----------------------------
+DROP TABLE IF EXISTS `colorlife`;
+CREATE TABLE `colorlife` (
+  `Id` int(14) unsigned NOT NULL AUTO_INCREMENT,
+  `Uid` int(14) NOT NULL,
+  `Title` varchar(50) NOT NULL,
+  `Tag` varchar(50) NOT NULL,
+  `Description` varchar(50) NOT NULL,
+  `Ablums` text NOT NULL,
+  `AdmireNum` int(14) unsigned NOT NULL,
+  `CommentNum` int(14) unsigned NOT NULL,
+  `ViewNum` int(14) unsigned NOT NULL,
+  `Status` tinyint(8) NOT NULL,
+  `IsPublic` tinyint(4) unsigned NOT NULL,
   `Updated` datetime NOT NULL,
   `Created` datetime NOT NULL,
   PRIMARY KEY (`Id`)
@@ -77,6 +100,7 @@ CREATE TABLE `comment` (
   `Created` datetime NOT NULL,
   PRIMARY KEY (`Id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
 -- ----------------------------
 -- Table structure for `useradmire`
 -- ----------------------------
