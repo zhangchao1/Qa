@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50540
 File Encoding         : 65001
 
-Date: 2017-01-13 15:02:30
+Date: 2017-01-16 17:41:56
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -50,7 +50,6 @@ CREATE TABLE `article` (
   PRIMARY KEY (`Aid`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
-
 -- ----------------------------
 -- Table structure for `attendance`
 -- ----------------------------
@@ -84,7 +83,7 @@ CREATE TABLE `colorlife` (
   `Updated` datetime NOT NULL,
   `Created` datetime NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for `comment`
@@ -100,6 +99,69 @@ CREATE TABLE `comment` (
   `Created` datetime NOT NULL,
   PRIMARY KEY (`Id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for `deparment`
+-- ----------------------------
+DROP TABLE IF EXISTS `deparment`;
+CREATE TABLE `deparment` (
+  `DeparmentId` tinyint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `DeparmentName` varchar(100) NOT NULL,
+  `ParentId` tinyint(8) unsigned NOT NULL,
+  `Level` tinyint(8) unsigned NOT NULL,
+  `Created` datetime NOT NULL,
+  `Updated` datetime NOT NULL,
+  PRIMARY KEY (`DeparmentId`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of deparment
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `employee`
+-- ----------------------------
+DROP TABLE IF EXISTS `employee`;
+CREATE TABLE `employee` (
+  `Eid` int(14) unsigned NOT NULL AUTO_INCREMENT,
+  `Uid` int(14) unsigned NOT NULL,
+  `DeId` tinyint(8) unsigned NOT NULL,
+  `Job` varchar(50) NOT NULL,
+  `Level` smallint(5) unsigned NOT NULL,
+  `Role` smallint(5) unsigned NOT NULL,
+  `Cretated` datetime NOT NULL,
+  `Updated` datetime NOT NULL,
+  PRIMARY KEY (`Eid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of employee
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `user`
+-- ----------------------------
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user` (
+  `Uid` int(14) unsigned NOT NULL AUTO_INCREMENT,
+  `Name` varchar(100) NOT NULL,
+  `Email` varchar(50) NOT NULL,
+  `Salt` char(50) NOT NULL,
+  `Password` char(64) NOT NULL,
+  `Age` tinyint(8) unsigned NOT NULL,
+  `Sex` smallint(3) unsigned NOT NULL,
+  `Avatar` varchar(255) NOT NULL,
+  `LastLoginIp` char(15) NOT NULL,
+  `ReLoginIp` char(15) NOT NULL,
+  `Created` datetime NOT NULL,
+  `ReLoginTime` int(14) unsigned NOT NULL,
+  `LastLoginTime` int(14) NOT NULL,
+  PRIMARY KEY (`Uid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of user
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `useradmire`
