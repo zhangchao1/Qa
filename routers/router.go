@@ -2,6 +2,7 @@ package routers
 
 import (
 	"Qa/controllers"
+	"Qa/controllers/admin"
 	"Qa/controllers/api"
 	"Qa/controllers/article"
 	"Qa/controllers/attendance"
@@ -19,7 +20,6 @@ import (
 
 func init() {
 	beego.Router("/", &controllers.MainController{})
-	//文章
 	beego.AutoRouter(&article.Article{})
 	beego.AutoRouter(&attendance.Attendance{})
 	beego.AutoRouter(&overtime.Overtime{})
@@ -31,6 +31,7 @@ func init() {
 	beego.AutoRouter(&leave.Leave{})
 	beego.AutoRouter(&colorlife.Colorlife{})
 	beego.AutoRouter(&goods.Goods{})
+	beego.AutoRouter(&admin.Admin{})
 	//api接口路由
 	ns := beego.NewNamespace("/api",
 		beego.NSNamespace("/article",

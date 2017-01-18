@@ -336,6 +336,18 @@
             <li><a href="/colorlife/search"><i class=" fa fa-search"></i>相册搜索</a></li>
           </ul>
         </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-user-secret"></i> <span>管理员操作</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu" {{if eq "admin" .controllerName}}style="display: block"{{else}}style="display: None"{{end}}>
+            <li class="active"><a href="/admin/creataccount"><i class="fa fa-user-plus"></i>创建用户</a></li>
+            <li><a href="/admin/updatepassword"><i class=" fa fa-user"></i>修改用户密码</a></li>
+          </ul>
+        </li>
       </ul>
     </section>
 </aside>

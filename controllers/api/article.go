@@ -190,3 +190,12 @@ func (this *Article) ArticleCommentList() {
 		this.ServeJSON()
 	}
 }
+
+// @router /test [get]
+func (this *Article) Test() {
+	var adminservice qa.AdminService
+	var data qa.Alldes
+	adminservice.GetAllDeparment(0, &data)
+	this.Data["json"] = map[string]interface{}{"IsSuccess": true, "ErrMsg": "", "Data": data.Children}
+	this.ServeJSON()
+}
