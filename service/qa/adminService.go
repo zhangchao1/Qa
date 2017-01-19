@@ -9,11 +9,10 @@ type AdminService struct {
 }
 
 type Alldes struct {
-	Did      int64
-	Dname    string
-	Pid      int64
-	Level    int64
-	Children []*Alldes
+	Did      int64     `json:"id"`
+	Dname    string    `json:"name"`
+	Open     bool      `json:"open"`
+	Children []*Alldes `json:"children"`
 }
 
 func (this *AdminService) GetAllDeparment(pid int64, des *Alldes) {
@@ -24,13 +23,11 @@ func (this *AdminService) GetAllDeparment(pid int64, des *Alldes) {
 		for _, item := range items {
 			Did, _ := item["Id"].(int64)
 			Dname, _ := item["Pname"].(string)
-			Pid, _ := item["Pid"].(int64)
-			Level, _ := item["Level"].(int64)
+			Open := true
 			children := Alldes{
 				Did,
 				Dname,
-				Pid,
-				Level,
+				Open,
 				[]*Alldes{}}
 			this.GetAllDeparment(Did, &children)
 			if children.Did != 0 {
