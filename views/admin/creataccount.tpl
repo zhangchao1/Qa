@@ -24,10 +24,28 @@
               <div class="box-body">
               	<validator name="validation1">
               	<form role="form">
-                  <div class="form-group">
-                      <label>用户名</label>
-                      <input type="text" class="form-control" placeholder="输入英文" v-model="Name" v-validate:Name="['required']" onkeyup="value=value.replace(/[\W]/g,'') " 
-      						onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))" >
+	              <div class="form-group">
+	                  <label>用户名</label>
+	                  <input type="text" class="form-control" placeholder="输入英文" v-model="Name" v-validate:Name="['required']" onkeyup="value=value.replace(/[\W]/g,'') " 
+	  						onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))" >
+	              </div>
+	               	<div class="form-group">
+	                  <label>性别</label>
+	                  <div class="radio">
+	                    <label>
+	                      <input type="radio" name="optionsRadios" id="optionsRadios1" value="1" checked="checked">
+	                     男
+	                    </label>
+	                  </div>
+	                  <div class="radio">
+	                    <label>
+	                      <input type="radio" name="optionsRadios" id="optionsRadios2" value="2">
+	                      女
+	                    </label>
+	                  </div>
+	                <div class="form-group">
+                      <label>年龄</label>
+                      <input type="number" class="form-control" placeholder="年龄" v-model="Age" v-validate:Age="['required']">
                     </div>
                     <div class="form-group">
 	                    <div class="row">
@@ -67,13 +85,15 @@
 	                </select>
               		</div>
               		<div class="form-group">
+              		  <label>后台权限</label>
 	                  <div class="checkbox">
 	                    <label>
 	                      <input type="checkbox" v-model="Managers">
 	                      是否为后台管理员
-	                    </label>
+	                      </label>
 	                  </div>
 	                </div>
+                </div>
                  </form>
                  </validator>
               </div>
@@ -97,6 +117,8 @@
         	Level:0,
         	Role:"",
         	Managers:0,
+        	Sex:0,
+        	Age:0
     	},
         methods:{
         	zTreeOnCheck:function (event, treeId, treeNode) {
@@ -115,7 +137,9 @@
 	                Name: this.Name,
 	                Level: this.Level,
 	                Role:this.Role,
-	                Managers:this.Managers
+	                Managers:this.Managers,
+	                Sex:this.Sex,
+	                Age:this.Age
             	}
             	this.$http.post('/api/admin/creatuser', params, []).then(function(response){
             		console.log(response)

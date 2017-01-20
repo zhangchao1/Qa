@@ -2,10 +2,11 @@ package user
 
 import (
 	"github.com/astaxie/beego/orm"
+	"time"
 )
 
 type User struct {
-	Uid           int64  `orm:"column(Uid);"`
+	Id            int64  `orm:"column(Uid);"`
 	Name          string `orm:"column(Name);"`
 	Email         string `orm:"column(Email);"`
 	Salt          string `orm:"column(Salt);"`

@@ -16,6 +16,8 @@ type CreatUser struct {
 	Level    int64
 	Role     string
 	Managers int64
+	Sex      int64
+	Age      int64
 }
 
 // @router /alldeparment [get]
