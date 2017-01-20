@@ -49,6 +49,11 @@ func init() {
 				&api.ColorLife{},
 			),
 		),
+		beego.NSNamespace("/admin",
+			beego.NSInclude(
+				&api.Admin{},
+			),
+		),
 	)
 	beego.AddNamespace(ns)
 }
