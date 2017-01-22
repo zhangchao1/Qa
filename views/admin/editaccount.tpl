@@ -1,23 +1,22 @@
 {{template "header.tpl" .}}
-
 <div class="content-wrapper">
 	<section class="content-header">
       <h1>
-        创建用户
+        编辑用户
         <small></small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="/"><i class="fa fa-dashboard"></i>Home</a></li>
         <li><a class="active">管理员操作</a></li>
-        <li class="active">用户创建</li>
+        <li class="active">用户编辑</li>
       </ol>
     </section>
-    <section class="content" id="admin_user_add">
+    <section class="content" id="admin_user_edit">
     <div class="row">
         <div class="col-md-12">
             <div class="box">
                 <div class="box-header with-border">
-                  <h3 class="box-title">创建用户</h3>
+                  <h3 class="box-title">编辑</h3>
                   <div class="pull-right">
                   </div>
             </div>
@@ -99,7 +98,7 @@
                  </validator>
               </div>
               <div class="box-footer">
-                  <button type="submit" class="btn btn-info" v-on:click="save" :disabled="!$validation1.valid">保存</button>
+                  <button type="submit" class="btn btn-info" :disabled="!$validation1.valid">保存</button>
               </div>
         </div>
       </div>
@@ -108,9 +107,10 @@
 <script src="/static/zTree/js/jquery.ztree.core.js"></script>
 <link href="/static/zTree/css/zTreeStyle/zTreeStyle.css" rel="stylesheet">
 <script>
+var uid = {{.uid}}
 	Vue.config.delimiters = ['{[', ']}']
     var vue = new Vue({
-        el: '#admin_user_add',
+        el: '#admin_user_edit',
         data: {
         	Did:0,
         	Job:"",
@@ -134,44 +134,73 @@
 		  		}
             var manger_type
             var sex
-            if (this.Manager == true){
+            if (this.Managers == true){
               manger_type = 2
             }else{
               manger_type = 1
             }
-        		var params = {
-	                Did: Number(this.Did),
-	                Job: this.Job,
-	                Name: this.Name,
-	                Level: Number(this.Level),
-	                Role:this.Role,
-	                Manager:manger_type,
-	                Sex:Number(this.Sex),
-	                Age:Number(this.Age)
-            	}
-            	this.$http.post('/api/admin/creatuser', params, []).then(function(response){
-            		console.log(response)
-                if(response.data.IsSuccess == true){
-                    alert("保存成功")
-                    window.location.href="/article/my"
-                }else{
-                    alert(response.data.ErrMsg);
-                }
-            	}, function(response){
-                alert('提交失败')
-            	});
+            if (this.sex == 0){
+              sex = 1
+            }else{
+              sex = 2
+            }
+    		var params = {
+                Did: Number(this.Did),
+                Job: this.Job,
+                Name: this.Name,
+                Level: Number(this.Level),
+                Role:this.Role,
+                Manager:manger_type,
+                Sex:sex,
+                Age:Number(this.Age)
+        	}
+        	this.$http.post('/api/admin/creatuser', params, []).then(function(response){
+        		console.log(response)
+            if(response.data.IsSuccess == true){
+                alert("保存成功")
+                window.location.href="/article/my"
+            }else{
+                alert(response.data.ErrMsg);
+            }
+        	}, function(response){
+            alert('提交失败')
+        	});
             }
         },
         ready:function(){
        	 var nodes
-     	 var setting = {
-     	 	callback: {onClick: this.zTreeOnCheck}
-     	 }
-	     $.getJSON(
-		    '/api/admin/alldeparment',
-		    function(data) {
-		        zTreeObj = $.fn.zTree.init($("#showde"), setting, data.Data[0]);
-		    });
+       	 var setting = {
+       	 	callback: {onClick: this.zTreeOnCheck}
+       	 }
+         this.$http.get('/api/admin/getuser?uid='+ uid, [], []).then(function(response){
+                console.log(response)
+                if(response.data.IsSuccess == true){
+                    this.Job = response.data.Data.Job
+                    this.Name = response.data.Data.Name
+                    this.Age = response.data.Data.Age
+                    this.Role = response.data.Data.Role
+                    this.Level = response.data.Data.Level
+                    this.Did = response.data.Data.Did
+                    console.log(this.Did)
+                    this.Sex = (response.data.Data.Sex ==2)? "2": "1"
+                    this.Manager = (response.data.Data.Manager ==2)? true: false
+                    var vthis=this;
+                    $.getJSON(
+                      '/api/admin/alldeparment',
+                      function(data) {
+                          console.log(data)
+                          zTreeObj = $.fn.zTree.init($("#showde"), setting, data.Data[0]);
+                          console.log(vthis.Did)
+                          var node = zTreeObj.getNodeByTId(vthis.Did.toString());
+                          console.log(node)
+                          zTreeObj.selectNode(node);
+                      });
+                }else{
+                    alert(response.data.ErrMsg);
+                }
+              }, function(response){
+                alert('提交失败')
+            });
         },
     });
 </script>

@@ -19,7 +19,6 @@ func init() {
 	attendanceRedis, _ = nosql.ConnetRedis("user")
 	fmt.Print(attendanceRedis)
 }
-
 func (this *AttendanceRedisService) AddAttendance(uid int64) int64 {
 	dayTime := time.Now().Format("20060102")
 	attendanceKey := fmt.Sprintf(USER_EACH_DAY_ATTENDANCE, dayTime, uid)

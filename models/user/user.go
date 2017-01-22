@@ -11,8 +11,8 @@ type User struct {
 	Email         string `orm:"column(Email);"`
 	Salt          string `orm:"column(Salt);"`
 	Password      string `orm:"column(Password);"`
-	Age           int64  `orm:"column(Age);"`
-	Sex           string `orm:"column(Sex);"`
+	Age           int    `orm:"column(Age);"`
+	Sex           int    `orm:"column(Sex);"`
 	Avatar        string `orm:"column(Avatar);"`
 	LastLoginIp   string `orm:"column(LastLoginIp);"`
 	ReLoginIp     string `orm:"column(ReLoginIp);"`
@@ -45,4 +45,18 @@ func (this *User) AddUser(addItem User) (int64, error) {
 	user.Created = time.Now().Format("2006-01-02 15:04:05")
 	id, err := o.Insert(user)
 	return id, err
+}
+
+func (this *User) GetUserByUid(uid int64) (item User, err error) {
+	o := orm.NewOrm()
+	user := User{Id: uid}
+	err = o.Read(&user, "Id")
+	return user, err
+}
+
+func (this *User) GetUserByName(name string) (item User, err error) {
+	o := orm.NewOrm()
+	user := User{Name: name}
+	err = o.Read(&user, "Name")
+	return user, err
 }
