@@ -41,6 +41,23 @@ func (this *Employee) AddEmployee(addItem Employee) (int64, error) {
 	return id, err
 }
 
+func (this *Employee) EditEmployee(uid int64, editItem Employee) error {
+	o := orm.NewOrm()
+	o.Using("Qa")
+	employee := Employee{Uid: uid}
+	err := o.Read(&employee, "Uid")
+	if err == nil {
+		employee.DeId = editItem.DeId
+		employee.Job = editItem.Job
+		employee.Level = editItem.Level
+		employee.Manager = editItem.Manager
+		employee.Role = editItem.Role
+		employee.Updated = time.Now().Format("2006-01-02 15:04:05")
+		_, err := o.Update(&employee, "DeId", "Job", "Level", "Manager", "Role", "Updated")
+		return err
+	}
+	return err
+}
 func (this *Employee) GetEmployeeByUid(uid int64) (Employee, error) {
 	o := orm.NewOrm()
 	employee := Employee{Uid: uid}

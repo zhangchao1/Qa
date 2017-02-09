@@ -23,6 +23,17 @@ type CreatUser struct {
 	Age     int
 }
 
+type EditUser struct {
+	Did     int64
+	Job     string
+	Level   int
+	Role    string
+	Manager int
+	Sex     int
+	Age     int
+	Uid     int64
+}
+
 type AdminService struct {
 }
 
@@ -171,4 +182,83 @@ func (this *AdminService) GetEditUser(uid int64) (CreatUser, error) {
 		editUser.Age = userInfo.Age
 	}
 	return editUser, nil
+}
+
+func (this *AdminService) EditUser(edititem EditUser) SaveResult {
+	var result SaveResult
+	valid := validation.Validation{}
+	val := validator.UserEditValidation{
+		Did:     edititem.Did,
+		Job:     edititem.Job,
+		Level:   edititem.Level,
+		Role:    edititem.Role,
+		Manager: edititem.Manager,
+		Sex:     edititem.Sex,
+		Age:     edititem.Age,
+		Uid:     edititem.Uid,
+	}
+	is, err := valid.Valid(&val)
+	if err != nil {
+		result.ErrMsg = "传入正确的参数"
+		result.IsSuccess = false
+	} else if !is {
+		for _, err := range valid.Errors {
+			result.ErrMsg = fmt.Sprintf("%s:%s", err.Key, err.Message)
+		}
+		result.IsSuccess = false
+	} else {
+		var getUser user.User
+		_, errUid := getUser.GetUserByUid(edititem.Uid)
+		if errUid != nil {
+			result.ErrMsg = "不存在该用户"
+			result.IsSuccess = false
+		} else {
+			updateUserError := EditUserTodb(edititem)
+			updateEmployeeError := EditEmployeeTodb(edititem)
+			updateUserInfoError := saveEditUserInfo(edititem)
+			fmt.Println(updateEmployeeError, updateUserError, updateUserInfoError)
+			if updateUserError != nil || updateEmployeeError != nil || updateUserInfoError != nil {
+				result.ErrMsg = "系统错误"
+				result.IsSuccess = false
+			} else {
+				result.ErrMsg = "保存成功"
+				result.IsSuccess = true
+			}
+		}
+	}
+	return result
+}
+
+func EditUserTodb(edititem EditUser) error {
+	var editUser user.User
+	var edit user.User
+	editUser.Age = edititem.Age
+	editUser.Sex = edititem.Sex
+	err := edit.EditUser(edititem.Uid, editUser)
+	return err
+}
+
+func EditEmployeeTodb(edititem EditUser) error {
+	var editEmployee user.Employee
+	var edit user.Employee
+	editEmployee.DeId = edititem.Did
+	editEmployee.Job = edititem.Job
+	editEmployee.Level = edititem.Level
+	editEmployee.Manager = edititem.Manager
+	editEmployee.Role = edititem.Role
+	err := edit.EditEmployee(edititem.Uid, editEmployee)
+	return err
+}
+
+func saveEditUserInfo(edititem EditUser) error {
+	var userRedis redisService.UserRedisService
+	UserInfo := userRedis.GetUserInfo(edititem.Uid)
+	UserInfo.Age = edititem.Age
+	UserInfo.Sex = edititem.Sex
+	UserInfo.Manager = edititem.Manager
+	UserInfo.Job = edititem.Job
+	UserInfo.Level = edititem.Level
+	UserInfo.Role = edititem.Role
+	err := userRedis.SetUserInfo(edititem.Uid, UserInfo)
+	return err
 }

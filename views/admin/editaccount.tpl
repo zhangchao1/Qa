@@ -25,8 +25,7 @@
               	<form role="form">
 	              <div class="form-group">
 	                  <label>用户名</label>
-	                  <input type="text" class="form-control" placeholder="输入英文" v-model="Name" v-validate:Name="['required']" onkeyup="value=value.replace(/[\W]/g,'') " 
-	  						onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))" >
+	                  <input type="text" class="form-control" placeholder="输入英文" v-model="Name" disabled="">
 	              </div>
 	               	<div class="form-group">
 	                  <label>性别</label>
@@ -98,7 +97,7 @@
                  </validator>
               </div>
               <div class="box-footer">
-                  <button type="submit" class="btn btn-info" :disabled="!$validation1.valid">保存</button>
+                  <button type="submit" class="btn btn-info" v-on:click="save" :disabled="!$validation1.valid">保存</button>
               </div>
         </div>
       </div>
@@ -114,9 +113,9 @@ var uid = {{.uid}}
         data: {
         	Did:0,
         	Job:"",
-        	Name:"",
         	Level:0,
         	Role:"",
+          Name:"",
         	Manager:false,
         	Sex:"",
         	Age:""
@@ -134,7 +133,7 @@ var uid = {{.uid}}
 		  		}
             var manger_type
             var sex
-            if (this.Managers == true){
+            if (this.Manager == true){
               manger_type = 2
             }else{
               manger_type = 1
@@ -147,14 +146,14 @@ var uid = {{.uid}}
     		var params = {
                 Did: Number(this.Did),
                 Job: this.Job,
-                Name: this.Name,
                 Level: Number(this.Level),
                 Role:this.Role,
                 Manager:manger_type,
                 Sex:sex,
-                Age:Number(this.Age)
+                Age:Number(this.Age),
+                Uid:uid
         	}
-        	this.$http.post('/api/admin/creatuser', params, []).then(function(response){
+        	this.$http.post('/api/admin/edituser', params, []).then(function(response){
         		console.log(response)
             if(response.data.IsSuccess == true){
                 alert("保存成功")

@@ -26,7 +26,7 @@
               	<form role="form">
 	              <div class="form-group">
 	                  <label>用户名</label>
-	                  <input type="text" class="form-control" placeholder="输入英文" v-model="Name" v-validate:Name="['required']" onkeyup="value=value.replace(/[\W]/g,'') " 
+	                  <input type="text" class="form-control" placeholder="输入英文" v-on:change="checkname" v-model="Name" v-validate:Name="['required']" onkeyup="value=value.replace(/[\W]/g,'') " 
 	  						onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))" >
 	              </div>
 	               	<div class="form-group">
@@ -123,44 +123,57 @@
     	},
         methods:{
         	zTreeOnCheck:function (event, treeId, treeNode) {
-  			 var tid_name = treeNode.tId
-  			 var tid = tid_name.split("_");
-  			 this.Did = tid[1]
-		  },
-		  save:function(){
-		  		if(this.Did == 0){
-		  			alert("选择员工的部门")
-		  			return
-		  		}
-            var manger_type
-            var sex
-            if (this.Manager == true){
-              manger_type = 2
-            }else{
-              manger_type = 1
-            }
-        		var params = {
-	                Did: Number(this.Did),
-	                Job: this.Job,
-	                Name: this.Name,
-	                Level: Number(this.Level),
-	                Role:this.Role,
-	                Manager:manger_type,
-	                Sex:Number(this.Sex),
-	                Age:Number(this.Age)
-            	}
-            	this.$http.post('/api/admin/creatuser', params, []).then(function(response){
-            		console.log(response)
+    			 var tid_name = treeNode.tId
+    			 var tid = tid_name.split("_");
+    			 this.Did = tid[1]
+		      },
+  		    save:function(){
+  		  		if(this.Did == 0){
+  		  			alert("选择员工的部门")
+  		  			return
+  		  		}
+              var manger_type
+              var sex
+              if (this.Manager == true){
+                manger_type = 2
+              }else{
+                manger_type = 1
+              }
+          		var params = {
+  	                Did: Number(this.Did),
+  	                Job: this.Job,
+  	                Name: this.Name,
+  	                Level: Number(this.Level),
+  	                Role:this.Role,
+  	                Manager:manger_type,
+  	                Sex:Number(this.Sex),
+  	                Age:Number(this.Age)
+              	}
+              	this.$http.post('/api/admin/creatuser', params, []).then(function(response){
+              		console.log(response)
+                  if(response.data.IsSuccess == true){
+                      alert("保存成功")
+                      window.location.href="/article/my"
+                  }else{
+                      alert(response.data.ErrMsg);
+                  }
+              	}, function(response){
+                  alert('提交失败')
+              	});
+              },
+          checkname:function(){
+            var Name = this.Name;
+            this.$http.get('/api/admin/checkname?name='+ Name , [], []).then(function(response){
                 if(response.data.IsSuccess == true){
-                    alert("保存成功")
-                    window.location.href="/article/my"
+                    
                 }else{
                     alert(response.data.ErrMsg);
+                    return;
                 }
-            	}, function(response){
+              }, function(response){
                 alert('提交失败')
-            	});
-            }
+            });
+          }
         },
         ready:function(){
        	 var nodes

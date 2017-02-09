@@ -60,8 +60,18 @@ func (this *Admin) CheckName() {
 		if err != nil {
 			this.Data["json"] = map[string]interface{}{"IsSuccess": true, "ErrMsg": ""}
 		} else {
-			this.Data["json"] = map[string]interface{}{"IsSuccess": false, "ErrMsg": "该用户名已经存在"}
+			this.Data["json"] = map[string]interface{}{"IsSuccess": false, "ErrMsg": "用户名已经存在"}
 		}
 		this.ServeJSON()
 	}
+}
+
+// @router /edituser [post]
+func (this *Admin) EditUser() {
+	var editUser qa.EditUser
+	var adminService qa.AdminService
+	json.Unmarshal(this.Ctx.Input.RequestBody, &editUser)
+	result := adminService.EditUser(editUser)
+	this.Data["json"] = result
+	this.ServeJSON()
 }

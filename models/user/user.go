@@ -60,3 +60,18 @@ func (this *User) GetUserByName(name string) (item User, err error) {
 	err = o.Read(&user, "Name")
 	return user, err
 }
+
+func (this *User) EditUser(Uid int64, editItem User) error {
+	o := orm.NewOrm()
+	o.Using("Qa")
+	user := User{Id: Uid}
+	err := o.Read(&user)
+	if err == nil {
+		user.Age = editItem.Age
+		user.Sex = editItem.Sex
+		user.Updated = time.Now().Format("2006-01-02 15:04:05")
+		_, err := o.Update(&user, "Name", "Email", "Age", "Sex", "Updated")
+		return err
+	}
+	return err
+}
