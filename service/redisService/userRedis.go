@@ -14,16 +14,17 @@ type UserRedisService struct {
 }
 
 type UserInfo struct {
-	Uid     int64
-	Name    string
-	Email   string
-	Age     int
-	Sex     int
-	Avatar  string
-	Manager int
-	Job     string
-	Level   int
-	Role    string
+	Uid      int64
+	Name     string
+	UserName string
+	Email    string
+	Age      int
+	Sex      int
+	Avatar   string
+	Manager  int
+	Job      string
+	Level    int
+	Role     string
 }
 
 const USER_INOF_KEY = "qa:user:info"

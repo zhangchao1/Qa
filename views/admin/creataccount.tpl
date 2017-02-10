@@ -25,9 +25,12 @@
               	<validator name="validation1">
               	<form role="form">
 	              <div class="form-group">
-	                  <label>用户名</label>
+	                  <label>用户名(拼音)</label>
 	                  <input type="text" class="form-control" placeholder="输入英文" v-on:change="checkname" v-model="Name" v-validate:Name="['required']" onkeyup="value=value.replace(/[\W]/g,'') " 
 	  						onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))" >
+                <div class="form-group">
+                    <label>用户名(中文)</label>
+                    <input type="text" class="form-control" placeholder="输入汉字" v-model="UserName" v-validate:UserName="['required']">
 	              </div>
 	               	<div class="form-group">
 	                  <label>性别</label>
@@ -115,6 +118,7 @@
         	Did:0,
         	Job:"",
         	Name:"",
+          UserName:"",
         	Level:0,
         	Role:"",
         	Manager:false,
@@ -143,6 +147,7 @@
   	                Did: Number(this.Did),
   	                Job: this.Job,
   	                Name: this.Name,
+                    UserName:this.UserName,
   	                Level: Number(this.Level),
   	                Role:this.Role,
   	                Manager:manger_type,
@@ -153,7 +158,6 @@
               		console.log(response)
                   if(response.data.IsSuccess == true){
                       alert("保存成功")
-                      window.location.href="/article/my"
                   }else{
                       alert(response.data.ErrMsg);
                   }
@@ -173,7 +177,10 @@
               }, function(response){
                 alert('提交失败')
             });
-          }
+          },
+          checkUsername:function(){
+
+          },
         },
         ready:function(){
        	 var nodes

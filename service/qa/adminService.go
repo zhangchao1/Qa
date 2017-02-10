@@ -8,19 +8,21 @@ import (
 	"Qa/validator"
 	"fmt"
 	"github.com/astaxie/beego/validation"
+	"regexp"
 )
 
 const default_password = "pass@123456"
 
 type CreatUser struct {
-	Did     int64
-	Job     string
-	Name    string
-	Level   int
-	Role    string
-	Manager int
-	Sex     int
-	Age     int
+	Did      int64
+	Job      string
+	Name     string
+	UserName string
+	Level    int
+	Role     string
+	Manager  int
+	Sex      int
+	Age      int
 }
 
 type EditUser struct {
@@ -70,14 +72,15 @@ func (this *AdminService) AddUser(additem CreatUser) SaveResult {
 	var result SaveResult
 	valid := validation.Validation{}
 	val := validator.UserAddValidation{
-		Did:     additem.Did,
-		Job:     additem.Job,
-		Name:    additem.Name,
-		Level:   additem.Level,
-		Role:    additem.Role,
-		Manager: additem.Manager,
-		Sex:     additem.Sex,
-		Age:     additem.Age,
+		Did:      additem.Did,
+		Job:      additem.Job,
+		Name:     additem.Name,
+		UserName: additem.UserName,
+		Level:    additem.Level,
+		Role:     additem.Role,
+		Manager:  additem.Manager,
+		Sex:      additem.Sex,
+		Age:      additem.Age,
 	}
 	is, err := valid.Valid(&val)
 	if err != nil {
@@ -90,7 +93,26 @@ func (this *AdminService) AddUser(additem CreatUser) SaveResult {
 		result.IsSuccess = false
 	} else {
 		var getUser user.User
+		var validName = regexp.MustCompile(`[\w]+`)
+		var validUserName = regexp.MustCompile(`^[\p{Han}]+$`)
+		errName := validName.MatchString(additem.Name)
+		errUserName := validUserName.MatchString(additem.UserName)
+		fmt.Println(errName, errUserName)
+		if !errName {
+			result.ErrMsg = "用户名只能是英文!"
+			result.IsSuccess = false
+			return result
+		}
+		if !errUserName {
+			result.ErrMsg = "用户真实名只能是中文!"
+			result.IsSuccess = false
+			return result
+		}
 		_, errget := getUser.GetUserByName(additem.Name)
+		total, _ := getUser.GetUserByUserName(additem.UserName)
+		if total != 0 {
+			additem.UserName = fmt.Sprintf("%s%d", additem.UserName, total)
+		}
 		if errget != nil {
 			uid, err := addUserTodb(additem)
 			fmt.Println(uid, err)
@@ -122,6 +144,7 @@ func addUserTodb(additem CreatUser) (int64, error) {
 	var randstring rand.RandString
 	var scrypt scrypt.Scrypt
 	addUser.Name = additem.Name
+	addUser.UserName = additem.UserName
 	addUser.Email = fmt.Sprintf("%s@qa.cn", additem.Name)
 	addUser.Salt = randstring.RandStringByNowTime(6)
 	addUser.Password = scrypt.StringHash(default_password, addUser.Salt, 32)
@@ -150,6 +173,7 @@ func saveUserInfo(additem CreatUser, uid int64) error {
 	var userinfo redisService.UserInfo
 	userinfo.Uid = uid
 	userinfo.Name = additem.Name
+	userinfo.UserName = additem.UserName
 	userinfo.Email = fmt.Sprintf("%s@qa.cn", additem.Name)
 	userinfo.Age = additem.Age
 	userinfo.Sex = additem.Sex
@@ -175,6 +199,7 @@ func (this *AdminService) GetEditUser(uid int64) (CreatUser, error) {
 		editUser.Did = empolyeeInfo.DeId
 		editUser.Job = empolyeeInfo.Job
 		editUser.Name = userInfo.Name
+		editUser.UserName = userInfo.UserName
 		editUser.Level = empolyeeInfo.Level
 		editUser.Role = empolyeeInfo.Role
 		editUser.Manager = empolyeeInfo.Manager

@@ -27,6 +27,10 @@
 	                  <label>用户名</label>
 	                  <input type="text" class="form-control" placeholder="输入英文" v-model="Name" disabled="">
 	              </div>
+                <div class="form-group">
+                    <label>用户名</label>
+                    <input type="text" class="form-control" placeholder="输入英文" v-model="UserName" disabled="">
+                </div>
 	               	<div class="form-group">
 	                  <label>性别</label>
 	                  <div class="radio">
@@ -116,6 +120,7 @@ var uid = {{.uid}}
         	Level:0,
         	Role:"",
           Name:"",
+          UserName:"",
         	Manager:false,
         	Sex:"",
         	Age:""
@@ -183,6 +188,7 @@ var uid = {{.uid}}
                     console.log(this.Did)
                     this.Sex = (response.data.Data.Sex ==2)? "2": "1"
                     this.Manager = (response.data.Data.Manager ==2)? true: false
+                    this.UserName = response.data.Data.UserName
                     var vthis=this;
                     $.getJSON(
                       '/api/admin/alldeparment',
