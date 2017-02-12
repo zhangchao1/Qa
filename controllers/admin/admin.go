@@ -40,3 +40,8 @@ func (this *Admin) EditAccount() {
 		this.Data["vueVersion"] = 1
 	}
 }
+
+func (this *Admin) UserList() {
+	this.Data["controllerName"] = "admin"
+	this.Data["vueVersion"] = 1
+}
