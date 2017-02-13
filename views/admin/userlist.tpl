@@ -28,6 +28,8 @@
                   <th>Uid</th>
                   <th>名字</th>
                   <th>操作</th>
+                  <th>工作</th>
+                  <th>职别</th>
                   <th>更新时间</th>
                 </tr>
                 <tr v-for="item in items">
@@ -37,6 +39,8 @@
                   <a class="btn btn-info" href="/admin/editaccount/{[ item.Uid ]}">编辑</a>
                   <a class="btn btn-danger" href="/admin/updatepassword/{[ item.Uid ]}">更改密码</a>
                   </td>
+                  <td>{[ item.Job ]}</td>
+                  <td>{[ item.Role ]}</td>
                   <td>{[ item.Updated ]}</td>
                 </tr>
               </tbody></table>

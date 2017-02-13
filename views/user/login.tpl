@@ -56,9 +56,6 @@
       <div class="col-xs-6">
         <a href="/user/forgetpassword">忘记密码</a>
       </div>
-      <div class="col-xs-6">
-        <a href="/user/register" class="text-center">注册用户</a>
-      </div>
   </div>
 </div>
 </html>

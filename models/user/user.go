@@ -1,6 +1,7 @@
 package user
 
 import (
+	"fmt"
 	"github.com/astaxie/beego/orm"
 	"math"
 	"time"
@@ -23,6 +24,8 @@ type User struct {
 	Created       string `orm:"column(Created);"`
 	Updated       string `orm:"column(Updated);"`
 }
+
+const query_all_user = "select * from user as us left join employee as em on us.Uid = em.uid ORDER BY us.Updated desc Limit ?,?"
 
 func (this *User) TableName() string {
 	return "user"
@@ -107,8 +110,9 @@ func (this *User) UserList(start int64, max int64, orderBy string) Items {
 	totalPage = int64(math.Ceil(pages))
 	offset := (start - 1) * max
 	limit := max
-	o.QueryTable("user").Limit(limit, offset).OrderBy(orderBy).Values(&maps)
+	o.Raw(query_all_user, offset, limit).Values(&maps)
 	items.Datas = maps
 	items.Total = totalPage
+	fmt.Println(items)
 	return items
 }

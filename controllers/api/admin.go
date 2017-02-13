@@ -4,6 +4,8 @@ import (
 	"Qa/models/user"
 	"Qa/service/qa"
 	"encoding/json"
+	"fmt"
+	"strconv"
 )
 
 type Admin struct {
@@ -14,6 +16,8 @@ type UserDatas struct {
 	Uid      int64
 	UserName string
 	Updated  string
+	Job      string
+	Role     string
 }
 
 type AllDatas struct {
@@ -102,12 +106,18 @@ func (this *Admin) UserList() {
 		var Items []UserDatas
 		for _, v := range datas.Datas {
 			var item UserDatas
-			Uid := v["Id"].(int64)
-			UserName := v["UserName"].(string)
-			Updated := v["Updated"].(string)
-			item.Uid = Uid
+			fmt.Println(v)
+			Uid, _ := v["Uid"].(string)
+			fmt.Println(Uid)
+			UserName, _ := v["UserName"].(string)
+			Updated, _ := v["Updated"].(string)
+			Job, _ := v["Job"].(string)
+			Role, _ := v["Role"].(string)
+			item.Uid, _ = strconv.ParseInt(Uid, 10, 64)
 			item.UserName = UserName
 			item.Updated = Updated
+			item.Job = Job
+			item.Role = Role
 			Items = append(Items, item)
 		}
 		results.Datas = Items
