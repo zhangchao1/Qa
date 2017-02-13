@@ -2,6 +2,7 @@ package user
 
 import (
 	"github.com/astaxie/beego/orm"
+	"math"
 	"time"
 )
 
@@ -25,6 +26,11 @@ type User struct {
 
 func (this *User) TableName() string {
 	return "user"
+}
+
+type Items struct {
+	Datas []orm.Params
+	Total int64
 }
 
 func init() {
@@ -83,4 +89,26 @@ func (this *User) EditUser(Uid int64, editItem User) error {
 		return err
 	}
 	return err
+}
+
+func (this *User) UserList(start int64, max int64, orderBy string) Items {
+	o := orm.NewOrm()
+	o.Using("Qa")
+	var maps []orm.Params
+	var items Items
+	var totalPage int64
+	cnt, err := o.QueryTable("user").Count()
+	if err != nil {
+		cnt = 0
+	}
+	count := float64(cnt)
+	maxCount := float64(max)
+	pages := float64(count / maxCount)
+	totalPage = int64(math.Ceil(pages))
+	offset := (start - 1) * max
+	limit := max
+	o.QueryTable("user").Limit(limit, offset).OrderBy(orderBy).Values(&maps)
+	items.Datas = maps
+	items.Total = totalPage
+	return items
 }

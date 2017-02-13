@@ -344,8 +344,8 @@
             </span>
           </a>
           <ul class="treeview-menu" {{if eq "admin" .controllerName}}style="display: block"{{else}}style="display: None"{{end}}>
+            <li class="active"><a href="/admin/userlist"><i class=" fa fa-user-secret"></i>用户列表</a></li>
             <li class="active"><a href="/admin/creataccount"><i class="fa fa-user-plus"></i>创建用户</a></li>
-            <li><a href="/admin/updatepassword"><i class=" fa fa-user"></i>修改用户密码</a></li>
           </ul>
         </li>
       </ul>

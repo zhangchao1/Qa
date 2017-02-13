@@ -10,6 +10,17 @@ type Admin struct {
 	ControllerBase
 }
 
+type UserDatas struct {
+	Uid      int64
+	UserName string
+	Updated  string
+}
+
+type AllDatas struct {
+	Datas []UserDatas
+	Total int64
+}
+
 // @router /alldeparment [get]
 func (this *Admin) AllDeparment() {
 	var adminservice qa.AdminService
@@ -74,4 +85,33 @@ func (this *Admin) EditUser() {
 	result := adminService.EditUser(editUser)
 	this.Data["json"] = result
 	this.ServeJSON()
+}
+
+// @router /userlist [get]
+func (this *Admin) UserList() {
+	var users user.User
+	var results AllDatas
+	startIndex, _ := this.GetInt64("start")
+	maxCounts, _ := this.GetInt64("max")
+	if startIndex == 0 || maxCounts == 0 {
+		this.Data["json"] = map[string]interface{}{"IsSuccess": false, "ErrMsg": "请传递正确的参数"}
+		this.ServeJSON()
+	} else {
+		datas := users.UserList(startIndex, maxCounts, "-Updated")
+		results.Total = datas.Total
+		var Items []UserDatas
+		for _, v := range datas.Datas {
+			var item UserDatas
+			Uid := v["Id"].(int64)
+			UserName := v["UserName"].(string)
+			Updated := v["Updated"].(string)
+			item.Uid = Uid
+			item.UserName = UserName
+			item.Updated = Updated
+			Items = append(Items, item)
+		}
+		results.Datas = Items
+		this.Data["json"] = map[string]interface{}{"IsSuccess": true, "ErrMsg": "", "data": results}
+		this.ServeJSON()
+	}
 }

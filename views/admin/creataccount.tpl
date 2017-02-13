@@ -158,6 +158,7 @@
               		console.log(response)
                   if(response.data.IsSuccess == true){
                       alert("保存成功")
+                      window.location.href="/admin/userlist"
                   }else{
                       alert(response.data.ErrMsg);
                   }

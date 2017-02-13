@@ -35,7 +35,7 @@
                   <td>{[ item.UserName ]}</td>
                   <td>
                   <a class="btn btn-info" href="/admin/editaccount/{[ item.Uid ]}">编辑</a>
-                  <a class="btn btn-info" href="/admin/updatepassword/{[ item.Uid ]}">更改密码</a>
+                  <a class="btn btn-danger" href="/admin/updatepassword/{[ item.Uid ]}">更改密码</a>
                   </td>
                   <td>{[ item.Updated ]}</td>
                 </tr>
@@ -53,10 +53,23 @@
         	   items:""
         },
         methods:{
-        	 
+        	 loadData:function(start){
+            var start = start
+            var max = 20
+            this.$http.get('/api/admin/userlist?start='+ start +"&max="+max, [], []).then(function(response){
+              if(response.data.IsSuccess == true){
+                  this.items = response.data.data.Datas
+                  console.log(this.items)
+              }else{
+                  alert(response.data.ErrMsg);
+              }
+              }, function(response){
+              alert('提交失败')
+            });
+          },
         },
         ready:function(){
-         	
+         	this.loadData(1)
         },
     });
 </script>
