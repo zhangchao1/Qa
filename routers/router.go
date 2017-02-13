@@ -54,6 +54,11 @@ func init() {
 				&api.Admin{},
 			),
 		),
+		beego.NSNamespace("/user",
+			beego.NSInclude(
+				&api.User{},
+			),
+		),
 	)
 	beego.AddNamespace(ns)
 }
