@@ -22,3 +22,9 @@ type UserEditValidation struct {
 	Age     int    `valid:"Required"`
 	Uid     int64  `valid:"Required"`
 }
+
+type UserUpdatePasswordValidation struct {
+	Uid             int64  `valid:"Required"`
+	Password        string `valid:"Required"`
+	ConfirmPassword string `valid:"Required"`
+}

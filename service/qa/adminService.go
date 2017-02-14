@@ -36,6 +36,12 @@ type EditUser struct {
 	Uid     int64
 }
 
+type UpdatePassword struct {
+	Uid             int64
+	Password        string
+	ConfirmPassword string
+}
+
 type AdminService struct {
 }
 
@@ -286,4 +292,71 @@ func saveEditUserInfo(edititem EditUser) error {
 	UserInfo.Role = edititem.Role
 	err := userRedis.SetUserInfo(edititem.Uid, UserInfo)
 	return err
+}
+
+func (this *AdminService) UpdatePassword(edititem UpdatePassword) SaveResult {
+	var result SaveResult
+	valid := validation.Validation{}
+	val := validator.UserUpdatePasswordValidation{
+		Uid:             edititem.Uid,
+		Password:        edititem.Password,
+		ConfirmPassword: edititem.ConfirmPassword,
+	}
+	is, err := valid.Valid(&val)
+	if err != nil {
+		result.ErrMsg = "传入正确的参数"
+		result.IsSuccess = false
+	} else if !is {
+		for _, err := range valid.Errors {
+			result.ErrMsg = fmt.Sprintf("%s:%s", err.Key, err.Message)
+		}
+		result.IsSuccess = false
+	} else {
+
+		if edititem.Password != edititem.ConfirmPassword {
+			result.ErrMsg = "前后输入密码不一致"
+			result.IsSuccess = false
+			return result
+		}
+		if len(edititem.Password) < 6 || len(edititem.Password) > 20 {
+			result.ErrMsg = "密码长度在6-20之间"
+			result.IsSuccess = false
+			return result
+		}
+		var isNumber = true
+		var isString = true
+		ValidNumber := regexp.MustCompile(`/^[:digit:]$/`)
+		ValidString := regexp.MustCompile(`/^[:alpha:]$/`)
+		ValidPassword := regexp.MustCompile(`/^[:alnum:]{6,10}$/`)
+		isNumber = ValidNumber.MatchString(edititem.Password)
+		isString = ValidString.MatchString(edititem.Password)
+		isValid := ValidPassword.MatchString(edititem.Password)
+		fmt.Println(isValid, isString, isNumber)
+		if !isNumber || !isString || !isValid {
+			result.ErrMsg = "密码必须包含数字和字母"
+			result.IsSuccess = false
+			return result
+		}
+		var getUser user.User
+		_, errUid := getUser.GetUserByUid(edititem.Uid)
+		if errUid != nil {
+			result.ErrMsg = "不存在该用户"
+			result.IsSuccess = false
+			return result
+		} else {
+			var scrypt scrypt.Scrypt
+			var randstring rand.RandString
+			salt := randstring.RandStringByNowTime(6)
+			password := scrypt.StringHash(edititem.Password, salt, 32)
+			errUpdatePassWord := getUser.EditUserPassword(edititem.Uid, salt, password)
+			if errUpdatePassWord != nil {
+				result.ErrMsg = "系统错误"
+				result.IsSuccess = false
+			} else {
+				result.ErrMsg = "保存成功"
+				result.IsSuccess = true
+			}
+		}
+	}
+	return result
 }

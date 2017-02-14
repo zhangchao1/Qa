@@ -25,11 +25,11 @@
               	<form role="form">
 	              <div class="form-group">
 	                  <label>密码</label>
-	                  <input type="password" class="form-control" placeholder="输入英文" v-model="password">
+	                  <input type="password" class="form-control" placeholder="输入密码" v-model="password">
 	              </div>
 	              <div class="form-group">
 	                  <label>再次输入密码</label>
-	                  <input type="password" class="form-control" placeholder="输入英文" v-model="confirmPassword">
+	                  <input type="password" class="form-control" placeholder="再次输入密码" v-model="confirmPassword">
 	              </div>
                  </form>
                  </validator>
@@ -43,16 +43,40 @@
    </section>
 </div>
 <script>
+  var uid = {{.uid}}
 	Vue.config.delimiters = ['{[', ']}']
 	var vue = new Vue({
         el: '#admin_updatepassword',
         data: {
-        	   items:"",
         	   password:"",
         	   confirmPassword:""
         },
         methods:{
         	 save:function() {
+              if(this.password != this.confirmPassword){
+                alert("前后输入密码不一致")
+                return
+              }
+              var reg=/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,10}$/
+              if(!reg.test(this.password)||!reg.test(this.confirmPassword)){
+                alert("密码长度必须包含字母和数字，且长度必须大于5")
+                return
+              }
+              var params = {
+                Uid:uid,
+                Password:this.password,
+                ConfirmPassword:this.confirmPassword
+              }
+              this.$http.post('/api/admin/updatepassword', params, []).then(function(response){
+                console.log(response)
+                if(response.data.IsSuccess == true){
+                    alert("保存成功")
+                }else{
+                    alert(response.data.ErrMsg);
+                }
+              }, function(response){
+                alert('提交失败')
+              });
         	 }
         },
         ready:function(){

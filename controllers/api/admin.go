@@ -125,3 +125,13 @@ func (this *Admin) UserList() {
 		this.ServeJSON()
 	}
 }
+
+// @router /updatepassword [post]
+func (this *Admin) UpdatePassword() {
+	var editUpdatePawword qa.UpdatePassword
+	var adminService qa.AdminService
+	json.Unmarshal(this.Ctx.Input.RequestBody, &editUpdatePawword)
+	result := adminService.UpdatePassword(editUpdatePawword)
+	this.Data["json"] = result
+	this.ServeJSON()
+}

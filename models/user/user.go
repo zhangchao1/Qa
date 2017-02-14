@@ -116,3 +116,18 @@ func (this *User) UserList(start int64, max int64, orderBy string) Items {
 	fmt.Println(items)
 	return items
 }
+
+func (this *User) EditUserPassword(Uid int64, salt string, password string) error {
+	o := orm.NewOrm()
+	o.Using("Qa")
+	user := User{Id: Uid}
+	err := o.Read(&user)
+	if err == nil {
+		user.Salt = salt
+		user.Password = password
+		user.Updated = time.Now().Format("2006-01-02 15:04:05")
+		_, err := o.Update(&user, "Salt", "Password", "Updated")
+		return err
+	}
+	return err
+}
