@@ -53,10 +53,12 @@ func (this *Attendance) Search() {
 
 // @router /monthsum [get]
 func (this *Attendance) MonthSum() {
-	this.Data["json"] = MonthSumAttendanceTotal()
+	Uid := this.GetUid()
+	this.Data["json"] = MonthSumAttendanceTotal(Uid)
 	this.ServeJSON()
 }
-func MonthSumAttendanceTotal() MonthAttnendance {
+
+func MonthSumAttendanceTotal(uid int64) MonthAttnendance {
 	var result MonthAttnendance
 	var attendanceService qa.AttendanceService
 	var monthSumHour float64
@@ -82,7 +84,7 @@ func MonthSumAttendanceTotal() MonthAttnendance {
 	result.ErrMsg = ""
 	result.IsSuccess = true
 	monthSumData := make(map[string]interface{})
-	monthSum := attendanceService.SearchAttendance(1, start, end, 60, 0)
+	monthSum := attendanceService.SearchAttendance(uid, start, end, 60, 0)
 	monthSumData["monthSum"] = len(monthSum.Data)
 	for i := 0; i < len(monthSum.Data); i++ {
 		monthSumHour += monthSum.Data[i]["GetHour"].(float64)
