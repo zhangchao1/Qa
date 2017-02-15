@@ -32,6 +32,8 @@ func (this *User) Login() {
 		} else {
 			sess := this.StartSession()
 			sess.Set("uid", searchUser.Id)
+			this.Data["json"] = map[string]interface{}{"IsSuccess": true, "ErrMsg": ""}
+			this.ServeJSON()
 		}
 	}
 }

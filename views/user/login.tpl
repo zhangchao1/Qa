@@ -70,6 +70,8 @@
               this.$http.post('/api/user/login?name='+this.Name+"&password="+this.Password, [], []).then(function(response){
                 if(!response.data.IsSuccess){
                     alert(response.data.ErrMsg);
+                }else{
+                  window.location.href="/"
                 }
               }, function(response){
                 alert('提交失败')
