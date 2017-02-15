@@ -19,3 +19,11 @@ func (this *User) Login() {
 func (this *User) Forgetpassword() {
 
 }
+
+func (this *User) Logut() {
+	sess := this.StartSession()
+	err := sess.Delete("uid")
+	if err == nil {
+		this.Ctx.Redirect(302, "/user/login")
+	}
+}

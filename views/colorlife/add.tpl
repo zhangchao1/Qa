@@ -72,7 +72,6 @@
             ablums:[],
             Ablums:"",
             IsPublic:0,
-            Uid:1,
         },
         methods:{
             save:function(){
@@ -91,7 +90,6 @@
                   Tag: this.Tag,
                   IsPublic : this.IsPublic,
                   Ablums: this.Ablums,
-                  Uid:this.Uid,
                   Description:this.Description,
                 }
                 this.$http.post('/api/colorlife/add', params, []).then(function(response){

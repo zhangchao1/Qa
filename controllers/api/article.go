@@ -20,6 +20,7 @@ type GetResult struct {
 func (this *Article) Add() {
 	var addArticle article.Article
 	json.Unmarshal(this.Ctx.Input.RequestBody, &addArticle)
+	addArticle.Uid = this.GetUid()
 	var articleService qa.ArticleService
 	result := articleService.Add(addArticle)
 	fmt.Println(result)
@@ -166,7 +167,7 @@ func (this *Article) AddComment() {
 	var addComment comment.Comment
 	json.Unmarshal(this.Ctx.Input.RequestBody, &addComment)
 	addComment.Types = 1
-	addComment.Uid = 1
+	addComment.Uid = this.GetUid()
 	addComment.TargetUid = 2
 	result := articleService.AddArticleComment(addComment)
 	fmt.Println(result)

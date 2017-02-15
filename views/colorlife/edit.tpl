@@ -73,7 +73,6 @@
             ablums:[],
             Ablums:"",
             IsPublic:0,
-            Uid:1,
         },
         methods:{
             save:function(){

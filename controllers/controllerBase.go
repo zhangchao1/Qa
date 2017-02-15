@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"Qa/service/redisService"
 	"github.com/astaxie/beego"
 )
 
@@ -17,4 +18,11 @@ func (this *ControllerBase) Prepare() {
 		this.Ctx.Redirect(302, "/user/login")
 		return
 	}
+	UserId := sess.Get("uid").(int64)
+	var userRedis redisService.UserRedisService
+	UserInfo := userRedis.GetUserInfo(UserId)
+	this.Data["useravatar"] = UserInfo.Avatar
+	this.Data["userjob"] = UserInfo.Job
+	this.Data["username"] = UserInfo.UserName
+	this.Data["usermanager"] = UserInfo.Manager
 }

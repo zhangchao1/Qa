@@ -68,6 +68,7 @@ func getFileName(name string) string {
 func (this *ColorLife) Add() {
 	var addcolorlife colorlife.Colorlife
 	json.Unmarshal(this.Ctx.Input.RequestBody, &addcolorlife)
+	addcolorlife.Uid = this.GetUid()
 	var colorlifeService qa.ColorlifeService
 	result := colorlifeService.Add(addcolorlife)
 	fmt.Println(result)
@@ -140,7 +141,7 @@ func (this *ColorLife) AddComment() {
 	var addComment comment.Comment
 	json.Unmarshal(this.Ctx.Input.RequestBody, &addComment)
 	addComment.Types = 2
-	addComment.Uid = 1
+	addComment.Uid = this.GetUid()
 	addComment.TargetUid = 2
 	result := colorlifeService.AddColorlifeComment(addComment)
 	fmt.Println(result)
