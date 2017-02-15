@@ -26,7 +26,8 @@ func (this *Attendance) Add() {
 		this.ServeJSON()
 	} else {
 		Ip := this.Ctx.Input.IP()
-		result := attendanceService.AddAttendance(addTime, 1, Ip)
+		Uid := this.GetUid()
+		result := attendanceService.AddAttendance(addTime, Uid, Ip)
 		this.Data["json"] = result
 		this.ServeJSON()
 	}
@@ -43,7 +44,8 @@ func (this *Attendance) Search() {
 		this.ServeJSON()
 	} else {
 		startIndex = startIndex - 1
-		datas := attendanceService.SearchAttendance(1, startTime, endTime, 10, startIndex)
+		Uid := this.GetUid()
+		datas := attendanceService.SearchAttendance(Uid, startTime, endTime, 10, startIndex)
 		this.Data["json"] = datas
 		this.ServeJSON()
 	}

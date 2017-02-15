@@ -66,7 +66,6 @@
 	var vue = new Vue({
         el: '#article_add',
         data: {
-        	uid : 1,
         	title: "",
         	content:"",
         	tag:"",
@@ -81,7 +80,6 @@
 	                Content: this.content,
 	                Tag: this.tag,
 	                Types: this.types,
-	                Uid:this.uid,
 	                Description:this.description
             	}
             	this.$http.post('/api/article/add', params, []).then(function(response){

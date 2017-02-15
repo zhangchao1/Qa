@@ -1,15 +1,15 @@
 package user
 
 import (
-	"Qa/controllers"
+	"github.com/astaxie/beego"
 )
 
 type User struct {
-	controllers.ControllerBase
+	beego.Controller
 }
 
 func (this *User) Login() {
-	this.Data["vueVersion"] = 1
+
 }
 
 // func (this *User) Register() {
@@ -17,5 +17,5 @@ func (this *User) Login() {
 // }
 
 func (this *User) Forgetpassword() {
-	this.Data["vueVersion"] = 1
+
 }

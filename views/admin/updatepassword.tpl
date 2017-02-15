@@ -57,7 +57,7 @@
                 alert("前后输入密码不一致")
                 return
               }
-              var reg=/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,10}$/
+              var reg=/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,20}$/
               if(!reg.test(this.password)||!reg.test(this.confirmPassword)){
                 alert("密码长度必须包含字母和数字，且长度必须大于5")
                 return

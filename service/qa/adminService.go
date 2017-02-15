@@ -323,16 +323,21 @@ func (this *AdminService) UpdatePassword(edititem UpdatePassword) SaveResult {
 			result.IsSuccess = false
 			return result
 		}
-		var isNumber = true
-		var isString = true
-		ValidNumber := regexp.MustCompile(`/^[:digit:]$/`)
-		ValidString := regexp.MustCompile(`/^[:alpha:]$/`)
-		ValidPassword := regexp.MustCompile(`/^[:alnum:]{6,10}$/`)
+		var isNumber = false
+		var isString = false
+		ValidNumber := regexp.MustCompile(`^\d*$`)
+		ValidString := regexp.MustCompile(`^[A-Za-z]+$`)
+		ValidPassword := regexp.MustCompile(`^[A-Za-z0-9]{6,20}$`)
 		isNumber = ValidNumber.MatchString(edititem.Password)
 		isString = ValidString.MatchString(edititem.Password)
 		isValid := ValidPassword.MatchString(edititem.Password)
-		fmt.Println(isValid, isString, isNumber)
-		if !isNumber || !isString || !isValid {
+		resultValid1 := isNumber || isString
+		if resultValid1 == true {
+			result.ErrMsg = "密码必须包含数字和字母"
+			result.IsSuccess = false
+			return result
+		}
+		if !isValid {
 			result.ErrMsg = "密码必须包含数字和字母"
 			result.IsSuccess = false
 			return result
