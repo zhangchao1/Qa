@@ -94,7 +94,7 @@ func (this *ColorlifeService) AddAdmrie(id int64, Uid int64, name string) Admire
 	var admireService AdmireService
 	var admireRedis redisService.AdmireRedisService
 	var result AdmireResult
-	errUserAdmire := admireRedis.AdmireStatusColorlife(int(id), 1)
+	errUserAdmire := admireRedis.AdmireStatusColorlife(int(id), Uid)
 	_, errIdStatus := colorlife.GetColorlifeById(id, 1)
 	if errUserAdmire == true {
 		result.IsSuccess = false
@@ -125,12 +125,12 @@ func (this *ColorlifeService) UserAdmireStatus(id int64, uid int64) UserAdmireSt
 	var admireRedis redisService.AdmireRedisService
 	var colorlife colorlife.Colorlife
 	var result UserAdmireStatus
-	_, errIdStatus := colorlife.GetColorlifeById(id, int(uid))
+	_, errIdStatus := colorlife.GetColorlifeById(id, 1)
 	if errIdStatus != nil {
 		result.ErrMsg = "请传递正确的id"
 		result.IsSuccess = false
 	} else {
-		errUserAdmire := admireRedis.AdmireStatusColorlife(int(id), int(uid))
+		errUserAdmire := admireRedis.AdmireStatusColorlife(int(id), uid)
 		if errUserAdmire == true {
 			result.ErrMsg = ""
 			result.IsSuccess = true

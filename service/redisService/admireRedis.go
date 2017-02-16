@@ -29,9 +29,9 @@ func (this *AdmireRedisService) AddAdmiresArticle(guid int) int64 {
 	return count
 }
 
-func (this *AdmireRedisService) AdmireStatusArticle(guid int, uid int) bool {
+func (this *AdmireRedisService) AdmireStatusArticle(guid int, uid int64) bool {
 	UadmireKey := fmt.Sprintf(U_ADMIRE_ARTICLE_KEY, guid)
-	Uid := strconv.Itoa(uid)
+	Uid := strconv.FormatInt(uid, 10)
 	status, _ := AdmireRedis.SIsMember(UadmireKey, Uid).Result()
 	if status == false {
 		return false
@@ -40,18 +40,18 @@ func (this *AdmireRedisService) AdmireStatusArticle(guid int, uid int) bool {
 	}
 }
 
-func (this *AdmireRedisService) AddUserAdmires(guid int, uid int) int64 {
+func (this *AdmireRedisService) AddUserAdmires(guid int, uid int64) int64 {
 	UadmireKey := fmt.Sprintf(U_ADMIRE_ARTICLE_KEY, guid)
 	fmt.Println(UadmireKey)
-	Uid := strconv.Itoa(uid)
+	Uid := strconv.FormatInt(uid, 10)
 	status, _ := AdmireRedis.SAdd(UadmireKey, Uid).Result()
 	return status
 }
 
-func (this *AdmireRedisService) RemoveUserAdmires(guid int, uid int) int64 {
+func (this *AdmireRedisService) RemoveUserAdmires(guid int, uid int64) int64 {
 	UadmireKey := fmt.Sprintf(U_ADMIRE_ARTICLE_KEY, guid)
 	fmt.Println(UadmireKey)
-	Uid := strconv.Itoa(uid)
+	Uid := strconv.FormatInt(uid, 10)
 	status, _ := AdmireRedis.SRem(UadmireKey, Uid).Result()
 	return status
 }
@@ -63,9 +63,9 @@ func (this *AdmireRedisService) AddAdmiresColorlife(guid int) int64 {
 	return count
 }
 
-func (this *AdmireRedisService) AdmireStatusColorlife(guid int, uid int) bool {
+func (this *AdmireRedisService) AdmireStatusColorlife(guid int, uid int64) bool {
 	UadmireKey := fmt.Sprintf(U_ADMIRE_COLORLIFE_KEY, guid)
-	Uid := strconv.Itoa(uid)
+	Uid := strconv.FormatInt(uid, 10)
 	status, _ := AdmireRedis.SIsMember(UadmireKey, Uid).Result()
 	if status == false {
 		return false
@@ -74,18 +74,18 @@ func (this *AdmireRedisService) AdmireStatusColorlife(guid int, uid int) bool {
 	}
 }
 
-func (this *AdmireRedisService) AddUserColorlifeAdmires(guid int, uid int) int64 {
+func (this *AdmireRedisService) AddUserColorlifeAdmires(guid int, uid int64) int64 {
 	UadmireKey := fmt.Sprintf(U_ADMIRE_COLORLIFE_KEY, guid)
 	fmt.Println(UadmireKey)
-	Uid := strconv.Itoa(uid)
+	Uid := strconv.FormatInt(uid, 10)
 	status, _ := AdmireRedis.SAdd(UadmireKey, Uid).Result()
 	return status
 }
 
-func (this *AdmireRedisService) RemoveUserColorlifeAdmires(guid int, uid int) int64 {
+func (this *AdmireRedisService) RemoveUserColorlifeAdmires(guid int, uid int64) int64 {
 	UadmireKey := fmt.Sprintf(U_ADMIRE_COLORLIFE_KEY, guid)
 	fmt.Println(UadmireKey)
-	Uid := strconv.Itoa(uid)
+	Uid := strconv.FormatInt(uid, 10)
 	status, _ := AdmireRedis.SRem(UadmireKey, Uid).Result()
 	return status
 }
