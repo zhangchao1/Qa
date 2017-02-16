@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2017-02-10 18:29:41
+Date: 2017-02-16 10:17:24
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -72,7 +72,9 @@ CREATE TABLE `attendance` (
   PRIMARY KEY (`Id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-
+-- ----------------------------
+-- Records of attendance
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `colorlife`
@@ -165,7 +167,12 @@ CREATE TABLE `employee` (
   `Created` datetime NOT NULL,
   `Updated` datetime NOT NULL,
   PRIMARY KEY (`Eid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of employee
+-- ----------------------------
+INSERT INTO `employee` VALUES ('1', '1', '4', 'PHP工程师', '1', '组员', '2', '2017-02-16 10:16:23', '2017-02-16 10:16:23');
 
 -- ----------------------------
 -- Table structure for `user`
@@ -188,7 +195,12 @@ CREATE TABLE `user` (
   `LastLoginTime` int(14) DEFAULT NULL,
   `Updated` datetime NOT NULL,
   PRIMARY KEY (`Uid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of user
+-- ----------------------------
+INSERT INTO `user` VALUES ('1', '张超', 'zhangchao', 'zhangchao@qa.cn', 'b981vo', '1c981ec29d3618566075349654484b61be017532147ecca2044ccfe0dda484e5', '27', '1', 'http://localhost:8087/static/img/user/default.jpg', '', '', '2017-02-16 10:16:23', '0', '0', '2017-02-16 10:16:32');
 
 -- ----------------------------
 -- Table structure for `useradmire`
