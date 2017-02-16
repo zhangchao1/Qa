@@ -1,11 +1,11 @@
 package api
 
 import (
+	"Qa/library/base"
 	"Qa/library/scrypt"
 	"Qa/models/user"
+	"fmt"
 	"github.com/astaxie/beego"
-	"rand"
-	"strconv"
 	"time"
 )
 
@@ -38,10 +38,12 @@ func (this *User) Login() {
 			sess := this.StartSession()
 			sess.Set("uid", searchUser.Id)
 			if autologin {
-				Uid := strconv.FormatInt(searchUser.Id, 10)
+				var baseEncode base.BaseEncodePass
 				nowUnix := time.Now().Unix()
+				passValue := fmt.Sprintf("%d,%d", searchUser.Id, nowUnix)
+				token := baseEncode.Encode([]byte(passValue))
 				expiration := time.Now().Add(7 * 24 * time.Hour)
-				this.Ctx.SetCookie("uid", Uid, expiration)
+				this.Ctx.SetCookie("uid", string(token), expiration)
 			}
 			this.Data["json"] = map[string]interface{}{"IsSuccess": true, "ErrMsg": ""}
 			this.ServeJSON()

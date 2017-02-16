@@ -1,8 +1,11 @@
 package api
 
 import (
+	"Qa/library/base"
 	"Qa/service/redisService"
+	"fmt"
 	"github.com/astaxie/beego"
+	"strings"
 )
 
 type ControllerBase struct {
@@ -24,8 +27,16 @@ func (this *ControllerBase) GetUserInfo() redisService.UserInfo {
 func (this *ControllerBase) Prepare() {
 	sess := this.StartSession()
 	Uid := sess.Get("uid")
+	var baseEncode base.BaseEncodePass
 	if Uid == nil {
-		this.Ctx.Redirect(302, "/user/login")
-		return
+		token := this.Ctx.GetCookie("uid")
+		if token == "" {
+			this.Ctx.Redirect(302, "/user/login")
+			return
+		}
+		src, _ := baseEncode.Decode([]byte(token))
+		cookieInfo := strings.Split(string(src), ",")
+		fmt.Println(cookieInfo[0])
 	}
+
 }
