@@ -3,8 +3,8 @@ package api
 import (
 	"Qa/library/scrypt"
 	"Qa/models/user"
-	"fmt"
 	"github.com/astaxie/beego"
+	"strconv"
 )
 
 type User struct {
@@ -17,6 +17,7 @@ func (this *User) Login() {
 	var scrypt scrypt.Scrypt
 	name := this.GetString("name")
 	password := this.GetString("password")
+	autologin, _ := this.GetBool("autologin")
 	if password == "" || name == "" {
 		this.Data["json"] = map[string]interface{}{"IsSuccess": false, "ErrMsg": "用户名或者密码为空"}
 		this.ServeJSON()
@@ -34,7 +35,11 @@ func (this *User) Login() {
 		} else {
 			sess := this.StartSession()
 			sess.Set("uid", searchUser.Id)
-			fmt.Println(searchUser.Id)
+
+			if autologin {
+				Uid := strconv.FormatInt(searchUser.Id, 10)
+				this.Ctx.SetCookie("uid", Uid)
+			}
 			this.Data["json"] = map[string]interface{}{"IsSuccess": true, "ErrMsg": ""}
 			this.ServeJSON()
 		}

@@ -16,6 +16,7 @@ func main() {
 	beego.BConfig.WebConfig.Session.SessionProvider = "file"
 	beego.BConfig.WebConfig.Session.SessionProviderConfig = "/session"
 	beego.GlobalSessions, _ = session.NewManager("file", sessionconf)
+
 	go beego.GlobalSessions.GC()
 	beego.Run()
 }

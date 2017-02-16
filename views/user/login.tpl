@@ -38,7 +38,7 @@
         <div class="col-xs-6">
           <div class="checkbox">
             <label class="">
-              <input type="checkbox">记住密码
+              <input type="checkbox" v-model="AutoLogin">记住密码
             </label>
           </div>
         </div>
@@ -59,7 +59,8 @@
         el: '#user_login',
         data: {
           Name:"",
-          Password:""
+          Password:"",
+          AutoLogin:false
         },
         methods:{
           login:function(){
@@ -67,7 +68,7 @@
                 $("#login_status").text("用户名或者密码为空")
                 return
               }
-              this.$http.post('/api/user/login?name='+this.Name+"&password="+this.Password, [], []).then(function(response){
+              this.$http.post('/api/user/login?name='+this.Name+"&password="+this.Password+"&autologin="+ this.AutoLogin, [], []).then(function(response){
                 if(!response.data.IsSuccess){
                     alert(response.data.ErrMsg);
                 }else{
