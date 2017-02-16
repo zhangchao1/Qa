@@ -151,7 +151,7 @@ func (this *ArticleService) Delete(id int64) SaveResult {
 	return result
 }
 
-func (this *ArticleService) AddAdmrie(id int64) AdmireResult {
+func (this *ArticleService) AddAdmrie(id int64, Uid int64, name string) AdmireResult {
 	var article article.Article
 	var admireService AdmireService
 	var admireRedis redisService.AdmireRedisService
@@ -166,7 +166,8 @@ func (this *ArticleService) AddAdmrie(id int64) AdmireResult {
 		result.ErrMsg = "无法点赞"
 	} else {
 		addAdmireNumStatus := article.UpdateAdmireNum(id)
-		errAddAdmireStatus := admireService.AddAdmire(id, 1, 1, "chaochao", 1)
+
+		errAddAdmireStatus := admireService.AddAdmire(id, 1, 1, name, Uid)
 		admireRedis.AddUserAdmires(int(id), 1)
 		count := admireRedis.AddAdmiresArticle(int(id))
 		fmt.Println(addAdmireNumStatus)

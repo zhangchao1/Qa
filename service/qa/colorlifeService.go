@@ -89,7 +89,7 @@ func (this *ColorlifeService) GetColorlifeByCid(id int64, status int) (colorlife
 	return data, err
 }
 
-func (this *ColorlifeService) AddAdmrie(id int64) AdmireResult {
+func (this *ColorlifeService) AddAdmrie(id int64, Uid int64, name string) AdmireResult {
 	var colorlife colorlife.Colorlife
 	var admireService AdmireService
 	var admireRedis redisService.AdmireRedisService
@@ -104,7 +104,7 @@ func (this *ColorlifeService) AddAdmrie(id int64) AdmireResult {
 		result.ErrMsg = "无法点赞"
 	} else {
 		addAdmireNumStatus := colorlife.UpdateAdmireNum(id)
-		errAddAdmireStatus := admireService.AddAdmire(id, 2, 1, "chaochao", 1)
+		errAddAdmireStatus := admireService.AddAdmire(id, 2, 1, name, Uid)
 		admireRedis.AddUserColorlifeAdmires(int(id), 1)
 		count := admireRedis.AddAdmiresColorlife(int(id))
 		fmt.Println(addAdmireNumStatus)

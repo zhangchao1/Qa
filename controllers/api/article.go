@@ -141,7 +141,8 @@ func (this *Article) AdmireArticle() {
 		this.Data["json"] = map[string]interface{}{"IsSuccess": false, "ErrMsg": "请传递正确的参数"}
 		this.ServeJSON()
 	} else {
-		result := articleService.AddAdmrie(id)
+		userinfo := this.GetUserInfo()
+		result := articleService.AddAdmrie(id, userinfo.Uid, userinfo.UserName)
 		this.Data["json"] = result
 		this.ServeJSON()
 	}
@@ -155,7 +156,8 @@ func (this *Article) UserAdmireStatus() {
 		this.Data["json"] = map[string]interface{}{"IsSuccess": false, "ErrMsg": "请传递正确的参数"}
 		this.ServeJSON()
 	} else {
-		result := articleService.UserAdmireStatus(id, 1)
+		uid := this.GetUid()
+		result := articleService.UserAdmireStatus(id, uid)
 		this.Data["json"] = result
 		this.ServeJSON()
 	}

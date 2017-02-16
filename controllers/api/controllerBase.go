@@ -1,6 +1,7 @@
 package api
 
 import (
+	"Qa/service/redisService"
 	"github.com/astaxie/beego"
 )
 
@@ -13,7 +14,13 @@ func (this *ControllerBase) GetUid() int64 {
 	Uid := sess.Get("uid").(int64)
 	return Uid
 }
-
+func (this *ControllerBase) GetUserInfo() redisService.UserInfo {
+	sess := this.StartSession()
+	Uid := sess.Get("uid").(int64)
+	var userRedis redisService.UserRedisService
+	userInfo := userRedis.GetUserInfo(Uid)
+	return userInfo
+}
 func (this *ControllerBase) Prepare() {
 	sess := this.StartSession()
 	Uid := sess.Get("uid")
