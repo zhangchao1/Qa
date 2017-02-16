@@ -3,10 +3,12 @@ package api
 import (
 	"Qa/library/scrypt"
 	"Qa/models/user"
+	"fmt"
+	"github.com/astaxie/beego"
 )
 
 type User struct {
-	ControllerBase
+	beego.Controller
 }
 
 // @router /login [post]
@@ -32,6 +34,7 @@ func (this *User) Login() {
 		} else {
 			sess := this.StartSession()
 			sess.Set("uid", searchUser.Id)
+			fmt.Println(searchUser.Id)
 			this.Data["json"] = map[string]interface{}{"IsSuccess": true, "ErrMsg": ""}
 			this.ServeJSON()
 		}

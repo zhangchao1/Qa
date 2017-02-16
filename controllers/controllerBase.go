@@ -24,5 +24,4 @@ func (this *ControllerBase) Prepare() {
 	this.Data["useravatar"] = UserInfo.Avatar
 	this.Data["userjob"] = UserInfo.Job
 	this.Data["username"] = UserInfo.UserName
-	this.Data["usermanager"] = UserInfo.Manager
 }

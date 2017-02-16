@@ -2,11 +2,28 @@ package admin
 
 import (
 	"Qa/controllers"
+	"Qa/service/redisService"
+	"fmt"
 	"strconv"
 )
 
 type Admin struct {
 	controllers.ControllerBase
+}
+
+func (this *Admin) Prepare() {
+	sess := this.StartSession()
+	UserId := sess.Get("uid").(int64)
+	var userRedis redisService.UserRedisService
+	UserInfo := userRedis.GetUserInfo(UserId)
+	fmt.Println(UserInfo)
+	if UserInfo.Manager != 2 {
+		this.Ctx.WriteString("无操作权限")
+		return
+	}
+	this.Data["useravatar"] = UserInfo.Avatar
+	this.Data["userjob"] = UserInfo.Job
+	this.Data["username"] = UserInfo.UserName
 }
 
 func (this *Admin) CreatAccount() {
