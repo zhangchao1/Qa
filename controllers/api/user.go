@@ -4,7 +4,9 @@ import (
 	"Qa/library/scrypt"
 	"Qa/models/user"
 	"github.com/astaxie/beego"
+	"rand"
 	"strconv"
+	"time"
 )
 
 type User struct {
@@ -35,10 +37,11 @@ func (this *User) Login() {
 		} else {
 			sess := this.StartSession()
 			sess.Set("uid", searchUser.Id)
-
 			if autologin {
 				Uid := strconv.FormatInt(searchUser.Id, 10)
-				this.Ctx.SetCookie("uid", Uid)
+				nowUnix := time.Now().Unix()
+				expiration := time.Now().Add(7 * 24 * time.Hour)
+				this.Ctx.SetCookie("uid", Uid, expiration)
 			}
 			this.Data["json"] = map[string]interface{}{"IsSuccess": true, "ErrMsg": ""}
 			this.ServeJSON()
