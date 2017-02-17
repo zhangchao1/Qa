@@ -169,7 +169,7 @@
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="/account/center" class="btn btn-default btn-flat">个人中心</a>
+                  <a href="/account/center" class="btn btn-default btn-flat">个人介绍</a>
                 </div>
                 <div class="pull-right">
                   <a href="/user/logut" class="btn btn-default btn-flat">退出</a>
@@ -195,8 +195,10 @@
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
-          <ul class="treeview-menu" style="display: none;">
-            
+          <ul class="treeview-menu" {{if eq "account" .controllerName}}style="display: block"{{else}}style="display: None"{{end}}>
+            <li class="active"><a href="/account/center"><i class="fa fa-user"></i>个人介绍</a></li>
+            <li class="active"><a href="/account/detail"><i class="fa fa-user-secret"></i>个人信息编辑</a></li>
+            <li class="active"><a href="/account/setting"><i class="fa fa-user-secret"></i>个人设置</a></li>
           </ul>
         </li>
         <li class="treeview">

@@ -12,8 +12,7 @@ type Admin struct {
 }
 
 func (this *Admin) Prepare() {
-	sess := this.StartSession()
-	UserId := sess.Get("uid").(int64)
+	UserId := this.GetUid()
 	var userRedis redisService.UserRedisService
 	UserInfo := userRedis.GetUserInfo(UserId)
 	fmt.Println(UserInfo)

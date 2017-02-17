@@ -33,7 +33,7 @@
         <div class="col-md-8">
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">About Me</h3>
+              <h3 class="box-title">关于我</h3>
             </div>
             <div class="box-body">
               <strong><i class="fa fa-book margin-r-5"></i>教育</strong>
@@ -53,7 +53,7 @@
                 <span class="label label-primary">Node.js</span>
               </p>
               <hr>
-              <strong><i class="fa fa-file-text-o margin-r-5"></i> Notes</strong>
+              <strong><i class="fa fa-file-text-o margin-r-5"></i>座右铭</strong>
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
               <hr>
               <strong><i class="fa fa-file-text-o margin-r-5"></i>个人喜好</strong>

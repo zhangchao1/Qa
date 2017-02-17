@@ -18,7 +18,7 @@
   <script src="/static/js/vue-resource.min.js"></script>
   </head>
 <body class="hold-transition login-page">
-<div class="login-box" id="user_login">
+<div class="login-box" id="user_login" style="width:500px;height: 400px">
   <div class="login-logo">
     <a href="/" target=""><b>QA</b>系统</a>
   </div>
@@ -35,14 +35,14 @@
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">
-        <div class="col-xs-6">
+        <div class="col-xs-7">
           <div class="checkbox">
             <label class="">
-              <input type="checkbox" v-model="AutoLogin">记住密码
+              <input type="checkbox" v-model="AutoLogin">记住密码(一周内有效)
             </label>
           </div>
         </div>
-        <div class="col-xs-6">
+        <div class="col-xs-5">
           <button type="button" class="btn btn-primary btn-block btn-flat" id="login_status" v-on:click="login">登录</button>
         </div>
       </div>
@@ -70,7 +70,7 @@
               }
               this.$http.post('/api/user/login?name='+this.Name+"&password="+this.Password+"&autologin="+ this.AutoLogin, [], []).then(function(response){
                 if(!response.data.IsSuccess){
-                    alert(response.data.ErrMsg);
+                    $("#login_status").text(response.data.ErrMsg);
                 }else{
                   window.location.href="/"
                 }

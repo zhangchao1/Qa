@@ -43,8 +43,7 @@ func (this *User) Login() {
 				fmt.Println(nowUnix, searchUser.Id)
 				passValue := fmt.Sprintf("%d,%d", searchUser.Id, nowUnix)
 				token := baseEncode.Encode([]byte(passValue))
-				expiration := time.Now().Add(7 * 24 * time.Hour)
-				this.Ctx.SetCookie("uid", string(token), expiration)
+				this.Ctx.SetCookie("uid", string(token), 3600*24*7, "/")
 			}
 			this.Data["json"] = map[string]interface{}{"IsSuccess": true, "ErrMsg": ""}
 			this.ServeJSON()
