@@ -40,6 +40,7 @@ func (this *User) Login() {
 			if autologin {
 				var baseEncode base.BaseEncodePass
 				nowUnix := time.Now().Unix()
+				fmt.Println(nowUnix, searchUser.Id)
 				passValue := fmt.Sprintf("%d,%d", searchUser.Id, nowUnix)
 				token := baseEncode.Encode([]byte(passValue))
 				expiration := time.Now().Add(7 * 24 * time.Hour)

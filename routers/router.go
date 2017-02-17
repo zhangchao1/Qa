@@ -2,6 +2,7 @@ package routers
 
 import (
 	"Qa/controllers"
+	"Qa/controllers/account"
 	"Qa/controllers/admin"
 	"Qa/controllers/api"
 	"Qa/controllers/article"
@@ -32,6 +33,7 @@ func init() {
 	beego.AutoRouter(&colorlife.Colorlife{})
 	beego.AutoRouter(&goods.Goods{})
 	beego.AutoRouter(&admin.Admin{})
+	beego.AutoRouter(&account.Account{})
 	//api接口路由
 	ns := beego.NewNamespace("/api",
 		beego.NSNamespace("/article",

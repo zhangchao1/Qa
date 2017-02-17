@@ -5,6 +5,7 @@ import (
 	"Qa/service/redisService"
 	"fmt"
 	"github.com/astaxie/beego"
+	"strconv"
 	"strings"
 )
 
@@ -14,14 +15,33 @@ type ControllerBase struct {
 
 func (this *ControllerBase) GetUid() int64 {
 	sess := this.StartSession()
-	Uid := sess.Get("uid").(int64)
-	return Uid
+	Uid := sess.Get("uid")
+	var baseEncode base.BaseEncodePass
+	if Uid == nil {
+		token := this.Ctx.GetCookie("uid")
+		src, _ := baseEncode.Decode([]byte(token))
+		cookieInfo := strings.Split(string(src), ",")
+		uid, _ := strconv.ParseInt(cookieInfo[0], 10, 64)
+		return uid
+	}
+	return Uid.(int64)
 }
 func (this *ControllerBase) GetUserInfo() redisService.UserInfo {
 	sess := this.StartSession()
-	Uid := sess.Get("uid").(int64)
+	Uid := sess.Get("uid")
+	var baseEncode base.BaseEncodePass
+	var userid int64
 	var userRedis redisService.UserRedisService
-	userInfo := userRedis.GetUserInfo(Uid)
+	if Uid == nil {
+		token := this.Ctx.GetCookie("uid")
+		src, _ := baseEncode.Decode([]byte(token))
+		cookieInfo := strings.Split(string(src), ",")
+		uid, _ := strconv.ParseInt(cookieInfo[0], 10, 64)
+		userid = uid
+	} else {
+		userid = Uid.(int64)
+	}
+	userInfo := userRedis.GetUserInfo(userid)
 	return userInfo
 }
 func (this *ControllerBase) Prepare() {
