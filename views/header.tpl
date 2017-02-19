@@ -190,15 +190,16 @@
      <ul class="sidebar-menu">
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-home"></i> <span>个人中心</span>
+            <i class="fa fa-home"></i> <span>用户中心</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu" {{if eq "account" .controllerName}}style="display: block"{{else}}style="display: None"{{end}}>
             <li class="active"><a href="/account/center"><i class="fa fa-user"></i>个人介绍</a></li>
-            <li class="active"><a href="/account/detail"><i class="fa fa-user-secret"></i>个人信息编辑</a></li>
-            <li class="active"><a href="/account/setting"><i class="fa fa-user-secret"></i>个人设置</a></li>
+            <li><a href="/account/edit"><i class="fa fa-user-secret"></i>信息编辑</a></li>
+            <li><a href="/account/uploadavatar"><i class="fa fa-user-plus"></i>上传头像</a></li>
+            <li><a href="/account/changepassword"><i class="fa fa-user-md"></i>密码更改</a></li>
           </ul>
         </li>
         <li class="treeview">

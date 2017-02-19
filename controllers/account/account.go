@@ -13,12 +13,19 @@ func (this *Account) Center() {
 	this.Data["controllerName"] = "account"
 }
 
-func (this *Account) Detail() {
+func (this *Account) Edit() {
 	this.Data["vueVersion"] = 1
 	this.Data["controllerName"] = "account"
 }
 
-func (this *Account) Setting() {
+func (this *Account) Uploadavatar() {
 	this.Data["vueVersion"] = 1
+	this.Data["controllerName"] = "account"
+}
+
+func (this *Account) ChangePassword() {
+	this.Data["vueVersion"] = 1
+	UserId := this.GetUid()
+	this.Data["uid"] = UserId
 	this.Data["controllerName"] = "account"
 }

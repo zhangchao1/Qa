@@ -93,6 +93,19 @@ func (this *User) EditUser(Uid int64, editItem User) error {
 	}
 	return err
 }
+func (this *User) EditAvatar(Uid int64, Avatar string) error {
+	o := orm.NewOrm()
+	o.Using("Qa")
+	user := User{Id: Uid}
+	err := o.Read(&user)
+	if err == nil {
+		user.Avatar = Avatar
+		user.Updated = time.Now().Format("2006-01-02 15:04:05")
+		_, err := o.Update(&user, "Avatar", "Updated")
+		return err
+	}
+	return err
+}
 
 func (this *User) UserList(start int64, max int64, orderBy string) Items {
 	o := orm.NewOrm()
