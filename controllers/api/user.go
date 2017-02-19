@@ -24,6 +24,19 @@ type User struct {
 type Image struct {
 	Avatar string
 }
+type PerSkill struct {
+	Color       string
+	Description string
+}
+type UsermDetail struct {
+	Habit    string
+	Motto    string
+	Location string
+	Eduction string
+	PhoneNum string
+	Birthday string
+	Skill    []PerSkill
+}
 
 // @router /login [post]
 func (this *User) Login() {
@@ -112,5 +125,42 @@ func (this *User) SaveAvatar() {
 			}
 
 		}
+	}
+}
+
+// @router /saveuserdetail [post]
+func (this *User) SaveUserDetail() {
+	var detail UsermDetail
+	var userService qa.UserService
+	var userdetail user.UserDetail
+	json.Unmarshal(this.Ctx.Input.RequestBody, &detail)
+	if len(detail.Skill) == 0 {
+		this.Data["json"] = map[string]interface{}{"IsSuccess": false, "ErrMsg": "参数为空"}
+		this.ServeJSON()
+	} else {
+		sess := this.StartSession()
+		Uid := sess.Get("uid")
+		var uid int64
+		var baseEncode base.BaseEncodePass
+		if Uid == nil {
+			token := this.Ctx.GetCookie("uid")
+			src, _ := baseEncode.Decode([]byte(token))
+			cookieInfo := strings.Split(string(src), ",")
+			uid, _ = strconv.ParseInt(cookieInfo[0], 10, 64)
+		} else {
+			uid = Uid.(int64)
+		}
+		personSkill, _ := json.Marshal(detail.Skill)
+		userdetail.Uid = uid
+		userdetail.Skill = string(personSkill)
+		userdetail.Habit = detail.Habit
+		userdetail.PhoneNum = detail.PhoneNum
+		userdetail.Location = detail.Location
+		userdetail.Eduction = detail.Eduction
+		userdetail.Motto = detail.Motto
+		userdetail.Birthday = detail.Birthday
+		result := userService.EditUserDetail(uid, userdetail)
+		this.Data["json"] = result
+		this.ServeJSON()
 	}
 }

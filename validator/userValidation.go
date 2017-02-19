@@ -28,3 +28,12 @@ type UserUpdatePasswordValidation struct {
 	Password        string `valid:"Required"`
 	ConfirmPassword string `valid:"Required"`
 }
+
+type UserDetailEditValidation struct {
+	Habit    string `valid:"Required"`
+	Motto    string `valid:"Required"`
+	Eduction string `valid:"Required"`
+	Location string `valid:"Required"`
+	PhoneNum string `valid:"Required"`
+	Birthday string `valid:"Required"`
+}

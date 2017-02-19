@@ -200,8 +200,9 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', '张超', 'zhangchao', 'zhangchao@qa.cn', 'b981vo', '1c981ec29d3618566075349654484b61be017532147ecca2044ccfe0dda484e5', '27', '1', 'http://localhost:8087/static/img/user/default.jpg', '', '', '2017-02-16 10:16:23', '0', '0', '2017-02-16 10:16:32');
-
+INSERT INTO `user` (`Uid`, `UserName`, `Name`, `Email`, `Salt`, `Password`, `Age`, `Sex`, `Avatar`, `LastLoginIp`, `ReLoginIp`, `Created`, `ReLoginTime`, `LastLoginTime`, `Updated`) VALUES
+(1, '张超', 'zhangchao', 'zhangchao@qa.cn', '2Q34J1', 'b5b68848d6fff26306d931bf7273ba31271a2c7e8b1c616da0d93b912223eeb1', 27, 2, 'http://localhost:8087/static/img/user/d6dd38eac1fc48a5c4009b547378b762.jpg', '', '', '2017-02-12 14:36:30', 0, 0, '2017-02-19 17:43:34'),
+(2, '里眉山', 'meishan', 'meishan@qa.cn', 'BgJ3fk', 'bfd2fb3a1879ed006efb10d966aa462f2e507445a3cf0f942124c7d9ee190ab8', 26, 2, 'http://localhost:8087/static/img/user/default.jpg', '', '', '2017-02-16 22:26:55', 0, 0, '2017-02-19 13:04:50');
 -- ----------------------------
 -- Table structure for `useradmire`
 -- ----------------------------
@@ -220,3 +221,18 @@ CREATE TABLE `useradmire` (
 -- ----------------------------
 -- Records of useradmire
 -- ----------------------------
+DROP TABLE IF EXISTS `userdetail`;
+CREATE TABLE `userdetail` (
+  `Id` int(14) UNSIGNED NOT NULL,
+  `Uid` int(14) UNSIGNED NOT NULL,
+  `Habit` varchar(255) NOT NULL,
+  `Motto` varchar(50) NOT NULL,
+  `Location` varchar(50) NOT NULL,
+  `Eduction` varchar(255) NOT NULL,
+  `PhoneNum` varchar(12) NOT NULL,
+  `Birthday` datetime NOT NULL,
+  `Skill` text NOT NULL,
+  `Created` datetime NOT NULL,
+  `Updated` datetime NOT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
