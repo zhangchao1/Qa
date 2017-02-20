@@ -29,7 +29,7 @@
                 </div>
                  <div class="form-group">
                     <label><i class="fa fa-mobile-phone">(联系方式)</i></label>
-                    <input type="number" class="form-control" placeholder="输入手机号" v-model="PhoneNum" v-validate:PhoneNum="['required']"> 
+                    <input type="text" class="form-control" placeholder="输入手机号" v-model="PhoneNum" v-validate:PhoneNum="['required']"> 
                 </div>
                 <div class="form-group">
                     <label><i class="fa fa fa-book margin-r-5">(教育方式描述)</i></label>
@@ -60,7 +60,7 @@
                       <td height=50px>
                       <div class="form-group">
                       <select class="form-control select2 valid untouched dirty modified" v-model="item.Color">
-                        <option selected="selected" value="info">一般</option>
+                        <option value="info">一般</option>
                         <option value="primary">初级</option>
                         <option value="warning">高级</option>
                         <option value="success">资深</option>
@@ -102,7 +102,7 @@
           Motto:"",
           Location:"",
           Eduction:"",
-          PhoneNum:0,
+          PhoneNum:"",
           Birthday:"",
           Skill:[]
         },
@@ -143,6 +143,23 @@
             format: "yyyy-mm-dd",
             autoclose: true,
           });
+          this.$http.get('/api/user/getuserdetail', [], []).then(function(response){
+                console.log(response)
+                if(response.data.IsSuccess == true){
+                    this.Habit = response.data.Data.Habit
+                    this.Motto = response.data.Data.Motto
+                    this.Location = response.data.Data.Location
+                    this.Eduction = response.data.Data.Eduction
+                    this.PhoneNum = response.data.Data.PhoneNum
+                    this.Birthday = response.data.Data.Birthday
+                    this.Skill = response.data.Data.Skill
+                    console.log(this.Skill)
+                }else{
+                    alert("请求失败");
+                }
+              }, function(response){
+                alert('提交失败')
+            });
         }
     });
 </script>

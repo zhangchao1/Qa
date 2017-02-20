@@ -11,7 +11,7 @@
         <li class="active">个人中心</li>
       </ol>
     </section>
-    <section class="content" id="attendance_add">
+    <section class="content" id="user_center">
       <div class="row">
         <div class="col-md-4">
           <div class="box box-primary">
@@ -24,8 +24,8 @@
                 <li><a href="#">性别 <span class="pull-right text-green">{{.usersex}}</span></a></li>
                 <li><a href="#">部门<span class="pull-right text-green">技术部</span></a></li>
                 <li><a href="#">职位<span class="pull-right text-green">PHP组</span></a></li>
-                <li><a href="#">生日 <span class="pull-right text-green">1900-00-00</span></a></li>
-                <li><a href="#">联系方式 <span class="pull-right text-green">18080909000</span></a></li>
+                <li><a href="#">生日 <span class="pull-right text-green">{[ Birthday ]}</span></a></li>
+                <li><a href="#">联系方式 <span class="pull-right text-green">{[ PhoneNum ]}</span></a></li>
               </ul>
             </div>
           </div>
@@ -38,26 +38,25 @@
             <div class="box-body">
               <strong><i class="fa fa-book margin-r-5"></i>教育</strong>
               <p class="text-muted">
-                B.S. in Computer Science from the University of Tennessee at Knoxville
+                {[ Eduction ]}
               </p>
               <hr>
               <strong><i class="fa fa-map-marker margin-r-5"></i>所在地</strong>
-              <p class="text-muted">Malibu, California</p>
+              <p class="text-muted">{[ Location ]}</p>
               <hr>
               <strong><i class="fa fa-pencil margin-r-5"></i>擅长的技能</strong>
               <p>
-                <span class="label label-danger">UI Design</span>
-                <span class="label label-success">Coding</span>
-                <span class="label label-info">Javascript</span>
-                <span class="label label-warning">PHP</span>
-                <span class="label label-primary">Node.js</span>
+                <template v-for="item in Skill">
+                <span class="label label-{[ item.Color ]}">{[ item.Description ]}
+                </span>  
+                </template>
               </p>
               <hr>
               <strong><i class="fa fa-file-text-o margin-r-5"></i>座右铭</strong>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
+              <p>{[ Motto ]}</p>
               <hr>
               <strong><i class="fa fa-file-text-o margin-r-5"></i>个人喜好</strong>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
+              <p>{[ Habit ]}</p>
             </div>
             <!-- /.box-body -->
           </div> 
@@ -101,4 +100,41 @@
       </div>
    </section>
 </div>
+<script>
+  Vue.config.delimiters = ['{[', ']}']
+  var vue = new Vue({
+        el: '#user_center',
+        data: {
+              Habit:"",   
+              Motto:"",    
+              Location :"",
+              Eduction :"",
+              PhoneNum :"",
+              Birthday :"",
+              Skill:[]    
+        },
+        methods:{
+           
+        },
+        ready:function(){
+          this.$http.get('/api/user/getuserdetail', [], []).then(function(response){
+                console.log(response)
+                if(response.data.IsSuccess == true){
+                    this.Habit = response.data.Data.Habit
+                    this.Motto = response.data.Data.Motto
+                    this.Location = response.data.Data.Location
+                    this.Eduction = response.data.Data.Eduction
+                    this.PhoneNum = response.data.Data.PhoneNum
+                    this.Birthday = response.data.Data.Birthday
+                    this.Skill = response.data.Data.Skill
+                    console.log(this.Skill)
+                }else{
+                    alert("请求失败");
+                }
+              }, function(response){
+                alert('提交失败')
+            });
+        },
+    });
+</script>
 {{template "footer.tpl" .}}

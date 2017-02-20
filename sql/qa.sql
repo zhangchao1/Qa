@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost_3306
+Source Server         : loclahost
 Source Server Version : 50553
 Source Host           : localhost:3306
 Source Database       : qa
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2017-02-16 10:17:24
+Date: 2017-02-20 22:02:44
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -195,14 +195,14 @@ CREATE TABLE `user` (
   `LastLoginTime` int(14) DEFAULT NULL,
   `Updated` datetime NOT NULL,
   PRIMARY KEY (`Uid`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` (`Uid`, `UserName`, `Name`, `Email`, `Salt`, `Password`, `Age`, `Sex`, `Avatar`, `LastLoginIp`, `ReLoginIp`, `Created`, `ReLoginTime`, `LastLoginTime`, `Updated`) VALUES
-(1, '张超', 'zhangchao', 'zhangchao@qa.cn', '2Q34J1', 'b5b68848d6fff26306d931bf7273ba31271a2c7e8b1c616da0d93b912223eeb1', 27, 2, 'http://localhost:8087/static/img/user/d6dd38eac1fc48a5c4009b547378b762.jpg', '', '', '2017-02-12 14:36:30', 0, 0, '2017-02-19 17:43:34'),
-(2, '里眉山', 'meishan', 'meishan@qa.cn', 'BgJ3fk', 'bfd2fb3a1879ed006efb10d966aa462f2e507445a3cf0f942124c7d9ee190ab8', 26, 2, 'http://localhost:8087/static/img/user/default.jpg', '', '', '2017-02-16 22:26:55', 0, 0, '2017-02-19 13:04:50');
+INSERT INTO `user` VALUES ('1', '张超', 'zhangchao', 'zhangchao@qa.cn', '2Q34J1', 'b5b68848d6fff26306d931bf7273ba31271a2c7e8b1c616da0d93b912223eeb1', '27', '2', 'http://localhost:8087/static/img/user/6ddfd85322dc890f40a7ece424100a8c.jpg', '', '', '2017-02-12 14:36:30', '0', '0', '2017-02-20 22:00:29');
+INSERT INTO `user` VALUES ('2', '里眉山', 'meishan', 'meishan@qa.cn', 'BgJ3fk', 'bfd2fb3a1879ed006efb10d966aa462f2e507445a3cf0f942124c7d9ee190ab8', '26', '2', 'http://localhost:8087/static/img/user/a822aefd1d5c73b7de779e5987881d12.jpg', '', '', '2017-02-16 22:26:55', '0', '0', '2017-02-20 21:36:56');
+
 -- ----------------------------
 -- Table structure for `useradmire`
 -- ----------------------------
@@ -221,10 +221,14 @@ CREATE TABLE `useradmire` (
 -- ----------------------------
 -- Records of useradmire
 -- ----------------------------
+
+-- ----------------------------
+-- Table structure for `userdetail`
+-- ----------------------------
 DROP TABLE IF EXISTS `userdetail`;
 CREATE TABLE `userdetail` (
-  `Id` int(14) UNSIGNED NOT NULL,
-  `Uid` int(14) UNSIGNED NOT NULL,
+  `Id` int(14) unsigned NOT NULL AUTO_INCREMENT,
+  `Uid` int(14) unsigned NOT NULL,
   `Habit` varchar(255) NOT NULL,
   `Motto` varchar(50) NOT NULL,
   `Location` varchar(50) NOT NULL,
@@ -235,4 +239,9 @@ CREATE TABLE `userdetail` (
   `Created` datetime NOT NULL,
   `Updated` datetime NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of userdetail
+-- ----------------------------
+INSERT INTO `userdetail` VALUES ('3', '1', '羽毛球', '何处不春光', '上海', '加里敦大学', '13022196509', '2017-02-06 00:00:00', '[{\"Color\":\"warning\",\"Description\":\"VB\"},{\"Color\":\"success\",\"Description\":\"C++\"}]', '2017-02-20 22:00:11', '2017-02-20 22:00:57');

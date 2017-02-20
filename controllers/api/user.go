@@ -164,3 +164,49 @@ func (this *User) SaveUserDetail() {
 		this.ServeJSON()
 	}
 }
+
+// @router /getuserdetail [get]
+func (this *User) GetUserDetail() {
+	sess := this.StartSession()
+	Uid := sess.Get("uid")
+	var uid int64
+	var baseEncode base.BaseEncodePass
+	if Uid == nil {
+		token := this.Ctx.GetCookie("uid")
+		src, _ := baseEncode.Decode([]byte(token))
+		cookieInfo := strings.Split(string(src), ",")
+		uid, _ = strconv.ParseInt(cookieInfo[0], 10, 64)
+	} else {
+		uid = Uid.(int64)
+	}
+	var userDetail user.UserDetail
+	var info UsermDetail
+	userData, err := userDetail.GetUserDetailByUid(uid)
+	if err != nil {
+		info.Birthday = "1970-01-01"
+		info.Eduction = "加里敦大学"
+		info.Habit = "羽毛球"
+		info.PhoneNum = "13022196508"
+		info.Location = "未知"
+		info.Motto = "何处不春光"
+		var skillInfo []PerSkill
+		var kInfo1, kInfo2 PerSkill
+		kInfo1.Color = "success"
+		kInfo1.Description = "C++"
+		kInfo2.Color = "warning"
+		kInfo2.Description = "VB"
+		skillInfo = append(skillInfo, kInfo2, kInfo1)
+		info.Skill = skillInfo
+	} else {
+
+		json.Unmarshal([]byte(userData.Skill), &info.Skill)
+		info.Birthday = userData.Birthday
+		info.Motto = userData.Motto
+		info.Location = userData.Location
+		info.Eduction = userData.Eduction
+		info.PhoneNum = userData.PhoneNum
+		info.Habit = userData.Habit
+	}
+	this.Data["json"] = map[string]interface{}{"IsSuccess": true, "Data": info}
+	this.ServeJSON()
+}
