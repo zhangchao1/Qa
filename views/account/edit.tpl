@@ -153,7 +153,6 @@
                     this.PhoneNum = response.data.Data.PhoneNum
                     this.Birthday = response.data.Data.Birthday
                     this.Skill = response.data.Data.Skill
-                    console.log(this.Skill)
                 }else{
                     alert("请求失败");
                 }

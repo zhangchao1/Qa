@@ -34,6 +34,6 @@ type UserDetailEditValidation struct {
 	Motto    string `valid:"Required"`
 	Eduction string `valid:"Required"`
 	Location string `valid:"Required"`
-	PhoneNum string `valid:"Required"`
+	PhoneNum string `valid:"Required; Mobile"`
 	Birthday string `valid:"Required"`
 }

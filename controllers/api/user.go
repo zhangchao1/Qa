@@ -86,7 +86,6 @@ func (this *User) SaveAvatar() {
 	} else {
 		b64data := strings.Split(avatar.Avatar, "base64,")[1]
 		dist, err := base64.StdEncoding.DecodeString(b64data)
-		fmt.Println(dist, err)
 		if err != nil {
 			this.Data["json"] = map[string]interface{}{"IsSuccess": false, "ErrMsg": "文件无效"}
 			this.ServeJSON()
@@ -100,7 +99,6 @@ func (this *User) SaveAvatar() {
 			userAvatar := "http://localhost:8087/" + filepath
 			f, _ := os.OpenFile(filepath, os.O_RDWR|os.O_CREATE, os.ModePerm)
 			defer f.Close()
-			fmt.Println(err)
 			_, err := f.Write(dist)
 			if err != nil {
 				this.Data["json"] = map[string]interface{}{"IsSuccess": false, "ErrMsg": "系统错误"}
@@ -183,7 +181,7 @@ func (this *User) GetUserDetail() {
 	var info UsermDetail
 	userData, err := userDetail.GetUserDetailByUid(uid)
 	if err != nil {
-		info.Birthday = "1970-01-01"
+		info.Birthday = time.Now().Format("2006-01-02")
 		info.Eduction = "加里敦大学"
 		info.Habit = "羽毛球"
 		info.PhoneNum = "13022196508"
@@ -198,9 +196,9 @@ func (this *User) GetUserDetail() {
 		skillInfo = append(skillInfo, kInfo2, kInfo1)
 		info.Skill = skillInfo
 	} else {
-
 		json.Unmarshal([]byte(userData.Skill), &info.Skill)
-		info.Birthday = userData.Birthday
+		birthday := strings.Split(userData.Birthday, " ")
+		info.Birthday = birthday[0]
 		info.Motto = userData.Motto
 		info.Location = userData.Location
 		info.Eduction = userData.Eduction
