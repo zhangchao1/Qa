@@ -144,7 +144,6 @@ func (this *ColorLife) AddComment() {
 	json.Unmarshal(this.Ctx.Input.RequestBody, &addComment)
 	addComment.Types = 2
 	addComment.Uid = this.GetUid()
-	addComment.TargetUid = 2
 	result := colorlifeService.AddColorlifeComment(addComment)
 	fmt.Println(result)
 	this.Data["json"] = result

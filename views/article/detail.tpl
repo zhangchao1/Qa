@@ -64,6 +64,7 @@
 </div>
 <script>
 	var aid = {{.aid}}
+  var targetuid= {{.uid }}
 	Vue.config.delimiters = ['{[', ']}']
 	var vue = new Vue({
         el: '#article_detail',
@@ -94,6 +95,7 @@
               var params = {
                   Cid: aid,
                   Content: content,
+                  TargetUid:targetuid
               }
               console.log(params)
               this.$http.post('/api/article/addcomment', params, []).then(function(response){

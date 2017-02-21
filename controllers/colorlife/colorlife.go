@@ -26,6 +26,7 @@ func (this *Colorlife) Detail() {
 		return
 	} else {
 		this.Data["cid"] = id
+		this.Data["uid"] = this.GetUid()
 		this.Data["vueVersion"] = 1
 		this.Data["controllerName"] = "colorlife"
 	}

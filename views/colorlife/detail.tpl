@@ -68,6 +68,7 @@
 </div>
 <script>
   var cid = {{.cid}}
+  var targetuid= {{.uid }}
   Vue.config.delimiters = ['{[', ']}']
     var vue = new Vue({
         el: '#colorlife_detail',
@@ -99,6 +100,7 @@
               var params = {
                   Cid: cid,
                   Content: content,
+                  TargetUid:targetuid
               }
               console.log(params)
               this.$http.post('/api/colorlife/addcomment', params, []).then(function(response){

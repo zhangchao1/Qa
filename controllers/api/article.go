@@ -170,7 +170,6 @@ func (this *Article) AddComment() {
 	json.Unmarshal(this.Ctx.Input.RequestBody, &addComment)
 	addComment.Types = 1
 	addComment.Uid = this.GetUid()
-	addComment.TargetUid = 2
 	result := articleService.AddArticleComment(addComment)
 	fmt.Println(result)
 	this.Data["json"] = result

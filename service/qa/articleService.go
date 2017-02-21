@@ -158,6 +158,7 @@ func (this *ArticleService) AddAdmrie(id int64, Uid int64, name string) AdmireRe
 	var result AdmireResult
 	errUserAdmire := admireRedis.AdmireStatusArticle(int(id), Uid)
 	_, errIdStatus := article.GetArticleById(id, 1)
+	fmt.Println(errUserAdmire, errIdStatus)
 	if errUserAdmire == true {
 		result.IsSuccess = false
 		result.ErrMsg = "你已经点过赞了!"

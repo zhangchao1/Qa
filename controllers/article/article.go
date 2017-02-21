@@ -37,6 +37,7 @@ func (this *Article) Detail() {
 		return
 	} else {
 		this.Data["aid"] = id
+		this.Data["uid"] = this.GetUid()
 		this.Data["vueVersion"] = 1
 		this.Data["controllerName"] = "article"
 	}
