@@ -17,7 +17,7 @@ func (this *User) Login() {
 // }
 
 func (this *User) Forgetpassword() {
-
+	this.Data["vueVersion"] = 1
 }
 
 func (this *User) Logut() {
