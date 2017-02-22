@@ -26,6 +26,7 @@ type User struct {
 }
 
 const query_all_user = "select * from user as us left join employee as em on us.Uid = em.uid ORDER BY us.Updated desc Limit ?,?"
+const all_user = "select username,uid from user"
 
 func (this *User) TableName() string {
 	return "user"
@@ -63,6 +64,14 @@ func (this *User) GetUserByUid(uid int64) (item User, err error) {
 	user := User{Id: uid}
 	err = o.Read(&user, "Id")
 	return user, err
+}
+
+func (this *User) GetAllUser() []orm.Params {
+	o := orm.NewOrm()
+	o.Using("Qa")
+	var maps []orm.Params
+	o.Raw(all_user).Values(&maps)
+	return maps
 }
 
 func (this *User) GetUserByName(name string) (item User, err error) {

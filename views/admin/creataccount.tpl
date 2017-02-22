@@ -97,6 +97,13 @@
 	                      </label>
 	                  </div>
 	                </div>
+                  <div class="form-group">
+                    <label>负责人</label>
+                    <select class="form-control select2" id="choose">
+                      <option v-for="option in options" v-bind:value="option.uid">{[option.username ]}
+                      </option>
+                    </select>
+                </div>
                 </div>
                  </form>
                  </validator>
@@ -108,6 +115,8 @@
       </div>
    </section>
 </div>
+<link href="/static/css/select2.min.css" rel="stylesheet">
+<script src="/static/js/select2.full.min.js"></script>
 <script src="/static/zTree/js/jquery.ztree.core.js"></script>
 <link href="/static/zTree/css/zTreeStyle/zTreeStyle.css" rel="stylesheet">
 <script>
@@ -123,7 +132,8 @@
         	Role:"",
         	Manager:false,
         	Sex:"",
-        	Age:""
+        	Age:"",
+          options:[],
     	},
         methods:{
         	zTreeOnCheck:function (event, treeId, treeNode) {
@@ -143,6 +153,7 @@
               }else{
                 manger_type = 1
               }
+              var head = $("#choose").val()
           		var params = {
   	                Did: Number(this.Did),
   	                Job: this.Job,
@@ -152,8 +163,11 @@
   	                Role:this.Role,
   	                Manager:manger_type,
   	                Sex:Number(this.Sex),
-  	                Age:Number(this.Age)
+  	                Age:Number(this.Age),
+                    Head:Number(head)
               	}
+                console.log(params);
+                rertun;
               	this.$http.post('/api/admin/creatuser', params, []).then(function(response){
               		console.log(response)
                   if(response.data.IsSuccess == true){
@@ -184,6 +198,7 @@
           },
         },
         ready:function(){
+          $("#choose").select2();
        	 var nodes
      	 var setting = {
      	 	callback: {onClick: this.zTreeOnCheck}
@@ -193,6 +208,16 @@
 		    function(data) {
 		        zTreeObj = $.fn.zTree.init($("#showde"), setting, data.Data[0]);
 		    });
+        this.$http.get('/api/admin/alluser' , [], []).then(function(response){
+                if(response.data.IsSuccess == true){
+                    this.options = response.data.Data
+                }else{
+                    alert(response.data.ErrMsg);
+                    return;
+                }
+              }, function(response){
+                alert('提交失败')
+            });
         },
     });
 </script>

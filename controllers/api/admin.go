@@ -135,3 +135,11 @@ func (this *Admin) UpdatePassword() {
 	this.Data["json"] = result
 	this.ServeJSON()
 }
+
+// @router /alluser [get]
+func (this *Admin) AllUser() {
+	var get user.User
+	info := get.GetAllUser()
+	this.Data["json"] = map[string]interface{}{"IsSuccess": true, "Data": info}
+	this.ServeJSON()
+}
