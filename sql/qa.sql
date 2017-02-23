@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2017-02-21 10:00:51
+Date: 2017-02-23 11:37:40
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -162,17 +162,12 @@ CREATE TABLE `employee` (
   `DeId` tinyint(8) unsigned NOT NULL,
   `Job` varchar(50) NOT NULL,
   `Level` smallint(5) unsigned NOT NULL,
-  `Role` varchar(50) NOT NULL,
+  `Role` smallint(5) unsigned NOT NULL,
   `Manager` smallint(5) unsigned NOT NULL,
   `Created` datetime NOT NULL,
   `Updated` datetime NOT NULL,
   PRIMARY KEY (`Eid`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of employee
--- ----------------------------
-INSERT INTO `employee` VALUES ('1', '1', '9', '运维工程师', '2', '组长', '2', '2017-02-21 09:35:22', '2017-02-21 09:35:22');
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for `user`
@@ -187,6 +182,7 @@ CREATE TABLE `user` (
   `Password` char(64) NOT NULL,
   `Age` tinyint(8) unsigned NOT NULL,
   `Sex` smallint(3) unsigned NOT NULL,
+  `Head` int(14) unsigned DEFAULT NULL,
   `Avatar` varchar(255) NOT NULL,
   `LastLoginIp` char(15) DEFAULT NULL,
   `ReLoginIp` char(15) DEFAULT NULL,
@@ -195,12 +191,7 @@ CREATE TABLE `user` (
   `LastLoginTime` int(14) DEFAULT NULL,
   `Updated` datetime NOT NULL,
   PRIMARY KEY (`Uid`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of user
--- ----------------------------
-INSERT INTO `user` VALUES ('1', '管理员', 'admin', 'admin@qa.cn', '9WLfMX', '5175d0ba034d1f15c6942bb5bac85abbb9a9751af81bea16aec04a979cd88e2a', '27', '1', 'http://localhost:8087/static/img/user/5b8f068b4fef3673a45ff6d8cf66b34d.jpg', '', '', '2017-02-21 09:35:22', '0', '0', '2017-02-21 09:41:42');
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for `useradmire`
