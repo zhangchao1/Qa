@@ -24,7 +24,8 @@ type UserInfo struct {
 	Manager  int
 	Job      string
 	Level    int
-	Role     string
+	Role     int64
+	Head     int64
 }
 
 const USER_INOF_KEY = "qa:user:info"

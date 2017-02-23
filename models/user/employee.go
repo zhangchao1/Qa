@@ -11,7 +11,7 @@ type Employee struct {
 	DeId    int64  `orm:"column(DeId);"`
 	Job     string `orm:"column(Job);"`
 	Level   int    `orm:"column(Level);"`
-	Role    string `orm:"column(Role);"`
+	Role    int64  `orm:"column(Role);"`
 	Manager int    `orm:"column(Manager);"`
 	Created string `orm:"column(Created);"`
 	Updated string `orm:"column(Updated);"`

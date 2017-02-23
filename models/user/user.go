@@ -12,6 +12,7 @@ type User struct {
 	Name          string `orm:"column(Name);"`
 	UserName      string `orm:"column(UserName);"`
 	Email         string `orm:"column(Email);"`
+	Head          int64  `orm:"column(Head);"`
 	Salt          string `orm:"column(Salt);"`
 	Password      string `orm:"column(Password);"`
 	Age           int    `orm:"column(Age);"`
@@ -53,6 +54,7 @@ func (this *User) AddUser(addItem User) (int64, error) {
 	user.Age = addItem.Age
 	user.Sex = addItem.Sex
 	user.Avatar = addItem.Avatar
+	user.Head = addItem.Head
 	user.Updated = time.Now().Format("2006-01-02 15:04:05")
 	user.Created = time.Now().Format("2006-01-02 15:04:05")
 	id, err := o.Insert(user)
@@ -96,8 +98,9 @@ func (this *User) EditUser(Uid int64, editItem User) error {
 	if err == nil {
 		user.Age = editItem.Age
 		user.Sex = editItem.Sex
+		user.Head = editItem.Head
 		user.Updated = time.Now().Format("2006-01-02 15:04:05")
-		_, err := o.Update(&user, "Name", "Email", "Age", "Sex", "Updated")
+		_, err := o.Update(&user, "Name", "Email", "Age", "Sex", "Head", "Updated")
 		return err
 	}
 	return err

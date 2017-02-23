@@ -19,21 +19,23 @@ type CreatUser struct {
 	Name     string
 	UserName string
 	Level    int
-	Role     string
+	Role     int64
 	Manager  int
 	Sex      int
 	Age      int
+	Head     int64
 }
 
 type EditUser struct {
 	Did     int64
 	Job     string
 	Level   int
-	Role    string
+	Role    int64
 	Manager int
 	Sex     int
 	Age     int
 	Uid     int64
+	Head    int64
 }
 
 type UpdatePassword struct {
@@ -150,6 +152,7 @@ func addUserTodb(additem CreatUser) (int64, error) {
 	var randstring rand.RandString
 	var scrypt scrypt.Scrypt
 	addUser.Name = additem.Name
+	addUser.Head = additem.Head
 	addUser.UserName = additem.UserName
 	addUser.Email = fmt.Sprintf("%s@qa.cn", additem.Name)
 	addUser.Salt = randstring.RandStringByNowTime(6)
@@ -211,6 +214,7 @@ func (this *AdminService) GetEditUser(uid int64) (CreatUser, error) {
 		editUser.Manager = empolyeeInfo.Manager
 		editUser.Sex = userInfo.Sex
 		editUser.Age = userInfo.Age
+		editUser.Head = userInfo.Head
 	}
 	return editUser, nil
 }
@@ -239,6 +243,7 @@ func (this *AdminService) EditUser(edititem EditUser) SaveResult {
 		result.IsSuccess = false
 	} else {
 		var getUser user.User
+		fmt.Println(edititem)
 		_, errUid := getUser.GetUserByUid(edititem.Uid)
 		if errUid != nil {
 			result.ErrMsg = "不存在该用户"
@@ -265,7 +270,9 @@ func EditUserTodb(edititem EditUser) error {
 	var edit user.User
 	editUser.Age = edititem.Age
 	editUser.Sex = edititem.Sex
+	editUser.Head = edititem.Head
 	err := edit.EditUser(edititem.Uid, editUser)
+	fmt.Println(edititem.Head)
 	return err
 }
 

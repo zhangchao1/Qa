@@ -80,12 +80,12 @@
               		<div class="form-group">
 	                <label>团队管理</label>
 	                <select class="form-control select2" v-model="Role" v-validate:Role="['required']">
-	                  <option selected="selected" value="组员">组员</option>
-	                  <option value="组长">组长</option>
-	                  <option value="部门副经理">部门副经理</option>
-	                  <option value="部门经理">部门经理</option>
-	                  <option value="部门副总监">部门副总监</option>
-	                  <option value="部门总监">部门总监</option>
+	                  <option selected="selected" value="1">组员</option>
+	                  <option value="2">组长</option>
+	                  <option value="3">部门副经理</option>
+	                  <option value="4">部门经理</option>
+	                  <option value="5">部门副总监</option>
+	                  <option value="6">部门总监</option>
 	                </select>
               		</div>
               		<div class="form-group">
@@ -129,7 +129,7 @@
         	Name:"",
           UserName:"",
         	Level:0,
-        	Role:"",
+        	Role:0,
         	Manager:false,
         	Sex:"",
         	Age:"",
@@ -160,14 +160,12 @@
   	                Name: this.Name,
                     UserName:this.UserName,
   	                Level: Number(this.Level),
-  	                Role:this.Role,
+  	                Role:Number(this.Role),
   	                Manager:manger_type,
   	                Sex:Number(this.Sex),
   	                Age:Number(this.Age),
                     Head:Number(head)
               	}
-                console.log(params);
-                rertun;
               	this.$http.post('/api/admin/creatuser', params, []).then(function(response){
               		console.log(response)
                   if(response.data.IsSuccess == true){
