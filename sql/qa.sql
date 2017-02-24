@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2017-02-23 11:37:40
+Date: 2017-02-24 19:27:16
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -167,7 +167,72 @@ CREATE TABLE `employee` (
   `Created` datetime NOT NULL,
   `Updated` datetime NOT NULL,
   PRIMARY KEY (`Eid`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of employee
+-- ----------------------------
+INSERT INTO `employee` VALUES ('1', '1', '9', '运维工程师', '1', '1', '2', '2017-02-23 11:42:05', '2017-02-23 11:43:58');
+
+-- ----------------------------
+-- Table structure for `goods`
+-- ----------------------------
+DROP TABLE IF EXISTS `goods`;
+CREATE TABLE `goods` (
+  `Id` int(14) unsigned NOT NULL AUTO_INCREMENT,
+  `Uid` int(14) unsigned NOT NULL,
+  `Name` varchar(50) NOT NULL,
+  `Application` varchar(50) DEFAULT NULL,
+  `TotalCount` int(14) unsigned NOT NULL,
+  `Updated` datetime NOT NULL,
+  `Created` datetime NOT NULL,
+  PRIMARY KEY (`Id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of goods
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `overtime`
+-- ----------------------------
+DROP TABLE IF EXISTS `overtime`;
+CREATE TABLE `overtime` (
+  `Id` int(14) unsigned NOT NULL AUTO_INCREMENT,
+  `Uid` int(14) unsigned NOT NULL,
+  `Types` tinyint(5) unsigned NOT NULL,
+  `StartTime` datetime NOT NULL,
+  `EndTime` datetime NOT NULL,
+  `LongTime` int(10) unsigned NOT NULL,
+  `Status` tinyint(5) unsigned NOT NULL,
+  `Reason` varchar(255) NOT NULL,
+  `Updated` datetime NOT NULL,
+  `Created` datetime NOT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of overtime
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `overtimeapproval`
+-- ----------------------------
+DROP TABLE IF EXISTS `overtimeapproval`;
+CREATE TABLE `overtimeapproval` (
+  `Id` int(14) unsigned NOT NULL AUTO_INCREMENT,
+  `Oid` int(14) unsigned NOT NULL,
+  `TargetUid` int(14) unsigned NOT NULL,
+  `Detail` varchar(100) NOT NULL,
+  `Status` smallint(5) unsigned NOT NULL,
+  `Updated` datetime NOT NULL,
+  `Created` datetime NOT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of overtimeapproval
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `user`
@@ -191,7 +256,12 @@ CREATE TABLE `user` (
   `LastLoginTime` int(14) DEFAULT NULL,
   `Updated` datetime NOT NULL,
   PRIMARY KEY (`Uid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of user
+-- ----------------------------
+INSERT INTO `user` VALUES ('1', '管理员', 'admin', 'admin@qa.cn', 'Tf6517', '96587636c8477aa646eac03bbd6ae8e8b957dd7b102bbb75bbbaad04e18ebc84', '33', '2', '1', 'http://localhost:8087/static/img/user/default.jpg', '', '', '2017-02-23 11:42:05', '0', '0', '2017-02-24 19:26:56');
 
 -- ----------------------------
 -- Table structure for `useradmire`
