@@ -85,6 +85,7 @@
 	                  <option value="4">部门经理</option>
 	                  <option value="5">部门副总监</option>
 	                  <option value="6">部门总监</option>
+                    <option value="7">CEO</option>
 	                </select>
               		</div>
               		<div class="form-group">
