@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2017-02-24 19:27:16
+Date: 2017-02-27 10:04:50
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -132,31 +132,34 @@ CREATE TABLE `deparment` (
   `Created` datetime NOT NULL,
   `Updated` datetime NOT NULL,
   PRIMARY KEY (`DeparmentId`)
-) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 
-INSERT INTO `deparment` (`DeparmentId`, `DeparmentName`, `ParentId`, `Level`, `Created`, `Updated`) VALUES
-(1, 'qa公司', 0, 1, '2017-01-01 09:16:02', '2017-01-18 09:16:05'),
-(2, '技术部', 1, 2, '2017-01-18 09:16:48', '2017-01-18 09:16:52'),
-(3, '后端技术中心', 2, 3, '2017-01-18 09:17:42', '2017-01-18 09:17:45'),
-(4, 'PHP组', 3, 4, '2017-01-18 09:18:40', '2017-01-18 09:18:43'),
-(5, 'C#组', 3, 4, '2017-01-18 09:19:39', '2017-01-18 09:19:42'),
-(6, 'Go组', 3, 4, '2017-01-18 09:22:22', '2017-01-18 09:22:25'),
-(7, '质量与运维组', 2, 3, '2017-01-18 09:23:21', '2017-01-18 09:23:23'),
-(8, '测试组', 7, 4, '2017-01-18 09:24:05', '2017-01-18 09:24:08'),
-(9, '运维组', 7, 4, '2017-01-18 09:24:58', '2017-01-18 09:25:01'),
-(10, '前端组', 2, 3, '2017-01-18 09:26:02', '2017-01-18 09:26:05'),
-(11, '设计组', 2, 3, '2017-01-18 09:27:12', '2017-01-18 09:27:15'),
-(12, '支持部门', 1, 2, '2017-01-18 09:29:26', '2017-01-01 09:29:29'),
-(13, '人事部', 12, 3, '2017-01-18 09:32:55', '2017-01-18 09:32:57'),
-(14, '财务部', 12, 3, '2017-01-18 09:33:46', '2017-01-18 09:33:49'),
-(15, '后勤组', 12, 3, '2017-02-01 01:00:00', '2017-02-02 00:00:00'),
-(16, '运营部', 1, 2, '2017-02-02 00:00:00', '2017-02-02 00:00:00'),
-(17, '运营一组', 16, 3, '2017-02-01 00:00:00', '2017-02-01 00:00:00'),
-(18, '运营二组', 16, 3, '2017-02-01 00:00:00', '2017-02-02 00:00:00'),
-(19, '节目部', 1, 2, '2017-02-01 00:00:00', '2017-02-02 00:00:00'),
-(20, '节目一组', 19, 3, '2017-02-02 00:00:00', '2017-02-02 00:00:00'),
-(21, '节目一组', 19, 3, '2017-02-02 00:00:00', '2017-02-02 00:00:00'),
-(22, '项目组', 2, 3, '2017-02-01 00:00:00', '2017-02-02 00:00:00');
+-- ----------------------------
+-- Records of deparment
+-- ----------------------------
+INSERT INTO `deparment` VALUES ('1', 'qa公司', '0', '1', '2017-01-01 09:16:02', '2017-01-18 09:16:05');
+INSERT INTO `deparment` VALUES ('2', '技术部', '1', '2', '2017-01-18 09:16:48', '2017-01-18 09:16:52');
+INSERT INTO `deparment` VALUES ('3', '后端技术中心', '2', '3', '2017-01-18 09:17:42', '2017-01-18 09:17:45');
+INSERT INTO `deparment` VALUES ('4', 'PHP组', '3', '4', '2017-01-18 09:18:40', '2017-01-18 09:18:43');
+INSERT INTO `deparment` VALUES ('5', 'C#组', '3', '4', '2017-01-18 09:19:39', '2017-01-18 09:19:42');
+INSERT INTO `deparment` VALUES ('6', 'Go组', '3', '4', '2017-01-18 09:22:22', '2017-01-18 09:22:25');
+INSERT INTO `deparment` VALUES ('7', '质量与运维组', '2', '3', '2017-01-18 09:23:21', '2017-01-18 09:23:23');
+INSERT INTO `deparment` VALUES ('8', '测试组', '7', '4', '2017-01-18 09:24:05', '2017-01-18 09:24:08');
+INSERT INTO `deparment` VALUES ('9', '运维组', '7', '4', '2017-01-18 09:24:58', '2017-01-18 09:25:01');
+INSERT INTO `deparment` VALUES ('10', '前端组', '2', '3', '2017-01-18 09:26:02', '2017-01-18 09:26:05');
+INSERT INTO `deparment` VALUES ('11', '设计组', '2', '3', '2017-01-18 09:27:12', '2017-01-18 09:27:15');
+INSERT INTO `deparment` VALUES ('12', '支持部门', '1', '2', '2017-01-18 09:29:26', '2017-01-01 09:29:29');
+INSERT INTO `deparment` VALUES ('13', '人事部', '12', '3', '2017-01-18 09:32:55', '2017-01-18 09:32:57');
+INSERT INTO `deparment` VALUES ('14', '财务部', '12', '3', '2017-01-18 09:33:46', '2017-01-18 09:33:49');
+INSERT INTO `deparment` VALUES ('15', '后勤组', '12', '3', '2017-02-01 01:00:00', '2017-02-02 00:00:00');
+INSERT INTO `deparment` VALUES ('16', '运营部', '1', '2', '2017-02-02 00:00:00', '2017-02-02 00:00:00');
+INSERT INTO `deparment` VALUES ('17', '运营一组', '16', '3', '2017-02-01 00:00:00', '2017-02-01 00:00:00');
+INSERT INTO `deparment` VALUES ('18', '运营二组', '16', '3', '2017-02-01 00:00:00', '2017-02-02 00:00:00');
+INSERT INTO `deparment` VALUES ('19', '节目部', '1', '2', '2017-02-01 00:00:00', '2017-02-02 00:00:00');
+INSERT INTO `deparment` VALUES ('20', '节目一组', '19', '3', '2017-02-02 00:00:00', '2017-02-02 00:00:00');
+INSERT INTO `deparment` VALUES ('21', '节目一组', '19', '3', '2017-02-02 00:00:00', '2017-02-02 00:00:00');
+INSERT INTO `deparment` VALUES ('22', '项目组', '2', '3', '2017-02-01 00:00:00', '2017-02-02 00:00:00');
+
 -- ----------------------------
 -- Table structure for `employee`
 -- ----------------------------
@@ -172,12 +175,15 @@ CREATE TABLE `employee` (
   `Created` datetime NOT NULL,
   `Updated` datetime NOT NULL,
   PRIMARY KEY (`Eid`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of employee
 -- ----------------------------
 INSERT INTO `employee` VALUES ('1', '1', '9', '运维工程师', '1', '1', '2', '2017-02-23 11:42:05', '2017-02-23 11:43:58');
+INSERT INTO `employee` VALUES ('2', '2', '16', '物品申请管理', '2', '1', '1', '2017-02-27 08:38:16', '2017-02-27 09:11:40');
+INSERT INTO `employee` VALUES ('3', '3', '16', '物品申请管理', '2', '1', '1', '2017-02-27 08:39:21', '2017-02-27 08:42:52');
+INSERT INTO `employee` VALUES ('4', '4', '16', '后勤组管理员', '2', '2', '1', '2017-02-27 08:41:59', '2017-02-27 08:41:59');
 
 -- ----------------------------
 -- Table structure for `goods`
@@ -261,12 +267,15 @@ CREATE TABLE `user` (
   `LastLoginTime` int(14) DEFAULT NULL,
   `Updated` datetime NOT NULL,
   PRIMARY KEY (`Uid`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
 INSERT INTO `user` VALUES ('1', '管理员', 'admin', 'admin@qa.cn', 'Tf6517', '96587636c8477aa646eac03bbd6ae8e8b957dd7b102bbb75bbbaad04e18ebc84', '33', '2', '1', 'http://localhost:8087/static/img/user/default.jpg', '', '', '2017-02-23 11:42:05', '0', '0', '2017-02-24 19:26:56');
+INSERT INTO `user` VALUES ('2', '李鑫', 'lixin', 'lixin@qa.cn', 'm1l43K', 'dff04244e0ede12dbdd5a35ec4364573901c687724b113aefc82d3d70d5ac478', '28', '2', '4', 'http://localhost:8087/static/img/user/default.jpg', '', '', '2017-02-27 08:38:16', '0', '0', '2017-02-27 09:11:40');
+INSERT INTO `user` VALUES ('3', '王珂', 'wangke', 'wangke@qa.cn', 'f608MT', '45a4f7983903feb8d621b9cc4ce1cad9e514da57ccf7d5826409dbb459f0adc6', '33', '2', '4', 'http://localhost:8087/static/img/user/default.jpg', '', '', '2017-02-27 08:39:21', '0', '0', '2017-02-27 08:42:52');
+INSERT INTO `user` VALUES ('4', '陈宁', 'chenning', 'chenning@qa.cn', '76KuZ1', '872c4a4215fa437b81f082f64e0103370b38748b21ba997038365690ce178f69', '36', '1', '1', 'http://localhost:8087/static/img/user/default.jpg', '', '', '2017-02-27 08:41:59', '0', '0', '2017-02-27 08:42:12');
 
 -- ----------------------------
 -- Table structure for `useradmire`
