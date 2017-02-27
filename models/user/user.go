@@ -27,6 +27,7 @@ type User struct {
 }
 
 const query_all_user = "select * from user as us left join employee as em on us.Uid = em.uid ORDER BY us.Updated desc Limit ?,?"
+const query_did_user = "select us.username,us.uid from user as us left join employee as em on us.Uid = em.uid where DeId = ? "
 const all_user = "select username,uid from user"
 
 func (this *User) TableName() string {
@@ -155,4 +156,12 @@ func (this *User) EditUserPassword(Uid int64, salt string, password string) erro
 		return err
 	}
 	return err
+}
+
+func (this *User) GetUserByDid(Did int64) []orm.Params {
+	o := orm.NewOrm()
+	o.Using("Qa")
+	var maps []orm.Params
+	o.Raw(query_did_user, Did).Values(&maps)
+	return maps
 }

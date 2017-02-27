@@ -35,14 +35,48 @@
                       <label>物品用途</label>
                       <textarea class="form-control" rows="4" placeholder="输入物品用途" v-model="Application" v-validate:Application="['required']"></textarea>
                     </div>
+                    <div class="form-group">
+                      <label><i class=" fa fa-user-plus">(审核人)</i></label>
+                      <select class="form-control select2" id="choose">
+                        <option v-for="option in options" v-bind:value="option.uid">{[option.username ]}
+                      </option>
+                    </select>
+                    </div>
                  </form>
                  </validator>
               </div>
               <div class="box-footer">
-                  <button type="submit" class="btn btn-info" :disabled="!$validation1.valid" v-on:click="save" >保存</button>
+                  <button type="submit" class="btn btn-info">保存</button>
               </div>
         </div>
       </div>
    </section>
 </div>
+<link href="/static/css/select2.min.css" rel="stylesheet">
+<script src="/static/js/select2.full.min.js"></script>
+<script>
+  Vue.config.delimiters = ['{[', ']}']
+  var vue = new Vue({
+        el: '#goods_add',
+        data: {
+          options:[],
+        },
+        methods:{
+          
+        },
+        ready:function(){
+          $("#choose").select2();
+          this.$http.get('/api/goods/approvalusers' , [], []).then(function(response){
+                if(response.data.IsSuccess == true){
+                    this.options = response.data.Data
+                }else{
+                    alert(response.data.ErrMsg);
+                    return;
+                }
+              }, function(response){
+                alert('提交失败')
+            });
+        }
+    });
+</script>
 {{template "footer.tpl" .}}

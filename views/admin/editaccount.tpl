@@ -99,8 +99,8 @@
 	                </div>
                 </div>
                 <div class="form-group">
-                    <label>负责人</label>
-                    <select class="form-control select2" id="choose">
+                    <label>负责人 当前负责人：{[ head_name ]}</label>
+                    <select class="form-control select2" id="choose" v-model="Head">
                       <option v-for="option in options" v-bind:value="option.uid">{[option.username ]}
                       </option>
                     </select>
@@ -134,6 +134,8 @@ var uid = {{.uid}}
         	Manager:false,
         	Sex:"",
         	Age:"",
+          head_value:"",
+          head_name:"",
           options:[],
     	},
         methods:{
@@ -175,7 +177,7 @@ var uid = {{.uid}}
         		console.log(response)
             if(response.data.IsSuccess == true){
                 alert("保存成功")
-                retun;
+                return;
                 window.location.href="/admin/userlist"
             }else{
                 alert(response.data.ErrMsg);
@@ -204,6 +206,7 @@ var uid = {{.uid}}
                     this.Sex = (response.data.Data.Sex ==2)? "2": "1"
                     this.Manager = (response.data.Data.Manager ==2)? true: false
                     this.UserName = response.data.Data.UserName
+                    this.head_value = response.data.Data.Head
                     var vthis=this;
                     $.getJSON(
                       '/api/admin/alldeparment',
@@ -224,6 +227,11 @@ var uid = {{.uid}}
          this.$http.get('/api/admin/alluser' , [], []).then(function(response){
                 if(response.data.IsSuccess == true){
                     this.options = response.data.Data
+                    for(var item of this.options){
+                      if (item.uid == this.head_value){
+                        this.head_name = item.username
+                      }
+                    }
                 }else{
                     alert(response.data.ErrMsg);
                     return;
