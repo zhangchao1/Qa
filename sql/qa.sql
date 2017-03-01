@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2017-02-27 10:04:50
+Date: 2017-03-01 09:45:17
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -202,6 +202,38 @@ CREATE TABLE `goods` (
 
 -- ----------------------------
 -- Records of goods
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `goodsapproval`
+-- ----------------------------
+DROP TABLE IF EXISTS `goodsapproval`;
+CREATE TABLE `goodsapproval` (
+  `Id` int(14) unsigned NOT NULL AUTO_INCREMENT,
+  `Gid` int(14) unsigned NOT NULL,
+  `TargetUid` int(14) unsigned NOT NULL,
+  `Detail` varchar(100) NOT NULL,
+  `Status` tinyint(4) unsigned NOT NULL,
+  `Updated` datetime NOT NULL,
+  `Created` datetime NOT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of goodsapproval
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `leave`
+-- ----------------------------
+DROP TABLE IF EXISTS `leave`;
+CREATE TABLE `leave` (
+  `Id` int(14) unsigned NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`Id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of leave
 -- ----------------------------
 
 -- ----------------------------
