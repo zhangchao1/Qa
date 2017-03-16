@@ -92,8 +92,8 @@
       </div>
    </section>
 </div>
-<link href="//cdn.bootcss.com/bootstrap-datepicker/1.6.2/css/bootstrap-datepicker.css" rel="stylesheet">
-<script src="//cdn.bootcss.com/bootstrap-datepicker/1.6.2/js/bootstrap-datepicker.min.js"></script>
+<link href="/static/css/bootstrap-datepicker.min.css" rel="stylesheet">
+<script src="/static/js/bootstrap-datepicker.min.js"></script>
 <script>
   var vue = new Vue({
         el: '#user_detail',
