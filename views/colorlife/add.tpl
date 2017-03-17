@@ -110,13 +110,16 @@
                   uploadUrl : "/api/colorlife/upload",//上传图片的url
                   allowedFileExtensions : ['jpg'],
                   overwriteInitial : false,
-                  maxFileSize : 1000,//上传文件最大的尺寸
+                  maxFileSize : 4098,//上传文件最大的尺寸
                   maxFilesNum : 10,//上传最大的文件数量
                   initialCaption: "请上传相册图片",//文本框初始话value
                   slugCallback : function(filename) {
               return filename.replace('(', '_').replace(']', '_');
             }
           }),
+          $(".file-drop-zone").css('height','350px');
+          $(".file-drop-zone").css("overflow-y","auto")
+          $(".file-drop-zone").css("overflow-x","hidden")
           $('#upload').on('fileuploaded', function(event, data, previewId, index) {
             var form = data.form, files = data.files, extra = data.extra,
             response = data.response, reader = data.reader;
