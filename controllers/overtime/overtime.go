@@ -17,3 +17,8 @@ func (this *Overtime) Record() {
 	this.Data["vueVersion"] = 1
 	this.Data["controllerName"] = "overtime"
 }
+
+func (this *Overtime) My() {
+	this.Data["vueVersion"] = 1
+	this.Data["controllerName"] = "overtime"
+}

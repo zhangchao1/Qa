@@ -258,8 +258,8 @@
             </span>
           </a>
           <ul class="treeview-menu" {{if eq "overtime" .controllerName}}style="display: block"{{else}}style="display: None"{{end}}>
-            <li class="active"><a href="/overtime/add"><i class="fa fa-user"></i>申请加班</a></li>
-            <li><a href="/overtime/record"><i class=" fa fa-search"></i>加班查询</a></li>
+            <li class="active"><a href="/overtime/my"><i class="fa fa-user"></i>个人加班申请</a></li>
+            <li><a href="/overtime/record"><i class=" fa fa-search"></i>加班申请查询</a></li>
           </ul>
         </li>
         <li class="treeview">

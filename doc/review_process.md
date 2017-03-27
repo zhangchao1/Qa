@@ -39,3 +39,5 @@
 | Process | 流程| int |
 | Updated | 更新时间 | datetime |
 | Created | 创建时间 | datetime |
+
+在审核过程中我们可以进行"改签"进行灵活的操作。

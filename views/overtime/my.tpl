@@ -1,14 +1,14 @@
 {{template "header.tpl" .}}
 <div class="content-wrapper">
-	<section class="content-header">
+  <section class="content-header">
       <h1>
-        请假
+        申请加班
         <small></small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="/"><i class="fa fa-dashboard"></i>Home</a></li>
-        <li><a class="active">请假管理</a></li>
-        <li class="active">请假</li>
+        <li><a class="active">加班管理</a></li>
+        <li class="active">申请加班</li>
       </ol>
     </section>
     <section class="content" id="leave_add">
@@ -17,7 +17,7 @@
           <div class="box">
             <div class="box-header">
             <div class="pull-right">
-                <a class="btn btn-success" href="/leave/add"><i class="fa fa-plus"></i> 新增</a>
+                <a class="btn btn-success" href="/overtime/add"><i class="fa fa-plus"></i> 新增加班申请</a>
             </div>
             </div>
             <div class="box-body">
