@@ -6,10 +6,10 @@
 .bs-wizard {border-bottom: solid 1px #e0e0e0; padding: 0 0 10px 0;}
 .bs-wizard > .bs-wizard-step {padding: 0; position: relative;margin: 0px 0px 20px;}
 .bs-wizard > .bs-wizard-step + .bs-wizard-step {}
-.bs-wizard > .bs-wizard-step .bs-wizard-info {color: #999; font-size: 16px;top: -25px;position:relative;}
+.bs-wizard > .bs-wizard-step .bs-wizard-info {color: #999; font-size: 14px;top: -25px;position: relative;text-align: center;}
 .bs-wizard > .bs-wizard-step > .bs-wizard-dot {position: absolute; width: 50px; height: 50px; display: block; background: #92cf5c; top: 25px; left: 50%; margin-top: -10px; margin-left: -4px; border-radius: 50%;}
 .bs-wizard > .bs-wizard-step > .bs-wizard-dot > .glyphicon {margin: 16px 17px; color: white}
-.bs-wizard > .bs-wizard-step > .bs-wizard-status {position: absolute; width: 20px; height: 20px; display: block; background: #92cf5c; top: 40px; left: 25%; margin-top: 25px; border-radius: 50%;}
+.bs-wizard > .bs-wizard-step > .bs-wizard-status {position: absolute; width: 20px; height: 20px; display: block; background: #92cf5c; top: 40px; margin-top: 25px; left:18%;border-radius: 50%;}
 .bs-wizard > .bs-wizard-step > .bs-wizard-status.start{
   margin-left: 9px; 
 }
@@ -57,7 +57,7 @@
                   <div class="progress"><div class="progress-bar"></div></div>
                   <a href="javascript:;" class="bs-wizard-dot"><span class="glyphicon glyphicon-lock"></span></a>
                   <div class="bs-wizard-status start"><span class="glyphicon glyphicon-ok"></span></div>
-                  <div class="bs-wizard-info text-center">提交申请单</div>
+                  <div class="bs-wizard-info">提交申请单</div>
                   <div class="bs-wizard-reviewName">
                     <p>张超(zhangchao)</p>
                     <p>2017/03/08 14:56:55</p>
@@ -67,7 +67,7 @@
                   <div class="progress"><div class="progress-bar"></div></div>
                   <a href="javascript:;" class="bs-wizard-dot"><span class="glyphicon glyphicon-user"></span>
 </a>               <div class="bs-wizard-status process"><span class="glyphicon glyphicon-ok"></span></div>
-                  <div class="bs-wizard-info text-center">Edit</div>
+                  <div class="bs-wizard-info">欧阳证明觉得骄傲</div>
                 </div>
                 
                 <div class="col-xs-2 bs-wizard-step active"><!-- complete -->
@@ -75,14 +75,14 @@
                   <a href="javascript:;" class="bs-wizard-dot"><span class="glyphicon glyphicon-user"></span>
 </a>
                   <div class="bs-wizard-status process"><span class="glyphicon glyphicon-ok"></span></div>
-                  <div class="bs-wizard-info text-center">Save</div>
+                  <div class="bs-wizard-info">Save</div>
                 </div>
                 
                 <div class="col-xs-2 bs-wizard-step disabled"><!-- active -->
                   <div class="progress"><div class="progress-bar"></div></div>
                   <a href="javascript:;" class="bs-wizard-dot"><span class="glyphicon glyphicon-user"></span>
 </a>              <div class="bs-wizard-status process"><span class="glyphicon glyphicon-ok"></span></div>
-                  <div class="bs-wizard-info text-center">Share</div>
+                  <div class="bs-wizard-info">Share</div>
                 </div>
                 <div class="col-xs-2 bs-wizard-step disabled"><!-- active -->
                   <div class="progress"><div class="progress-bar"></div></div>
@@ -94,13 +94,13 @@
                   <div class="progress"><div class="progress-bar"></div></div>
                   <a href="javascript:;" class="bs-wizard-dot"><span class="glyphicon glyphicon-user"></span>
 </a>              <div class="bs-wizard-status process"><span class="glyphicon glyphicon-ok"></span></div>
-                  <div class="bs-wizard-info text-center">Share</div>
+                  <div class="bs-wizard-info">Share</div>
                 </div>
                 <div class="col-xs-2 bs-wizard-step disabled"><!-- active -->
                   <div class="progress"><div class="progress-bar"></div></div>
                   <a href="javascript:;" class="bs-wizard-dot"><span class="glyphicon glyphicon-user"></span>
 </a>              <div class="bs-wizard-status end"><span class="glyphicon glyphicon-ok"></span></div>
-                  <div class="bs-wizard-info text-center">审核流程完成</div>
+                  <div class="bs-wizard-info">审核流程完成</div>
                 </div>
             </div>
    </section>
