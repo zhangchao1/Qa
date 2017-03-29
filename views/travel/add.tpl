@@ -9,7 +9,7 @@
 .bs-wizard > .bs-wizard-step .bs-wizard-stepnum {color: #595959; font-size: 16px; margin-bottom: 5px;}
 .bs-wizard > .bs-wizard-step .bs-wizard-info {color: #999; font-size: 14px;}
 .bs-wizard > .bs-wizard-step > .bs-wizard-dot {position: absolute; width: 40px; height: 40px; display: block; background: #92cf5c; top: 45px; left: 50%; margin-top: -7px; margin-left: -8px; border-radius: 50%;}
-.bs-wizard > .bs-wizard-step > .bs-wizard-dot > .glyphicon {margin: 12px 12px; color: #0000}
+.bs-wizard > .bs-wizard-step > .bs-wizard-dot > .glyphicon {margin: 12px 12px; color: white}
 .bs-wizard > .bs-wizard-step > .progress {position: relative; border-radius: 0px; height: 8px; box-shadow: none; margin: 30px 0; background-color: #e5e5e5; overflow: hidden;}
 .bs-wizard > .bs-wizard-step > .progress > .progress-bar {width:0px; box-shadow: none; background: #92cf5c;}
 .bs-wizard > .bs-wizard-step.complete > .progress > .progress-bar {width:100%;}
