@@ -11,6 +11,7 @@
 .bs-wizard > .bs-wizard-step > .bs-wizard-status {position: absolute; width: 20px; height: 20px; display: block; background: #92cf5c; top: 40px; margin-top: 25px; left:18%;border-radius: 50%;}
 .bs-wizard > .bs-wizard-step .bs-wizard-info.start{
   top:-25px;
+  left:13px;
 }
 .bs-wizard > .bs-wizard-step .bs-wizard-info.process{
   top:-5px;
@@ -18,7 +19,7 @@
 }
 .bs-wizard > .bs-wizard-step .bs-wizard-info.end{
   top:-25px;
-  left:1px;
+  left:13px;
 }
 .bs-wizard > .bs-wizard-step > .bs-wizard-status.start{
   margin-left: 30px; 
