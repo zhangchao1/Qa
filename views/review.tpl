@@ -11,7 +11,6 @@
 .bs-wizard > .bs-wizard-step > .bs-wizard-status {position: absolute; width: 20px; height: 20px; display: block; background: #92cf5c; top: 40px; margin-top: 25px; left:18%;border-radius: 50%;}
 .bs-wizard > .bs-wizard-step .bs-wizard-info.start{
   top:-25px;
-  left:auto;
 }
 .bs-wizard > .bs-wizard-step .bs-wizard-info.process{
   top:-5px;
@@ -19,7 +18,7 @@
 }
 .bs-wizard > .bs-wizard-step .bs-wizard-info.end{
   top:-25px;
-  left:auto;
+  left:1px;
 }
 .bs-wizard > .bs-wizard-step > .bs-wizard-status.start{
   margin-left: 30px; 
@@ -54,7 +53,7 @@
       <div class="progress"><div class="progress-bar"></div></div>
       <a href="javascript:;" class="bs-wizard-dot"><span class="glyphicon glyphicon-lock"></span></a>
       <div class="bs-wizard-status start"><span class="glyphicon glyphicon-ok"></span></div>
-      <div class="bs-wizard-info start">提交申请单</div>
+      <div class="bs-wizard-info start">审核申请</div>
       <div class="bs-wizard-reviewName">
         <p>张超(zhangchao)</p>
         <p>2017/03/08 14:56:55</p>
@@ -97,6 +96,6 @@
       <div class="progress"><div class="progress-bar"></div></div>
       <a href="javascript:;" class="bs-wizard-dot"><span class="glyphicon glyphicon-user"></span>
 </a>              <div class="bs-wizard-status end"><span class="glyphicon glyphicon-ok"></span></div>
-      <div class="bs-wizard-info end">审核还未完成</div>
+      <div class="bs-wizard-info end">审核未完成</div>
     </div>
 </div>
