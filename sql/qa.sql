@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2017-03-15 09:54:53
+Date: 2017-03-30 19:40:29
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -70,11 +70,13 @@ CREATE TABLE `attendance` (
   `Updated` datetime NOT NULL,
   `Created` datetime NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of attendance
 -- ----------------------------
+INSERT INTO `attendance` VALUES ('1', '1', '1', '127.0.0.1', '2017-03-27 08:40:33', '2017-03-27 08:40:33');
+INSERT INTO `attendance` VALUES ('2', '1', '1', '127.0.0.1', '2017-03-27 08:40:46', '2017-03-27 08:40:46');
 
 -- ----------------------------
 -- Table structure for `colorlife`
@@ -95,11 +97,12 @@ CREATE TABLE `colorlife` (
   `Updated` datetime NOT NULL,
   `Created` datetime NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of colorlife
 -- ----------------------------
+INSERT INTO `colorlife` VALUES ('1', '1', 'asfas', 'asdas', 'asdasd', '[\"http://localhost:8087/static/img/colorlife/e1375384d236e57392142090acdf5609.jpg\",\"http://localhost:8087/static/img/colorlife/4530d2cdd30a6da0cd822b8e2bd02810.jpg\",\"http://localhost:8087/static/img/colorlife/368d3d41bd459394c714e83164c40e99.jpg\"]', '0', '0', '0', '1', '2', '2017-03-22 08:53:59', '2017-03-22 08:53:59');
 
 -- ----------------------------
 -- Table structure for `comment`
@@ -207,25 +210,6 @@ CREATE TABLE `goods` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `goodsapproval`
--- ----------------------------
-DROP TABLE IF EXISTS `goodsapproval`;
-CREATE TABLE `goodsapproval` (
-  `Id` int(14) unsigned NOT NULL AUTO_INCREMENT,
-  `Gid` int(14) unsigned NOT NULL,
-  `TargetUid` int(14) unsigned NOT NULL,
-  `Detail` varchar(100) NOT NULL,
-  `Status` tinyint(4) unsigned NOT NULL,
-  `Updated` datetime NOT NULL,
-  `Created` datetime NOT NULL,
-  PRIMARY KEY (`Id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of goodsapproval
--- ----------------------------
-
--- ----------------------------
 -- Table structure for `leave`
 -- ----------------------------
 DROP TABLE IF EXISTS `leave`;
@@ -258,25 +242,6 @@ CREATE TABLE `overtime` (
 
 -- ----------------------------
 -- Records of overtime
--- ----------------------------
-
--- ----------------------------
--- Table structure for `overtimeapproval`
--- ----------------------------
-DROP TABLE IF EXISTS `overtimeapproval`;
-CREATE TABLE `overtimeapproval` (
-  `Id` int(14) unsigned NOT NULL AUTO_INCREMENT,
-  `Oid` int(14) unsigned NOT NULL,
-  `TargetUid` int(14) unsigned NOT NULL,
-  `Detail` varchar(100) NOT NULL,
-  `Status` smallint(5) unsigned NOT NULL,
-  `Updated` datetime NOT NULL,
-  `Created` datetime NOT NULL,
-  PRIMARY KEY (`Id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of overtimeapproval
 -- ----------------------------
 
 -- ----------------------------
@@ -319,6 +284,63 @@ INSERT INTO `reviewconfig` VALUES ('15', '3', 'leave', '5', '2', '1', '13', '5',
 INSERT INTO `reviewconfig` VALUES ('16', '1', 'leave', '6', '2', '0', '13', '5', '0', '2017-03-15 09:49:02', '2017-03-15 09:49:05');
 INSERT INTO `reviewconfig` VALUES ('17', '2', 'leave', '6', '2', '0', '13', '5', '0', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 INSERT INTO `reviewconfig` VALUES ('18', '3', 'leave', '6', '2', '0', '13', '5', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+
+-- ----------------------------
+-- Table structure for `reviewnode`
+-- ----------------------------
+DROP TABLE IF EXISTS `reviewnode`;
+CREATE TABLE `reviewnode` (
+  `Id` int(14) unsigned NOT NULL AUTO_INCREMENT,
+  `ReviewStatusId` int(14) unsigned NOT NULL,
+  `OperateUid` int(14) unsigned NOT NULL,
+  `Level` smallint(4) unsigned NOT NULL,
+  `Status` tinyint(4) unsigned NOT NULL,
+  `EndorseUid` int(14) unsigned DEFAULT '0',
+  `Created` datetime NOT NULL,
+  `Updated` datetime NOT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of reviewnode
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `reviewperson`
+-- ----------------------------
+DROP TABLE IF EXISTS `reviewperson`;
+CREATE TABLE `reviewperson` (
+  `Id` int(14) unsigned NOT NULL AUTO_INCREMENT,
+  `ReviewStatusUid` int(14) unsigned NOT NULL,
+  `Auditor` int(14) unsigned NOT NULL,
+  `Status` tinyint(4) unsigned NOT NULL,
+  `Updated` datetime NOT NULL,
+  `Created` datetime NOT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of reviewperson
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `reviewstatus`
+-- ----------------------------
+DROP TABLE IF EXISTS `reviewstatus`;
+CREATE TABLE `reviewstatus` (
+  `Id` int(14) unsigned NOT NULL AUTO_INCREMENT,
+  `Type` varchar(50) NOT NULL,
+  `Uid` int(14) unsigned NOT NULL,
+  `Detail` varchar(100) NOT NULL,
+  `Status` tinyint(4) unsigned NOT NULL,
+  `Created` datetime NOT NULL,
+  `Updated` datetime NOT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of reviewstatus
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `user`
