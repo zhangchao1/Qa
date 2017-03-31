@@ -41,3 +41,24 @@
 | Created | 创建时间 | datetime |
 
 在审核过程中我们可以进行"改签"进行灵活的操作。
+
+1.审核正常流程进行的主要步骤
+1.1根据用户人的角色以及条件进行获取用户的操作人列表
+1.2将操作人按照操作顺序插入到reviewnode这张表中
+1.3将用户审核的状态表插入到reviewstatus表中
+1.4同时生成审核人的记录表reviewperson
+1.5每一次审核完成以后，自动把下一级审核人插入到reviewperson，同时更新reviewnode这张表的状态
+1.6直到审核流程完成，将reviewstatus的表的status置为通过。
+2.审核流程拒绝
+2.1流程被拒绝后，会将操作reviewnode对应的status置为拒绝
+2.2同时置为reviewstatus的表中的status的记录更新为拒绝
+2.3同时将reviewperson的status置为拒绝。
+2.4到此审核流程将不能继续。
+3.改签流程
+3.1当某一个流程被改签后，将会更新reviewnode的改签人uid更新
+3.2同时更新将原来reviewperson的uid改成改签人uid
+3.3同时当这个操作人的状态通过(拒绝)以后，同时更新reviewnode表的状态
+3.4如果改签人拒绝的话，同时更新reviewstatus表
+4.审核撤销
+4.1审核撤销以后删除reviewperson的数据,reviewnode的数据，同时将reviewstatus的状态置为撤销状态
+

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2017-03-30 19:40:29
+Date: 2017-03-31 10:24:16
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -311,8 +311,9 @@ CREATE TABLE `reviewnode` (
 DROP TABLE IF EXISTS `reviewperson`;
 CREATE TABLE `reviewperson` (
   `Id` int(14) unsigned NOT NULL AUTO_INCREMENT,
-  `ReviewStatusUid` int(14) unsigned NOT NULL,
+  `ReviewStatusId` int(14) unsigned NOT NULL,
   `Auditor` int(14) unsigned NOT NULL,
+  `Detail` varchar(100) DEFAULT 'null',
   `Status` tinyint(4) unsigned NOT NULL,
   `Updated` datetime NOT NULL,
   `Created` datetime NOT NULL,
