@@ -96,6 +96,12 @@
     <div class="col-xs-2 bs-wizard-step disabled"><!-- active -->
       <div class="progress"><div class="progress-bar"></div></div>
       <a href="javascript:;" class="bs-wizard-dot"><span class="glyphicon glyphicon-user"></span>
+</a>              <div class="bs-wizard-status process"><span class="glyphicon glyphicon-ok"></span></div>
+      <div class="bs-wizard-info process">未审批</div>
+    </div>
+    <div class="col-xs-2 bs-wizard-step disabled"><!-- active -->
+      <div class="progress"><div class="progress-bar"></div></div>
+      <a href="javascript:;" class="bs-wizard-dot"><span class="glyphicon glyphicon-user"></span>
 </a>              <div class="bs-wizard-status end"><span class="glyphicon glyphicon-ok"></span></div>
       <div class="bs-wizard-info end">审核未完成</div>
     </div>
