@@ -28,7 +28,7 @@ func init() {
 	orm.RegisterModel(new(ReviewPerson))
 }
 
-func (this *ReviewPerson) AddReviewPerson(addItem ReviewPerson) (int64, error) {
+func (this *ReviewPerson) Add(addItem ReviewPerson) (int64, error) {
 	o := orm.NewOrm()
 	o.Using("Qa")
 	reviewperson := new(ReviewPerson)
@@ -41,7 +41,7 @@ func (this *ReviewPerson) AddReviewPerson(addItem ReviewPerson) (int64, error) {
 	return id, err
 }
 
-func (this *ReviewPerson) DeleteReviewPersonByReviewStatusId(reviewStatusId int64) error {
+func (this *ReviewPerson) DeleteByReviewStatusId(reviewStatusId int64) error {
 	o := orm.NewOrm()
 	o.Using("Qa")
 	reviewperson := ReviewPerson{ReviewStatusId: reviewStatusId}
@@ -52,13 +52,13 @@ func (this *ReviewPerson) DeleteReviewPersonByReviewStatusId(reviewStatusId int6
 	}
 	return err
 }
-func (this *ReviewPerson) ChangeAuditor(auditor int64, tagetAuditor int64, reviewStatusId int64) error {
+func (this *ReviewPerson) ChangeStatus(id int64, status int) error {
 	o := orm.NewOrm()
 	o.Using("Qa")
-	reviewperson := ReviewPerson{ReviewStatusId: reviewStatusId, Auditor: auditor}
-	err := o.Read(&reviewperson, "ReviewStatusId", "Auditor")
+	reviewperson := ReviewPerson{Id: id}
+	err := o.Read(&reviewperson, "Id")
 	if err == nil {
-		reviewperson.Auditor = auditor
+		reviewperson.Status = status
 		reviewperson.Updated = time.Now().Format("2006-01-02 15:04:05")
 		_, err := o.Update(&reviewperson, "Updated", "Auditor")
 		return err

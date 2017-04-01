@@ -27,7 +27,7 @@ func init() {
 	orm.RegisterModel(new(ReviewStatus))
 }
 
-func (this *ReviewStatus) AddReviewStatus(addItem ReviewStatus) (int64, error) {
+func (this *ReviewStatus) Add(addItem ReviewStatus) (int64, error) {
 	o := orm.NewOrm()
 	o.Using("Qa")
 	reviewstatus := new(ReviewStatus)
@@ -54,7 +54,7 @@ func (this *ReviewStatus) ChangeStatus(sid int64, status int) error {
 	}
 }
 
-func (this *ReviewStatus) GetReviewListByStatus(Uid int64, Type string, status int, start int64, max int64,
+func (this *ReviewStatus) GetByStatus(Uid int64, Type string, status int, start int64, max int64,
 	orderBy string) Items {
 	o := orm.NewOrm()
 	o.Using("Qa")
