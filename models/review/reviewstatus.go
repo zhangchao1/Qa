@@ -2,6 +2,7 @@ package review
 
 import (
 	"github.com/astaxie/beego/orm"
+	"math"
 	"time"
 )
 
@@ -13,10 +14,6 @@ type ReviewStatus struct {
 	Status  int    `orm:"column(Status);"`
 	Created string `orm:"column(Created);"`
 	Updated string `orm:"column(Updated);"`
-}
-type Items struct {
-	Datas []orm.Params
-	Total int64
 }
 
 func (this *ReviewStatus) TableName() string {
@@ -52,6 +49,7 @@ func (this *ReviewStatus) ChangeStatus(sid int64, status int) error {
 		_, err := o.Update(&reviewstatus, "Status", "Updated")
 		return err
 	}
+	return err
 }
 
 func (this *ReviewStatus) GetByStatus(Uid int64, Type string, status int, start int64, max int64,

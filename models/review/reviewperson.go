@@ -32,9 +32,9 @@ func (this *ReviewPerson) Add(addItem ReviewPerson) (int64, error) {
 	o := orm.NewOrm()
 	o.Using("Qa")
 	reviewperson := new(ReviewPerson)
-	reviewstatus.ReviewStatusId = addItem.ReviewStatusId
-	reviewstatus.Auditor = addItem.Auditor
-	reviewstatus.Status = addItem.Status
+	reviewperson.ReviewStatusId = addItem.ReviewStatusId
+	reviewperson.Auditor = addItem.Auditor
+	reviewperson.Status = addItem.Status
 	reviewperson.Updated = time.Now().Format("2006-01-02 15:04:05")
 	reviewperson.Created = time.Now().Format("2006-01-02 15:04:05")
 	id, err := o.Insert(reviewperson)

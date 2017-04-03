@@ -53,7 +53,7 @@ func (this *ReviewNode) Delete(reviewStatusId int64) error {
 func (this *ReviewNode) ChangeStatus(id int64, status int) error {
 	o := orm.NewOrm()
 	o.Using("Qa")
-	reviewnode := ReviewNode{Id: reviewStatusId}
+	reviewnode := ReviewNode{Id: id}
 	err := o.Read(&reviewnode, "Id")
 	if err == nil {
 		reviewnode.Status = status
@@ -67,7 +67,7 @@ func (this *ReviewNode) ChangeStatus(id int64, status int) error {
 func (this *ReviewNode) addEndorseUid(id int64, endorseUid int64) error {
 	o := orm.NewOrm()
 	o.Using("Qa")
-	reviewnode := ReviewNode{Id: reviewStatusId}
+	reviewnode := ReviewNode{Id: id}
 	err := o.Read(&reviewnode, "Id")
 	if err == nil {
 		reviewnode.EndorseUid = endorseUid
