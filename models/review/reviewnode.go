@@ -31,7 +31,7 @@ func (this *ReviewNode) Add(addItem ReviewNode) (int64, error) {
 	reviewnode.ReviewStatusId = addItem.ReviewStatusId
 	reviewnode.OperateUid = addItem.OperateUid
 	reviewnode.Level = addItem.Level
-	reviewnode.Status = addItem.Status
+	reviewnode.Status = APPROVAL_INIT
 	reviewnode.Updated = time.Now().Format("2006-01-02 15:04:05")
 	reviewnode.Created = time.Now().Format("2006-01-02 15:04:05")
 	id, err := o.Insert(reviewnode)
@@ -50,11 +50,11 @@ func (this *ReviewNode) Delete(reviewStatusId int64) error {
 	return err
 }
 
-func (this *ReviewNode) ChangeStatus(id int64, status int) error {
+func (this *ReviewNode) ChangeStatusByLevel(reviewStatusId int64, level int, status int) error {
 	o := orm.NewOrm()
 	o.Using("Qa")
-	reviewnode := ReviewNode{Id: id}
-	err := o.Read(&reviewnode, "Id")
+	reviewnode := ReviewNode{ReviewStatusId: reviewStatusId, Level: level}
+	err := o.Read(&reviewnode, "ReviewStatusId", "Level")
 	if err == nil {
 		reviewnode.Status = status
 		reviewnode.Updated = time.Now().Format("2006-01-02 15:04:05")
@@ -64,7 +64,7 @@ func (this *ReviewNode) ChangeStatus(id int64, status int) error {
 	return err
 }
 
-func (this *ReviewNode) addEndorseUid(id int64, endorseUid int64) error {
+func (this *ReviewNode) AddEndorseUid(id int64, endorseUid int64) error {
 	o := orm.NewOrm()
 	o.Using("Qa")
 	reviewnode := ReviewNode{Id: id}
@@ -76,4 +76,12 @@ func (this *ReviewNode) addEndorseUid(id int64, endorseUid int64) error {
 		return err
 	}
 	return err
+}
+
+func (this *ReviewNode) GetReviewNodeByLevel(reviewStatusId int64, level int) (ReviewNode, error) {
+	o := orm.NewOrm()
+	o.Using("Qa")
+	reviewnode := ReviewNode{ReviewStatusId: reviewStatusId, Level: level}
+	err := o.Read(&reviewnode, "ReviewStatusId", "Level")
+	return reviewnode, err
 }

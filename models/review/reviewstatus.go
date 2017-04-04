@@ -3,8 +3,14 @@ package review
 import (
 	"github.com/astaxie/beego/orm"
 	"math"
+	"reflect"
 	"time"
 )
+
+const APPROVAL_INIT = 1
+const APPROVAL_PASS = 2
+const APPROVAL_REFUSE = 3
+const APPROVAL_CANCEL = 4
 
 type ReviewStatus struct {
 	Id      int64  `orm:"column(Id);"`
@@ -30,8 +36,12 @@ func (this *ReviewStatus) Add(addItem ReviewStatus) (int64, error) {
 	reviewstatus := new(ReviewStatus)
 	reviewstatus.Type = addItem.Type
 	reviewstatus.Uid = addItem.Uid
-	reviewstatus.Detail = addItem.Detail
-	reviewstatus.Status = addItem.Status
+	re := reflect.ValueOf(addItem)
+	detail := re.FieldByName("Detail").String()
+	if detail != "" {
+		reviewstatus.Detail = detail
+	}
+	reviewstatus.Status = APPROVAL_INIT
 	reviewstatus.Updated = time.Now().Format("2006-01-02 15:04:05")
 	reviewstatus.Created = time.Now().Format("2006-01-02 15:04:05")
 	id, err := o.Insert(reviewstatus)
