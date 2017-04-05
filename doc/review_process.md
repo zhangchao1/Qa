@@ -60,5 +60,5 @@
 3.3同时当这个操作人的状态通过(拒绝)以后，同时更新reviewnode表的状态
 3.4如果改签人拒绝的话，同时更新reviewstatus表
 4.审核撤销
-4.1审核撤销以后删除reviewperson的数据,reviewnode的数据，同时将reviewstatus的状态置为撤销状态
+4.1审核撤销以后删除reviewperson的数据,reviewnode的数据，同时将reviewstatus的状态置为撤销状态，同时一级审核通过以后，不可以撤销
 

@@ -37,7 +37,7 @@ func GetHead(uid int64) {
 	}
 }
 
-func (this *ReviewService) Add(uid int64, role int64, eid int64, types int, scene string, detail string) error {
+func (this *ReviewService) Add(reviewId int64, uid int64, role int64, eid int64, types int, scene string, detail string) error {
 	reviewConfigInfo, _ := reviewcofig.GetReviewProcess(role, types, scene, eid)
 	var firstApprovalPerson []int64
 	var endApprovalPerson []int64
@@ -52,7 +52,7 @@ func (this *ReviewService) Add(uid int64, role int64, eid int64, types int, scen
 	for i := 0; i < len(endApprovalPerson); i++ {
 		firstApprovalPerson = append(firstApprovalPerson, endApprovalPerson[i])
 	}
-	reviestatusId, _ := addReviewStatus(uid, scene, detail)
+	reviestatusId, _ := addReviewStatus(uid, scene, detail, reviewId)
 	errSaveReviewPerson := addReviewPerson(reviestatusId, firstApprovalPerson[0], scene, 1, "")
 	if errSaveReviewPerson == nil {
 		var errSaveReviewNode error
@@ -72,11 +72,12 @@ func (this *ReviewService) Add(uid int64, role int64, eid int64, types int, scen
 	}
 }
 
-func addReviewStatus(uid int64, types string, detail string) (int64, error) {
+func addReviewStatus(uid int64, types string, detail string, reviewId int64) (int64, error) {
 	var additem review.ReviewStatus
 	additem.Type = types
 	additem.Uid = uid
 	additem.Detail = detail
+	additem.ReviewId = reviewId
 	id, err := reviewstatus.Add(additem)
 	return id, err
 }
