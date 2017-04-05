@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost
+Source Server         : localhost_3306
 Source Server Version : 50553
 Source Host           : localhost:3306
 Source Database       : qa
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2017-04-04 21:02:27
+Date: 2017-04-05 09:58:30
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -193,14 +193,34 @@ INSERT INTO `employee` VALUES ('10', '10', '2', '技术部CEO', '3', '6', '1', '
 INSERT INTO `employee` VALUES ('11', '11', '1', 'Qa公司CEO', '5', '7', '1', '2017-04-03 14:50:40', '2017-04-03 14:50:40');
 
 -- ----------------------------
+-- Table structure for `expense`
+-- ----------------------------
+DROP TABLE IF EXISTS `expense`;
+CREATE TABLE `expense` (
+  `Id` int(14) unsigned NOT NULL AUTO_INCREMENT,
+  `Type` smallint(6) unsigned NOT NULL,
+  `TotalAmounts` decimal(10,0) NOT NULL,
+  `Detail` varchar(50) NOT NULL,
+  `AttachMent` varchar(500) NOT NULL,
+  `Updated` datetime NOT NULL,
+  `Created` datetime NOT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of expense
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for `goods`
 -- ----------------------------
 DROP TABLE IF EXISTS `goods`;
 CREATE TABLE `goods` (
   `Id` int(14) unsigned NOT NULL AUTO_INCREMENT,
+  `Type` smallint(6) unsigned NOT NULL,
   `Uid` int(14) unsigned NOT NULL,
   `Name` varchar(50) NOT NULL,
-  `Application` varchar(50) DEFAULT NULL,
+  `Application` varchar(50) NOT NULL,
   `TotalCount` int(14) unsigned NOT NULL,
   `Updated` datetime NOT NULL,
   `Created` datetime NOT NULL,
@@ -217,6 +237,15 @@ CREATE TABLE `goods` (
 DROP TABLE IF EXISTS `leave`;
 CREATE TABLE `leave` (
   `Id` int(14) unsigned NOT NULL AUTO_INCREMENT,
+  `Uid` int(14) unsigned NOT NULL,
+  `Type` smallint(6) unsigned NOT NULL,
+  `StartTime` datetime NOT NULL,
+  `EndTime` datetime NOT NULL,
+  `Reason` varchar(100) NOT NULL,
+  `AttachMent` varchar(500) DEFAULT NULL,
+  `LongTime` varchar(50) NOT NULL,
+  `Updated` datetime NOT NULL,
+  `Created` datetime NOT NULL,
   PRIMARY KEY (`Id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -235,7 +264,6 @@ CREATE TABLE `overtime` (
   `StartTime` datetime NOT NULL,
   `EndTime` datetime NOT NULL,
   `LongTime` int(10) unsigned NOT NULL,
-  `Status` tinyint(5) unsigned NOT NULL,
   `Reason` varchar(255) NOT NULL,
   `Updated` datetime NOT NULL,
   `Created` datetime NOT NULL,
@@ -342,6 +370,7 @@ INSERT INTO `reviewperson` VALUES ('4', '1', '5', '审核通过！', '2', '2017-
 DROP TABLE IF EXISTS `reviewstatus`;
 CREATE TABLE `reviewstatus` (
   `Id` int(14) unsigned NOT NULL AUTO_INCREMENT,
+  `ReviewId` int(14) unsigned NOT NULL,
   `Type` varchar(50) NOT NULL,
   `Uid` int(14) unsigned NOT NULL,
   `Detail` varchar(100) DEFAULT NULL,
@@ -354,7 +383,28 @@ CREATE TABLE `reviewstatus` (
 -- ----------------------------
 -- Records of reviewstatus
 -- ----------------------------
-INSERT INTO `reviewstatus` VALUES ('1', 'leave', '7', '', '2', '2017-04-04 19:56:35', '2017-04-04 20:01:21');
+INSERT INTO `reviewstatus` VALUES ('1', '0', 'leave', '7', '', '2', '2017-04-04 19:56:35', '2017-04-04 20:01:21');
+
+-- ----------------------------
+-- Table structure for `travel`
+-- ----------------------------
+DROP TABLE IF EXISTS `travel`;
+CREATE TABLE `travel` (
+  `Id` int(14) unsigned NOT NULL AUTO_INCREMENT,
+  `Type` smallint(6) unsigned NOT NULL,
+  `StartTime` datetime NOT NULL,
+  `EndTime` datetime NOT NULL,
+  `LongTime` varchar(50) NOT NULL,
+  `Reason` varchar(100) NOT NULL,
+  `Destination` varchar(30) NOT NULL,
+  `Updated` datetime NOT NULL,
+  `Created` datetime NOT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of travel
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `user`
