@@ -49,33 +49,34 @@
                                 </p>
                             </div>
                     </div>
+                    <validator name="validation1">
 	            	<form class="form-horizontal">
                         <div class="form-group">
                             <label for="inputEmail3" class="col-md-1 control-label">开始日期</label>
                             <div class="col-md-2">
-                                <input type="text" class="form-control" id="startime" placeholder="输入开始时间">
+                                <input type="text" class="form-control" id="startime" placeholder="输入开始时间" v-model="StartTimeDay" v-validate:StartTimeDay="['required']">
                             </div>
                             <div class="col-md-3">
                                 <div class="btn-group" data-toggle="buttons">
-                                    <label class="btn btn-primary active">
-                                        <input type="radio" name="options" id="startAm">上午
+                                    <label class="btn btn-primary active" id="startAm">
+                                        <input type="radio" name="options">上午
                                     </label>
-                                    <label class="btn btn-primary">
-                                        <input type="radio" name="options" id="startPm">下午
+                                    <label class="btn btn-primary" id="startPm">
+                                        <input type="radio" name="options">下午
                                     </label>
                                 </div>
                             </div>
                             <label for="inputEmail3" class="col-md-1 control-label">结束日期</label>
                             <div class="col-md-2">
-                                <input type="text" class="form-control" id="endtime" placeholder="输入结束日期">
+                                <input type="text" class="form-control" id="endtime" placeholder="输入结束日期" v-model="EndTimeDay" v-validate:EndTimeDay="['required']">
                             </div>
                             <div class="col-md-3">
                                 <div class="btn-group" data-toggle="buttons">
-                                    <label class="btn btn-primary">
-                                        <input type="radio" name="options" id="EndAm">上午
+                                    <label class="btn btn-primary" id="EndAm">
+                                        <input type="radio" name="options" >上午
                                     </label>
-                                    <label class="btn btn-primary active">
-                                        <input type="radio" name="options" id="EndPm">下午
+                                    <label class="btn btn-primary active" id="EndPm">
+                                        <input type="radio" name="options">下午
                                     </label>
                                 </div>
                             </div>
@@ -83,23 +84,23 @@
                         <div class="form-group">
                             <label for="inputEmail3" class="col-md-1 control-label">请假类型</label>
                             <div class="col-md-9">
-                                <select class="form-control select2">
-                                  <option selected="selected" value="1">调休</option>
-                                  <option value="2">事假</option>
-                                  <option value="3">年假</option>
-                                  <option value="4">病假</option>
-                                  <option value="5">婚假</option>
-                                  <option value="6">丧假</option>
-                                  <option value="7">产假</option>
-                                  <option value="8">产检假</option>
-                                  <option value="9">陪产假</option>
+                                <select class="form-control select2" v-model="Type" v-validate:Type="['required']">
+                                  <option selected="selected" value="调休">调休</option>
+                                  <option value="事假">事假</option>
+                                  <option value="年假">年假</option>
+                                  <option value="病假">病假</option>
+                                  <option value="婚假">婚假</option>
+                                  <option value="丧假">丧假</option>
+                                  <option value="产假">产假</option>
+                                  <option value="产检假">产检假</option>
+                                  <option value="陪产假">陪产假</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="inputEmail3" class="col-md-1 control-label">请假原因</label>
                             <div class="col-md-9">
-                            <textarea class="form-control" rows="5" placeholder="原因描述不超过100字"></textarea>
+                            <textarea class="form-control" rows="5" placeholder="原因描述不超过100字" v-model="Reason" v-validate:Reason="['required']"></textarea>
                             </div>
                         </div>
                         <div class="form-group">
@@ -110,9 +111,10 @@
                             </div>
                         </div>
                     </form>
+                    </validator>
 	            </div>
 	            <div class="box-footer">
-                  <button type="submit" class="btn btn-info">保存</button>
+                  <button type="submit" class="btn btn-info":disabled="!$validation1.valid">保存</button>
               </div>
     		</div>
     	</div>
@@ -127,11 +129,22 @@
 	var vue = new Vue({
         el: '#leave_add',
         data: {
-        	
+        	StartTime:"",
+            EndTime:"",
+            StartTimeDay:"",
+            StartTimeHour:"",
+            EndTimeDay:"",
+            EndTimeHour:"",
+            Longtime:"",
+            AttachMent:"",
+            Reason:"",
+            Type:""
         },
         delimiters: ['{[', ']}'],
         methods:{
-        	
+        	save:function(){
+                
+            }
         },
         ready:function(){
         	$('#startime').datepicker({
