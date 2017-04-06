@@ -191,6 +191,7 @@ func saveUserInfo(additem CreatUser, uid int64) error {
 	userinfo.Job = additem.Job
 	userinfo.Level = additem.Level
 	userinfo.Role = additem.Role
+	userinfo.Did = additem.Did
 	err := userRedis.SetUserInfo(uid, userinfo)
 	return err
 }
@@ -297,6 +298,7 @@ func saveEditUserInfo(edititem EditUser) error {
 	UserInfo.Job = edititem.Job
 	UserInfo.Level = edititem.Level
 	UserInfo.Role = edititem.Role
+	UserInfo.Did = edititem.Did
 	err := userRedis.SetUserInfo(edititem.Uid, UserInfo)
 	return err
 }

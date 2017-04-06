@@ -26,6 +26,7 @@ type UserInfo struct {
 	Level    int
 	Role     int64
 	Head     int64
+	Did      int64
 }
 
 const USER_INOF_KEY = "qa:user:info"
