@@ -112,7 +112,7 @@
                     </form>
 	            </div>
 	            <div class="box-footer">
-	               
+                  <button type="submit" class="btn btn-info">保存</button>
               </div>
     		</div>
     	</div>
@@ -148,8 +148,8 @@
               allowedFileExtensions : ['jpg'],
               overwriteInitial : false,
               maxFileSize : 4098,//上传文件最大的尺寸
-              maxFilesNum : 2,//上传最大的文件数量
-              initialCaption: "请上传请假相关证明",//文本框初始话value
+              maxFilesNum : 8,//上传最大的文件数量
+              initialCaption: "请上传请假相关证明(请假证明图片数为8张)",//文本框初始话value
               slugCallback : function(filename) {
           return filename.replace('(', '_').replace(']', '_');
         }
