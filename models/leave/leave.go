@@ -28,6 +28,10 @@ func (this *Leave) TableName() string {
 	return "leave"
 }
 
+func init() {
+	orm.RegisterModel(new(Leave))
+}
+
 type Items struct {
 	Datas []orm.Params
 	Total int64

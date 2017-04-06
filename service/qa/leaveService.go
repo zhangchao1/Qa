@@ -6,10 +6,15 @@ import (
 	"Qa/validator"
 	"fmt"
 	"github.com/astaxie/beego/validation"
+	"strconv"
 )
 
 type LeaveService struct {
 }
+
+const TWO_DAY_LEAVE = 2.0
+const FOUR_DAY_LEAVE = 4.0
+const SEVEN_DAY_LEAVE = 7.0
 
 func (this *LeaveService) Add(addLeave leave.Leave) SaveResult {
 	var result SaveResult
@@ -41,7 +46,16 @@ func (this *LeaveService) Add(addLeave leave.Leave) SaveResult {
 		} else {
 			userInfo := userRedis.GetUserInfo(addLeave.Uid)
 			var reviewService ReviewService
-			errSaveReview := reviewService.Add(leaveId, addLeave.Uid, userInfo.Role, userInfo.Did, 1, "leave", addLeave.Reason)
+			var leaveReviewType int
+			longtime, _ := strconv.ParseFloat(addLeave.LongTime, 64)
+			if longtime <= TWO_DAY_LEAVE {
+				leaveReviewType = 1
+			} else if longtime > TWO_DAY_LEAVE && longtime <= FOUR_DAY_LEAVE {
+				leaveReviewType = 2
+			} else {
+				leaveReviewType = 3
+			}
+			errSaveReview := reviewService.Add(leaveId, addLeave.Uid, userInfo.Role, userInfo.Did, leaveReviewType, "leave", addLeave.Reason)
 			if errSaveReview != nil {
 				result.ErrMsg = "系统错误"
 				result.IsSuccess = false

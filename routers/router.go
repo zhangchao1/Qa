@@ -66,6 +66,11 @@ func init() {
 				&api.Goods{},
 			),
 		),
+		beego.NSNamespace("/leave",
+			beego.NSInclude(
+				&api.Leave{},
+			),
+		),
 	)
 	beego.AddNamespace(ns)
 }

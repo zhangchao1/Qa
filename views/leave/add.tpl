@@ -114,7 +114,7 @@
                     </validator>
 	            </div>
 	            <div class="box-footer">
-                  <button type="submit" class="btn btn-info":disabled="!$validation1.valid">保存</button>
+                  <button type="submit" class="btn btn-info":disabled="!$validation1.valid" v-on:click="save">保存</button>
               </div>
     		</div>
     	</div>
@@ -122,6 +122,7 @@
 </div>
 <link href="/static/css/bootstrap-datepicker.min.css" rel="stylesheet">
 <script src="/static/js/bootstrap-datepicker.min.js"></script>
+<script src="/static/js/moment.min.js"></script>
 <link href="/static/bootstrap-fileinput/css/fileinput.min.css" rel="stylesheet">
 <script src="/static/bootstrap-fileinput/js/fileinput.min.js"></script>
 <script src="/static/bootstrap-fileinput/js/locales/zh.js"></script>
@@ -138,13 +139,62 @@
             Longtime:"",
             AttachMent:"",
             Reason:"",
-            Type:""
+            Type:"",
+            Images:[]
         },
         delimiters: ['{[', ']}'],
         methods:{
         	save:function(){
-                
-            }
+                if($("#startAm").prop("className") == "btn btn-primary active"){
+                    this.StartTimeHour = "00:00"
+                }else{
+                    this.StartTimeHour = "12:00"
+                }
+                if($("#EndPm").prop("className") == "btn btn-primary active"){
+                    this.EndTimeHour = "24:00"
+                }else{
+                    this.EndTimeHour = "12:00"
+                }
+                this.StartTime = this.StartTimeDay + " " + this.StartTimeHour;
+                this.EndTime = this.EndTimeDay + " " + this.EndTimeHour
+                console.log(this.StartTime,this.EndTime)
+                if(moment(this.StartTime,"YYYY-MM-DD HH:mm").format('X') > moment(this.EndTime,"YYYY-MM-DD HH:mm").format('X')){
+                    alert("开始时间不能大于结束时间！")
+                    return
+                }else{
+                    var durationTime 
+                    durationTime = moment(this.EndTime,"YYYY-MM-DD HH:mm").format('X') - moment(this.StartTime,"YYYY-MM-DD HH:mm").format('X')
+                     var days = durationTime/86400;
+                     this.Longtime = days.toString()
+                }
+                if(this.Type != "调休" && this.Type != "年假"){
+                   if(this.Images.length == 0) {
+                        alert("请上传相关证明！")
+                        return
+                   }
+                }
+                if(this.Images.length > 0){
+                    this.AttachMent = JSON.stringify(this.Images.length)
+                }
+                var params = {
+                  StartTime: this.StartTime,
+                  EndTime: this.EndTime,
+                  Longtime : this.Longtime,
+                  Reason: this.Reason,
+                  Type:this.Type,
+                  AttachMent:this.AttachMent
+                }
+                 this.$http.post('/api/leave/add', params, []).then(function(response){
+                console.log(response)
+                if(response.data.IsSuccess == true){
+                    alert("保存成功")
+                }else{
+                    alert(response.data.ErrMsg);
+                }
+              }, function(response){
+                alert('提交失败')
+              });
+            }       
         },
         ready:function(){
         	$('#startime').datepicker({
@@ -157,12 +207,12 @@
           });
         var vthis = this;
         $("#upload").fileinput({
-              uploadUrl : "/api/colorlife/upload",//上传图片的url
+              uploadUrl : "/api/leave/upload",//上传图片的url
               allowedFileExtensions : ['jpg'],
               overwriteInitial : false,
               maxFileSize : 4098,//上传文件最大的尺寸
               maxFilesNum : 8,//上传最大的文件数量
-              initialCaption: "请上传请假相关证明(请假证明图片数为8张)",//文本框初始话value
+              initialCaption: "请上传相关证明(图片数为8张)",//文本框初始话value
               slugCallback : function(filename) {
           return filename.replace('(', '_').replace(']', '_');
         }
@@ -173,7 +223,7 @@
         $('#upload').on('fileuploaded', function(event, data, previewId, index) {
         var form = data.form, files = data.files, extra = data.extra,
         response = data.response, reader = data.reader;
-        vthis.ablums.push(response.Data)
+        vthis.Images.push(response.Data)
         })
         }
     });
