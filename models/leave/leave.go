@@ -4,6 +4,7 @@ import (
 	"github.com/astaxie/beego/orm"
 	"math"
 	"reflect"
+	"strconv"
 	"time"
 )
 
@@ -22,7 +23,7 @@ type Leave struct {
 
 const QUERY_LEAVE_DETAIL = "select le.*, res.* from `leave` as le left join reviewstatus as res on res.ReviewId = le.Id where le.Id = ? AND res.Type = 'leave'"
 const QUERY_LEAVE_STATUS_COUNT = "select count(*) as cnt from `leave` as le left join reviewstatus as res on res.ReviewId = le.Id where res.Status = ? AND res.Type = 'leave'"
-const QUERY_LEAVE_STATUS = "select le.*, res.* from `leave` as le left join reviewstatus as res on res.ReviewId = le.Id where res.Status = ? AND res.Type = 'leave' ORDER BY res.Updated desc Limit ?,?"
+const QUERY_LEAVE_STATUS = "select * from `leave` as le left join reviewstatus as res on res.ReviewId = le.Id where res.Status = ? AND res.Type = 'leave' ORDER BY res.Updated desc Limit ?,?"
 
 func (this *Leave) TableName() string {
 	return "leave"
@@ -73,8 +74,9 @@ func (this *Leave) GetLeaveByStatus(start int64, max int64, status int) Items {
 	var totalPage int64
 	var maps []orm.Params
 	o.Raw(QUERY_LEAVE_STATUS_COUNT, status).Values(&maps)
-	cnt, _ := maps[0]["cnt"].(int)
-	count := float64(cnt)
+	cnt, _ := maps[0]["cnt"].(string)
+	totals, _ := strconv.ParseInt(cnt, 10, 64)
+	count := float64(totals)
 	maxCount := float64(max)
 	pages := float64(count / maxCount)
 	totalPage = int64(math.Ceil(pages))

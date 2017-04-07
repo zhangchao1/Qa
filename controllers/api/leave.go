@@ -59,3 +59,19 @@ func (this *Leave) Add() {
 	this.Data["json"] = result
 	this.ServeJSON()
 }
+
+// @router /leaveList [get]
+func (this *Leave) LeaveList() {
+	var leave leave.Leave
+	startIndex, _ := this.GetInt64("start")
+	maxCounts, _ := this.GetInt64("max")
+	status, _ := this.GetInt("status")
+	if startIndex == 0 || maxCounts == 0 || status == 0 {
+		this.Data["json"] = map[string]interface{}{"IsSuccess": false, "ErrMsg": "请传递正确的参数"}
+		this.ServeJSON()
+	} else {
+		result := leave.GetLeaveByStatus(startIndex, maxCounts, status)
+		this.Data["json"] = map[string]interface{}{"IsSuccess": true, "ErrMsg": "", "data": result}
+		this.ServeJSON()
+	}
+}

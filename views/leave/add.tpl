@@ -191,6 +191,7 @@
                  this.$http.post('/api/leave/add', params, []).then(function(response){
                 if(response.data.IsSuccess == true){
                     alert("保存成功")
+                    window.location.href="/leave/my"
                 }else{
                     alert(response.data.ErrMsg);
                 }
