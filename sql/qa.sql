@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2017-04-06 13:18:25
+Date: 2017-04-07 09:18:59
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -184,12 +184,12 @@ INSERT INTO `employee` VALUES ('1', '1', '9', '运维工程师', '1', '1', '2', 
 INSERT INTO `employee` VALUES ('2', '2', '16', '物品申请管理', '2', '1', '1', '2017-02-27 08:38:16', '2017-04-06 09:47:41');
 INSERT INTO `employee` VALUES ('3', '3', '16', '物品申请管理', '2', '1', '1', '2017-02-27 08:39:21', '2017-04-06 09:47:46');
 INSERT INTO `employee` VALUES ('4', '4', '16', '后勤组管理员', '2', '2', '1', '2017-02-27 08:41:59', '2017-04-06 09:49:59');
-INSERT INTO `employee` VALUES ('5', '5', '16', '考勤管理专员', '2', '1', '1', '2017-03-15 09:03:49', '2017-04-06 09:47:32');
+INSERT INTO `employee` VALUES ('5', '5', '16', '考勤管理专员', '2', '1', '1', '2017-03-15 09:03:49', '2017-04-07 09:12:25');
 INSERT INTO `employee` VALUES ('6', '6', '14', '人事总监', '3', '6', '1', '2017-03-15 09:05:24', '2017-04-06 09:47:37');
-INSERT INTO `employee` VALUES ('7', '7', '4', 'PHP工程师', '2', '1', '1', '2017-04-03 14:39:43', '2017-04-06 09:53:14');
-INSERT INTO `employee` VALUES ('8', '8', '4', 'PHP高级工程师', '3', '2', '1', '2017-04-03 14:42:05', '2017-04-06 09:53:18');
-INSERT INTO `employee` VALUES ('9', '9', '3', '后端架构工程师', '4', '4', '1', '2017-04-03 14:43:40', '2017-04-06 09:53:02');
-INSERT INTO `employee` VALUES ('10', '10', '2', '技术部CEO', '3', '6', '1', '2017-04-03 14:45:53', '2017-04-06 09:52:51');
+INSERT INTO `employee` VALUES ('7', '7', '4', 'PHP工程师', '2', '1', '1', '2017-04-03 14:39:43', '2017-04-07 09:01:07');
+INSERT INTO `employee` VALUES ('8', '8', '4', 'PHP高级工程师', '3', '2', '1', '2017-04-03 14:42:05', '2017-04-07 09:00:39');
+INSERT INTO `employee` VALUES ('9', '9', '3', '后端架构工程师', '4', '4', '1', '2017-04-03 14:43:40', '2017-04-07 09:00:07');
+INSERT INTO `employee` VALUES ('10', '10', '2', '技术部CEO', '3', '6', '1', '2017-04-03 14:45:53', '2017-04-07 09:07:28');
 INSERT INTO `employee` VALUES ('11', '11', '1', 'Qa公司CEO', '5', '7', '1', '2017-04-03 14:50:40', '2017-04-06 09:52:56');
 
 -- ----------------------------
@@ -247,11 +247,7 @@ CREATE TABLE `leave` (
   `Updated` datetime NOT NULL,
   `Created` datetime NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of leave
--- ----------------------------
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for `overtime`
@@ -416,12 +412,12 @@ INSERT INTO `user` VALUES ('1', '管理员', 'admin', 'admin@qa.cn', 'Tf6517', '
 INSERT INTO `user` VALUES ('2', '李鑫', 'lixin', 'lixin@qa.cn', 'm1l43K', 'dff04244e0ede12dbdd5a35ec4364573901c687724b113aefc82d3d70d5ac478', '28', '2', '0', 'http://localhost:8087/static/img/user/default.jpg', '', '', '2017-02-27 08:38:16', '0', '0', '2017-04-06 09:47:41');
 INSERT INTO `user` VALUES ('3', '王珂', 'wangke', 'wangke@qa.cn', 'f608MT', '45a4f7983903feb8d621b9cc4ce1cad9e514da57ccf7d5826409dbb459f0adc6', '33', '2', '0', 'http://localhost:8087/static/img/user/default.jpg', '', '', '2017-02-27 08:39:21', '0', '0', '2017-04-06 09:47:46');
 INSERT INTO `user` VALUES ('4', '陈宁', 'chenning', 'chenning@qa.cn', '76KuZ1', '872c4a4215fa437b81f082f64e0103370b38748b21ba997038365690ce178f69', '36', '2', '0', 'http://localhost:8087/static/img/user/default.jpg', '', '', '2017-02-27 08:41:59', '0', '0', '2017-04-06 09:49:59');
-INSERT INTO `user` VALUES ('5', '李娟', 'lijuan', 'lijuan@qa.cn', 'fKiOZl', 'd8471d1a37dbfd23082fa77063e2bda437bbac2b0ce5d892efc5a0015fa51882', '32', '2', '0', 'http://localhost:8087/static/img/user/default.jpg', '', '', '2017-03-15 09:03:49', '0', '0', '2017-04-06 09:47:32');
+INSERT INTO `user` VALUES ('5', '李娟', 'lijuan', 'lijuan@qa.cn', 'fKiOZl', 'd8471d1a37dbfd23082fa77063e2bda437bbac2b0ce5d892efc5a0015fa51882', '32', '2', '6', 'http://localhost:8087/static/img/user/default.jpg', '', '', '2017-03-15 09:03:49', '0', '0', '2017-04-07 09:12:25');
 INSERT INTO `user` VALUES ('6', '张寅', 'zhangyin', 'zhangyin@qa.cn', '8Y446k', 'dab2c139a82732a794cb5b63d60a22e43ca7c8097762b811d69919bf7f184713', '34', '2', '0', 'http://localhost:8087/static/img/user/default.jpg', '', '', '2017-03-15 09:05:24', '0', '0', '2017-04-06 09:47:37');
-INSERT INTO `user` VALUES ('7', '超', 'chao', 'chao@qa.cn', 'Z55Awf', '6fa06fdcc1691bf5c46907dbcabc2887052b19bc62e2343e0b065cb8dd26cc18', '24', '2', '0', 'http://localhost:8087/static/img/user/default.jpg', '', '', '2017-04-03 14:39:43', '0', '0', '2017-04-06 09:53:14');
-INSERT INTO `user` VALUES ('8', '王政', 'wangzheng', 'wangzheng@qa.cn', 'MPQ7Zr', '81bf31a5c00c218bce667ad69ef05dd4d334b4966cb6ee123bca03ec808f29e8', '29', '2', '0', 'http://localhost:8087/static/img/user/default.jpg', '', '', '2017-04-03 14:42:05', '0', '0', '2017-04-06 09:53:18');
-INSERT INTO `user` VALUES ('9', '陈晓', 'chenxiao', 'chenxiao@qa.cn', 'GyH86U', '147dbc6dac5b636644eb4b37f6d9aac71e2b9544b736b87f358c16fcfa4fa833', '31', '2', '0', 'http://localhost:8087/static/img/user/default.jpg', '', '', '2017-04-03 14:43:40', '0', '0', '2017-04-06 09:53:02');
-INSERT INTO `user` VALUES ('10', '李白', 'libai', 'libai@qa.cn', 'oOT42s', '5d4fe70546c9fde0a71ca1d3d5b5356f3ede912a13061397d9067bdfc4c8b439', '34', '2', '0', 'http://localhost:8087/static/img/user/default.jpg', '', '', '2017-04-03 14:45:53', '0', '0', '2017-04-06 09:52:51');
+INSERT INTO `user` VALUES ('7', '超', 'chao', 'chao@qa.cn', 'Z55Awf', '6fa06fdcc1691bf5c46907dbcabc2887052b19bc62e2343e0b065cb8dd26cc18', '24', '2', '8', 'http://localhost:8087/static/img/user/default.jpg', '', '', '2017-04-03 14:39:43', '0', '0', '2017-04-07 09:01:07');
+INSERT INTO `user` VALUES ('8', '王政', 'wangzheng', 'wangzheng@qa.cn', 'MPQ7Zr', '81bf31a5c00c218bce667ad69ef05dd4d334b4966cb6ee123bca03ec808f29e8', '29', '2', '9', 'http://localhost:8087/static/img/user/default.jpg', '', '', '2017-04-03 14:42:05', '0', '0', '2017-04-07 09:00:39');
+INSERT INTO `user` VALUES ('9', '陈晓', 'chenxiao', 'chenxiao@qa.cn', 'GyH86U', '147dbc6dac5b636644eb4b37f6d9aac71e2b9544b736b87f358c16fcfa4fa833', '31', '2', '10', 'http://localhost:8087/static/img/user/default.jpg', '', '', '2017-04-03 14:43:40', '0', '0', '2017-04-07 09:00:07');
+INSERT INTO `user` VALUES ('10', '李白', 'libai', 'libai@qa.cn', 'oOT42s', '5d4fe70546c9fde0a71ca1d3d5b5356f3ede912a13061397d9067bdfc4c8b439', '34', '2', '11', 'http://localhost:8087/static/img/user/default.jpg', '', '', '2017-04-03 14:45:53', '0', '0', '2017-04-07 09:07:28');
 INSERT INTO `user` VALUES ('11', '嬴政', 'yingzheng', 'yingzheng@qa.cn', '1y6Fu3', '0f195bbf7d0ca38b662f99cbd1bce16fbe5b10779dc846e04d4c07ae6319896a', '40', '2', '0', 'http://localhost:8087/static/img/user/default.jpg', '', '', '2017-04-03 14:50:40', '0', '0', '2017-04-06 09:52:56');
 
 -- ----------------------------

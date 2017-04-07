@@ -45,7 +45,11 @@ func (this *ReviewService) Add(reviewId int64, uid int64, role int64, eid int64,
 		firstApprovalPerson = GetReviewProcessUid(uid, reviewConfigInfo.Process)
 	}
 	if reviewConfigInfo.EndProcess > 0 {
-		endApprovalPerson = GetReviewProcessUid(reviewConfigInfo.EndUid, reviewConfigInfo.EndProcess)
+		endApprovalPerson = append(endApprovalPerson, reviewConfigInfo.EndUid)
+		endApprovalPersonUid := GetReviewProcessUid(reviewConfigInfo.EndUid, reviewConfigInfo.EndProcess)
+		for i := 0; i < len(endApprovalPersonUid); i++ {
+			endApprovalPerson = append(endApprovalPerson, endApprovalPersonUid[i])
+		}
 	} else {
 		endApprovalPerson = append(endApprovalPerson, reviewConfigInfo.EndUid)
 	}

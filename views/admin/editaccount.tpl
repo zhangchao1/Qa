@@ -162,6 +162,10 @@ var uid = {{.uid}}
               sex = 2
             }
             var head = $("#choose").val()
+            if(head == null){
+              alert("请选择负责人！")
+              return
+            }
     		var params = {
                 Did: Number(this.Did),
                 Job: this.Job,
