@@ -329,15 +329,7 @@ CREATE TABLE `reviewnode` (
   `Created` datetime NOT NULL,
   `Updated` datetime NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of reviewnode
--- ----------------------------
-INSERT INTO `reviewnode` VALUES ('1', '1', '8', '1', '2', '0', '2017-04-04 19:56:35', '2017-04-04 19:59:18');
-INSERT INTO `reviewnode` VALUES ('2', '1', '9', '2', '2', '0', '2017-04-04 19:56:35', '2017-04-04 20:00:03');
-INSERT INTO `reviewnode` VALUES ('3', '1', '10', '3', '2', '0', '2017-04-04 19:56:35', '2017-04-04 20:00:43');
-INSERT INTO `reviewnode` VALUES ('4', '1', '5', '4', '2', '0', '2017-04-04 19:56:35', '2017-04-04 20:01:21');
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for `reviewperson`
@@ -354,15 +346,7 @@ CREATE TABLE `reviewperson` (
   `Type` smallint(6) NOT NULL,
   `Level` smallint(6) NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of reviewperson
--- ----------------------------
-INSERT INTO `reviewperson` VALUES ('1', '1', '8', '审核通过！', '2', '2017-04-04 19:59:18', '2017-04-04 19:56:35', '0', '1');
-INSERT INTO `reviewperson` VALUES ('2', '1', '9', '审核通过！', '2', '2017-04-04 20:00:03', '2017-04-04 19:59:18', '0', '2');
-INSERT INTO `reviewperson` VALUES ('3', '1', '10', '审核通过！', '2', '2017-04-04 20:00:43', '2017-04-04 20:00:03', '0', '3');
-INSERT INTO `reviewperson` VALUES ('4', '1', '5', '审核通过！', '2', '2017-04-04 20:01:21', '2017-04-04 20:00:43', '0', '4');
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for `reviewstatus`
@@ -378,12 +362,7 @@ CREATE TABLE `reviewstatus` (
   `Created` datetime NOT NULL,
   `Updated` datetime NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of reviewstatus
--- ----------------------------
-INSERT INTO `reviewstatus` VALUES ('1', '0', 'leave', '7', '', '2', '2017-04-04 19:56:35', '2017-04-04 20:01:21');
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for `travel`

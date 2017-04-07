@@ -39,6 +39,7 @@ func (this *LeaveService) Add(addLeave leave.Leave) SaveResult {
 		}
 		result.IsSuccess = false
 	} else {
+
 		leaveId, err := leave.Add(addLeave)
 		if err != nil {
 			result.ErrMsg = "系统错误"
@@ -55,6 +56,7 @@ func (this *LeaveService) Add(addLeave leave.Leave) SaveResult {
 			} else {
 				leaveReviewType = 3
 			}
+			fmt.Println(userInfo.Role, userInfo.Did)
 			errSaveReview := reviewService.Add(leaveId, addLeave.Uid, userInfo.Role, userInfo.Did, leaveReviewType, "leave", addLeave.Reason)
 			if errSaveReview != nil {
 				result.ErrMsg = "系统错误"

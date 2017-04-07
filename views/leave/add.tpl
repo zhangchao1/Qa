@@ -145,6 +145,7 @@
         delimiters: ['{[', ']}'],
         methods:{
         	save:function(){
+                var endtimeHour;
                 if($("#startAm").prop("className") == "btn btn-primary active"){
                     this.StartTimeHour = "00:00"
                 }else{
@@ -173,8 +174,11 @@
                         return
                    }
                 }
+                if(this.EndTime.indexOf("24:00") > 0 ){
+                    this.EndTime = this.EndTime.replace("24:00","23:59")
+                }
                 if(this.Images.length > 0){
-                    this.AttachMent = JSON.stringify(this.Images.length)
+                    this.AttachMent = JSON.stringify(this.Images)
                 }
                 var params = {
                   StartTime: this.StartTime,
