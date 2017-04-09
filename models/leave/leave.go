@@ -22,8 +22,22 @@ type Leave struct {
 }
 
 const QUERY_LEAVE_DETAIL = "select le.*, res.* from `leave` as le left join reviewstatus as res on res.ReviewId = le.Id where le.Id = ? AND res.Type = 'leave'"
-const QUERY_LEAVE_STATUS_COUNT = "select count(*) as cnt from `leave` as le left join reviewstatus as res on res.ReviewId = le.Id where res.Status = ? AND res.Type = 'leave'"
-const QUERY_LEAVE_STATUS = "select * from `leave` as le left join reviewstatus as res on res.ReviewId = le.Id where res.Status = ? AND res.Type = 'leave' ORDER BY res.Updated desc Limit ?,?"
+const QUERY_LEAVE_STATUS_COUNT = "select count(*) as cnt from `leave` as le left join reviewstatus as res on res.ReviewId = le.Id where res.Status = ? AND le.Uid = ? AND res.Type = 'leave'"
+const QUERY_LEAVE_STATUS = `select le.Id as LeId,
+							le.Type as Type,
+							le.Reason as Reason,
+							le.LongTime as LongTime,
+							le.StartTime as StartTime,
+							le.EndTime as Endtime,
+							le.Updated as Updated,
+							res.Id as ReId,
+							res.Status as Status
+							from qa.leave as le left 
+							join reviewstatus as res 
+							on res.ReviewId = le.Id 
+							where res.Status = ? AND le.Uid = ? 
+							AND res.Type = 'leave' 
+							ORDER BY res.Updated desc Limit ?,?`
 
 func (this *Leave) TableName() string {
 	return "leave"
@@ -67,13 +81,13 @@ func (this *Leave) Detail(id int64) []orm.Params {
 	return maps
 }
 
-func (this *Leave) GetLeaveByStatus(start int64, max int64, status int) Items {
+func (this *Leave) GetLeaveByStatus(start int64, max int64, status int, uid int64) Items {
 	o := orm.NewOrm()
 	o.Using("Qa")
 	var items Items
 	var totalPage int64
 	var maps []orm.Params
-	o.Raw(QUERY_LEAVE_STATUS_COUNT, status).Values(&maps)
+	o.Raw(QUERY_LEAVE_STATUS_COUNT, status, uid).Values(&maps)
 	cnt, _ := maps[0]["cnt"].(string)
 	totals, _ := strconv.ParseInt(cnt, 10, 64)
 	count := float64(totals)
@@ -82,7 +96,7 @@ func (this *Leave) GetLeaveByStatus(start int64, max int64, status int) Items {
 	totalPage = int64(math.Ceil(pages))
 	offset := (start - 1) * max
 	limit := max
-	o.Raw(QUERY_LEAVE_STATUS, status, offset, limit).Values(&maps)
+	o.Raw(QUERY_LEAVE_STATUS, status, uid, offset, limit).Values(&maps)
 	items.Datas = maps
 	items.Total = totalPage
 	return items

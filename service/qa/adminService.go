@@ -299,6 +299,7 @@ func saveEditUserInfo(edititem EditUser) error {
 	UserInfo.Level = edititem.Level
 	UserInfo.Role = edititem.Role
 	UserInfo.Did = edititem.Did
+	UserInfo.Head = edititem.Head
 	err := userRedis.SetUserInfo(edititem.Uid, UserInfo)
 	return err
 }

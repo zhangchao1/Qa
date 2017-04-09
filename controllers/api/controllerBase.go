@@ -44,6 +44,13 @@ func (this *ControllerBase) GetUserInfo() redisService.UserInfo {
 	userInfo := userRedis.GetUserInfo(userid)
 	return userInfo
 }
+
+func (this *ControllerBase) GetUserInfoByUid(uid int64) redisService.UserInfo {
+	var userRedis redisService.UserRedisService
+	userInfo := userRedis.GetUserInfo(uid)
+	return userInfo
+}
+
 func (this *ControllerBase) Prepare() {
 	sess := this.StartSession()
 	Uid := sess.Get("uid")

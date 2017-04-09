@@ -22,3 +22,8 @@ func (this *Leave) Add() {
 	this.Data["vueVersion"] = 1
 	this.Data["controllerName"] = "leave"
 }
+
+func (this *Leave) Detail() {
+	this.Data["vueVersion"] = 1
+	this.Data["controllerName"] = "leave"
+}

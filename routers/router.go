@@ -71,6 +71,11 @@ func init() {
 				&api.Leave{},
 			),
 		),
+		beego.NSNamespace("/review",
+			beego.NSInclude(
+				&api.Review{},
+			),
+		),
 	)
 	beego.AddNamespace(ns)
 }

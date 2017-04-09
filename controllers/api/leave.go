@@ -70,7 +70,8 @@ func (this *Leave) LeaveList() {
 		this.Data["json"] = map[string]interface{}{"IsSuccess": false, "ErrMsg": "请传递正确的参数"}
 		this.ServeJSON()
 	} else {
-		result := leave.GetLeaveByStatus(startIndex, maxCounts, status)
+		uid := this.GetUid()
+		result := leave.GetLeaveByStatus(startIndex, maxCounts, status, uid)
 		this.Data["json"] = map[string]interface{}{"IsSuccess": true, "ErrMsg": "", "data": result}
 		this.ServeJSON()
 	}

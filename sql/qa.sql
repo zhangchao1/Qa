@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost_3306
+Source Server         : localhost
 Source Server Version : 50553
 Source Host           : localhost:3306
 Source Database       : qa
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2017-04-07 09:25:12
+Date: 2017-04-09 19:34:01
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -175,22 +175,19 @@ CREATE TABLE `employee` (
   `Created` datetime NOT NULL,
   `Updated` datetime NOT NULL,
   PRIMARY KEY (`Eid`)
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of employee
 -- ----------------------------
-INSERT INTO `employee` VALUES ('1', '1', '9', '运维工程师', '1', '1', '2', '2017-02-23 11:42:05', '2017-04-06 09:53:09');
-INSERT INTO `employee` VALUES ('2', '2', '16', '物品申请管理', '2', '1', '1', '2017-02-27 08:38:16', '2017-04-06 09:47:41');
-INSERT INTO `employee` VALUES ('3', '3', '16', '物品申请管理', '2', '1', '1', '2017-02-27 08:39:21', '2017-04-06 09:47:46');
-INSERT INTO `employee` VALUES ('4', '4', '16', '后勤组管理员', '2', '2', '1', '2017-02-27 08:41:59', '2017-04-06 09:49:59');
-INSERT INTO `employee` VALUES ('5', '5', '16', '考勤管理专员', '2', '1', '1', '2017-03-15 09:03:49', '2017-04-07 09:12:25');
-INSERT INTO `employee` VALUES ('6', '6', '14', '人事总监', '3', '6', '1', '2017-03-15 09:05:24', '2017-04-06 09:47:37');
-INSERT INTO `employee` VALUES ('7', '7', '4', 'PHP工程师', '2', '1', '1', '2017-04-03 14:39:43', '2017-04-07 09:01:07');
-INSERT INTO `employee` VALUES ('8', '8', '4', 'PHP高级工程师', '3', '2', '1', '2017-04-03 14:42:05', '2017-04-07 09:00:39');
-INSERT INTO `employee` VALUES ('9', '9', '3', '后端架构工程师', '4', '4', '1', '2017-04-03 14:43:40', '2017-04-07 09:00:07');
-INSERT INTO `employee` VALUES ('10', '10', '2', '技术部CEO', '3', '6', '1', '2017-04-03 14:45:53', '2017-04-07 09:07:28');
-INSERT INTO `employee` VALUES ('11', '11', '1', 'Qa公司CEO', '5', '7', '1', '2017-04-03 14:50:40', '2017-04-06 09:52:56');
+INSERT INTO `employee` VALUES ('1', '1', '9', '运维工程师', '3', '2', '2', '2017-04-09 19:04:20', '2017-04-09 19:18:35');
+INSERT INTO `employee` VALUES ('2', '2', '4', 'PHP工程师', '2', '1', '1', '2017-04-09 19:06:14', '2017-04-09 19:19:08');
+INSERT INTO `employee` VALUES ('3', '3', '1', 'Qa公司CEO', '5', '7', '1', '2017-04-09 19:07:16', '2017-04-09 19:07:16');
+INSERT INTO `employee` VALUES ('4', '4', '4', 'PHP工程师', '3', '2', '1', '2017-04-09 19:08:19', '2017-04-09 19:19:45');
+INSERT INTO `employee` VALUES ('5', '5', '3', '后端技术中心架构师', '4', '4', '1', '2017-04-09 19:09:34', '2017-04-09 19:19:16');
+INSERT INTO `employee` VALUES ('6', '6', '2', '技术部CEO', '5', '6', '1', '2017-04-09 19:10:40', '2017-04-09 19:19:30');
+INSERT INTO `employee` VALUES ('7', '7', '14', '人事专员', '2', '1', '1', '2017-04-09 19:21:56', '2017-04-09 19:23:44');
+INSERT INTO `employee` VALUES ('8', '8', '14', '人事部总监', '5', '6', '1', '2017-04-09 19:23:06', '2017-04-09 19:23:06');
 
 -- ----------------------------
 -- Table structure for `expense`
@@ -247,7 +244,7 @@ CREATE TABLE `leave` (
   `Updated` datetime NOT NULL,
   `Created` datetime NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for `overtime`
@@ -292,24 +289,24 @@ CREATE TABLE `reviewconfig` (
 -- ----------------------------
 -- Records of reviewconfig
 -- ----------------------------
-INSERT INTO `reviewconfig` VALUES ('1', '1', 'leave', '1', '4', '2', '13', '5', '0', '2017-03-15 09:17:28', '2017-03-15 09:17:31');
-INSERT INTO `reviewconfig` VALUES ('2', '2', 'leave', '1', '4', '3', '13', '5', '0', '2017-03-15 09:19:45', '2017-03-15 09:19:48');
-INSERT INTO `reviewconfig` VALUES ('3', '3', 'leave', '1', '4', '3', '13', '5', '1', '2017-03-15 09:23:13', '2017-03-15 09:23:16');
-INSERT INTO `reviewconfig` VALUES ('4', '1', 'leave', '2', '4', '1', '13', '5', '0', '2017-03-15 09:23:19', '2017-03-15 09:23:22');
-INSERT INTO `reviewconfig` VALUES ('5', '2', 'leave', '2', '4', '2', '13', '5', '0', '2017-03-15 09:27:29', '2017-03-15 09:27:32');
-INSERT INTO `reviewconfig` VALUES ('6', '3', 'leave', '2', '4', '2', '13', '5', '1', '2017-03-15 09:27:35', '2017-03-15 09:27:38');
-INSERT INTO `reviewconfig` VALUES ('7', '1', 'leave', '3', '3', '1', '13', '5', '0', '2017-03-15 09:30:56', '2017-03-15 09:30:59');
-INSERT INTO `reviewconfig` VALUES ('8', '2', 'leave', '3', '3', '2', '13', '5', '0', '2017-03-15 09:35:32', '2017-03-15 09:35:35');
-INSERT INTO `reviewconfig` VALUES ('9', '3', 'leave', '3', '3', '2', '13', '5', '1', '2017-03-15 09:35:37', '2017-03-15 09:35:40');
-INSERT INTO `reviewconfig` VALUES ('10', '1', 'leave', '4', '3', '1', '13', '5', '0', '2017-03-15 09:35:43', '2017-03-15 09:35:46');
-INSERT INTO `reviewconfig` VALUES ('11', '2', 'leave', '4', '3', '1', '13', '5', '0', '2017-03-15 09:44:02', '2017-03-15 09:44:04');
-INSERT INTO `reviewconfig` VALUES ('12', '3', 'leave', '4', '3', '2', '13', '5', '1', '2017-03-15 09:44:07', '2017-03-15 09:44:10');
-INSERT INTO `reviewconfig` VALUES ('13', '1', 'leave', '5', '2', '1', '13', '5', '0', '2017-03-15 09:44:13', '2017-03-15 09:44:16');
-INSERT INTO `reviewconfig` VALUES ('14', '2', 'leave', '5', '2', '1', '13', '5', '0', '2017-03-15 09:45:24', '2017-03-15 09:45:27');
-INSERT INTO `reviewconfig` VALUES ('15', '3', 'leave', '5', '2', '1', '13', '5', '0', '2017-03-15 09:46:53', '2017-03-15 09:46:57');
-INSERT INTO `reviewconfig` VALUES ('16', '1', 'leave', '6', '2', '0', '13', '5', '0', '2017-03-15 09:49:02', '2017-03-15 09:49:05');
-INSERT INTO `reviewconfig` VALUES ('17', '2', 'leave', '6', '2', '0', '13', '5', '0', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
-INSERT INTO `reviewconfig` VALUES ('18', '3', 'leave', '6', '2', '0', '13', '5', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+INSERT INTO `reviewconfig` VALUES ('1', '1', 'leave', '1', '4', '2', '13', '7', '0', '2017-03-15 09:17:28', '2017-03-15 09:17:31');
+INSERT INTO `reviewconfig` VALUES ('2', '2', 'leave', '1', '4', '3', '13', '7', '0', '2017-03-15 09:19:45', '2017-03-15 09:19:48');
+INSERT INTO `reviewconfig` VALUES ('3', '3', 'leave', '1', '4', '3', '13', '7', '1', '2017-03-15 09:23:13', '2017-03-15 09:23:16');
+INSERT INTO `reviewconfig` VALUES ('4', '1', 'leave', '2', '4', '1', '13', '7', '0', '2017-03-15 09:23:19', '2017-03-15 09:23:22');
+INSERT INTO `reviewconfig` VALUES ('5', '2', 'leave', '2', '4', '2', '13', '7', '0', '2017-03-15 09:27:29', '2017-03-15 09:27:32');
+INSERT INTO `reviewconfig` VALUES ('6', '3', 'leave', '2', '4', '2', '13', '7', '1', '2017-03-15 09:27:35', '2017-03-15 09:27:38');
+INSERT INTO `reviewconfig` VALUES ('7', '1', 'leave', '3', '3', '1', '13', '7', '0', '2017-03-15 09:30:56', '2017-03-15 09:30:59');
+INSERT INTO `reviewconfig` VALUES ('8', '2', 'leave', '3', '3', '2', '13', '7', '0', '2017-03-15 09:35:32', '2017-03-15 09:35:35');
+INSERT INTO `reviewconfig` VALUES ('9', '3', 'leave', '3', '3', '2', '13', '7', '1', '2017-03-15 09:35:37', '2017-03-15 09:35:40');
+INSERT INTO `reviewconfig` VALUES ('10', '1', 'leave', '4', '3', '1', '13', '7', '0', '2017-03-15 09:35:43', '2017-03-15 09:35:46');
+INSERT INTO `reviewconfig` VALUES ('11', '2', 'leave', '4', '3', '1', '13', '7', '0', '2017-03-15 09:44:02', '2017-03-15 09:44:04');
+INSERT INTO `reviewconfig` VALUES ('12', '3', 'leave', '4', '3', '2', '13', '7', '1', '2017-03-15 09:44:07', '2017-03-15 09:44:10');
+INSERT INTO `reviewconfig` VALUES ('13', '1', 'leave', '5', '2', '1', '13', '7', '0', '2017-03-15 09:44:13', '2017-03-15 09:44:16');
+INSERT INTO `reviewconfig` VALUES ('14', '2', 'leave', '5', '2', '1', '13', '7', '0', '2017-03-15 09:45:24', '2017-03-15 09:45:27');
+INSERT INTO `reviewconfig` VALUES ('15', '3', 'leave', '5', '2', '1', '13', '7', '0', '2017-03-15 09:46:53', '2017-03-15 09:46:57');
+INSERT INTO `reviewconfig` VALUES ('16', '1', 'leave', '6', '2', '0', '13', '7', '0', '2017-03-15 09:49:02', '2017-03-15 09:49:05');
+INSERT INTO `reviewconfig` VALUES ('17', '2', 'leave', '6', '2', '0', '13', '7', '0', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+INSERT INTO `reviewconfig` VALUES ('18', '3', 'leave', '6', '2', '0', '13', '7', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 -- ----------------------------
 -- Table structure for `reviewnode`
@@ -324,8 +321,13 @@ CREATE TABLE `reviewnode` (
   `EndorseUid` int(14) unsigned DEFAULT '0',
   `Created` datetime NOT NULL,
   `Updated` datetime NOT NULL,
+  `Type` varchar(50) NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of reviewnode
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `reviewperson`
@@ -341,8 +343,9 @@ CREATE TABLE `reviewperson` (
   `Created` datetime NOT NULL,
   `Type` varchar(50) NOT NULL,
   `Level` smallint(6) NOT NULL,
+  `Uid` int(14) unsigned NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for `reviewstatus`
@@ -358,7 +361,7 @@ CREATE TABLE `reviewstatus` (
   `Created` datetime NOT NULL,
   `Updated` datetime NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for `travel`
@@ -403,22 +406,19 @@ CREATE TABLE `user` (
   `LastLoginTime` int(14) DEFAULT NULL,
   `Updated` datetime NOT NULL,
   PRIMARY KEY (`Uid`)
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', '管理员', 'admin', 'admin@qa.cn', 'Tf6517', '96587636c8477aa646eac03bbd6ae8e8b957dd7b102bbb75bbbaad04e18ebc84', '33', '2', '0', 'http://localhost:8087/static/img/user/default.jpg', '', '', '2017-02-23 11:42:05', '0', '0', '2017-04-06 09:53:09');
-INSERT INTO `user` VALUES ('2', '李鑫', 'lixin', 'lixin@qa.cn', 'm1l43K', 'dff04244e0ede12dbdd5a35ec4364573901c687724b113aefc82d3d70d5ac478', '28', '2', '0', 'http://localhost:8087/static/img/user/default.jpg', '', '', '2017-02-27 08:38:16', '0', '0', '2017-04-06 09:47:41');
-INSERT INTO `user` VALUES ('3', '王珂', 'wangke', 'wangke@qa.cn', 'f608MT', '45a4f7983903feb8d621b9cc4ce1cad9e514da57ccf7d5826409dbb459f0adc6', '33', '2', '0', 'http://localhost:8087/static/img/user/default.jpg', '', '', '2017-02-27 08:39:21', '0', '0', '2017-04-06 09:47:46');
-INSERT INTO `user` VALUES ('4', '陈宁', 'chenning', 'chenning@qa.cn', '76KuZ1', '872c4a4215fa437b81f082f64e0103370b38748b21ba997038365690ce178f69', '36', '2', '0', 'http://localhost:8087/static/img/user/default.jpg', '', '', '2017-02-27 08:41:59', '0', '0', '2017-04-06 09:49:59');
-INSERT INTO `user` VALUES ('5', '李娟', 'lijuan', 'lijuan@qa.cn', 'fKiOZl', 'd8471d1a37dbfd23082fa77063e2bda437bbac2b0ce5d892efc5a0015fa51882', '32', '2', '6', 'http://localhost:8087/static/img/user/default.jpg', '', '', '2017-03-15 09:03:49', '0', '0', '2017-04-07 09:12:25');
-INSERT INTO `user` VALUES ('6', '张寅', 'zhangyin', 'zhangyin@qa.cn', '8Y446k', 'dab2c139a82732a794cb5b63d60a22e43ca7c8097762b811d69919bf7f184713', '34', '2', '0', 'http://localhost:8087/static/img/user/default.jpg', '', '', '2017-03-15 09:05:24', '0', '0', '2017-04-06 09:47:37');
-INSERT INTO `user` VALUES ('7', '超', 'chao', 'chao@qa.cn', 'Z55Awf', '6fa06fdcc1691bf5c46907dbcabc2887052b19bc62e2343e0b065cb8dd26cc18', '24', '2', '8', 'http://localhost:8087/static/img/user/default.jpg', '', '', '2017-04-03 14:39:43', '0', '0', '2017-04-07 09:01:07');
-INSERT INTO `user` VALUES ('8', '王政', 'wangzheng', 'wangzheng@qa.cn', 'MPQ7Zr', '81bf31a5c00c218bce667ad69ef05dd4d334b4966cb6ee123bca03ec808f29e8', '29', '2', '9', 'http://localhost:8087/static/img/user/default.jpg', '', '', '2017-04-03 14:42:05', '0', '0', '2017-04-07 09:00:39');
-INSERT INTO `user` VALUES ('9', '陈晓', 'chenxiao', 'chenxiao@qa.cn', 'GyH86U', '147dbc6dac5b636644eb4b37f6d9aac71e2b9544b736b87f358c16fcfa4fa833', '31', '2', '10', 'http://localhost:8087/static/img/user/default.jpg', '', '', '2017-04-03 14:43:40', '0', '0', '2017-04-07 09:00:07');
-INSERT INTO `user` VALUES ('10', '李白', 'libai', 'libai@qa.cn', 'oOT42s', '5d4fe70546c9fde0a71ca1d3d5b5356f3ede912a13061397d9067bdfc4c8b439', '34', '2', '11', 'http://localhost:8087/static/img/user/default.jpg', '', '', '2017-04-03 14:45:53', '0', '0', '2017-04-07 09:07:28');
-INSERT INTO `user` VALUES ('11', '嬴政', 'yingzheng', 'yingzheng@qa.cn', '1y6Fu3', '0f195bbf7d0ca38b662f99cbd1bce16fbe5b10779dc846e04d4c07ae6319896a', '40', '2', '0', 'http://localhost:8087/static/img/user/default.jpg', '', '', '2017-04-03 14:50:40', '0', '0', '2017-04-06 09:52:56');
+INSERT INTO `user` VALUES ('1', '管理员', 'admin', 'admin@qa.cn', 'UzwZNr', '606211b40d53991bdd1bcc2e5c2e692c571aa0200995df666c2d262a43839db5', '33', '2', '6', 'http://localhost:8087/static/img/user/default.jpg', '', '', '2017-04-09 19:04:20', '0', '0', '2017-04-09 19:18:35');
+INSERT INTO `user` VALUES ('2', '张超', 'chao', 'chao@qa.cn', '4j13Yp', '73323efbb00cafc00044787938d4c9586b499c164ca93d6c71ea10761b13d952', '26', '2', '4', 'http://localhost:8087/static/img/user/default.jpg', '', '', '2017-04-09 19:06:14', '0', '0', '2017-04-09 19:19:08');
+INSERT INTO `user` VALUES ('3', '嬴政', 'yingzheng', 'yingzheng@qa.cn', '4C3trP', 'b68a45af2d60d8a17be70067c2d439b1a268b33df7e90bba835896dcd4d20277', '40', '1', '1', 'http://localhost:8087/static/img/user/default.jpg', '', '', '2017-04-09 19:07:16', '0', '0', '2017-04-09 19:07:16');
+INSERT INTO `user` VALUES ('4', '王政', 'wangzheng', 'wangzheng@qa.cn', 'N8gY37', 'e139de3d01ebe9804157cab168fc3b08f30eaf13aabd3592193f4019b1e42c13', '30', '2', '5', 'http://localhost:8087/static/img/user/default.jpg', '', '', '2017-04-09 19:08:18', '0', '0', '2017-04-09 19:19:45');
+INSERT INTO `user` VALUES ('5', '李晓', 'lixiao', 'lixiao@qa.cn', 'bt0aFz', '40e28bb62ac6e48f85018f103ffa292d2888224e56c0f64714b7b5d2cf5f44c3', '32', '2', '6', 'http://localhost:8087/static/img/user/default.jpg', '', '', '2017-04-09 19:09:34', '0', '0', '2017-04-09 19:19:16');
+INSERT INTO `user` VALUES ('6', '张飞', 'zhangfei', 'zhangfei@qa.cn', 'dBsIpc', 'bcd1158cd08bedf4f6281b59c3cfd653882e7c2322333d1d5a6ba2e65cf7dd33', '34', '2', '3', 'http://localhost:8087/static/img/user/default.jpg', '', '', '2017-04-09 19:10:40', '0', '0', '2017-04-09 19:19:30');
+INSERT INTO `user` VALUES ('7', '李娟', 'lijuan', 'lijuan@qa.cn', 'i7y3ig', 'dfa5f274f73158ff2871b09f69495bd07f09edfab6806d681ed18da9bc17aea5', '30', '2', '8', 'http://localhost:8087/static/img/user/default.jpg', '', '', '2017-04-09 19:21:56', '0', '0', '2017-04-09 19:23:44');
+INSERT INTO `user` VALUES ('8', '王德', 'wangde', 'wangde@qa.cn', 'ZiNefr', '20b4c1f8760c7d750acdb7533e685250b24161b62e22a2714b6dd99f69018ad7', '34', '1', '3', 'http://localhost:8087/static/img/user/default.jpg', '', '', '2017-04-09 19:23:06', '0', '0', '2017-04-09 19:23:06');
 
 -- ----------------------------
 -- Table structure for `useradmire`
