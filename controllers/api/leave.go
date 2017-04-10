@@ -76,3 +76,17 @@ func (this *Leave) LeaveList() {
 		this.ServeJSON()
 	}
 }
+
+// @router /detail [get]
+func (this *Leave) Detail() {
+	var leave leave.Leave
+	id, _ := this.GetInt64("id")
+	if id == 0 {
+		this.Data["json"] = map[string]interface{}{"IsSuccess": false, "ErrMsg": "请传递正确的参数"}
+		this.ServeJSON()
+	} else {
+		result := leave.Detail(id)
+		this.Data["json"] = map[string]interface{}{"IsSuccess": true, "ErrMsg": "", "data": result}
+		this.ServeJSON()
+	}
+}

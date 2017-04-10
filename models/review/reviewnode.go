@@ -84,3 +84,11 @@ func (this *ReviewNode) GetReviewNodeByLevel(reviewStatusId int64, level int, ty
 	err := o.Read(&reviewnode, "ReviewStatusId", "Level")
 	return reviewnode, err
 }
+
+func (this *ReviewNode) GetReviewNodeByreviewStatusId(reviewStatusId int64, types string) []orm.Params {
+	o := orm.NewOrm()
+	o.Using("Qa")
+	var maps []orm.Params
+	o.QueryTable("reviewnode").Filter("ReviewStatusId", reviewStatusId).Filter("Type", types).OrderBy("Level").Values(&maps)
+	return maps
+}

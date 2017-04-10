@@ -21,7 +21,7 @@ type Leave struct {
 	Created    string `orm:"column(Created);"`
 }
 
-const QUERY_LEAVE_DETAIL = "select le.*, res.* from `leave` as le left join reviewstatus as res on res.ReviewId = le.Id where le.Id = ? AND res.Type = 'leave'"
+const QUERY_LEAVE_DETAIL = "select * from `leave` where Id = ?"
 const QUERY_LEAVE_STATUS_COUNT = "select count(*) as cnt from `leave` as le left join reviewstatus as res on res.ReviewId = le.Id where res.Status = ? AND le.Uid = ? AND res.Type = 'leave'"
 const QUERY_LEAVE_STATUS = `select le.Id as LeId,
 							le.Type as Type,

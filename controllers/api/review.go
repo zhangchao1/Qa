@@ -22,7 +22,7 @@ func (this *Review) Cancel() {
 		if err == nil {
 			this.Data["json"] = map[string]interface{}{"IsSuccess": true, "ErrMsg": "取消成功"}
 		} else {
-			this.Data["json"] = map[string]interface{}{"IsSuccess": true, "ErrMsg": "系统错误"}
+			this.Data["json"] = map[string]interface{}{"IsSuccess": false, "ErrMsg": "系统错误"}
 		}
 		this.ServeJSON()
 	}
@@ -84,7 +84,7 @@ func (this *Review) Approve() {
 	} else {
 		errApprove := reviewService.Approve(reviewId, id, level, types, detail, uid)
 		if errApprove == nil {
-			this.Data["json"] = map[string]interface{}{"IsSuccess": false, "ErrMsg": "审核通过成功！"}
+			this.Data["json"] = map[string]interface{}{"IsSuccess": true, "ErrMsg": "审核通过成功！"}
 		} else {
 			this.Data["json"] = map[string]interface{}{"IsSuccess": false, "ErrMsg": "系统错误！"}
 		}
@@ -106,10 +106,25 @@ func (this *Review) Refuse() {
 	} else {
 		errRefuse := reviewService.Reject(id, reviewId, detail, level, types)
 		if errRefuse == nil {
-			this.Data["json"] = map[string]interface{}{"IsSuccess": false, "ErrMsg": "审核通过成功！"}
+			this.Data["json"] = map[string]interface{}{"IsSuccess": true, "ErrMsg": "审核通过成功！"}
 		} else {
 			this.Data["json"] = map[string]interface{}{"IsSuccess": false, "ErrMsg": "系统错误！"}
 		}
+		this.ServeJSON()
+	}
+}
+
+// @router /nodelist [get]
+func (this *Review) NodeList() {
+	reviewId, _ := this.GetInt64("reviewId")
+	types := this.GetString("types")
+	if reviewId == 0 || types == "" {
+		this.Data["json"] = map[string]interface{}{"IsSuccess": false, "ErrMsg": "请传递正确的参数"}
+		this.ServeJSON()
+	} else {
+		var reviewNode review.ReviewNode
+		result := reviewNode.GetReviewNodeByreviewStatusId(reviewId, types)
+		this.Data["json"] = map[string]interface{}{"IsSuccess": true, "ErrMsg": "", "Datas": result}
 		this.ServeJSON()
 	}
 }
