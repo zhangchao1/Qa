@@ -3,6 +3,7 @@ package api
 import (
 	"Qa/models/review"
 	"Qa/service/qa"
+	"fmt"
 )
 
 type Review struct {
@@ -133,13 +134,18 @@ func (this *Review) NodeList() {
 			Uid, _ := value["OperateUid"].(int64)
 			userinfo := this.GetUserInfoByUid(Uid)
 			value["UserName"] = userinfo.UserName
-			if value["Status"] == 1 {
-				value["Status"] = "未审核"
-			} else if value["Status"] == 2 {
-				value["Status"] = "已通过"
-			} else if value["Status"] == 3 {
-				value["Status"] = "已拒绝"
+			var status int
+			status, _ = value["Status"].(int)
+			fmt.Println(status)
+			var nodeStatus string
+			if status == 1 {
+				nodeStatus = "未审核"
+			} else if status == 2 {
+				nodeStatus = "已通过"
+			} else if status == 3 {
+				nodeStatus = "已拒绝"
 			}
+			value["Status"] = nodeStatus
 		}
 		this.Data["json"] = map[string]interface{}{"IsSuccess": true, "ErrMsg": "", "Datas": result}
 		this.ServeJSON()
