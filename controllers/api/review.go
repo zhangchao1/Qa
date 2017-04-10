@@ -49,14 +49,19 @@ func (this *Review) List() {
 			switch reviewType {
 			case "leave":
 				reviewTypes = "请假申请"
+				break
 			case "travel":
 				reviewTypes = "外勤申请"
+				break
 			case "overtime":
 				reviewTypes = "加班申请"
+				break
 			case "expense":
 				reviewTypes = "报销申请"
+				break
 			case "goods":
 				reviewTypes = "物品申请"
+				break
 			}
 			userinfo := this.GetUserInfoByUid(approveUid)
 			value["UserName"] = userinfo.UserName
@@ -124,6 +129,18 @@ func (this *Review) NodeList() {
 	} else {
 		var reviewNode review.ReviewNode
 		result := reviewNode.GetReviewNodeByreviewStatusId(reviewId, types)
+		for _, value := range result {
+			Uid, _ := value["OperateUid"].(int64)
+			userinfo := this.GetUserInfoByUid(Uid)
+			value["UserName"] = userinfo.UserName
+			if value["Status"] == 1 {
+				value["Status"] = "未审核"
+			} else if value["Status"] == 2 {
+				value["Status"] = "已通过"
+			} else if value["Status"] == 3 {
+				value["Status"] = "已拒绝"
+			}
+		}
 		this.Data["json"] = map[string]interface{}{"IsSuccess": true, "ErrMsg": "", "Datas": result}
 		this.ServeJSON()
 	}

@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"io"
 	"os"
+	"strconv"
 )
 
 type Leave struct {
@@ -86,6 +87,12 @@ func (this *Leave) Detail() {
 		this.ServeJSON()
 	} else {
 		result := leave.Detail(id)
+		for _, value := range result {
+			Uid, _ := value["Uid"].(string)
+			leaveUid, _ := strconv.ParseInt(Uid, 14, 64)
+			userinfo := this.GetUserInfoByUid(leaveUid)
+			value["UserName"] = userinfo.UserName
+		}
 		this.Data["json"] = map[string]interface{}{"IsSuccess": true, "ErrMsg": "", "data": result}
 		this.ServeJSON()
 	}
