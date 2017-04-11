@@ -21,11 +21,28 @@
                   </div>
             </div>
               <div class="box-body">
+              <div class="col-md-12">
+                  <div class="callout callout-success">
+                      <b>申请物品:</b>
+                      <p>
+                      1.生活用品和生活用品不用归还给物品管理员。
+                      2.电子产品需在离职前归还物品管理员，这一块需要做好备注。
+                      </p>
+                  </div>
+              </div>
               <validator name="validation1">
                 <form role="form">
                   <div class="form-group">
                       <label>物品名称</label>
                       <input type="text" class="form-control" placeholder="输入物品名称" v-model="Name" v-validate:Name="['required']">
+                    </div>
+                    <div class="form-group">
+                      <label>物品类型</label>
+                        <select class="form-control select2" v-model="Type" v-validate:Type="['required']">
+                          <option selected="selected" value="生活用品">生活用品</option>
+                          <option value="办公用品">办公用品</option>
+                          <option value="电子产品">电子产品</option>
+                        </select>
                     </div>
                     <div class="form-group">
                       <label>物品数量</label>
@@ -34,13 +51,6 @@
                     <div class="form-group">
                       <label>物品用途</label>
                       <textarea class="form-control" rows="4" placeholder="输入物品用途" v-model="Application" v-validate:Application="['required']"></textarea>
-                    </div>
-                    <div class="form-group">
-                      <label><i class=" fa fa-user-plus">(审核人)</i></label>
-                      <select class="form-control select2" id="choose">
-                        <option v-for="option in options" v-bind:value="option.uid">{[option.username ]}
-                      </option>
-                    </select>
                     </div>
                  </form>
                  </validator>
@@ -52,8 +62,6 @@
       </div>
    </section>
 </div>
-<link href="/static/css/select2.min.css" rel="stylesheet">
-<script src="/static/js/select2.full.min.js"></script>
 <script>
   Vue.config.delimiters = ['{[', ']}']
   var vue = new Vue({
@@ -65,17 +73,7 @@
           
         },
         ready:function(){
-          $("#choose").select2();
-          this.$http.get('/api/goods/approvalusers' , [], []).then(function(response){
-                if(response.data.IsSuccess == true){
-                    this.options = response.data.Data
-                }else{
-                    alert(response.data.ErrMsg);
-                    return;
-                }
-              }, function(response){
-                alert('提交失败')
-            });
+         
         }
     });
 </script>
