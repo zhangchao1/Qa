@@ -44,6 +44,7 @@
                   <th>请假时长(单位:天)</th>
                   <th>更新时间</th>
                   <th>操作</th>
+                  <th>详情</th>
                 </tr>
                 <tr v-for="item in myOnApprove.items">
                   <td>{[ item.Type ]}</td>
@@ -53,6 +54,7 @@
                   <td>{[ item.LongTime ]}</td>
                   <td>{[ item.Updated ]}</td>
                   <td><a class="btn btn-info" v-on:click="cancelReview(item.ReId)">取消申请</a></td>
+                  <td><a class="btn btn-primary" href="/leave/detail/{[ item['LeId'] ]}" target="_blank">审核详情</a></td>
                 </tr>
               </tbody></table>
               </div>
@@ -65,6 +67,7 @@
                   <th>请假原因</th>
                   <th>请假时长(单位:天)</th>
                   <th>更新时间</th>
+                  <th>详情</th>
                 </tr>
                 <tr v-for="item in myApprovIng.items">
                   <td>{[ item.Type ]}</td>
@@ -73,6 +76,7 @@
                   <td>{[ item.Reason ]}</td>
                   <td>{[ item.LongTime ]}</td>
                   <td>{[ item.Updated ]}</td>
+                  <td><a class="btn btn-primary" href="/leave/detail/{[ item['LeId'] ]}" target="_blank">审核详情</a></td>
                 </tr>
               </tbody></table>
               </div>
@@ -85,6 +89,7 @@
                   <th>请假原因</th>
                   <th>请假时长(单位:天)</th>
                   <th>更新时间</th>
+                  <th>详情</th>
                 </tr>
                 <tr v-for="item in myApprove.items">
                   <td>{[ item.Type ]}</td>
@@ -93,6 +98,7 @@
                   <td>{[ item.Reason ]}</td>
                   <td>{[ item.LongTime ]}</td>
                   <td>{[ item.Updated ]}</td>
+                  <td><a class="btn btn-primary" href="/leave/detail/{[ item['LeId'] ]}" target="_blank">审核详情</a></td>
                 </tr>
               </tbody></table>
               </div>
@@ -105,6 +111,7 @@
                   <th>请假原因</th>
                   <th>请假时长(单位:天)</th>
                   <th>更新时间</th>
+                  <th>详情</th>
                 </tr>
                 <tr v-for="item in myRefuse.items">
                   <td>{[ item.Type ]}</td>
@@ -113,6 +120,7 @@
                   <td>{[ item.Reason ]}</td>
                   <td>{[ item.LongTime ]}</td>
                   <td>{[ item.Updated ]}</td>
+                  <td><a class="btn btn-primary" href="/leave/detail/{[ item['LeId'] ]}" target="_blank">审核详情</a></td>
                 </tr>
               </tbody></table>
               </div>
@@ -125,6 +133,7 @@
                   <th>请假原因</th>
                   <th>请假时长(单位:天)</th>
                   <th>更新时间</th>
+                  <th>详情</th>
                 </tr>
                 <tr v-for="item in myCancel.items">
                   <td>{[ item.Type ]}</td>
@@ -133,6 +142,7 @@
                   <td>{[ item.Reason ]}</td>
                   <td>{[ item.LongTime ]}</td>
                   <td>{[ item.Updated ]}</td>
+                  <td><a class="btn btn-primary" href="/leave/detail/{[ item['LeId'] ]}" target="_blank">审核详情</a></td>
                 </tr>
               </tbody></table>
               </div>
@@ -153,7 +163,7 @@
                   <td>
                   <a class="btn btn-info" data-toggle="modal" data-target="#approveModal" v-on:click="getCurrentApproveItem(item)">审核通过</a>
                   <a class="btn btn-danger" data-toggle="modal" data-target="#refuseModal" v-on:click="getCurrentApproveItem(item)">审核拒绝</a>
-                  <a class="btn btn-primary">审核详情</a>
+                  <a class="btn btn-primary" href="/leave/detail/{[ item['ReviewStatusId'] ]}" target="_blank">审核详情</a>
                   </td>
                 </tr>
               </tbody></table>
@@ -165,12 +175,16 @@
                   <th>创建时间</th>
                   <th>被审核人</th>
                   <th>职位</th>
+                  <th>详情</th>
                 </tr>
                 <tr v-for="item in hasApprove.items">
                   <td>{[ item.Type ]}</td>
                   <td>{[ item.Created ]}</td>
                   <td>{[ item.UserName ]}</td>
                   <td>{[ item.Job ]}</td>
+                  <td>
+                  <a class="btn btn-primary" href="/leave/detail/{[ item['ReviewStatusId'] ]}" target="_blank">审核详情</a>
+                  </td>
                 </tr>
               </tbody></table>
               </div>
@@ -181,12 +195,16 @@
                   <th>创建时间</th>
                   <th>被审核人</th>
                   <th>职位</th>
+                  <th>详情</th>
                 </tr>
                 <tr v-for="item in hasRefused.items">
                   <td>{[ item.Type ]}</td>
                   <td>{[ item.Created ]}</td>
                   <td>{[ item.UserName ]}</td>
                   <td>{[ item.Job ]}</td>
+                  <td>
+                  <a class="btn btn-primary" href="/leave/detail/{[ item['ReviewStatusId'] ]}" target="_blank">审核详情</a>
+                  </td>
                 </tr>
               </tbody></table>
               </div>

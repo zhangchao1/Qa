@@ -22,7 +22,6 @@
           <div class="box-body">
           <div class="row" style="height:350px">
              <div class="col-md-12">
-                {{template "review.tpl" .}}
              </div>
           </div>     
           </div>

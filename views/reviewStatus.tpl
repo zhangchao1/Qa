@@ -35,7 +35,7 @@
   position: absolute; top:80px;margin-left: 70px;margin-top: 10px;margin-bottom: 20px
 }
 .bs-wizard > .bs-wizard-step > .bs-wizard-reviewName > p{
-  margin: 0 10px;color:#7c887c;
+  margin: -5px 20px;color:#7c887c;
 }
 .bs-wizard > .bs-wizard-step > .progress {position: relative; border-radius: 0px; height: 8px; box-shadow: none; margin: 40px 0; background-color: #e5e5e5; overflow: hidden;}
 .bs-wizard > .bs-wizard-step > .progress > .progress-bar {width:0px; box-shadow: none; background: #92cf5c;}
