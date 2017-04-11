@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2017-04-09 22:07:50
+Date: 2017-04-11 22:52:38
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -244,7 +244,7 @@ CREATE TABLE `leave` (
   `Updated` datetime NOT NULL,
   `Created` datetime NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of leave
@@ -252,6 +252,9 @@ CREATE TABLE `leave` (
 INSERT INTO `leave` VALUES ('1', '2', '调休', '2017-04-04 00:00:00', '2017-04-05 23:59:00', '休息', '', '2', '2017-04-09 19:35:53', '2017-04-09 19:35:53');
 INSERT INTO `leave` VALUES ('2', '2', '调休', '2017-04-04 00:00:00', '2017-04-07 23:59:00', '卡斯卡萨佛', '', '4', '2017-04-09 19:36:08', '2017-04-09 19:36:08');
 INSERT INTO `leave` VALUES ('3', '2', '调休', '2017-04-04 00:00:00', '2017-04-11 23:59:00', '卡就是分开撒娇', '', '8', '2017-04-09 19:36:21', '2017-04-09 19:36:21');
+INSERT INTO `leave` VALUES ('4', '2', '调休', '2017-04-03 00:00:00', '2017-04-14 23:59:00', 'xiuxi', '', '12', '2017-04-11 21:34:37', '2017-04-11 21:34:37');
+INSERT INTO `leave` VALUES ('5', '2', '年假', '2017-04-10 00:00:00', '2017-04-13 23:59:00', 'faasgasg', '', '4', '2017-04-11 22:43:07', '2017-04-11 22:43:07');
+INSERT INTO `leave` VALUES ('6', '2', '调休', '2017-04-11 00:00:00', '2017-04-12 23:59:00', 'ssdafgasgv', '', '2', '2017-04-11 22:49:05', '2017-04-11 22:49:05');
 
 -- ----------------------------
 -- Table structure for `overtime`
@@ -330,7 +333,7 @@ CREATE TABLE `reviewnode` (
   `Updated` datetime NOT NULL,
   `Type` varchar(50) NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of reviewnode
@@ -342,6 +345,18 @@ INSERT INTO `reviewnode` VALUES ('4', '2', '4', '1', '3', '0', '2017-04-09 19:36
 INSERT INTO `reviewnode` VALUES ('5', '2', '5', '2', '1', '0', '2017-04-09 19:36:08', '2017-04-09 19:36:08', 'leave');
 INSERT INTO `reviewnode` VALUES ('6', '2', '6', '3', '1', '0', '2017-04-09 19:36:08', '2017-04-09 19:36:08', 'leave');
 INSERT INTO `reviewnode` VALUES ('7', '2', '7', '4', '1', '0', '2017-04-09 19:36:08', '2017-04-09 19:36:08', 'leave');
+INSERT INTO `reviewnode` VALUES ('17', '4', '8', '5', '2', '0', '2017-04-11 21:34:37', '2017-04-11 21:42:37', 'leave');
+INSERT INTO `reviewnode` VALUES ('16', '4', '7', '4', '2', '0', '2017-04-11 21:34:37', '2017-04-11 21:41:45', 'leave');
+INSERT INTO `reviewnode` VALUES ('15', '4', '6', '3', '2', '0', '2017-04-11 21:34:37', '2017-04-11 21:41:11', 'leave');
+INSERT INTO `reviewnode` VALUES ('14', '4', '5', '2', '2', '0', '2017-04-11 21:34:37', '2017-04-11 21:40:42', 'leave');
+INSERT INTO `reviewnode` VALUES ('13', '4', '4', '1', '2', '0', '2017-04-11 21:34:37', '2017-04-11 21:39:29', 'leave');
+INSERT INTO `reviewnode` VALUES ('18', '5', '4', '1', '2', '0', '2017-04-11 22:43:07', '2017-04-11 22:47:27', 'leave');
+INSERT INTO `reviewnode` VALUES ('19', '5', '5', '2', '1', '0', '2017-04-11 22:43:07', '2017-04-11 22:43:07', 'leave');
+INSERT INTO `reviewnode` VALUES ('20', '5', '6', '3', '1', '0', '2017-04-11 22:43:07', '2017-04-11 22:43:07', 'leave');
+INSERT INTO `reviewnode` VALUES ('21', '5', '7', '4', '1', '0', '2017-04-11 22:43:07', '2017-04-11 22:43:07', 'leave');
+INSERT INTO `reviewnode` VALUES ('22', '6', '4', '1', '1', '0', '2017-04-11 22:49:05', '2017-04-11 22:49:05', 'leave');
+INSERT INTO `reviewnode` VALUES ('23', '6', '5', '2', '1', '0', '2017-04-11 22:49:05', '2017-04-11 22:49:05', 'leave');
+INSERT INTO `reviewnode` VALUES ('24', '6', '7', '3', '1', '0', '2017-04-11 22:49:05', '2017-04-11 22:49:05', 'leave');
 
 -- ----------------------------
 -- Table structure for `reviewperson`
@@ -359,7 +374,7 @@ CREATE TABLE `reviewperson` (
   `Level` smallint(6) NOT NULL,
   `Uid` int(14) unsigned NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of reviewperson
@@ -368,6 +383,14 @@ INSERT INTO `reviewperson` VALUES ('1', '1', '4', '确认ok!', '2', '2017-04-09 
 INSERT INTO `reviewperson` VALUES ('2', '2', '4', '理由不够充分', '3', '2017-04-09 19:37:27', '2017-04-09 19:36:08', 'leave', '1', '2');
 INSERT INTO `reviewperson` VALUES ('4', '1', '5', '确认ok!', '2', '2017-04-09 19:38:47', '2017-04-09 19:37:44', 'leave', '2', '2');
 INSERT INTO `reviewperson` VALUES ('5', '1', '7', '确认ok', '2', '2017-04-09 19:40:20', '2017-04-09 19:38:47', 'leave', '3', '2');
+INSERT INTO `reviewperson` VALUES ('6', '4', '4', '确认ok!', '2', '2017-04-11 21:39:29', '2017-04-11 21:34:37', 'leave', '1', '2');
+INSERT INTO `reviewperson` VALUES ('7', '4', '5', '确认ok！', '2', '2017-04-11 21:40:42', '2017-04-11 21:39:29', 'leave', '2', '2');
+INSERT INTO `reviewperson` VALUES ('8', '4', '6', '确认ok！', '2', '2017-04-11 21:41:11', '2017-04-11 21:40:42', 'leave', '3', '2');
+INSERT INTO `reviewperson` VALUES ('9', '4', '7', '确认 ok!', '2', '2017-04-11 21:41:45', '2017-04-11 21:41:11', 'leave', '4', '2');
+INSERT INTO `reviewperson` VALUES ('10', '4', '8', '确认ok！', '2', '2017-04-11 21:42:37', '2017-04-11 21:41:45', 'leave', '5', '2');
+INSERT INTO `reviewperson` VALUES ('11', '5', '4', 'ok', '2', '2017-04-11 22:47:27', '2017-04-11 22:43:07', 'leave', '1', '2');
+INSERT INTO `reviewperson` VALUES ('12', '5', '5', '', '1', '2017-04-11 22:47:27', '2017-04-11 22:47:27', 'leave', '2', '2');
+INSERT INTO `reviewperson` VALUES ('13', '6', '4', '', '1', '2017-04-11 22:49:05', '2017-04-11 22:49:05', 'leave', '1', '2');
 
 -- ----------------------------
 -- Table structure for `reviewstatus`
@@ -383,7 +406,7 @@ CREATE TABLE `reviewstatus` (
   `Created` datetime NOT NULL,
   `Updated` datetime NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of reviewstatus
@@ -391,6 +414,9 @@ CREATE TABLE `reviewstatus` (
 INSERT INTO `reviewstatus` VALUES ('1', '1', 'leave', '2', '休息', '3', '2017-04-09 19:35:53', '2017-04-09 19:40:20');
 INSERT INTO `reviewstatus` VALUES ('2', '2', 'leave', '2', '卡斯卡萨佛', '4', '2017-04-09 19:36:08', '2017-04-09 19:37:27');
 INSERT INTO `reviewstatus` VALUES ('3', '3', 'leave', '2', '卡就是分开撒娇', '5', '2017-04-09 19:36:21', '2017-04-09 19:36:26');
+INSERT INTO `reviewstatus` VALUES ('4', '4', 'leave', '2', 'xiuxi', '3', '2017-04-11 21:34:37', '2017-04-11 21:42:37');
+INSERT INTO `reviewstatus` VALUES ('5', '5', 'leave', '2', 'faasgasg', '2', '2017-04-11 22:43:07', '2017-04-11 22:47:27');
+INSERT INTO `reviewstatus` VALUES ('6', '6', 'leave', '2', 'ssdafgasgv', '1', '2017-04-11 22:49:05', '2017-04-11 22:49:05');
 
 -- ----------------------------
 -- Table structure for `travel`
