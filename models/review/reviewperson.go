@@ -121,3 +121,11 @@ func (this *ReviewPerson) List(start int64, max int64, uid int64, types string, 
 	items.Total = totalPage
 	return items
 }
+
+func (this *ReviewPerson) GetReviewPersonByreviewStatusId(reviewStatusId int64, types string) []orm.Params {
+	o := orm.NewOrm()
+	o.Using("Qa")
+	var maps []orm.Params
+	o.QueryTable("reviewperson").Filter("ReviewStatusId", reviewStatusId).Filter("Type", types).OrderBy("Level").Values(&maps)
+	return maps
+}

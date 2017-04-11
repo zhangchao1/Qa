@@ -134,18 +134,97 @@ func (this *Review) NodeList() {
 			Uid, _ := value["OperateUid"].(int64)
 			userinfo := this.GetUserInfoByUid(Uid)
 			value["UserName"] = userinfo.UserName
-			var status int
-			status, _ = value["Status"].(int)
-			fmt.Println(status)
+			status, ok := value["Status"].(int64)
+			fmt.Println(status, ok)
 			var nodeStatus string
+			var renderSatus string
 			if status == 1 {
 				nodeStatus = "未审核"
+				renderSatus = "disabled"
 			} else if status == 2 {
 				nodeStatus = "已通过"
+				renderSatus = "complete"
 			} else if status == 3 {
 				nodeStatus = "已拒绝"
+				renderSatus = "disabled"
 			}
-			value["Status"] = nodeStatus
+			value["StatusTitle"] = nodeStatus
+			value["RenderSatus"] = renderSatus
+		}
+		this.Data["json"] = map[string]interface{}{"IsSuccess": true, "ErrMsg": "", "Datas": result}
+		this.ServeJSON()
+	}
+}
+
+// @router /status [get]
+func (this *Review) Status() {
+	reviewId, _ := this.GetInt64("reviewId")
+	types := this.GetString("types")
+	if reviewId == 0 || types == "" {
+		this.Data["json"] = map[string]interface{}{"IsSuccess": false, "ErrMsg": "请传递正确的参数"}
+		this.ServeJSON()
+	} else {
+		var reviewStatus review.ReviewStatus
+		result := reviewStatus.GetReviewStatusByType(types, reviewId)
+		for _, value := range result {
+			status, ok := value["Status"].(int64)
+			fmt.Println(status, ok)
+			var nodeStatus string
+			var renderSatus string
+			if status == 1 {
+				nodeStatus = "未审核"
+				renderSatus = "disabled"
+			} else if status == 2 {
+				nodeStatus = "审核中"
+				renderSatus = "disabled"
+			} else if status == 3 {
+				nodeStatus = "已通过"
+				renderSatus = "complete"
+			} else if status == 4 {
+				nodeStatus = "已拒绝"
+				renderSatus = "disabled"
+			} else if status == 5 {
+				nodeStatus = "已取消"
+				renderSatus = "disabled"
+			}
+			value["StatusTitle"] = nodeStatus
+			value["RenderSatus"] = renderSatus
+		}
+		this.Data["json"] = map[string]interface{}{"IsSuccess": true, "ErrMsg": "", "Datas": result}
+		this.ServeJSON()
+	}
+}
+
+// @router /personlist [get]
+func (this *Review) PersonList() {
+	reviewId, _ := this.GetInt64("reviewId")
+	types := this.GetString("types")
+	if reviewId == 0 || types == "" {
+		this.Data["json"] = map[string]interface{}{"IsSuccess": false, "ErrMsg": "请传递正确的参数"}
+		this.ServeJSON()
+	} else {
+		var reviewPerson review.ReviewPerson
+		result := reviewPerson.GetReviewPersonByreviewStatusId(reviewId, types)
+		for _, value := range result {
+			Uid, _ := value["Auditor"].(int64)
+			userinfo := this.GetUserInfoByUid(Uid)
+			value["UserName"] = userinfo.UserName
+			status, ok := value["Status"].(int64)
+			fmt.Println(status, ok)
+			var nodeStatus string
+			var renderSatus string
+			if status == 1 {
+				nodeStatus = "未审核"
+				renderSatus = "bg-light-blue"
+			} else if status == 2 {
+				nodeStatus = "已通过"
+				renderSatus = "bg-green"
+			} else if status == 3 {
+				nodeStatus = "已拒绝"
+				renderSatus = "bg-red"
+			}
+			value["StatusTitle"] = nodeStatus
+			value["RenderSatus"] = renderSatus
 		}
 		this.Data["json"] = map[string]interface{}{"IsSuccess": true, "ErrMsg": "", "Datas": result}
 		this.ServeJSON()

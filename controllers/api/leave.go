@@ -92,6 +92,7 @@ func (this *Leave) Detail() {
 			leaveUid, _ := strconv.ParseInt(Uid, 14, 64)
 			userinfo := this.GetUserInfoByUid(leaveUid)
 			value["UserName"] = userinfo.UserName
+			value["Name"] = userinfo.Name
 		}
 		this.Data["json"] = map[string]interface{}{"IsSuccess": true, "ErrMsg": "", "data": result}
 		this.ServeJSON()

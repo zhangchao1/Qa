@@ -56,53 +56,27 @@
       <div class="bs-wizard-status start"><span class="glyphicon glyphicon-ok"></span></div>
       <div class="bs-wizard-info start">审核申请</div>
       <div class="bs-wizard-reviewName">
-        <p>张超(zhangchao)</p>
-        <p>2017/03/08 14:56:55</p>
+        <p>{[ reviewDetail["UserName"] ]}({[ reviewDetail["Name"] ]})</p>
+        <p>{[ reviewDetail["Created"] ]}</p>
       </div>
     </div>
-    <div class="col-xs-2 bs-wizard-step complete"><!-- complete -->
+    <template v-for="item in nodelist">
+
+      <div class="col-xs-2 bs-wizard-step {[ item['RenderSatus'] ]}">
       <div class="progress"><div class="progress-bar"></div></div>
-      <a href="javascript:;" class="bs-wizard-dot"><span class="glyphicon glyphicon-user"></span>
-</a>               <div class="bs-wizard-status process"><span class="glyphicon glyphicon-ok"></span></div>
-      <div class="bs-wizard-info process">王娟 通过</div>
+      <a href="javascript:;" class="bs-wizard-dot"><span class="glyphicon glyphicon-user"></span></a>
+      <template v-if="item.Status == 2 ">
+        <div class="bs-wizard-status process"><span class="glyphicon glyphicon-ok"></span></div>
+      </template>
+      <div class="bs-wizard-info process">{[ item["UserName"] ]} {[ item["StatusTitle"] ]}</div>
     </div>
-    
-    <div class="col-xs-2 bs-wizard-step active"><!-- complete -->
+    </template>
+    <div class="col-xs-2 bs-wizard-step {[ reviewStatus.RenderSatus ]}"><!-- active -->
       <div class="progress"><div class="progress-bar"></div></div>
-      <a href="javascript:;" class="bs-wizard-dot"><span class="glyphicon glyphicon-user"></span>
-</a>
-      <div class="bs-wizard-status process"><span class="glyphicon glyphicon-ok"></span></div>
-      <div class="bs-wizard-info process">小明通过</div>
-    </div>
-    
-    <div class="col-xs-2 bs-wizard-step disabled"><!-- active -->
-      <div class="progress"><div class="progress-bar"></div></div>
-      <a href="javascript:;" class="bs-wizard-dot"><span class="glyphicon glyphicon-user"></span>
-</a>              <div class="bs-wizard-status process"><span class="glyphicon glyphicon-ok"></span></div>
-      <div class="bs-wizard-info process">未审批</div>
-    </div>
-    <div class="col-xs-2 bs-wizard-step disabled"><!-- active -->
-      <div class="progress"><div class="progress-bar"></div></div>
-      <a href="javascript:;" class="bs-wizard-dot"><span class="glyphicon glyphicon-user"></span>
-</a>              <div class="bs-wizard-status process"><span class="glyphicon glyphicon-ok"></span></div>
-      <div class="bs-wizard-info process">未审批</div>
-    </div>
-    <div class="col-xs-2 bs-wizard-step disabled"><!-- active -->
-      <div class="progress"><div class="progress-bar"></div></div>
-      <a href="javascript:;" class="bs-wizard-dot"><span class="glyphicon glyphicon-user"></span>
-</a>              <div class="bs-wizard-status process"><span class="glyphicon glyphicon-ok"></span></div>
-      <div class="bs-wizard-info process">未审批</div>
-    </div>
-    <div class="col-xs-2 bs-wizard-step disabled"><!-- active -->
-      <div class="progress"><div class="progress-bar"></div></div>
-      <a href="javascript:;" class="bs-wizard-dot"><span class="glyphicon glyphicon-user"></span>
-</a>              <div class="bs-wizard-status process"><span class="glyphicon glyphicon-ok"></span></div>
-      <div class="bs-wizard-info process">未审批</div>
-    </div>
-    <div class="col-xs-2 bs-wizard-step disabled"><!-- active -->
-      <div class="progress"><div class="progress-bar"></div></div>
-      <a href="javascript:;" class="bs-wizard-dot"><span class="glyphicon glyphicon-user"></span>
-</a>              <div class="bs-wizard-status end"><span class="glyphicon glyphicon-ok"></span></div>
-      <div class="bs-wizard-info end">审核未完成</div>
+      <a href="javascript:;" class="bs-wizard-dot"><span class="glyphicon glyphicon-list-alt"></span></a>
+      <template v-if="reviewStatus.Status == 3 ">
+        <div class="bs-wizard-status end"><span class="glyphicon glyphicon-ok"></span></div>
+      </template>
+      <div class="bs-wizard-info end">{[ reviewStatus.StatusTitle ]}</div>
     </div>
 </div>

@@ -86,3 +86,11 @@ func (this *ReviewStatus) GetByStatus(Uid int64, Type string, status int, start 
 	items.Total = totalPage
 	return items
 }
+
+func (this *ReviewStatus) GetReviewStatusByType(Type string, ReviewId int64) []orm.Params {
+	o := orm.NewOrm()
+	o.Using("Qa")
+	var maps []orm.Params
+	o.QueryTable("reviewstatus").Filter("Type", Type).Filter("ReviewId", ReviewId).Values(&maps)
+	return maps
+}
