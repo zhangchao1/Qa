@@ -61,7 +61,9 @@ func (this *ReviewService) Add(reviewId int64, uid int64, role int64, eid int64,
 			endApprovalPerson = append(endApprovalPerson, endApprovalPersonUid[i])
 		}
 	} else {
-		endApprovalPerson = append(endApprovalPerson, reviewConfigInfo.EndUid)
+		if reviewConfigInfo.EndUid > 0 {
+			endApprovalPerson = append(endApprovalPerson, reviewConfigInfo.EndUid)
+		}
 	}
 	for i := 0; i < len(endApprovalPerson); i++ {
 		firstApprovalPerson = append(firstApprovalPerson, endApprovalPerson[i])

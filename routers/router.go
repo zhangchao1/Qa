@@ -76,6 +76,11 @@ func init() {
 				&api.Review{},
 			),
 		),
+		beego.NSNamespace("/overtime",
+			beego.NSInclude(
+				&api.OverTime{},
+			),
+		),
 	)
 	beego.AddNamespace(ns)
 }
