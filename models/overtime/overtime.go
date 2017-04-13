@@ -15,6 +15,7 @@ type OverTime struct {
 	StartTime    string `orm:"column(StartTime);"`
 	EndTime      string `orm:"column(EndTime);"`
 	LongTime     string `orm:"column(LongTime);"`
+	ExpireTime   string `orm:"column(ExpireTime);"`
 	Reason       string `orm:"column(Reason);"`
 	Updated      string `orm:"column(Updated);"`
 	Created      string `orm:"column(Created);"`
@@ -77,7 +78,21 @@ func (this *OverTime) Detail(id int64) []orm.Params {
 	return maps
 }
 
-func (this *OverTime) GetLeaveByStatus(start int64, max int64, status int, uid int64) Items {
+func (this *OverTime) UpdateExpireTime(id int64, expireTime string) error {
+	o := orm.NewOrm()
+	o.Using("Qa")
+	overTime := OverTime{Id: id}
+	err := o.Read(&overTime)
+	if err == nil {
+		overTime.Updated = time.Now().Format("2006-01-02 15:04:05")
+		overTime.ExpireTime = expireTime
+		_, err := o.Update(&overTime, "Updated", "ExpireTime")
+		return err
+	}
+	return err
+}
+
+func (this *OverTime) GetOverTimeByStatus(start int64, max int64, status int, uid int64) Items {
 	o := orm.NewOrm()
 	o.Using("Qa")
 	var items Items
