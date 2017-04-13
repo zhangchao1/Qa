@@ -77,7 +77,7 @@
                   <td>{[ item.LongTime ]}</td>
                   <td>{[ item.Updated ]}</td>
                   <td>{[ item.ExpireTime ]}</td>
-                  <td><a class="btn btn-primary" href="/leave/detail/{[ item['OtId'] ]}" target="_blank">审核详情</a></td>
+                  <td><a class="btn btn-primary" href="/overtime/detail/{[ item['OtId'] ]}" target="_blank">审核详情</a></td>
                 </tr>
               </tbody></table>
               </div>
@@ -99,7 +99,7 @@
                   <td>{[ item.LongTime ]}</td>
                   <td>{[ item.Updated ]}</td>
                   <td>{[ item.ExpireTime ]}</td>
-                  <td><a class="btn btn-primary" href="/leave/detail/{[ item['OtId'] ]}" target="_blank">审核详情</a></td>
+                  <td><a class="btn btn-primary" href="/overtime/detail/{[ item['OtId'] ]}" target="_blank">审核详情</a></td>
                 </tr>
               </tbody></table>
               </div>
@@ -121,7 +121,7 @@
                   <td>{[ item.LongTime ]}</td>
                   <td>{[ item.Updated ]}</td>
                   <td>{[ item.ExpireTime ]}</td>
-                  <td><a class="btn btn-primary" href="/leave/detail/{[ item['OtId'] ]}" target="_blank">审核详情</a></td>
+                  <td><a class="btn btn-primary" href="/overtime/detail/{[ item['OtId'] ]}" target="_blank">审核详情</a></td>
                 </tr>
               </tbody></table>
               </div>
@@ -143,7 +143,7 @@
                   <td>{[ item.LongTime ]}</td>
                   <td>{[ item.Updated ]}</td>
                   <td>{[ item.ExpireTime ]}</td>
-                  <td><a class="btn btn-primary" href="/leave/detail/{[ item['OtId'] ]}" target="_blank">审核详情</a></td>
+                  <td><a class="btn btn-primary" href="/overtime/detail/{[ item['OtId'] ]}" target="_blank">审核详情</a></td>
                 </tr>
               </tbody></table>
               </div>
@@ -164,7 +164,7 @@
                   <td>
                   <a class="btn btn-info" data-toggle="modal" data-target="#approveModal" v-on:click="getCurrentApproveItem(item)">审核通过</a>
                   <a class="btn btn-danger" data-toggle="modal" data-target="#refuseModal" v-on:click="getCurrentApproveItem(item)">审核拒绝</a>
-                  <a class="btn btn-primary" href="/leave/detail/{[ item['ReviewStatusId'] ]}" target="_blank">审核详情</a>
+                  <a class="btn btn-primary" href="/overtime/detail/{[ item['ReviewStatusId'] ]}" target="_blank">审核详情</a>
                   </td>
                 </tr>
               </tbody></table>
@@ -184,7 +184,7 @@
                   <td>{[ item.UserName ]}</td>
                   <td>{[ item.Job ]}</td>
                   <td>
-                  <a class="btn btn-primary" href="/leave/detail/{[ item['ReviewStatusId'] ]}" target="_blank">审核详情</a>
+                  <a class="btn btn-primary" href="/overtime/detail/{[ item['ReviewStatusId'] ]}" target="_blank">审核详情</a>
                   </td>
                 </tr>
               </tbody></table>
@@ -204,7 +204,7 @@
                   <td>{[ item.UserName ]}</td>
                   <td>{[ item.Job ]}</td>
                   <td>
-                  <a class="btn btn-primary" href="/leave/detail/{[ item['ReviewStatusId'] ]}" target="_blank">审核详情</a>
+                  <a class="btn btn-primary" href="/overtime/detail/{[ item['ReviewStatusId'] ]}" target="_blank">审核详情</a>
                   </td>
                 </tr>
               </tbody></table>
