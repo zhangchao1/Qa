@@ -58,6 +58,9 @@
                   <td><a class="btn btn-primary" href="/overtime/detail/{[ item['OtId'] ]}" target="_blank">审核详情</a></td>
                 </tr>
               </tbody></table>
+              <div class="box-footer clearfix">
+                    <vue-pagination :cur.sync="myOnApprove.currentpage" :all.sync="myOnApprove.total" v-on:btn-click="getReviewData(1)"></vue-pagination>
+              </div>
               </div>
               <div class="tab-pane" id="tab_2">
                 <table class="table table-hover">
@@ -80,6 +83,9 @@
                   <td><a class="btn btn-primary" href="/overtime/detail/{[ item['OtId'] ]}" target="_blank">审核详情</a></td>
                 </tr>
               </tbody></table>
+               <div class="box-footer clearfix">
+                    <vue-pagination :cur.sync="myApprovIng.currentpage" :all.sync="myApprovIng.total" v-on:btn-click="getReviewData(2)"></vue-pagination>
+              </div>
               </div>
               <div class="tab-pane" id="tab_3">
                 <table class="table table-hover">
@@ -102,6 +108,9 @@
                   <td><a class="btn btn-primary" href="/overtime/detail/{[ item['OtId'] ]}" target="_blank">审核详情</a></td>
                 </tr>
               </tbody></table>
+              <div class="box-footer clearfix">
+                    <vue-pagination :cur.sync="myApprove.currentpage" :all.sync="myApprove.total" v-on:btn-click="getReviewData(3)"></vue-pagination>
+              </div>
               </div>
               <div class="tab-pane" id="tab_4">
                 <table class="table table-hover">
@@ -124,6 +133,9 @@
                   <td><a class="btn btn-primary" href="/overtime/detail/{[ item['OtId'] ]}" target="_blank">审核详情</a></td>
                 </tr>
               </tbody></table>
+              <div class="box-footer clearfix">
+                    <vue-pagination :cur.sync="myRefuse.currentpage" :all.sync="myRefuse.total" v-on:btn-click="getReviewData(4)"></vue-pagination>
+              </div>
               </div>
               <div class="tab-pane" id="tab_5">
                 <table class="table table-hover">
@@ -146,6 +158,9 @@
                   <td><a class="btn btn-primary" href="/overtime/detail/{[ item['OtId'] ]}" target="_blank">审核详情</a></td>
                 </tr>
               </tbody></table>
+              <div class="box-footer clearfix">
+                    <vue-pagination :cur.sync="myCancel.currentpage" :all.sync="myCancel.total" v-on:btn-click="getReviewData(5)"></vue-pagination>
+              </div>
               </div>
                <div class="tab-pane" id="tab_6">
                 <table class="table table-hover">
@@ -168,6 +183,9 @@
                   </td>
                 </tr>
               </tbody></table>
+              <div class="box-footer clearfix">
+                    <vue-pagination :cur.sync="isApprove.currentpage" :all.sync="isApprove.total" v-on:btn-click="myReviewList(1)"></vue-pagination>
+              </div>
               </div>
               <div class="tab-pane" id="tab_7">
                 <table class="table table-hover">
@@ -188,6 +206,9 @@
                   </td>
                 </tr>
               </tbody></table>
+              <div class="box-footer clearfix">
+                    <vue-pagination :cur.sync="hasApprove.currentpage" :all.sync="hasApprove.total" v-on:btn-click="myReviewList(2)"></vue-pagination>
+              </div>
               </div>
               <div class="tab-pane" id="tab_8">
                 <table class="table table-hover">
@@ -208,6 +229,9 @@
                   </td>
                 </tr>
               </tbody></table>
+              <div class="box-footer clearfix">
+                    <vue-pagination :cur.sync="hasRefused.currentpage" :all.sync="hasRefused.total" v-on:btn-click="myReviewList(3)"></vue-pagination>
+              </div>
               </div>
             </div>
           </div>
@@ -275,48 +299,49 @@
 </div>
    </section>
 </div>
+<script src="/static/js/vue-page.js"></script>
 <script>
   Vue.config.delimiters = ['{[', ']}']
   var vue = new Vue({
         el: '#overtime_my',
         data: {
           myOnApprove:{
-             currentpage:0,
+             currentpage:1,
              total:0,
              items:{}
           },
           myApprovIng:{
-             currentpage:0,
+             currentpage:1,
              total:0,
              items:{}
           },
           myApprove:{
-             currentpage:0,
+             currentpage:1,
              total:0,
              items:{}
           },
           myRefuse:{
-             currentpage:0,
+             currentpage:1,
              total:0,
              items:{}
           },
           myCancel:{
-             currentpage:0,
+             currentpage:1,
              total:0,
              items:{}
           },
           isApprove:{
-            currentpage:0,
+            currentpage:1,
             total:0,
             items:{}
           },
           hasRefused:{
-            currentpage:0,
+            currentpage:1,
             total:0,
             items:{}
           },
           hasApprove:{
-            currentpage:0,
+            currentpage:1,
             total:0,
             items:{}
           },
@@ -324,29 +349,37 @@
           currentApproveItems:{},
           refuseDetail:""
         },
+        components:{VuePagination},
         methods:{
-          getReviewData:function(page ,status){
+          getReviewData:function(status){
+            var page;
+            if(status == 1){
+              page = this.myOnApprove.currentpage;
+            }else if(status == 2){
+              page = this.myApprovIng.currentpage;
+            }else if(status == 3){
+              page = this.myApprove.currentpage;
+            }else if(status == 4){
+              page = this.myRefuse.currentpage;
+            }else if(status == 5){
+              page = this.myCancel.currentpage;
+            }
             var url = "/api/overtime/list?start="+ page +"&max=20&status=" + status
             this.$http.get(url, [], []).then(function(response){
                 if(response.data.IsSuccess == true){
                     if(status == 1){
-                        this.myOnApprove.currentpage = page
                         this.myOnApprove.total = response.data.data.Total
                         this.myOnApprove.items = response.data.data.Datas
                       }else if(status == 2){
-                        this.myApprovIng.currentpage = page
                         this.myApprovIng.total = response.data.data.Total
                         this.myApprovIng.items = response.data.data.Datas
                       }else if(status == 3){
-                        this.myApprove.currentpage = page
                         this.myApprove.total = response.data.data.Total
                         this.myApprove.items = response.data.data.Datas
                       }else if(status == 4){
-                        this.myRefuse.currentpage = page
                         this.myRefuse.total = response.data.data.Total
                         this.myRefuse.items = response.data.data.Datas
                       }else if(status == 5){
-                        this.myCancel.currentpage = page
                         this.myCancel.total = response.data.data.Total
                         this.myCancel.items = response.data.data.Datas
                       }
@@ -362,7 +395,8 @@
             this.$http.get(url, [], []).then(function(response){
                 if(response.data.IsSuccess == true){
                     alert(response.data.ErrMsg);
-                    this.getReviewData(1,1)
+                    this.getReviewData(1)
+                    this.getReviewData(5)
                 }else{
                     alert(response.data.ErrMsg);
                 }
@@ -373,20 +407,25 @@
           getCurrentApproveItem:function(item){
             this.currentApproveItems = item
           },
-          myReviewList:function(page,status){
+          myReviewList:function(status){
+            var page;
+            if(status == 1){
+              page=this.isApprove.currentpage
+            }else if(status == 2){
+              page = this.hasApprove.currentpage
+            }else if(status == 3){
+              page = this.hasRefused.currentpage
+            }
             var url = "/api/review/list?start="+ page +"&max=20&status=" + status + "&types=overtime"
             this.$http.get(url, [], []).then(function(response){
                 if(response.data.IsSuccess == true){
                     if(status == 1){
-                        this.isApprove.currentpage = page
                         this.isApprove.total = response.data.Datas.Total
                         this.isApprove.items = response.data.Datas.Datas
                       }else if(status == 2){
-                        this.hasApprove.currentpage = page
                         this.hasApprove.total = response.data.Datas.Total
                         this.hasApprove.items = response.data.Datas.Datas
                       }else if(status == 3){
-                        this.hasRefused.currentpage = page
                         this.hasRefused.total = response.data.Datas.Total
                         this.hasRefused.items = response.data.Datas.Datas
                       }
@@ -406,7 +445,9 @@
             this.$http.get(url, [], []).then(function(response){
                 if(response.data.IsSuccess == true){
                     alert(response.data.ErrMsg);
-                    this.myReviewList(1,1)
+                    $("#approveModal").modal('hide')
+                    this.myReviewList(1)
+                    this.myReviewList(2)
                 }else{
                     alert(response.data.ErrMsg);
                 }
@@ -423,7 +464,9 @@
             this.$http.get(url, [], []).then(function(response){
                 if(response.data.IsSuccess == true){
                     alert(response.data.ErrMsg);
-                    this.myReviewList(1,1)
+                    $("#refuseModal").modal('hide')
+                    this.myReviewList(1)
+                    this.myReviewList(3)
                 }else{
                     alert(response.data.ErrMsg);
                 }
@@ -433,14 +476,14 @@
           },
         },
         ready:function(){
-          this.getReviewData(1,1)
-          this.getReviewData(1,2)
-          this.getReviewData(1,3)
-          this.getReviewData(1,4)
-          this.getReviewData(1,5)
-          this.myReviewList(1,1)
-          this.myReviewList(1,2)
-          this.myReviewList(1,3)
+          this.getReviewData(1)
+          this.getReviewData(2)
+          this.getReviewData(3)
+          this.getReviewData(4)
+          this.getReviewData(5)
+          this.myReviewList(1)
+          this.myReviewList(2)
+          this.myReviewList(3)
         }
     });
 </script>

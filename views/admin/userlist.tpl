@@ -44,26 +44,33 @@
                   <td>{[ item.Updated ]}</td>
                 </tr>
               </tbody></table>
+              <div class="box-footer clearfix">
+                    <vue-pagination :cur.sync="current_page" :all.sync="total" v-on:btn-click="loadData()"></vue-pagination>
+              </div>
             </div>
             <!-- /.box-body -->
           </div>
    </section>
 </div>
+<script src="/static/js/vue-page.js"></script>
 <script>
 	Vue.config.delimiters = ['{[', ']}']
 	var vue = new Vue({
         el: '#admin_userlist',
         data: {
-        	   items:""
+        	   items:"",
+             current_page:1,
+             total:0,
         },
+        components:{VuePagination},
         methods:{
-        	 loadData:function(start){
-            var start = start
+        	 loadData:function(){
+            var start = this.current_page
             var max = 20
             this.$http.get('/api/admin/userlist?start='+ start +"&max="+max, [], []).then(function(response){
               if(response.data.IsSuccess == true){
                   this.items = response.data.data.Datas
-                  console.log(this.items)
+                  this.total = response.data.data.Total
               }else{
                   alert(response.data.ErrMsg);
               }
@@ -73,7 +80,7 @@
           },
         },
         ready:function(){
-         	this.loadData(1)
+         	this.loadData()
         },
     });
 </script>

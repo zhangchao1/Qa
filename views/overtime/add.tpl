@@ -57,8 +57,8 @@
                             <label for="inputEmail3" class="col-md-1 control-label">补偿方式</label>
                             <div class="col-md-11">
                                 <div class="btn-group" data-toggle="buttons">
-                                    <label class="btn btn-default active">
-                                        <input type="radio" name="options" id="EqualizeType">调休
+                                    <label class="btn btn-default active" id="EqualizeType">
+                                        <input type="radio" name="options" >调休
                                     </label>
                                     <label class="btn btn-default">
                                         <input type="radio" name="options">加班费
@@ -76,8 +76,8 @@
                             <label for="inputEmail3" class="col-md-1 control-label">是否外勤</label>
                             <div class="col-md-11">
                                 <div class="btn-group" data-toggle="buttons">
-                                    <label class="btn btn-default active">
-                                        <input type="radio" name="options" id="IsOutside">非外勤
+                                    <label class="btn btn-default active" id="IsOutside">
+                                        <input type="radio" name="options" >非外勤
                                     </label>
                                     <label class="btn btn-default ">
                                         <input type="radio" name="options">外勤
@@ -151,12 +151,12 @@
                 if(this.EndTime.indexOf("24:00") > 0 ){
                     this.EndTime = this.EndTime.replace("24:00","23:59")
                 }
-                if($("#EqualizeType").prop("className") == "btn btn-primary active"){
+                if($("#EqualizeType").prop("className") == "btn btn-default active"){
                     this.EqualizeType = "调休"
                 }else{
                     this.EqualizeType = "加班费"
                 }
-                if($("#IsOutside").prop("className") == "btn btn-primary active"){
+                if($("#IsOutside").prop("className") == "btn btn-default active"){
                     this.IsOutside = "非外勤"
                 }else{
                     this.IsOutside = "外勤"
