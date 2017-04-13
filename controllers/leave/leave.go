@@ -2,6 +2,7 @@ package leave
 
 import (
 	"Qa/controllers"
+	"Qa/models/review"
 	"strconv"
 )
 
@@ -33,6 +34,9 @@ func (this *Leave) Detail() {
 		return
 	} else {
 		this.Data["rid"] = id
+		var reviewStatus review.ReviewStatus
+		reviewStatusInfo := reviewStatus.GetReviewStatusByType("leave", id)
+		this.Data["reviewStatusId"] = reviewStatusInfo[0]["Id"]
 		this.Data["vueVersion"] = 1
 		this.Data["controllerName"] = "leave"
 	}
