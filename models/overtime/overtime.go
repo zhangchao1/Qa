@@ -30,6 +30,7 @@ const QUERY_OVERTIME_STATUS = `select ot.Id as OtId,
                             ot.LongTime as LongTime,
                             ot.StartTime as StartTime,
                             ot.EndTime as Endtime,
+                            ot.ExpireTime as ExpireTime,
                             ot.Updated as Updated,
                             res.Id as ReId,
                             res.Status as Status

@@ -94,3 +94,11 @@ func (this *ReviewStatus) GetReviewStatusByType(Type string, ReviewId int64) []o
 	o.QueryTable("reviewstatus").Filter("Type", Type).Filter("ReviewId", ReviewId).Values(&maps)
 	return maps
 }
+
+func (this *ReviewStatus) DetailById(sid int64) (ReviewStatus, error) {
+	o := orm.NewOrm()
+	o.Using("Qa")
+	reviewstatus := ReviewStatus{Id: sid}
+	err := o.Read(&reviewstatus, "Id")
+	return reviewstatus, err
+}

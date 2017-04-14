@@ -1,9 +1,11 @@
 package qa
 
 import (
+	"Qa/models/overtime"
 	"Qa/models/review"
 	"Qa/models/user"
 	"fmt"
+	"time"
 )
 
 type ReviewService struct {
@@ -120,6 +122,7 @@ func (this *ReviewService) Approve(reviestatusId int64, id int64, level int, typ
 		addLevel = level + 1
 		reviewNodeInfo, hasReviewNode := reviewnode.GetReviewNodeByLevel(reviestatusId, addLevel, types)
 		if hasReviewNode != nil {
+			checkReviewType(reviestatusId, types)
 			errUpdateStatus := reviewstatus.ChangeStatus(reviestatusId, APPROVAL_PASS)
 			return errUpdateStatus
 		} else {
@@ -174,4 +177,17 @@ func (this *ReviewService) Endorse(id int64, reviestatusId int64, endorseUid int
 	} else {
 		return errAddEndorseUid
 	}
+}
+
+func checkReviewType(reviestatusId int64, types string) error {
+	reviewStatus, err := reviewstatus.DetailById(reviestatusId)
+	if types == "overtime" {
+		var overTime overtime.OverTime
+		now := time.Now()
+		expireTime := now.AddDate(0, 6, 0).Format("2006-01-02 15:04:05")
+		errUpdateExpireTime := overTime.UpdateExpireTime(reviewStatus.ReviewId, expireTime)
+		return errUpdateExpireTime
+	}
+	return err
+
 }
