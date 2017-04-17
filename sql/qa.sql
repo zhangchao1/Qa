@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2017-04-13 08:49:37
+Date: 2017-04-17 09:27:05
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -195,6 +195,7 @@ INSERT INTO `employee` VALUES ('8', '8', '14', '人事部总监', '5', '6', '1',
 DROP TABLE IF EXISTS `expense`;
 CREATE TABLE `expense` (
   `Id` int(14) unsigned NOT NULL AUTO_INCREMENT,
+  `Uid` int(14) unsigned NOT NULL,
   `Type` smallint(6) unsigned NOT NULL,
   `TotalAmounts` decimal(10,0) NOT NULL,
   `Detail` varchar(50) NOT NULL,
@@ -206,6 +207,19 @@ CREATE TABLE `expense` (
 
 -- ----------------------------
 -- Records of expense
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `expensedetail`
+-- ----------------------------
+DROP TABLE IF EXISTS `expensedetail`;
+CREATE TABLE `expensedetail` (
+  `Id` int(14) unsigned NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`Id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of expensedetail
 -- ----------------------------
 
 -- ----------------------------
@@ -229,6 +243,25 @@ CREATE TABLE `goods` (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for `goodsdetail`
+-- ----------------------------
+DROP TABLE IF EXISTS `goodsdetail`;
+CREATE TABLE `goodsdetail` (
+  `Id` int(14) unsigned NOT NULL AUTO_INCREMENT,
+  `Name` varchar(100) NOT NULL,
+  `TotalCount` int(14) unsigned NOT NULL,
+  `Updated` datetime NOT NULL,
+  `Created` datetime NOT NULL,
+  PRIMARY KEY (`Id`),
+  UNIQUE KEY `Name` (`Name`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of goodsdetail
+-- ----------------------------
+INSERT INTO `goodsdetail` VALUES ('1', 'ni', '500', '2017-04-22 10:08:42', '2017-04-28 10:08:46');
+
+-- ----------------------------
 -- Table structure for `leave`
 -- ----------------------------
 DROP TABLE IF EXISTS `leave`;
@@ -244,7 +277,12 @@ CREATE TABLE `leave` (
   `Updated` datetime NOT NULL,
   `Created` datetime NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of leave
+-- ----------------------------
+INSERT INTO `leave` VALUES ('1', '2', '调休', '2017-04-04 00:00:00', '2017-04-05 23:59:00', 'asfnabsnfasb', '', '2', '2017-04-13 09:23:46', '2017-04-13 09:23:46');
 
 -- ----------------------------
 -- Table structure for `overtime`
@@ -263,7 +301,35 @@ CREATE TABLE `overtime` (
   `Created` datetime NOT NULL,
   `ExpireTime` datetime DEFAULT NULL,
   PRIMARY KEY (`Id`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of overtime
+-- ----------------------------
+INSERT INTO `overtime` VALUES ('1', '2', '加班费', '外勤', '2017-04-12 00:00:00', '2017-04-12 23:59:00', '1', '项目需求', '2017-04-13 08:55:44', '2017-04-13 08:55:44', '2017-10-25 09:32:08');
+INSERT INTO `overtime` VALUES ('2', '2', '加班费', '外勤', '2017-04-04 00:00:00', '2017-04-07 23:59:00', '4', '项目需求', '2017-04-14 09:30:20', '2017-04-13 08:55:54', '2017-10-14 09:30:20');
+INSERT INTO `overtime` VALUES ('3', '2', '加班费', '外勤', '2017-04-04 00:00:00', '2017-04-08 23:59:00', '5', '项目需求', '2017-04-13 08:56:05', '2017-04-13 08:56:05', null);
+INSERT INTO `overtime` VALUES ('4', '2', '调休', '非外勤', '2017-04-06 00:00:00', '2017-04-08 23:59:00', '3', 'asvasvgqsg', '2017-04-14 09:33:52', '2017-04-14 09:33:52', '0000-00-00 00:00:00');
+
+-- ----------------------------
+-- Table structure for `returnrecord`
+-- ----------------------------
+DROP TABLE IF EXISTS `returnrecord`;
+CREATE TABLE `returnrecord` (
+  `Id` int(14) unsigned NOT NULL AUTO_INCREMENT,
+  `Uid` int(14) unsigned NOT NULL,
+  `GoodsName` varchar(100) NOT NULL,
+  `Numbers` int(10) unsigned NOT NULL,
+  `IsReturn` varchar(10) DEFAULT NULL,
+  `Created` datetime NOT NULL,
+  `Updated` datetime NOT NULL,
+  `ApplyTime` datetime NOT NULL,
+  PRIMARY KEY (`Id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of returnrecord
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `reviewconfig`
@@ -324,7 +390,22 @@ CREATE TABLE `reviewnode` (
   `Updated` datetime NOT NULL,
   `Type` varchar(50) NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of reviewnode
+-- ----------------------------
+INSERT INTO `reviewnode` VALUES ('1', '1', '4', '1', '2', '0', '2017-04-13 08:55:44', '2017-04-13 09:45:38', 'overtime');
+INSERT INTO `reviewnode` VALUES ('2', '1', '5', '2', '2', '0', '2017-04-13 08:55:44', '2017-04-13 17:41:04', 'overtime');
+INSERT INTO `reviewnode` VALUES ('3', '2', '4', '1', '2', '0', '2017-04-13 08:55:54', '2017-04-14 09:29:07', 'overtime');
+INSERT INTO `reviewnode` VALUES ('4', '2', '5', '2', '2', '0', '2017-04-13 08:55:54', '2017-04-14 09:29:38', 'overtime');
+INSERT INTO `reviewnode` VALUES ('5', '2', '6', '3', '2', '0', '2017-04-13 08:55:54', '2017-04-14 09:30:20', 'overtime');
+INSERT INTO `reviewnode` VALUES ('15', '5', '6', '3', '1', '0', '2017-04-14 09:33:52', '2017-04-14 09:33:52', 'overtime');
+INSERT INTO `reviewnode` VALUES ('14', '5', '5', '2', '1', '0', '2017-04-14 09:33:52', '2017-04-14 09:33:52', 'overtime');
+INSERT INTO `reviewnode` VALUES ('13', '5', '4', '1', '2', '0', '2017-04-14 09:33:52', '2017-04-14 09:34:31', 'overtime');
+INSERT INTO `reviewnode` VALUES ('10', '4', '4', '1', '2', '0', '2017-04-13 09:23:46', '2017-04-13 09:45:57', 'leave');
+INSERT INTO `reviewnode` VALUES ('11', '4', '5', '2', '1', '0', '2017-04-13 09:23:46', '2017-04-13 09:23:46', 'leave');
+INSERT INTO `reviewnode` VALUES ('12', '4', '7', '3', '1', '0', '2017-04-13 09:23:46', '2017-04-13 09:23:46', 'leave');
 
 -- ----------------------------
 -- Table structure for `reviewperson`
@@ -342,7 +423,20 @@ CREATE TABLE `reviewperson` (
   `Level` smallint(6) NOT NULL,
   `Uid` int(14) unsigned NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of reviewperson
+-- ----------------------------
+INSERT INTO `reviewperson` VALUES ('1', '1', '4', 'ok', '2', '2017-04-13 09:45:38', '2017-04-13 08:55:44', 'overtime', '1', '2');
+INSERT INTO `reviewperson` VALUES ('2', '2', '4', 'ok！', '2', '2017-04-14 09:29:07', '2017-04-13 08:55:54', 'overtime', '1', '2');
+INSERT INTO `reviewperson` VALUES ('4', '4', '4', 'ok！', '2', '2017-04-13 09:45:57', '2017-04-13 09:23:46', 'leave', '1', '2');
+INSERT INTO `reviewperson` VALUES ('5', '1', '5', 'ok！', '2', '2017-04-13 17:41:04', '2017-04-13 09:45:38', 'overtime', '2', '2');
+INSERT INTO `reviewperson` VALUES ('6', '4', '5', '', '1', '2017-04-13 09:45:57', '2017-04-13 09:45:57', 'leave', '2', '2');
+INSERT INTO `reviewperson` VALUES ('7', '2', '5', 'ok!', '2', '2017-04-14 09:29:38', '2017-04-14 09:29:07', 'overtime', '2', '2');
+INSERT INTO `reviewperson` VALUES ('8', '2', '6', 'ok！', '2', '2017-04-14 09:30:20', '2017-04-14 09:29:38', 'overtime', '3', '2');
+INSERT INTO `reviewperson` VALUES ('9', '5', '4', 'ok！', '2', '2017-04-14 09:34:31', '2017-04-14 09:33:52', 'overtime', '1', '2');
+INSERT INTO `reviewperson` VALUES ('10', '5', '5', '', '1', '2017-04-14 09:34:31', '2017-04-14 09:34:31', 'overtime', '2', '2');
 
 -- ----------------------------
 -- Table structure for `reviewstatus`
@@ -358,7 +452,16 @@ CREATE TABLE `reviewstatus` (
   `Created` datetime NOT NULL,
   `Updated` datetime NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of reviewstatus
+-- ----------------------------
+INSERT INTO `reviewstatus` VALUES ('1', '1', 'overtime', '2', '项目需求', '3', '2017-04-13 08:55:44', '2017-04-13 17:41:04');
+INSERT INTO `reviewstatus` VALUES ('2', '2', 'overtime', '2', '项目需求', '3', '2017-04-13 08:55:54', '2017-04-14 09:30:20');
+INSERT INTO `reviewstatus` VALUES ('3', '3', 'overtime', '2', '项目需求', '5', '2017-04-13 08:56:05', '2017-04-13 17:39:48');
+INSERT INTO `reviewstatus` VALUES ('4', '1', 'leave', '2', 'asfnabsnfasb', '2', '2017-04-13 09:23:46', '2017-04-13 09:45:57');
+INSERT INTO `reviewstatus` VALUES ('5', '4', 'overtime', '2', 'asvasvgqsg', '2', '2017-04-14 09:33:52', '2017-04-14 09:34:31');
 
 -- ----------------------------
 -- Table structure for `travel`
