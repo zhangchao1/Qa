@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2017-04-17 09:27:05
+Date: 2017-04-18 18:38:01
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -247,19 +247,21 @@ CREATE TABLE `goods` (
 -- ----------------------------
 DROP TABLE IF EXISTS `goodsdetail`;
 CREATE TABLE `goodsdetail` (
+  `Unit` varchar(20) NOT NULL,
   `Id` int(14) unsigned NOT NULL AUTO_INCREMENT,
   `Name` varchar(100) NOT NULL,
   `TotalCount` int(14) unsigned NOT NULL,
   `Updated` datetime NOT NULL,
   `Created` datetime NOT NULL,
+  `Type` varchar(20) NOT NULL,
   PRIMARY KEY (`Id`),
   UNIQUE KEY `Name` (`Name`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of goodsdetail
 -- ----------------------------
-INSERT INTO `goodsdetail` VALUES ('1', 'ni', '500', '2017-04-22 10:08:42', '2017-04-28 10:08:46');
+INSERT INTO `goodsdetail` VALUES ('', '2', '纸巾', '500', '2017-04-19 09:32:44', '2017-04-19 09:32:49', '普通物品');
 
 -- ----------------------------
 -- Table structure for `leave`
