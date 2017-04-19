@@ -284,6 +284,7 @@
           <ul class="treeview-menu" {{if eq "goods" .controllerName}}style="display: block"{{else}}style="display: None"{{end}}>
             <li class="active"><a href="/goods/add"><i class="fa fa-user"></i>申请物品</a></li>
             <li><a href="/goods/record"><i class=" fa fa-search"></i>物品申请查询</a></li>
+            <li><a href="/goods/manage"><i class=" fa fa-user-secret"></i>物品详情管理</a></li>
           </ul>
         </li>
         <li class="treeview">

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2017-04-18 18:38:01
+Date: 2017-04-19 09:07:45
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -256,12 +256,7 @@ CREATE TABLE `goodsdetail` (
   `Type` varchar(20) NOT NULL,
   PRIMARY KEY (`Id`),
   UNIQUE KEY `Name` (`Name`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of goodsdetail
--- ----------------------------
-INSERT INTO `goodsdetail` VALUES ('', '2', '纸巾', '500', '2017-04-19 09:32:44', '2017-04-19 09:32:49', '普通物品');
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for `leave`
