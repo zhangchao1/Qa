@@ -3,6 +3,9 @@ package api
 import (
 	"Qa/models/goods"
 	"Qa/models/user"
+	"Qa/service/qa"
+	"encoding/json"
+	"fmt"
 )
 
 type Goods struct {
@@ -49,4 +52,43 @@ func (this *Goods) GoodsDetailDelete() {
 		}
 		this.ServeJSON()
 	}
+}
+
+// @router /goodsdetail/add [post]
+func (this *Goods) GoodsDetailAdd() {
+	var goodsDetail goods.GoodsDetail
+	json.Unmarshal(this.Ctx.Input.RequestBody, &goodsDetail)
+	var goodsService qa.GoodsService
+	result := goodsService.AddGoodsDetail(goodsDetail)
+	this.Data["json"] = result
+	this.ServeJSON()
+}
+
+// @router /goodsdetail/info [get]
+func (this *Goods) GoodsDetailInfo() {
+	id, _ := this.GetInt64("id")
+	var goodsDetail goods.GoodsDetail
+	if id == 0 {
+		this.Data["json"] = map[string]interface{}{"IsSuccess": false, "ErrMsg": "请传递正确的参数"}
+		this.ServeJSON()
+	} else {
+		result := goodsDetail.Info(id)
+		this.Data["json"] = map[string]interface{}{"IsSuccess": true, "ErrMsg": "", "Data": result}
+		this.ServeJSON()
+	}
+}
+
+// @router /goodsdetail/edit [post]
+func (this *Goods) GoodsDetailEdit() {
+	var goodsDetail goods.GoodsDetail
+	json.Unmarshal(this.Ctx.Input.RequestBody, &goodsDetail)
+	var goodsDetailEdit goods.GoodsDetail
+	err := goodsDetailEdit.Edit(goodsDetail)
+	fmt.Println(err)
+	if err == nil {
+		this.Data["json"] = map[string]interface{}{"IsSuccess": true, "ErrMsg": "保存成功！"}
+	} else {
+		this.Data["json"] = map[string]interface{}{"IsSuccess": false, "ErrMsg": "系统错误！"}
+	}
+	this.ServeJSON()
 }

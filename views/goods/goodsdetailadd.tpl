@@ -40,6 +40,8 @@
                       <label>单位</label>
                       <select class="form-control" v-model="Unit" v-validate:types="['required']">
                         <option selected="selected">个</option>
+                        <option>盒</option>
+                        <option>双</option>
                         <option>包</option>
                         <option>台</option>
                         <option>只</option>
@@ -72,7 +74,22 @@
         },
         methods:{
           save:function(){
-
+            var params = {
+                Name: this.Name,
+                Type: this.Type,
+                Unit : this.Unit,
+                TotalCount: Number(this.TotalCount),
+            }
+            this.$http.post('/api/goods/goodsdetail/add', params, []).then(function(response){
+              if(response.data.IsSuccess == true){
+                  alert("保存成功")
+                  window.location.href="/goods/manage"
+              }else{
+                  alert(response.data.ErrMsg);
+              }
+            }, function(response){
+              alert('提交失败')
+            });
 
           }
         },

@@ -2,6 +2,7 @@ package goods
 
 import (
 	"Qa/controllers"
+	"strconv"
 )
 
 type Goods struct {
@@ -29,6 +30,15 @@ func (this *Goods) GoodsDetailAdd() {
 }
 
 func (this *Goods) GoodsDetailEdit() {
-	this.Data["vueVersion"] = 1
-	this.Data["controllerName"] = "goods"
+	var id int64
+	Params := make(map[string]string)
+	Params = this.Ctx.Input.Params()
+	id, _ = strconv.ParseInt(Params["0"], 10, 64)
+	if id == 0 {
+		return
+	} else {
+		this.Data["goodsDeatilId"] = id
+		this.Data["vueVersion"] = 1
+		this.Data["controllerName"] = "goods"
+	}
 }

@@ -23,7 +23,7 @@
                         </div>
                     </div>
                     <div class="pull-right">
-                        <a class="btn btn-success" href="/goods/goosdetail/add"><i class="fa fa-plus" ></i> 新增</a>
+                        <a class="btn btn-success" href="/goods/goodsdetailadd"><i class="fa fa-plus" ></i> 新增</a>
                     </div>
                 </div>
               <div class="box-body">
@@ -43,7 +43,7 @@
                     <td>{[ item.Created ]}</td>
                     <td>{[ item.Updated ]}</td>
                     <td>
-                    <a class="btn btn-primary" href="/goods/goosdetail/{[ item['Id'] ]}" target="_blank">编辑</a>
+                    <a class="btn btn-primary" href="/goods/goodsdetailedit/{[ item['Id'] ]}" target="_blank">编辑</a>
                     <a class="btn btn-danger" v-on:click="deleteItem(item.Id)">删除</a>
                     </td>
                   </tr>

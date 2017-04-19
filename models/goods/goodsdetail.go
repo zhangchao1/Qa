@@ -11,6 +11,7 @@ type GoodsDetail struct {
 	Id         int64  `orm:"column(Id);"`
 	Type       string `orm:"column(Type);"`
 	Name       string `orm:"column(Name);"`
+	Unit       string `orm:"column(Unit);"`
 	TotalCount int    `orm:"column(TotalCount);"`
 	Created    string `orm:"column(Created);"`
 	Updated    string `orm:"column(Updated);"`
@@ -19,6 +20,8 @@ type Items struct {
 	Datas []orm.Params
 	Total int64
 }
+
+const QUERY_GoodsDetail_DETAIL = "select * from `goodsdetail` where Id = ?"
 
 func (this *GoodsDetail) TableName() string {
 	return "goodsdetail"
@@ -35,24 +38,36 @@ func (this *GoodsDetail) Add(addItem GoodsDetail) (int64, error) {
 	goodsdetail.Name = addItem.Name
 	goodsdetail.TotalCount = addItem.TotalCount
 	goodsdetail.Type = addItem.Type
+	goodsdetail.Unit = addItem.Unit
 	goodsdetail.Updated = time.Now().Format("2006-01-02 15:04:05")
 	goodsdetail.Created = time.Now().Format("2006-01-02 15:04:05")
 	id, err := o.Insert(goodsdetail)
 	return id, err
 }
 
-func (this *GoodsDetail) Edit(id int64, totalCount int) error {
+func (this *GoodsDetail) Edit(editItem GoodsDetail) error {
 	o := orm.NewOrm()
 	o.Using("Qa")
-	goodsdetail := GoodsDetail{Id: id}
+	goodsdetail := GoodsDetail{Id: editItem.Id}
 	err := o.Read(&goodsdetail, "Id")
 	if err == nil {
-		goodsdetail.TotalCount = totalCount
+		goodsdetail.Name = editItem.Name
+		goodsdetail.Type = editItem.Type
+		goodsdetail.Unit = editItem.Unit
+		goodsdetail.TotalCount = editItem.TotalCount
 		goodsdetail.Updated = time.Now().Format("2006-01-02 15:04:05")
-		_, err := o.Update(&goodsdetail, "Updated", "totalCount")
+		_, err := o.Update(&goodsdetail, "Updated", "TotalCount", "Name", "Unit", "Type")
 		return err
 	}
 	return err
+}
+
+func (this *GoodsDetail) Info(id int64) []orm.Params {
+	o := orm.NewOrm()
+	o.Using("Qa")
+	var maps []orm.Params
+	o.Raw(QUERY_GoodsDetail_DETAIL, id).Values(&maps)
+	return maps
 }
 
 func (this *GoodsDetail) Delete(id int64) error {
