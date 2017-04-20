@@ -12,11 +12,32 @@ type Goods struct {
 	ControllerBase
 }
 
+type AddGoods struct {
+	GoodsDetailId   int64
+	Application     string
+	ApplyTotalCount int
+}
+
 // @router /approvalusers [get]
 func (this *Goods) GoodApproval() {
 	var approveUser user.User
 	result := approveUser.GetUserByDid(16)
 	this.Data["json"] = map[string]interface{}{"IsSuccess": true, "ErrMsg": "", "Data": result}
+	this.ServeJSON()
+}
+
+// @router /add [post]
+func (this *Goods) Add() {
+	var addGoods AddGoods
+	json.Unmarshal(this.Ctx.Input.RequestBody, &addGoods)
+	var additem goods.Goods
+	additem.Uid = this.GetUid()
+	additem.Application = addGoods.Application
+	additem.GoodsDetailId = addGoods.GoodsDetailId
+	additem.ApplyTotalCount = addGoods.ApplyTotalCount
+	var goodsService qa.GoodsService
+	result := goodsService.Add(additem)
+	this.Data["json"] = result
 	this.ServeJSON()
 }
 

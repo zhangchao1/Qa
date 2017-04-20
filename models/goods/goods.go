@@ -12,7 +12,7 @@ type Goods struct {
 	Application     string `orm:"column(Application);"`
 	ApplyTotalCount int    `orm:"column(ApplyTotalCount);"`
 	IsBack          int    `orm:"column(IsBack);"`
-	GoodSDetailId   int64  `orm:"column(GoodSDetailId);"`
+	GoodsDetailId   int64  `orm:"column(GoodSDetailId);"`
 	Created         string `orm:"column(Created);"`
 	Updated         string `orm:"column(Updated);"`
 }
@@ -32,7 +32,7 @@ func (this *Goods) Add(addItem Goods) (int64, error) {
 	goods.Uid = addItem.Uid
 	goods.Application = addItem.Application
 	goods.ApplyTotalCount = addItem.ApplyTotalCount
-	goods.GoodSDetailId = addItem.GoodSDetailId
+	goods.GoodsDetailId = addItem.GoodsDetailId
 	good := reflect.ValueOf(addItem)
 	IsBack := good.FieldByName("IsBack").Int()
 	if IsBack != 0 {
