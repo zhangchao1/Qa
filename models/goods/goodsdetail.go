@@ -114,3 +114,27 @@ func (this *GoodsDetail) List(start int64, max int64, orderBy string, keywords s
 	items.Total = totalPage
 	return items
 }
+
+func (this *GoodsDetail) All(orderBy string) []orm.Params {
+	o := orm.NewOrm()
+	o.Using("Qa")
+	var maps []orm.Params
+	o.QueryTable("goodsdetail").OrderBy(orderBy).Values(&maps)
+	return maps
+}
+
+func (this *GoodsDetail) CheckIsSurplus(id int64, applyCount int) (status int, item GoodsDetail) {
+	o := orm.NewOrm()
+	o.Using("Qa")
+	goodsdetail := GoodsDetail{Id: id}
+	err := o.Read(&goodsdetail, "Id")
+	if err == nil {
+		surplus := goodsdetail.TotalCount - applyCount
+		if surplus < 0 {
+			return -2, goodsdetail
+		} else {
+			return 0, goodsdetail
+		}
+	}
+	return -1, goodsdetail
+}

@@ -92,3 +92,11 @@ func (this *Goods) GoodsDetailEdit() {
 	}
 	this.ServeJSON()
 }
+
+// @router /goodsdetail/all [get]
+func (this *Goods) GoodsDetailAll() {
+	var goodsDetail goods.GoodsDetail
+	items := goodsDetail.All("-Updated")
+	this.Data["json"] = map[string]interface{}{"IsSuccess": true, "ErrMsg": "", "Data": items}
+	this.ServeJSON()
+}

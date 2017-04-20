@@ -32,25 +32,19 @@
               </div>
               <validator name="validation1">
                 <form role="form">
-                  <div class="form-group">
-                      <label>物品名称</label>
-                      <input type="text" class="form-control" placeholder="输入物品名称" v-model="Name" v-validate:Name="['required']">
-                    </div>
                     <div class="form-group">
-                      <label>物品类型</label>
-                        <select class="form-control select2" v-model="Type" v-validate:Type="['required']">
-                          <option selected="selected" value="生活用品">生活用品</option>
-                          <option value="办公用品">办公用品</option>
-                          <option value="电子产品">电子产品</option>
+                      <label>物品名称</label>
+                        <select class="form-control" id="goods_detail_list" style="width=100%">
+                          
                         </select>
                     </div>
                     <div class="form-group">
                       <label>物品数量</label>
-                      <input type="number" class="form-control" placeholder="输入物品物品数量" v-model="TotalCount" v-validate:TotalCount="['required']">
+                      <input type="number" class="form-control" placeholder="输入物品物品数量" v-model="applyTotalCount" v-validate:applyTotalCount="['required']">
                     </div>
                     <div class="form-group">
                       <label>物品用途</label>
-                      <textarea class="form-control" rows="4" placeholder="输入物品用途" v-model="Application" v-validate:Application="['required']"></textarea>
+                      <textarea class="form-control" rows="4" placeholder="输入物品用途" v-model="application" v-validate:application="['required']"></textarea>
                     </div>
                  </form>
                  </validator>
@@ -62,18 +56,52 @@
       </div>
    </section>
 </div>
+<link href="/static/css/select2.min.css" rel="stylesheet">
+<script src="/static/js/select2.full.min.js"></script>
 <script>
   Vue.config.delimiters = ['{[', ']}']
   var vue = new Vue({
         el: '#goods_add',
         data: {
           options:[],
+          goodsDetailId:0,
+          application:"",
+          applyTotalCount:1,
         },
         methods:{
-          
+            getGoodsAll:function(){
+              var url = "/api/goods/goodsdetail/all";
+              this.$http.get(url, [], []).then(function(response){
+                  var data = response.data;
+                  if(data.IsSuccess == true){
+                      var allGoodsDetail = data.Data;
+                      for(var item of allGoodsDetail){
+                          this.options.push({
+                              'id' : item.Id,
+                              'text' : item.Name
+                          });
+                      }
+                      console.log(this.options)
+                      var vue = this;
+                      $('#goods_detail_list').select2({
+                          placeholder: "搜索...",
+                          data: vue.options
+                      });
+                      $('#goods_detail_list').on("select2:select", function(e) { 
+                          vue.goodsDetailId = $('#goods_detail_list').val();
+                          console.log(vue.goodsDetailId)
+                      });
+                  }else{
+                      console.log("error")
+                  }
+              }, function(response) {
+                  alert('请求失败')
+              });
+
+            }
         },
         ready:function(){
-         
+          this.getGoodsAll();
         }
     });
 </script>
