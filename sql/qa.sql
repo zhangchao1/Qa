@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2017-04-19 09:07:45
+Date: 2017-04-20 10:05:37
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -175,7 +175,7 @@ CREATE TABLE `employee` (
   `Created` datetime NOT NULL,
   `Updated` datetime NOT NULL,
   PRIMARY KEY (`Eid`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of employee
@@ -188,6 +188,8 @@ INSERT INTO `employee` VALUES ('5', '5', '3', '后端技术中心架构师', '4'
 INSERT INTO `employee` VALUES ('6', '6', '2', '技术部CEO', '5', '6', '1', '2017-04-09 19:10:40', '2017-04-09 19:19:30');
 INSERT INTO `employee` VALUES ('7', '7', '14', '人事专员', '2', '1', '1', '2017-04-09 19:21:56', '2017-04-09 19:23:44');
 INSERT INTO `employee` VALUES ('8', '8', '14', '人事部总监', '5', '6', '1', '2017-04-09 19:23:06', '2017-04-09 19:23:06');
+INSERT INTO `employee` VALUES ('9', '9', '16', '物品管理员', '2', '1', '1', '2017-04-20 09:13:57', '2017-04-20 09:15:31');
+INSERT INTO `employee` VALUES ('10', '10', '16', '物品管理组组长', '3', '2', '1', '2017-04-20 09:14:47', '2017-04-20 09:14:47');
 
 -- ----------------------------
 -- Table structure for `expense`
@@ -228,13 +230,13 @@ CREATE TABLE `expensedetail` (
 DROP TABLE IF EXISTS `goods`;
 CREATE TABLE `goods` (
   `Id` int(14) unsigned NOT NULL AUTO_INCREMENT,
-  `Type` smallint(6) unsigned NOT NULL,
   `Uid` int(14) unsigned NOT NULL,
-  `Name` varchar(50) NOT NULL,
   `Application` varchar(50) NOT NULL,
-  `TotalCount` int(14) unsigned NOT NULL,
+  `ApplyTotalCount` int(14) unsigned NOT NULL,
   `Updated` datetime NOT NULL,
   `Created` datetime NOT NULL,
+  `IsBack` tinyint(5) unsigned DEFAULT NULL,
+  `GoodSDetailId` int(14) unsigned NOT NULL,
   PRIMARY KEY (`Id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -256,7 +258,13 @@ CREATE TABLE `goodsdetail` (
   `Type` varchar(20) NOT NULL,
   PRIMARY KEY (`Id`),
   UNIQUE KEY `Name` (`Name`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of goodsdetail
+-- ----------------------------
+INSERT INTO `goodsdetail` VALUES ('包', '3', '纸巾', '500', '2017-04-19 08:35:47', '2017-04-19 08:35:47', '生活物品');
+INSERT INTO `goodsdetail` VALUES ('个', '4', '鸿基笔记本电脑', '100', '2017-04-19 09:05:10', '2017-04-19 08:37:08', '生活物品');
 
 -- ----------------------------
 -- Table structure for `leave`
@@ -345,7 +353,7 @@ CREATE TABLE `reviewconfig` (
   `Updated` datetime NOT NULL,
   `Created` datetime NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=MyISAM AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of reviewconfig
@@ -371,6 +379,10 @@ INSERT INTO `reviewconfig` VALUES ('18', '3', 'leave', '6', '2', '0', '13', '7',
 INSERT INTO `reviewconfig` VALUES ('19', '1', 'overtime', '1', '4', '2', '0', '0', '0', '2017-04-14 09:00:16', '2017-04-15 09:00:23');
 INSERT INTO `reviewconfig` VALUES ('20', '2', 'overtime', '1', '4', '3', '0', '0', '0', '2017-04-14 09:00:52', '2017-04-14 09:00:55');
 INSERT INTO `reviewconfig` VALUES ('21', '3', 'overtime', '1', '4', '4', '0', '0', '0', '2017-04-23 09:01:43', '2017-04-29 09:01:47');
+INSERT INTO `reviewconfig` VALUES ('22', '1', 'goods', '1', '4', '1', '0', '9', '0', '2017-04-20 09:19:47', '2017-04-20 09:19:50');
+INSERT INTO `reviewconfig` VALUES ('23', '2', 'goods', '1', '4', '2', '0', '9', '0', '2017-04-20 09:21:04', '2017-04-20 09:21:07');
+INSERT INTO `reviewconfig` VALUES ('24', '3', 'goods', '1', '4', '3', '0', '9', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+INSERT INTO `reviewconfig` VALUES ('25', '4', 'goods', '1', '4', '3', '0', '9', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 -- ----------------------------
 -- Table structure for `reviewnode`
@@ -503,7 +515,7 @@ CREATE TABLE `user` (
   `LastLoginTime` int(14) DEFAULT NULL,
   `Updated` datetime NOT NULL,
   PRIMARY KEY (`Uid`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user
@@ -516,6 +528,8 @@ INSERT INTO `user` VALUES ('5', '李晓', 'lixiao', 'lixiao@qa.cn', 'bt0aFz', '4
 INSERT INTO `user` VALUES ('6', '张飞', 'zhangfei', 'zhangfei@qa.cn', 'dBsIpc', 'bcd1158cd08bedf4f6281b59c3cfd653882e7c2322333d1d5a6ba2e65cf7dd33', '34', '2', '3', 'http://localhost:8087/static/img/user/default.jpg', '', '', '2017-04-09 19:10:40', '0', '0', '2017-04-09 19:19:30');
 INSERT INTO `user` VALUES ('7', '李娟', 'lijuan', 'lijuan@qa.cn', 'i7y3ig', 'dfa5f274f73158ff2871b09f69495bd07f09edfab6806d681ed18da9bc17aea5', '30', '2', '8', 'http://localhost:8087/static/img/user/default.jpg', '', '', '2017-04-09 19:21:56', '0', '0', '2017-04-09 19:23:44');
 INSERT INTO `user` VALUES ('8', '王德', 'wangde', 'wangde@qa.cn', 'ZiNefr', '20b4c1f8760c7d750acdb7533e685250b24161b62e22a2714b6dd99f69018ad7', '34', '1', '3', 'http://localhost:8087/static/img/user/default.jpg', '', '', '2017-04-09 19:23:06', '0', '0', '2017-04-09 19:23:06');
+INSERT INTO `user` VALUES ('9', '李晓明', 'lixiaoming', 'lixiaoming@qa.cn', 'S6i3BG', '598107b2ba8fc1d57578117740f14f8491fbe533bbfc34bd9d9160a510c9df19', '32', '2', '10', 'http://localhost:8087/static/img/user/default.jpg', '', '', '2017-04-20 09:13:57', '0', '0', '2017-04-20 09:15:31');
+INSERT INTO `user` VALUES ('10', '郑晓', 'zhengxiao', 'zhengxiao@qa.cn', 'b0L450', '490f9108246d917c4822193a8745d16591279c2f7bb787e35840532400eb2352', '31', '1', '1', 'http://localhost:8087/static/img/user/default.jpg', '', '', '2017-04-20 09:14:47', '0', '0', '2017-04-20 09:14:47');
 
 -- ----------------------------
 -- Table structure for `useradmire`
