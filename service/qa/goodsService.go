@@ -74,14 +74,15 @@ func (this *GoodsService) Add(addGoods goods.Goods) SaveResult {
 			result.ErrMsg = "该物品不存在！"
 			result.IsSuccess = false
 		} else if isSurplus == -2 {
-			result.ErrMsg = "该物品不存在！"
+			result.ErrMsg = "该物品库存不足！"
 			result.IsSuccess = false
 		} else {
 			if item.Type == ELEC_GOODS || item.Type == PRECIOUS_GOODS {
 				addGoods.IsBack = 1
 			}
 			goodsId, err := good.Add(addGoods)
-			if err != nil {
+			updateErr := goodsDetail.UpdateTotalCount(item.Id, item.TotalCount)
+			if err != nil || updateErr != nil {
 				result.ErrMsg = "系统错误"
 				result.IsSuccess = false
 			} else {

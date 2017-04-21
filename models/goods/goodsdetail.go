@@ -134,8 +134,23 @@ func (this *GoodsDetail) CheckIsSurplus(id int64, applyCount int) (status int, i
 		if surplus < 0 {
 			return -2, goodsdetail
 		} else {
+			goodsdetail.TotalCount = surplus
 			return 0, goodsdetail
 		}
 	}
 	return -1, goodsdetail
+}
+
+func (this *GoodsDetail) UpdateTotalCount(id int64, count int) error {
+	o := orm.NewOrm()
+	o.Using("Qa")
+	goodsdetail := GoodsDetail{Id: id}
+	err := o.Read(&goodsdetail, "Id")
+	if err == nil {
+		goodsdetail.TotalCount = count
+		goodsdetail.Updated = time.Now().Format("2006-01-02 15:04:05")
+		_, err := o.Update(&goodsdetail, "Updated", "TotalCount")
+		return err
+	}
+	return err
 }
