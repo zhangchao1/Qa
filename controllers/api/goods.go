@@ -30,6 +30,7 @@ func (this *Goods) GoodApproval() {
 func (this *Goods) Add() {
 	var addGoods AddGoods
 	json.Unmarshal(this.Ctx.Input.RequestBody, &addGoods)
+	fmt.Println(addGoods)
 	var additem goods.Goods
 	additem.Uid = this.GetUid()
 	additem.Application = addGoods.Application

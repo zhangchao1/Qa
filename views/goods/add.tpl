@@ -35,7 +35,6 @@
                     <div class="form-group">
                       <label>物品名称</label>
                         <select class="form-control" id="goods_detail_list" style="width=100%">
-                          
                         </select>
                     </div>
                     <div class="form-group">
@@ -50,7 +49,7 @@
                  </validator>
               </div>
               <div class="box-footer">
-                  <button type="submit" class="btn btn-info">保存</button>
+                  <button type="submit" class="btn btn-info" v-on:click="save" :disabled="!$validation1.valid">保存</button>
               </div>
         </div>
       </div>
@@ -98,6 +97,24 @@
                   alert('请求失败')
               });
 
+            },
+            save:function(){
+              this.goodsDetailId =  $('#goods_detail_list').val();
+              var params = {
+                  GoodsDetailId: Number(this.goodsDetailId),
+                  Application: this.application,
+                  ApplyTotalCount : Number(this.applyTotalCount),
+              }
+              this.$http.post('/api/goods/add', params, []).then(function(response){
+                if(response.data.IsSuccess == true){
+                    alert("保存成功")
+                    window.location.href="/goods/manage"
+                }else{
+                    alert(response.data.ErrMsg);
+                }
+              }, function(response){
+                alert('提交失败')
+              });
             }
         },
         ready:function(){

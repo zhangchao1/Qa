@@ -69,6 +69,7 @@ func (this *GoodsService) Add(addGoods goods.Goods) SaveResult {
 		result.IsSuccess = false
 	} else {
 		isSurplus, item := goodsDetail.CheckIsSurplus(addGoods.GoodsDetailId, addGoods.ApplyTotalCount)
+		fmt.Println(isSurplus, item)
 		if isSurplus == -1 {
 			result.ErrMsg = "该物品不存在！"
 			result.IsSuccess = false

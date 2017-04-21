@@ -128,6 +128,7 @@ func (this *GoodsDetail) CheckIsSurplus(id int64, applyCount int) (status int, i
 	o.Using("Qa")
 	goodsdetail := GoodsDetail{Id: id}
 	err := o.Read(&goodsdetail, "Id")
+	fmt.Println(err, id)
 	if err == nil {
 		surplus := goodsdetail.TotalCount - applyCount
 		if surplus < 0 {
