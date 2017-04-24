@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost_3306
+Source Server         : localhost
 Source Server Version : 50553
 Source Host           : localhost:3306
 Source Database       : qa
@@ -10,13 +10,13 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2017-04-20 10:05:37
+Date: 2017-04-24 09:43:30
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for `admire`
+-- Table structure for admire
 -- ----------------------------
 DROP TABLE IF EXISTS `admire`;
 CREATE TABLE `admire` (
@@ -34,7 +34,7 @@ CREATE TABLE `admire` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `article`
+-- Table structure for article
 -- ----------------------------
 DROP TABLE IF EXISTS `article`;
 CREATE TABLE `article` (
@@ -52,14 +52,15 @@ CREATE TABLE `article` (
   `Updated` datetime NOT NULL,
   `Created` datetime NOT NULL,
   PRIMARY KEY (`Aid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of article
 -- ----------------------------
+INSERT INTO `article` VALUES ('1', '2', 'nihao', '<p>agsgag</p>\n', 'kdkashdf', 'asfag', '企业文化', '1', '0', '6', '0', '2017-04-24 09:11:40', '2017-04-24 08:59:08');
 
 -- ----------------------------
--- Table structure for `attendance`
+-- Table structure for attendance
 -- ----------------------------
 DROP TABLE IF EXISTS `attendance`;
 CREATE TABLE `attendance` (
@@ -70,14 +71,16 @@ CREATE TABLE `attendance` (
   `Updated` datetime NOT NULL,
   `Created` datetime NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of attendance
 -- ----------------------------
+INSERT INTO `attendance` VALUES ('1', '2', '1', '127.0.0.1', '2017-04-24 08:43:17', '2017-04-24 08:43:17');
+INSERT INTO `attendance` VALUES ('2', '2', '1', '127.0.0.1', '2017-04-24 08:47:02', '2017-04-24 08:43:29');
 
 -- ----------------------------
--- Table structure for `colorlife`
+-- Table structure for colorlife
 -- ----------------------------
 DROP TABLE IF EXISTS `colorlife`;
 CREATE TABLE `colorlife` (
@@ -102,7 +105,7 @@ CREATE TABLE `colorlife` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `comment`
+-- Table structure for comment
 -- ----------------------------
 DROP TABLE IF EXISTS `comment`;
 CREATE TABLE `comment` (
@@ -114,14 +117,20 @@ CREATE TABLE `comment` (
   `Types` tinyint(8) unsigned NOT NULL,
   `Created` datetime NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of comment
 -- ----------------------------
+INSERT INTO `comment` VALUES ('1', '1', '2', '2', '1', '1', '2017-04-24 09:08:55');
+INSERT INTO `comment` VALUES ('2', '1', '2', '2', '1', '1', '2017-04-24 09:08:59');
+INSERT INTO `comment` VALUES ('3', '1', '2', '2', '1', '1', '2017-04-24 09:09:10');
+INSERT INTO `comment` VALUES ('4', '1', '2', '2', '1', '1', '2017-04-24 09:11:37');
+INSERT INTO `comment` VALUES ('5', '1', '2', '2', '1', '1', '2017-04-24 09:11:38');
+INSERT INTO `comment` VALUES ('6', '1', '2', '2', '1', '1', '2017-04-24 09:11:40');
 
 -- ----------------------------
--- Table structure for `deparment`
+-- Table structure for deparment
 -- ----------------------------
 DROP TABLE IF EXISTS `deparment`;
 CREATE TABLE `deparment` (
@@ -161,7 +170,7 @@ INSERT INTO `deparment` VALUES ('21', '节目一组', '19', '3', '2017-02-02 00:
 INSERT INTO `deparment` VALUES ('22', '项目组', '2', '3', '2017-02-01 00:00:00', '2017-02-02 00:00:00');
 
 -- ----------------------------
--- Table structure for `employee`
+-- Table structure for employee
 -- ----------------------------
 DROP TABLE IF EXISTS `employee`;
 CREATE TABLE `employee` (
@@ -192,7 +201,7 @@ INSERT INTO `employee` VALUES ('9', '9', '16', '物品管理员', '2', '1', '1',
 INSERT INTO `employee` VALUES ('10', '10', '16', '物品管理组组长', '3', '2', '1', '2017-04-20 09:14:47', '2017-04-20 09:14:47');
 
 -- ----------------------------
--- Table structure for `expense`
+-- Table structure for expense
 -- ----------------------------
 DROP TABLE IF EXISTS `expense`;
 CREATE TABLE `expense` (
@@ -212,7 +221,7 @@ CREATE TABLE `expense` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `expensedetail`
+-- Table structure for expensedetail
 -- ----------------------------
 DROP TABLE IF EXISTS `expensedetail`;
 CREATE TABLE `expensedetail` (
@@ -225,7 +234,7 @@ CREATE TABLE `expensedetail` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `goods`
+-- Table structure for goods
 -- ----------------------------
 DROP TABLE IF EXISTS `goods`;
 CREATE TABLE `goods` (
@@ -245,7 +254,7 @@ CREATE TABLE `goods` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `goodsdetail`
+-- Table structure for goodsdetail
 -- ----------------------------
 DROP TABLE IF EXISTS `goodsdetail`;
 CREATE TABLE `goodsdetail` (
@@ -267,7 +276,7 @@ INSERT INTO `goodsdetail` VALUES ('包', '3', '纸巾', '500', '2017-04-19 08:35
 INSERT INTO `goodsdetail` VALUES ('个', '4', '鸿基笔记本电脑', '100', '2017-04-19 09:05:10', '2017-04-19 08:37:08', '生活物品');
 
 -- ----------------------------
--- Table structure for `leave`
+-- Table structure for leave
 -- ----------------------------
 DROP TABLE IF EXISTS `leave`;
 CREATE TABLE `leave` (
@@ -290,7 +299,7 @@ CREATE TABLE `leave` (
 INSERT INTO `leave` VALUES ('1', '2', '调休', '2017-04-04 00:00:00', '2017-04-05 23:59:00', 'asfnabsnfasb', '', '2', '2017-04-13 09:23:46', '2017-04-13 09:23:46');
 
 -- ----------------------------
--- Table structure for `overtime`
+-- Table structure for overtime
 -- ----------------------------
 DROP TABLE IF EXISTS `overtime`;
 CREATE TABLE `overtime` (
@@ -317,7 +326,49 @@ INSERT INTO `overtime` VALUES ('3', '2', '加班费', '外勤', '2017-04-04 00:0
 INSERT INTO `overtime` VALUES ('4', '2', '调休', '非外勤', '2017-04-06 00:00:00', '2017-04-08 23:59:00', '3', 'asvasvgqsg', '2017-04-14 09:33:52', '2017-04-14 09:33:52', '0000-00-00 00:00:00');
 
 -- ----------------------------
--- Table structure for `returnrecord`
+-- Table structure for overtimedetail
+-- ----------------------------
+DROP TABLE IF EXISTS `overtimedetail`;
+CREATE TABLE `overtimedetail` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `Uid` int(11) NOT NULL,
+  `TotalTime` varchar(45) NOT NULL,
+  `Created` datetime NOT NULL,
+  `Updated` datetime NOT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of overtimedetail
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for resume
+-- ----------------------------
+DROP TABLE IF EXISTS `resume`;
+CREATE TABLE `resume` (
+  `Id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `Uid` int(11) unsigned NOT NULL,
+  `Created` datetime NOT NULL,
+  `Updated` datetime NOT NULL,
+  `Name` varchar(45) NOT NULL,
+  `Sex` varchar(3) NOT NULL,
+  `Age` int(6) unsigned NOT NULL,
+  `Eduction` text NOT NULL,
+  `Address` varchar(45) NOT NULL,
+  `Tel` varchar(45) NOT NULL,
+  `WorkExperience` text NOT NULL,
+  `SelfQuality` varchar(45) NOT NULL,
+  `Job` varchar(45) NOT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of resume
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for returnrecord
 -- ----------------------------
 DROP TABLE IF EXISTS `returnrecord`;
 CREATE TABLE `returnrecord` (
@@ -337,7 +388,7 @@ CREATE TABLE `returnrecord` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `reviewconfig`
+-- Table structure for reviewconfig
 -- ----------------------------
 DROP TABLE IF EXISTS `reviewconfig`;
 CREATE TABLE `reviewconfig` (
@@ -385,7 +436,7 @@ INSERT INTO `reviewconfig` VALUES ('24', '3', 'goods', '1', '4', '3', '0', '9', 
 INSERT INTO `reviewconfig` VALUES ('25', '4', 'goods', '1', '4', '3', '0', '9', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 -- ----------------------------
--- Table structure for `reviewnode`
+-- Table structure for reviewnode
 -- ----------------------------
 DROP TABLE IF EXISTS `reviewnode`;
 CREATE TABLE `reviewnode` (
@@ -417,7 +468,7 @@ INSERT INTO `reviewnode` VALUES ('11', '4', '5', '2', '1', '0', '2017-04-13 09:2
 INSERT INTO `reviewnode` VALUES ('12', '4', '7', '3', '1', '0', '2017-04-13 09:23:46', '2017-04-13 09:23:46', 'leave');
 
 -- ----------------------------
--- Table structure for `reviewperson`
+-- Table structure for reviewperson
 -- ----------------------------
 DROP TABLE IF EXISTS `reviewperson`;
 CREATE TABLE `reviewperson` (
@@ -448,7 +499,7 @@ INSERT INTO `reviewperson` VALUES ('9', '5', '4', 'ok！', '2', '2017-04-14 09:3
 INSERT INTO `reviewperson` VALUES ('10', '5', '5', '', '1', '2017-04-14 09:34:31', '2017-04-14 09:34:31', 'overtime', '2', '2');
 
 -- ----------------------------
--- Table structure for `reviewstatus`
+-- Table structure for reviewstatus
 -- ----------------------------
 DROP TABLE IF EXISTS `reviewstatus`;
 CREATE TABLE `reviewstatus` (
@@ -473,7 +524,7 @@ INSERT INTO `reviewstatus` VALUES ('4', '1', 'leave', '2', 'asfnabsnfasb', '2', 
 INSERT INTO `reviewstatus` VALUES ('5', '4', 'overtime', '2', 'asvasvgqsg', '2', '2017-04-14 09:33:52', '2017-04-14 09:34:31');
 
 -- ----------------------------
--- Table structure for `travel`
+-- Table structure for travel
 -- ----------------------------
 DROP TABLE IF EXISTS `travel`;
 CREATE TABLE `travel` (
@@ -494,7 +545,7 @@ CREATE TABLE `travel` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `user`
+-- Table structure for user
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
@@ -532,7 +583,7 @@ INSERT INTO `user` VALUES ('9', '李晓明', 'lixiaoming', 'lixiaoming@qa.cn', '
 INSERT INTO `user` VALUES ('10', '郑晓', 'zhengxiao', 'zhengxiao@qa.cn', 'b0L450', '490f9108246d917c4822193a8745d16591279c2f7bb787e35840532400eb2352', '31', '1', '1', 'http://localhost:8087/static/img/user/default.jpg', '', '', '2017-04-20 09:14:47', '0', '0', '2017-04-20 09:14:47');
 
 -- ----------------------------
--- Table structure for `useradmire`
+-- Table structure for useradmire
 -- ----------------------------
 DROP TABLE IF EXISTS `useradmire`;
 CREATE TABLE `useradmire` (
@@ -551,7 +602,7 @@ CREATE TABLE `useradmire` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `userdetail`
+-- Table structure for userdetail
 -- ----------------------------
 DROP TABLE IF EXISTS `userdetail`;
 CREATE TABLE `userdetail` (
@@ -574,7 +625,7 @@ CREATE TABLE `userdetail` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `usertoken`
+-- Table structure for usertoken
 -- ----------------------------
 DROP TABLE IF EXISTS `usertoken`;
 CREATE TABLE `usertoken` (
@@ -589,4 +640,21 @@ CREATE TABLE `usertoken` (
 
 -- ----------------------------
 -- Records of usertoken
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for yearholiday
+-- ----------------------------
+DROP TABLE IF EXISTS `yearholiday`;
+CREATE TABLE `yearholiday` (
+  `Id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `Uid` int(11) unsigned NOT NULL,
+  `TotalTime` varchar(45) NOT NULL,
+  `Created` datetime NOT NULL,
+  `Updated` datetime NOT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of yearholiday
 -- ----------------------------
