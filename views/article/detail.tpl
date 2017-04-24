@@ -58,10 +58,14 @@
                   <textarea class="form-control" rows="4" placeholder="文章评论" id="comment_content"></textarea>
                 </div>
               <button type="button" v-on:click="comment" class="btn btn-info pull-right">提交评论</button>
+              <div class="box-footer clearfix">
+                    <vue-pagination :cur.sync="currentpage" :all.sync="total" v-on:btn-click="commentList()"></vue-pagination>
+              </div>
             </div>	
     </div>
    </section>
 </div>
+<script src="/static/js/vue-page.js"></script>
 <script>
 	var aid = {{.aid}}
   var targetuid= {{.uid }}
@@ -70,8 +74,11 @@
         el: '#article_detail',
         data:{
         		items:{},
-            commentsList:{}
+            commentsList:{},
+            currentpage:1,
+            total:0
         },
+        components:{VuePagination},
         methods:{
           userAdmire :function(){
             this.$http.get('/api/article/admire?id='+ aid, [], []).then(function(response){
@@ -102,7 +109,8 @@
                 console.log(response)
                 if(response.data.IsSuccess == true){
                     this.items.CommentNum= response.data.Count
-                    this.commentList(1);
+                    this.currentpage = 1
+                    this.commentList();
                     $("#comment_content").val("")
                 }else{
                     alert(response.data.ErrMsg);
@@ -111,12 +119,14 @@
                 alert('提交失败')
               });
           },
-          commentList :function(start){
-            var max = 20;
+          commentList :function(){
+            var start = this.currentpage
+            var max = 5;
             this.$http.get('/api/article/commentlist?id='+ aid+"&start=" + start +"&max="+max, [], []).then(function(response){
                 if(response.data.IsSuccess == true){
                     this.commentsList = response.data.data.Datas;
-                    console.log(this.commentsList)
+                    this.total = response.data.data.Total
+                    console.log(this.commentsList,this.total)
                 }else{
                     alert(response.data.ErrMsg);
                 }
@@ -149,7 +159,7 @@
               }, function(response){
                 alert('提交失败')
             });
-          this.commentList(1);
+          this.commentList();
         }
     });
 </script>

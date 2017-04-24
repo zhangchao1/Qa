@@ -189,5 +189,4 @@ func checkReviewType(reviestatusId int64, types string) error {
 		return errUpdateExpireTime
 	}
 	return err
-
 }

@@ -52,26 +52,34 @@
                 </tr>
               </tbody></table>
             </div>
+            <div class="box-footer clearfix">
+                    <vue-pagination :cur.sync="currentpage" :all.sync="total" v-on:btn-click="loadData()"></vue-pagination>
+              </div>
           </div>
         </div>
       </div>
    </section>
 </div>
+<script src="/static/js/vue-page.js"></script>
 <script>
   Vue.config.delimiters = ['{[', ']}']
 	var vue = new Vue({
         el: '#article_recyle',
         data: {
-        	items:{}
+        	items:{},
+          currentpage:1,
+          total:0
         },
+        components:{VuePagination},
         methods:{
         	loadData:function(start){
-        		var start = start
+        		var start = this.currentpage
         		var max = 20
         		this.$http.get('/api/article/recycleList?start='+ start +"&max="+max, [], []).then(function(response){
                 	console.log(response)
 	            if(response.data.IsSuccess == true){
 	                this.items = response.data.data.Datas
+                  this.total = response.data.data.Total
 	                console.log(this.items)
 	            }else{
 	                alert(response.data.ErrMsg);
