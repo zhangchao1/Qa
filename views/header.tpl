@@ -276,13 +276,13 @@
         </li>
         <li class="treeview">
           <a href="#">
-            <i class="fa  fa-archive"></i> <span>物品申请管理</span>
+            <i class="fa fa-archive"></i> <span>物品申请管理</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu" {{if eq "goods" .controllerName}}style="display: block"{{else}}style="display: None"{{end}}>
-            <li class="active"><a href="/goods/add"><i class="fa fa-user"></i>申请物品</a></li>
+            <li class="active"><a href="/goods/my"><i class="fa fa-user"></i>个人物品申请</a></li>
             <li><a href="/goods/record"><i class=" fa fa-search"></i>物品申请查询</a></li>
             <li><a href="/goods/manage"><i class=" fa fa-user-secret"></i>物品详情管理</a></li>
           </ul>

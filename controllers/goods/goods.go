@@ -24,6 +24,11 @@ func (this *Goods) Manage() {
 	this.Data["controllerName"] = "goods"
 }
 
+func (this *Goods) My() {
+	this.Data["vueVersion"] = 1
+	this.Data["controllerName"] = "goods"
+}
+
 func (this *Goods) GoodsDetailAdd() {
 	this.Data["vueVersion"] = 1
 	this.Data["controllerName"] = "goods"

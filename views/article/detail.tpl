@@ -17,9 +17,9 @@
 	          <div class="box box-widget">
 	               <div class="box-header with-border">
 				      <div class="user-block">
-				        <img class="img-circle" src="http://img2.plures.net/0de1/ee17/efd5/7f6c/7b3d/1960/27a2/6a3c.jpg" alt="User Image">
-				        <span class="username"><a href="#">最亮的那颗星</a></span>
-				        <span class="description">写于2012年</span>
+				        <img class="img-circle" src="{{.useravatar}}" alt="User Image">
+				        <span class="username"><a href="#">{{.username}}</a></span>
+				        <span class="description">写于{[ items.Created ]}</span>
 				      </div>
 				    </div>
 	            </div>
@@ -53,7 +53,7 @@
         	</div>
         	<div class="box-footer">
               <form action="#" method="post">
-                <img class="img-responsive img-circle img-sm" src="http://img2.plures.net/0de1/ee17/efd5/7f6c/7b3d/1960/27a2/6a3c.jpg" alt="Alt Text">
+                <img class="img-responsive img-circle img-sm" src="{{.useravatar}}" alt="Alt Text">
                 <div class="img-push">
                   <textarea class="form-control" rows="4" placeholder="文章评论" id="comment_content"></textarea>
                 </div>

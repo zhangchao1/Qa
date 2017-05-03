@@ -2,6 +2,7 @@ package article
 
 import (
 	"Qa/controllers"
+	"Qa/service/redisService"
 	"strconv"
 )
 
@@ -38,6 +39,10 @@ func (this *Article) Detail() {
 	} else {
 		this.Data["aid"] = id
 		this.Data["uid"] = this.GetUid()
+		var userRedis redisService.UserRedisService
+		UserInfo := userRedis.GetUserInfo(this.GetUid())
+		this.Data["useravatar"] = UserInfo.Avatar
+		this.Data["username"] = UserInfo.UserName
 		this.Data["vueVersion"] = 1
 		this.Data["controllerName"] = "article"
 	}

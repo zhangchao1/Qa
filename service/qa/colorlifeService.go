@@ -105,7 +105,7 @@ func (this *ColorlifeService) AddAdmrie(id int64, Uid int64, name string) Admire
 	} else {
 		addAdmireNumStatus := colorlife.UpdateAdmireNum(id)
 		errAddAdmireStatus := admireService.AddAdmire(id, 2, 1, name, Uid)
-		admireRedis.AddUserColorlifeAdmires(int(id), 1)
+		admireRedis.AddUserColorlifeAdmires(int(id), Uid)
 		count := admireRedis.AddAdmiresColorlife(int(id))
 		fmt.Println(addAdmireNumStatus)
 		fmt.Println(errAddAdmireStatus)

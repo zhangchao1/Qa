@@ -33,6 +33,7 @@ func (this *AdmireRedisService) AdmireStatusArticle(guid int, uid int64) bool {
 	UadmireKey := fmt.Sprintf(U_ADMIRE_ARTICLE_KEY, guid)
 	Uid := strconv.FormatInt(uid, 10)
 	status, _ := AdmireRedis.SIsMember(UadmireKey, Uid).Result()
+	fmt.Println(status, UadmireKey, Uid)
 	if status == false {
 		return false
 	} else {
