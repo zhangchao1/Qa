@@ -40,11 +40,11 @@
                 <h1><small>精彩评论</small></h1>
               <div class="box-comment" v-for="comment in commentsList">
                   <!-- User image -->
-                  <img class="img-circle img-sm" src="http://img2.plures.net/0de1/ee17/efd5/7f6c/7b3d/1960/27a2/6a3c.jpg" alt="User Image">
+                  <img class="img-circle img-sm" v-bind:src=" comment.Avatar" alt="User Image">
 
                   <div class="comment-text">
                     <span class="username">
-                      Maria Gonzales
+                      {[ comment.UserName ]}
                       <span class="text-muted pull-right">{[ comment.Created ]}</span>
                     </span>
                     <div>
@@ -55,17 +55,21 @@
           </div>
           <div class="box-footer">
               <form action="#" method="post">
-                <img class="img-responsive img-circle img-sm" src="http://img2.plures.net/0de1/ee17/efd5/7f6c/7b3d/1960/27a2/6a3c.jpg" alt="Alt Text">
+                <img class="img-responsive img-circle img-sm" src="{{.useravatar}}" alt="Alt Text">
                 <div class="img-push">
                   <textarea class="form-control" rows="4" placeholder="文章评论" id="comment_content"></textarea>
                 </div>
               <button type="button" class="btn btn-info pull-right" v-on:click="comment">提交评论</button>
+              <div class="box-footer clearfix">
+                    <vue-pagination :cur.sync="currentpage" :all.sync="total" v-on:btn-click="commentList()"></vue-pagination>
+              </div>
             </div>  
       </div>
       </div>
     </div>
    </section>
 </div>
+<script src="/static/js/vue-page.js"></script>
 <script>
   var cid = {{.cid}}
   var targetuid= {{.uid }}
@@ -75,8 +79,11 @@
         data: {
             items:{},
             images:{},
-            commentsList:{}
+            commentsList:{},
+            currentpage:1,
+            total:0
         },
+        components:{VuePagination},
         methods:{
             userAdmire :function(){
             this.$http.get('/api/colorlife/admire?id='+ cid, [], []).then(function(response){
@@ -107,7 +114,8 @@
                 console.log(response)
                 if(response.data.IsSuccess == true){
                     this.items.CommentNum= response.data.Count
-                    this.commentList(1);
+                    this.currentpage = 1
+                    this.commentList();
                     $("#comment_content").val("")
                 }else{
                     alert(response.data.ErrMsg);
@@ -116,11 +124,13 @@
                 alert('提交失败')
               });
           },
-          commentList :function(start){
-            var max = 20;
+          commentList :function(){
+            var start = this.currentpage
+            var max = 5;
             this.$http.get('/api/colorlife/commentlist?id='+ cid+"&start=" + start +"&max="+max, [], []).then(function(response){
                 if(response.data.IsSuccess == true){
                     this.commentsList = response.data.data.Datas;
+                    this.total = response.data.data.Total
                     console.log(this.commentsList)
                 }else{
                     alert(response.data.ErrMsg);

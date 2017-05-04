@@ -101,7 +101,8 @@ func (this *ColorLife) GetColorlife() {
 			this.Data["json"] = map[string]interface{}{"IsSuccess": false, "ErrMsg": "无效的id"}
 			this.ServeJSON()
 		} else {
-			this.Data["json"] = map[string]interface{}{"IsSuccess": true, "ErrMsg": "", "data": data}
+			userinfo := this.GetUserInfoByUid(data.Uid)
+			this.Data["json"] = map[string]interface{}{"IsSuccess": true, "ErrMsg": "", "data": data, "UserName": userinfo.UserName, "Aavatar": userinfo.Avatar}
 			this.ServeJSON()
 		}
 	}
@@ -162,6 +163,13 @@ func (this *ColorLife) ColorLifeCommentList() {
 		this.ServeJSON()
 	} else {
 		result = Comment.CommentList(startIndex, maxCounts, "-Created", id, 2)
+		for _, value := range result.Datas {
+			Uid, _ := value["Uid"].(int64)
+			userinfo := this.GetUserInfoByUid(Uid)
+			fmt.Println(userinfo)
+			value["UserName"] = userinfo.UserName
+			value["Avatar"] = userinfo.Avatar
+		}
 		this.Data["json"] = map[string]interface{}{"IsSuccess": true, "ErrMsg": "", "data": result}
 		this.ServeJSON()
 	}

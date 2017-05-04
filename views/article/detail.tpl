@@ -17,8 +17,8 @@
 	          <div class="box box-widget">
 	               <div class="box-header with-border">
 				      <div class="user-block">
-				        <img class="img-circle" src="{{.useravatar}}" alt="User Image">
-				        <span class="username"><a href="#">{{.username}}</a></span>
+				        <img class="img-circle" v-bind:src="Avatar" alt="User Image">
+				        <span class="username"><a href="#">{[ UserName ]}</a></span>
 				        <span class="description">写于{[ items.Created ]}</span>
 				      </div>
 				    </div>
@@ -38,11 +38,11 @@
 	          	  <h1><small>精彩评论</small></h1>
 		          <div class="box-comment" v-for="comment in commentsList">
 	                <!-- User image -->
-	                <img class="img-circle img-sm" src="http://img2.plures.net/0de1/ee17/efd5/7f6c/7b3d/1960/27a2/6a3c.jpg" alt="User Image">
+	                <img class="img-circle img-sm" v-bind:src=" comment.Avatar" alt="User Image">
 
 	                <div class="comment-text">
                     <span class="username">
-                      Maria Gonzales
+                      {[ comment.UserName ]}
                       <span class="text-muted pull-right">{[ comment.Created ]}</span>
                     </span>
                     <div>
@@ -74,6 +74,8 @@
         el: '#article_detail',
         data:{
         		items:{},
+            Avatar:"",
+            UserName:"",
             commentsList:{},
             currentpage:1,
             total:0
@@ -139,6 +141,8 @@
         	this.$http.get('/api/article/getArticle?id='+ aid, [], []).then(function(response){
                 if(response.data.IsSuccess == true){
                     this.items = response.data.data
+                    this.Avatar = response.data.Aavatar
+                    this.UserName = response.data.UserName
                     $("#article_contents").html(response.data.data.Content)
                 }else{
                     alert(response.data.ErrMsg);

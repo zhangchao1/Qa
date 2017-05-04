@@ -2,6 +2,7 @@ package colorlife
 
 import (
 	"Qa/controllers"
+	"Qa/service/redisService"
 	"strconv"
 )
 
@@ -27,6 +28,10 @@ func (this *Colorlife) Detail() {
 	} else {
 		this.Data["cid"] = id
 		this.Data["uid"] = this.GetUid()
+		var userRedis redisService.UserRedisService
+		UserInfo := userRedis.GetUserInfo(this.GetUid())
+		this.Data["useravatar"] = UserInfo.Avatar
+		this.Data["username"] = UserInfo.UserName
 		this.Data["vueVersion"] = 1
 		this.Data["controllerName"] = "colorlife"
 	}
