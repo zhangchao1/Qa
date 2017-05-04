@@ -38,10 +38,10 @@
                 <!-- Add the bg color to the header using any of the bg-* classes -->
                 <div class="widget-user-header">
                   <div class="widget-user-image">
-                    <img class="img-circle" src="http://img2.plures.net/0de1/ee17/efd5/7f6c/7b3d/1960/27a2/6a3c.jpg" alt="User Avatar">
+                    <img class="img-circle" src="{{.useravatar}}" alt="User Avatar">
                   </div>
                   <!-- /.widget-user-image -->
-                  <h3 class="widget-user-username">张超</h3>
+                  <h3 class="widget-user-username">{{.username}}</h3>
                   <h5 class="widget-user-desc">当月考勤汇总</h5>
                 </div>
                 <div class="box-footer no-padding">
