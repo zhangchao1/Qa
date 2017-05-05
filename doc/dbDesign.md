@@ -244,6 +244,7 @@
 | 字段 | 说明 | 类型 |
 | --- | --- | --- | 
 | id | 自增id | int |
+| uid |项目创建人 | int |
 | types | 类型| int|
 | name | 项目名称| varchar|
 | content | 项目详情| varchar|
@@ -252,7 +253,6 @@
 | creatUid | 创建人 | int |
 | headUid | 负责人 | int |
 | cycle | 项目周期| varchar |
-| schedule | 项目进度| varchar |
 | status | 项目状态 | int |
 | updated | 更新时间 | datetime |
 | created | 创建时间 | datetime |
