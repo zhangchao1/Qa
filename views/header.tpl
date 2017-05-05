@@ -222,8 +222,9 @@
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
-          <ul class="treeview-menu" >
-            
+          <ul class="treeview-menu" {{if eq "project" .controllerName}}style="display: block"{{else}}style="display: None"{{end}}>
+            <li class="active"><a href="/project/my"><i class="fa fa-user"></i>我的相关项目</a></li>
+            <li><a href="/project/record"><i class=" fa fa-user-secret"></i>项目查询</a></li>
           </ul>
         </li>
         <li class="treeview">
