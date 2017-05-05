@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2017-04-24 09:43:30
+Date: 2017-05-05 08:48:17
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -29,9 +29,6 @@ CREATE TABLE `admire` (
   PRIMARY KEY (`Id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of admire
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for article
@@ -52,12 +49,8 @@ CREATE TABLE `article` (
   `Updated` datetime NOT NULL,
   `Created` datetime NOT NULL,
   PRIMARY KEY (`Aid`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of article
--- ----------------------------
-INSERT INTO `article` VALUES ('1', '2', 'nihao', '<p>agsgag</p>\n', 'kdkashdf', 'asfag', '企业文化', '1', '0', '6', '0', '2017-04-24 09:11:40', '2017-04-24 08:59:08');
 
 -- ----------------------------
 -- Table structure for attendance
@@ -71,13 +64,7 @@ CREATE TABLE `attendance` (
   `Updated` datetime NOT NULL,
   `Created` datetime NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of attendance
--- ----------------------------
-INSERT INTO `attendance` VALUES ('1', '2', '1', '127.0.0.1', '2017-04-24 08:43:17', '2017-04-24 08:43:17');
-INSERT INTO `attendance` VALUES ('2', '2', '1', '127.0.0.1', '2017-04-24 08:47:02', '2017-04-24 08:43:29');
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for colorlife
@@ -101,10 +88,6 @@ CREATE TABLE `colorlife` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of colorlife
--- ----------------------------
-
--- ----------------------------
 -- Table structure for comment
 -- ----------------------------
 DROP TABLE IF EXISTS `comment`;
@@ -117,17 +100,7 @@ CREATE TABLE `comment` (
   `Types` tinyint(8) unsigned NOT NULL,
   `Created` datetime NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of comment
--- ----------------------------
-INSERT INTO `comment` VALUES ('1', '1', '2', '2', '1', '1', '2017-04-24 09:08:55');
-INSERT INTO `comment` VALUES ('2', '1', '2', '2', '1', '1', '2017-04-24 09:08:59');
-INSERT INTO `comment` VALUES ('3', '1', '2', '2', '1', '1', '2017-04-24 09:09:10');
-INSERT INTO `comment` VALUES ('4', '1', '2', '2', '1', '1', '2017-04-24 09:11:37');
-INSERT INTO `comment` VALUES ('5', '1', '2', '2', '1', '1', '2017-04-24 09:11:38');
-INSERT INTO `comment` VALUES ('6', '1', '2', '2', '1', '1', '2017-04-24 09:11:40');
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for deparment
@@ -267,13 +240,7 @@ CREATE TABLE `goodsdetail` (
   `Type` varchar(20) NOT NULL,
   PRIMARY KEY (`Id`),
   UNIQUE KEY `Name` (`Name`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of goodsdetail
--- ----------------------------
-INSERT INTO `goodsdetail` VALUES ('包', '3', '纸巾', '500', '2017-04-19 08:35:47', '2017-04-19 08:35:47', '生活物品');
-INSERT INTO `goodsdetail` VALUES ('个', '4', '鸿基笔记本电脑', '100', '2017-04-19 09:05:10', '2017-04-19 08:37:08', '生活物品');
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for leave
@@ -596,10 +563,6 @@ CREATE TABLE `useradmire` (
   `Created` datetime NOT NULL,
   PRIMARY KEY (`Id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of useradmire
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for userdetail
