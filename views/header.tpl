@@ -270,7 +270,7 @@
             </span>
           </a>
           <ul class="treeview-menu" {{if eq "reimbursement" .controllerName}}style="display: block"{{else}}style="display: None"{{end}}>
-            <li class="active"><a href="/reimbursement/add"><i class="fa fa-user"></i>申请报销</a></li>
+            <li class="active"><a href="/reimbursement/my"><i class="fa fa-user"></i>我的报销</a></li>
             <li><a href="/reimbursement/record"><i class=" fa fa-search"></i>报销查询</a></li>
           </ul>
         </li>
@@ -295,7 +295,7 @@
             </span>
           </a>
           <ul class="treeview-menu" {{if eq "travel" .controllerName}}style="display: block"{{else}}style="display: None"{{end}}>
-           <li class="active"><a href="/travel/add"><i class="fa fa-user"></i>申请出差</a></li>
+           <li class="active"><a href="/travel/my"><i class="fa fa-user"></i>我的出差申请</a></li>
             <li><a href="/travel/record"><i class=" fa fa-search"></i>出差申请查询</a></li>
           </ul>
         </li>

@@ -17,3 +17,8 @@ func (this *Reimbursement) Record() {
 	this.Data["vueVersion"] = 1
 	this.Data["controllerName"] = "reimbursement"
 }
+
+func (this *Reimbursement) My() {
+	this.Data["vueVersion"] = 1
+	this.Data["controllerName"] = "reimbursement"
+}
