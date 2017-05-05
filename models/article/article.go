@@ -163,13 +163,13 @@ func (this *Article) DeleteArticle(id int64) error {
 	return err
 }
 
-func (this *Article) RecyleList(start int64, max int64, orderBy string) Items {
+func (this *Article) RecyleList(uid int64, start int64, max int64, orderBy string) Items {
 	o := orm.NewOrm()
 	o.Using("Qa")
 	var maps []orm.Params
 	var items Items
 	var totalPage int64
-	cnt, err := o.QueryTable("article").Filter("Status", 0).Count()
+	cnt, err := o.QueryTable("article").Filter("Status", 0).Filter("Uid", uid).Count()
 	if err != nil {
 		cnt = 0
 	}
@@ -179,19 +179,19 @@ func (this *Article) RecyleList(start int64, max int64, orderBy string) Items {
 	totalPage = int64(math.Ceil(pages))
 	offset := (start - 1) * max
 	limit := max
-	o.QueryTable("article").Filter("Status", 0).Limit(limit, offset).OrderBy(orderBy).Values(&maps)
+	o.QueryTable("article").Filter("Status", 0).Filter("Uid", uid).Limit(limit, offset).OrderBy(orderBy).Values(&maps)
 	items.Datas = maps
 	items.Total = totalPage
 	return items
 }
 
-func (this *Article) MyArticleList(start int64, max int64, orderBy string) Items {
+func (this *Article) MyArticleList(uid int64, start int64, max int64, orderBy string) Items {
 	o := orm.NewOrm()
 	o.Using("Qa")
 	var maps []orm.Params
 	var items Items
 	var totalPage int64
-	cnt, err := o.QueryTable("article").Filter("Status", 1).Count()
+	cnt, err := o.QueryTable("article").Filter("Status", 1).Filter("Uid", uid).Count()
 	if err != nil {
 		cnt = 0
 	}
@@ -201,7 +201,7 @@ func (this *Article) MyArticleList(start int64, max int64, orderBy string) Items
 	totalPage = int64(math.Ceil(pages))
 	offset := (start - 1) * max
 	limit := max
-	o.QueryTable("article").Filter("Status", 1).Limit(limit, offset).OrderBy(orderBy).Values(&maps)
+	o.QueryTable("article").Filter("Status", 1).Filter("Uid", uid).Limit(limit, offset).OrderBy(orderBy).Values(&maps)
 	items.Datas = maps
 	items.Total = totalPage
 	return items

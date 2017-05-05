@@ -98,7 +98,8 @@ func (this *Article) RecycleList() {
 		this.Data["json"] = map[string]interface{}{"IsSuccess": false, "ErrMsg": "请传递正确的参数"}
 		this.ServeJSON()
 	} else {
-		result = articles.RecyleList(startIndex, maxCounts, "-Updated")
+		uid := this.GetUid()
+		result = articles.RecyleList(uid, startIndex, maxCounts, "-Updated")
 		this.Data["json"] = map[string]interface{}{"IsSuccess": true, "ErrMsg": "", "data": result}
 		this.ServeJSON()
 	}
@@ -114,7 +115,8 @@ func (this *Article) MyArticleList() {
 		this.Data["json"] = map[string]interface{}{"IsSuccess": false, "ErrMsg": "请传递正确的参数"}
 		this.ServeJSON()
 	} else {
-		result = articles.MyArticleList(startIndex, maxCounts, "-Updated")
+		uid := this.GetUid()
+		result = articles.MyArticleList(uid, startIndex, maxCounts, "-Updated")
 		this.Data["json"] = map[string]interface{}{"IsSuccess": true, "ErrMsg": "", "data": result}
 		this.ServeJSON()
 	}
