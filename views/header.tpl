@@ -307,7 +307,7 @@
             </span>
           </a>
           <ul class="treeview-menu" {{if eq "resume" .controllerName}}style="display: block"{{else}}style="display: None"{{end}}>
-            <li class="active"><a href="/resume/add"><i class="fa fa-user"></i>创建简历</a></li>
+            <li class="active"><a href="/resume/my"><i class="fa fa-user"></i>我创建的简历</a></li>
             <li><a href="/resume/search"><i class=" fa fa-search"></i>简历查询</a></li>
           </ul>
         </li>
@@ -321,7 +321,6 @@
           <ul class="treeview-menu" {{if eq "colorlife" .controllerName}}style="display: block"{{else}}style="display: None"{{end}}>
             <li class="active"><a href="/colorlife/index"><i class="fa fa-user"></i>员工相册</a></li>
             <li><a href="/colorlife/my"><i class=" fa fa-user-secret"></i>我的相册</a></li>
-            <li><a href="/colorlife/search"><i class=" fa fa-search"></i>相册搜索</a></li>
           </ul>
         </li>
         <li class="treeview">

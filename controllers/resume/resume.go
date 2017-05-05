@@ -17,3 +17,8 @@ func (this *Resume) Search() {
 	this.Data["vueVersion"] = 1
 	this.Data["controllerName"] = "resume"
 }
+
+func (this *Resume) My() {
+	this.Data["vueVersion"] = 1
+	this.Data["controllerName"] = "resume"
+}
