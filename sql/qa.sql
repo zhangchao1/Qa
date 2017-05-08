@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2017-05-08 09:28:56
+Date: 2017-05-08 09:34:09
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -323,23 +323,6 @@ INSERT INTO `overtime` VALUES ('1', '2', '加班费', '外勤', '2017-04-12 00:0
 INSERT INTO `overtime` VALUES ('2', '2', '加班费', '外勤', '2017-04-04 00:00:00', '2017-04-07 23:59:00', '4', '项目需求', '2017-04-14 09:30:20', '2017-04-13 08:55:54', '2017-10-14 09:30:20');
 INSERT INTO `overtime` VALUES ('3', '2', '加班费', '外勤', '2017-04-04 00:00:00', '2017-04-08 23:59:00', '5', '项目需求', '2017-04-13 08:56:05', '2017-04-13 08:56:05', null);
 INSERT INTO `overtime` VALUES ('4', '2', '调休', '非外勤', '2017-04-06 00:00:00', '2017-04-08 23:59:00', '3', 'asvasvgqsg', '2017-04-14 09:33:52', '2017-04-14 09:33:52', '0000-00-00 00:00:00');
-
--- ----------------------------
--- Table structure for `overtimedetail`
--- ----------------------------
-DROP TABLE IF EXISTS `overtimedetail`;
-CREATE TABLE `overtimedetail` (
-  `Id` int(11) NOT NULL AUTO_INCREMENT,
-  `Uid` int(11) NOT NULL,
-  `TotalTime` varchar(45) NOT NULL,
-  `Created` datetime NOT NULL,
-  `Updated` datetime NOT NULL,
-  PRIMARY KEY (`Id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of overtimedetail
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for `resume`
