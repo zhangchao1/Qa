@@ -22,3 +22,8 @@ func (this *Resume) My() {
 	this.Data["vueVersion"] = 1
 	this.Data["controllerName"] = "resume"
 }
+
+func (this *Resume) Edit() {
+	this.Data["vueVersion"] = 1
+	this.Data["controllerName"] = "resume"
+}

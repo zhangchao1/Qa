@@ -2,21 +2,21 @@
 <div class="content-wrapper">
 	<section class="content-header">
       <h1>
-        创建简历
+        编辑简历
         <small></small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="/"><i class="fa fa-dashboard"></i>Home</a></li>
         <li><a class="active">简历管理</a></li>
-        <li class="active">创建简历</li>
+        <li class="active">编辑简历</li>
       </ol>
     </section>
-    <section class="content" id="resume_add">
+    <section class="content" id="resume_edit">
       <div class="row">
         <div class="col-md-12">
             <div class="box">
                 <div class="box-header with-border">
-                  <h3 class="box-title">创建简历</h3>
+                  <h3 class="box-title">编辑简历</h3>
                   <div class="pull-right">
                   </div>
             </div>
@@ -89,7 +89,7 @@
 </div>
 <script>
   var vue = new Vue({
-        el: '#resume_add',
+        el: '#resume_edit',
         data: {
           SelfQuality: "",
           WorkExperience:"",
