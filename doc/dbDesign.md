@@ -250,8 +250,6 @@
 | content | 项目详情| varchar|
 | startTime | 项目开始时间| datetime |
 | endTime | 项目结束时间| datetime |
-| creatUid | 创建人 | int |
-| headUid | 负责人 | int |
 | cycle | 项目周期| varchar |
 | status | 项目状态 | int |
 | updated | 更新时间 | datetime |
